@@ -1,0 +1,82 @@
+{
+  "hubris:Icosahedron_1": {
+    "DESCRIPTION": "Curse",
+    "NAME": "1"
+  },
+  "hubris:Icosahedron_10": {
+    "DESCRIPTION": "Add a Mulligan to your hand.",
+    "NAME": "10"
+  },
+  "hubris:Icosahedron_11": {
+    "DESCRIPTION": "Gain 100 Gold.",
+    "NAME": "11"
+  },
+  "hubris:Icosahedron_12": {
+    "DESCRIPTION": "Gain 2 random common potions.",
+    "NAME": "12"
+  },
+  "hubris:Icosahedron_13": {
+    "DESCRIPTION": "Gain 5 Artifact.",
+    "NAME": "13"
+  },
+  "hubris:Icosahedron_14": {
+    "DESCRIPTION": "Gain 3 Strength and 3 Dexterity.",
+    "NAME": "14"
+  },
+  "hubris:Icosahedron_15": {
+    "DESCRIPTION": "Draw 1 additional card at the start of each turn.",
+    "NAME": "15"
+  },
+  "hubris:Icosahedron_16": {
+    "DESCRIPTION": "Gain a random rare potion.",
+    "NAME": "16"
+  },
+  "hubris:Icosahedron_17": {
+    "DESCRIPTION": "Choose 1 of 3 rare cards to add to your hand.",
+    "NAME": "17"
+  },
+  "hubris:Icosahedron_18": {
+    "DESCRIPTION": "At the start of each turn, gain [E].",
+    "NAME": "18"
+  },
+  "hubris:Icosahedron_19": {
+    "DESCRIPTION": "Heal to full.",
+    "NAME": "19"
+  },
+  "hubris:Icosahedron_2": {
+    "DESCRIPTION": "Lose 10 HP.",
+    "NAME": "2"
+  },
+  "hubris:Icosahedron_20": {
+    "DESCRIPTION": "At the start of each turn, gain [E] and draw 2 cards.",
+    "NAME": "20"
+  },
+  "hubris:Icosahedron_3": {
+    "DESCRIPTION": "Add 3 Void to your draw pile.",
+    "NAME": "3"
+  },
+  "hubris:Icosahedron_4": {
+    "DESCRIPTION": "Draw 1 less card each turn.",
+    "NAME": "4"
+  },
+  "hubris:Icosahedron_5": {
+    "DESCRIPTION": "Increase the cost of cards in your hand by 1 this combat.",
+    "NAME": "5"
+  },
+  "hubris:Icosahedron_6": {
+    "DESCRIPTION": "Gain 5 Vulnerable.",
+    "NAME": "6"
+  },
+  "hubris:Icosahedron_7": {
+    "DESCRIPTION": "Gain 5 Frail.",
+    "NAME": "7"
+  },
+  "hubris:Icosahedron_8": {
+    "DESCRIPTION": "Gain 5 Weak.",
+    "NAME": "8"
+  },
+  "hubris:Icosahedron_9": {
+    "DESCRIPTION": "",
+    "NAME": "9"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "hubris:MonsterLightning": {
+    "NAME": "Lightning",
+    "DESCRIPTION": [
+      "#yEvoke: Deal #b",
+      " damage."
+    ]
+  },
+  "hubris:MonsterFrost": {
+    "NAME": "Frost",
+    "DESCRIPTION": [
+      "#yEvoke: Gain #b",
+      " #yBlock."
+    ]
+  },
+  "hubris:MonsterMiasma": {
+    "NAME": "Miasma",
+    "DESCRIPTION": [
+      "#yEvoke: Apply #b",
+      " Weak, #b",
+      " Vulnerable, and #b",
+      " Frail."
+    ]
+  },
+  "hubris:MonsterFocusing": {
+    "NAME": "Focusing",
+    "DESCRIPTION": [
+      "#yEvoke: Gain #b",
+      " Focus."
+    ]
+  },
+  "hubris:MonsterHypnotic": {
+    "NAME": "Hypnotic",
+    "DESCRIPTION": [
+      "#yEvoke: Apply Befuddled. NL NL #yBefuddled: The first card drawn each turn is transformed."
+    ]
+  }
+}

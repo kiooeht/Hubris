@@ -1,0 +1,10 @@
+{
+  "modid": "hubris",
+  "name": "Hubris",
+  "author_list": ["kiooeht"],
+  "description": "???",
+  "version": "0.1",
+  "sts_version": "06-21-2018",
+  "mts_version": "2.6.0",
+  "dependencies": ["basemod"]
+}

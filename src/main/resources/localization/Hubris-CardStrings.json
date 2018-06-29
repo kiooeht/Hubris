@@ -1,0 +1,10 @@
+{
+  "hubris:Icosahedron": {
+    "NAME": "Icosahedron",
+    "DESCRIPTION": "Retain. NL Roll. NL Purge."
+  },
+  "hubris:Mulligan": {
+    "NAME": "Mulligan",
+    "DESCRIPTION": "Retain. NL Discard your hand, NL then draw that many cards. NL Purge."
+  }
+}

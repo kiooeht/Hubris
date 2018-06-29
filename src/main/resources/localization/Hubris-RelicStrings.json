@@ -1,0 +1,16 @@
+{
+  "hubris:Icosahedron": {
+    "NAME": "Icosahedron",
+    "FLAVOR": "1d20",
+    "DESCRIPTIONS": [
+      "At the start of each combat, add an Icosahedron to your hand."
+    ]
+  },
+  "hubris:Black Hole": {
+    "NAME": "Black Hole",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "All cards cost #b0. NL Any card entering your discard pile instead goes to your exhaust."
+    ]
+  }
+}
