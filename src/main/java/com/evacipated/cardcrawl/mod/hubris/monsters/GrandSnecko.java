@@ -47,6 +47,7 @@ public class GrandSnecko extends OrbUsingMonster
         orbPercents.add(new Pair<>(15, MonsterFrost.class));
         orbPercents.add(new Pair<>(10, MonsterFocusing.class));
         orbPercents.add(new Pair<>(5, MonsterMiasma.class));
+        orbPercents.add(new Pair<>(10, MonsterDraining.class));
 
         int sum = 0;
         for (Pair<Integer, Class> kv : orbPercents) {

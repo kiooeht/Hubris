@@ -34,5 +34,12 @@
     "DESCRIPTION": [
       "#yEvoke: Apply Befuddled. NL NL #yBefuddled: The first card drawn each turn is transformed."
     ]
+  },
+  "hubris:MonsterDraining": {
+    "NAME": "Draining",
+    "DESCRIPTION": [
+      "#yEvoke: Add #b",
+      " #yDazed to your draw pile."
+    ]
   }
 }
