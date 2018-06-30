@@ -30,5 +30,12 @@
       "At the start of each combat, gain #b",
       " #yTemporary HP."
     ]
+  },
+  "hubris:Curious Feather": {
+    "NAME": "Curious Feather",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "Whenever you play a #yPower, gain #b1 #yStrength."
+    ]
   }
 }

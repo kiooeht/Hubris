@@ -7,10 +7,7 @@ import basemod.interfaces.EditKeywordsSubscriber;
 import basemod.interfaces.EditRelicsSubscriber;
 import basemod.interfaces.EditStringsSubscriber;
 import com.badlogic.gdx.Gdx;
-import com.evacipated.cardcrawl.mod.hubris.relics.BlackHole;
-import com.evacipated.cardcrawl.mod.hubris.relics.BlankMap;
-import com.evacipated.cardcrawl.mod.hubris.relics.Icosahedron;
-import com.evacipated.cardcrawl.mod.hubris.relics.OfFalseLife;
+import com.evacipated.cardcrawl.mod.hubris.relics.*;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.localization.CardStrings;
@@ -56,6 +53,7 @@ public class HubrisMod implements
         BaseMod.addRelic(new BlackHole(), RelicType.SHARED);
         BaseMod.addRelic(new BlankMap(), RelicType.SHARED);
         BaseMod.addRelic(new OfFalseLife(), RelicType.SHARED);
+        BaseMod.addRelic(new CuriousFeather(), RelicType.SHARED);
     }
 
     @Override
