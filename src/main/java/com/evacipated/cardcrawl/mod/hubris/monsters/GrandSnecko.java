@@ -65,11 +65,11 @@ public class GrandSnecko extends OrbUsingMonster
         AnimationState.TrackEntry e = this.state.setAnimation(0, "Idle", true);
         e.setTime(e.getEndTime() * MathUtils.random());
         this.stateData.setMix("Hit", "Idle", 0.1F);
-        e.setTimeScale(0.8F);
+        e.setTimeScale(0.4F);
 
         this.type = AbstractMonster.EnemyType.BOSS;
-        this.dialogX = (-200.0F * Settings.scale);
-        this.dialogY = (10.0F * Settings.scale);
+        this.dialogX = (-400.0F * Settings.scale);
+        this.dialogY = (200.0F * Settings.scale);
     }
 
     private AbstractOrb makeOrb(Class clazz)
