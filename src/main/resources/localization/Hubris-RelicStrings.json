@@ -3,7 +3,7 @@
     "NAME": "Icosahedron",
     "FLAVOR": "1d20",
     "DESCRIPTIONS": [
-      "At the start of each combat, add an Icosahedron to your hand."
+      "Once per combat, you may roll the Icosahedron."
     ]
   },
   "hubris:Black Hole": {
