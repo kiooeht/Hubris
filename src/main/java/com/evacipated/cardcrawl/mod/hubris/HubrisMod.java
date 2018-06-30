@@ -10,6 +10,7 @@ import com.badlogic.gdx.Gdx;
 import com.evacipated.cardcrawl.mod.hubris.relics.BlackHole;
 import com.evacipated.cardcrawl.mod.hubris.relics.BlankMap;
 import com.evacipated.cardcrawl.mod.hubris.relics.Icosahedron;
+import com.evacipated.cardcrawl.mod.hubris.relics.OfFalseLife;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.localization.CardStrings;
@@ -54,6 +55,7 @@ public class HubrisMod implements
         BaseMod.addRelic(new Icosahedron(), RelicType.SHARED);
         BaseMod.addRelic(new BlackHole(), RelicType.SHARED);
         BaseMod.addRelic(new BlankMap(), RelicType.SHARED);
+        BaseMod.addRelic(new OfFalseLife(), RelicType.SHARED);
     }
 
     @Override
@@ -61,6 +63,7 @@ public class HubrisMod implements
     {
         BaseMod.addKeyword(new String[] {"purge"}, "Disappears upon use.");
         BaseMod.addKeyword(new String[] {"retain"}, "Not discarded at the end of your turn.");
+        BaseMod.addKeyword(new String[] {"temporary"}, "Temporary HP disappears at the end of combat.");
     }
 
     @Override

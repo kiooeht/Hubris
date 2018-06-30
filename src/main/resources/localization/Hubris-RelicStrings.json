@@ -22,5 +22,13 @@
       "Gain [G] at the start of each turn.",
       "Gain [B] at the start of each turn."
     ]
+  },
+  "hubris:False Life": {
+    "NAME": "Talisman of False Life",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "At the start of each combat, gain #b",
+      " #yTemporary HP."
+    ]
   }
 }
