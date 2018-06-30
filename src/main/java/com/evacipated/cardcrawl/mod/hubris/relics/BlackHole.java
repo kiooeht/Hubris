@@ -53,6 +53,7 @@ public class BlackHole extends AbstractRelic
 
             List<AbstractCard> list = new ArrayList<>(AbstractDungeon.player.discardPile.group);
             for (AbstractCard c : list) {
+                flash();
                 //AbstractDungeon.player.discardPile.moveToExhaustPile(c);
                 resetCardBeforeMoving.invoke(AbstractDungeon.player.discardPile, c);
                 AbstractDungeon.player.exhaustPile.addToTop(c);

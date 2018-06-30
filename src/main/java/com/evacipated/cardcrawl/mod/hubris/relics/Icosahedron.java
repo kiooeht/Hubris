@@ -17,6 +17,7 @@ public class Icosahedron extends AbstractRelic
     @Override
     public void atBattleStartPreDraw()
     {
+        flash();
         AbstractDungeon.actionManager.addToBottom(new RelicAboveCreatureAction(AbstractDungeon.player, this));
         AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(new com.evacipated.cardcrawl.mod.hubris.cards.Icosahedron(), 1, false));
     }
