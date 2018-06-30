@@ -10,7 +10,7 @@
     "NAME": "Black Hole",
     "FLAVOR": "TODO",
     "DESCRIPTIONS": [
-      "All cards cost #b0. NL Any card entering your discard pile instead goes to your exhaust."
+      "All cards cost #b0. NL Any card entering your discard pile is exhausted."
     ]
   },
   "hubris:Blank Map": {

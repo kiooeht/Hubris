@@ -1,16 +1,9 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
-import com.megacrit.cardcrawl.actions.common.ExhaustAction;
 import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
 
 public class BlackHole extends AbstractRelic
 {
@@ -32,6 +25,7 @@ public class BlackHole extends AbstractRelic
         }
         for (AbstractCard c : AbstractDungeon.player.discardPile.group) {
             c.modifyCostForCombat(-9);
+            AbstractDungeon.actionManager.addToBottom(new ExhaustSpecificCardAction(c, AbstractDungeon.player.discardPile));
         }
         for (AbstractCard c : AbstractDungeon.player.exhaustPile.group) {
             c.modifyCostForCombat(-9);
@@ -45,22 +39,9 @@ public class BlackHole extends AbstractRelic
     }
 
     @Override
-    public void onDrawOrDiscard()
+    public void onRefreshHand()
     {
-        try {
-            Method resetCardBeforeMoving = CardGroup.class.getDeclaredMethod("resetCardBeforeMoving", AbstractCard.class);
-            resetCardBeforeMoving.setAccessible(true);
-
-            List<AbstractCard> list = new ArrayList<>(AbstractDungeon.player.discardPile.group);
-            for (AbstractCard c : list) {
-                flash();
-                //AbstractDungeon.player.discardPile.moveToExhaustPile(c);
-                resetCardBeforeMoving.invoke(AbstractDungeon.player.discardPile, c);
-                AbstractDungeon.player.exhaustPile.addToTop(c);
-            }
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
-        }
+        atBattleStartPreDraw();
     }
 
     @Override
