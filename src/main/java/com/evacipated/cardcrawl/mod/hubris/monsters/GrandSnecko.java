@@ -59,7 +59,7 @@ public class GrandSnecko extends OrbUsingMonster
     {
         super(NAME, ID, HP, -30.0f, -20.0f, 434, 427, null, -50.0f, 30.0f);
         maxOrbsCap = 12;
-        loadAnimation("images/monsters/theCity/reptile/skeleton.atlas", "images/monsters/theCity/reptile/skeleton.json", 0.6F);
+        loadAnimation("images/monsters/theCity/reptile/skeleton.atlas", "images/monsters/theCity/reptile/skeleton.json", 0.25F);
 
         AnimationState.TrackEntry e = this.state.setAnimation(0, "Idle", true);
         e.setTime(e.getEndTime() * MathUtils.random());
