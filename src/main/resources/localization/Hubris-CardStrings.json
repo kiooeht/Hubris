@@ -1,4 +1,8 @@
 {
+  "hubris:Hubris": {
+    "NAME": "Hubris",
+    "DESCRIPTION": "Innate. Autoplay. NL ? NL Inescapable."
+  },
   "hubris:Icosahedron": {
     "NAME": "Icosahedron",
     "DESCRIPTION": "Retain. NL Roll. NL Purge."

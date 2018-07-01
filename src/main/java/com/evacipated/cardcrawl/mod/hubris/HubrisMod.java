@@ -62,6 +62,8 @@ public class HubrisMod implements
         BaseMod.addKeyword(new String[] {"purge"}, "Disappears upon use.");
         BaseMod.addKeyword(new String[] {"retain"}, "Not discarded at the end of your turn.");
         BaseMod.addKeyword(new String[] {"temporary"}, "Temporary HP disappears at the end of combat.");
+        BaseMod.addKeyword(new String[] {"autoplay"}, "This card automatically plays itself when drawn.");
+        BaseMod.addKeyword(new String[] {"inescapable"}, "Cannot be removed from your deck.");
     }
 
     @Override
