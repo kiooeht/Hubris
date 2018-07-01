@@ -10,5 +10,13 @@
   "hubris:Mulligan": {
     "NAME": "Mulligan",
     "DESCRIPTION": "Retain. NL Discard your hand, NL then draw that many cards. NL Purge."
+  },
+  "hubris:PotOfGreed": {
+    "NAME": "Pot of Greed",
+    "DESCRIPTION": "Draw 2 cards. NL Permanently add a Greed to your deck."
+  },
+  "hubris:Greed": {
+    "NAME": "Greed",
+    "DESCRIPTION": "Unplayable. NL Gain an additional 5 gold at the end of combat for each Greed in your deck. NL Inescapable."
   }
 }
