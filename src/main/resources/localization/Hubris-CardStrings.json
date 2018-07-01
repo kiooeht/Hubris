@@ -17,7 +17,7 @@
   },
   "hubris:Greed": {
     "NAME": "Greed",
-    "DESCRIPTION": "Unplayable. NL Gain an additional 5 gold at the end of combat for each Greed in your deck. NL Inescapable."
+    "DESCRIPTION": "Unplayable. NL Gain an additional !M! gold at the end of combat for each Greed in your deck. NL Inescapable."
   },
   "hubris:SlightOfHand": {
     "NAME": "Slight of Hand",

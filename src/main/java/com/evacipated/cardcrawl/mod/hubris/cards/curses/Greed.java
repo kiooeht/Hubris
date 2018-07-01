@@ -19,9 +19,13 @@ public class Greed extends CustomCard
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     private static final int COST = -2;
 
+    public static int GOLD_AMOUNT = 5;
+
     public Greed()
     {
         super(ID, NAME, IMG, COST, DESCRIPTION, CardType.CURSE, CardColor.CURSE, CardRarity.SPECIAL, CardTarget.NONE);
+
+        magicNumber = baseMagicNumber = GOLD_AMOUNT;
     }
 
     @Override
@@ -50,5 +54,16 @@ public class Greed extends CustomCard
     public AbstractCard makeCopy()
     {
         return new Greed();
+    }
+
+    public static int countCopiesInDeck()
+    {
+        int count = 0;
+        for (AbstractCard card : AbstractDungeon.player.masterDeck.group) {
+            if (card.cardID.equals(ID)) {
+                ++count;
+            }
+        }
+        return count;
     }
 }
