@@ -2,6 +2,7 @@ package com.evacipated.cardcrawl.mod.hubris.cards.curses;
 
 import basemod.abstracts.CustomCard;
 import com.evacipated.cardcrawl.mod.hubris.actions.common.AutoplayCardAction;
+import com.evacipated.cardcrawl.mod.hubris.patches.cards.AbstractCard.InescapableField;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -27,6 +28,7 @@ public class Hubris extends CustomCard
     {
         super(ID, NAME, IMG, COST, DESCRIPTION, CardType.POWER, CardColor.CURSE, CardRarity.SPECIAL, CardTarget.SELF);
 
+        InescapableField.inescapable.set(this, true);
         isInnate = true;
     }
 
