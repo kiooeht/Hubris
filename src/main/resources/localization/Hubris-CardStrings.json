@@ -26,5 +26,25 @@
   "hubris:Wrath": {
     "NAME": "Wrath",
     "DESCRIPTION": "Autoplay. NL Deal !D! damage to a random enemy. NL Place a copy of this copy into your discard pile. Inescapable."
+  },
+  "hubris:EnhanceAbility": {
+    "NAME": "Enhance Ability",
+    "DESCRIPTION": "Gain either !M! Strength, !M! Dexterity, !M! Focus, or !M!0  Temporary HP."
+  },
+  "hubris:BullsStrength": {
+    "NAME": "Bull's Strength",
+    "DESCRIPTION": "Gain !M! Strength."
+  },
+  "hubris:CatsGrace": {
+    "NAME": "Cat's Grace",
+    "DESCRIPTION": "Gain !M! Dexterity."
+  },
+  "hubris:FoxsCunning": {
+    "NAME": "Fox's Cunning",
+    "DESCRIPTION": "Gain !M! Focus."
+  },
+  "hubris:BearsEndurance": {
+    "NAME": "Bear's Endurance",
+    "DESCRIPTION": "Gain !M! Temporary HP."
   }
 }
