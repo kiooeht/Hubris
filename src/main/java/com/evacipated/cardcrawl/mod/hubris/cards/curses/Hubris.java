@@ -47,7 +47,7 @@ public class Hubris extends CustomCard
     @Override
     public void triggerWhenDrawn()
     {
-        AbstractDungeon.actionManager.addToBottom(new AutoplayCardAction(this, AbstractDungeon.player.hand));
+        AbstractDungeon.actionManager.addToTop(new AutoplayCardAction(this, AbstractDungeon.player.hand));
     }
 
     @Override

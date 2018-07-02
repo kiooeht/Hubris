@@ -9,6 +9,7 @@ import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.PlayerTurnEffect;
 import com.megacrit.cardcrawl.vfx.combat.BattleStartEffect;
 
+// NOTE: Must be used with addToTop, NOT addToBottom
 public class AutoplayCardAction extends AbstractGameAction
 {
     private AbstractCard card;
@@ -29,7 +30,9 @@ public class AutoplayCardAction extends AbstractGameAction
             }
         }
         isDone = true;
-        group.removeCard(card);
-        AbstractDungeon.effectList.add(new AutoplayCardEffect(card));
+        if (group.contains(card)) {
+            group.removeCard(card);
+            AbstractDungeon.effectList.add(new AutoplayCardEffect(card));
+        }
     }
 }
