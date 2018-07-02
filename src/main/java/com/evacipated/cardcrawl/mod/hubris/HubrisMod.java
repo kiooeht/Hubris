@@ -63,7 +63,6 @@ public class HubrisMod implements
         BaseMod.addKeyword(new String[] {"retain"}, "Not discarded at the end of your turn.");
         BaseMod.addKeyword(new String[] {"temporary"}, "Temporary HP disappears at the end of combat.");
         BaseMod.addKeyword(new String[] {"autoplay"}, "This card automatically plays itself when drawn.");
-        // TODO: Make Inescapable do something
         BaseMod.addKeyword(new String[] {"inescapable"}, "Cannot be removed from your deck.");
         BaseMod.addKeyword(new String[] {"greed"}, "Greed is a curse that gets you more gold.");
     }
