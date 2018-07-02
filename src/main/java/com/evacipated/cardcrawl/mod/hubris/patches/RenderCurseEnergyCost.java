@@ -2,6 +2,7 @@ package com.evacipated.cardcrawl.mod.hubris.patches;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.mod.hubris.cards.curses.Hubris;
+import com.evacipated.cardcrawl.mod.hubris.cards.curses.Wrath;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.curses.Pride;
@@ -16,7 +17,8 @@ import java.util.List;
 public class RenderCurseEnergyCost
 {
     private static List<String> curseIDs = Arrays.asList(
-            Hubris.ID
+            Hubris.ID,
+            Wrath.ID
     );
     private static String save_ID;
 

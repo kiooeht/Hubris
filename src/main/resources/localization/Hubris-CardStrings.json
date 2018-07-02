@@ -22,5 +22,9 @@
   "hubris:SlightOfHand": {
     "NAME": "Slight of Hand",
     "DESCRIPTION": "Draw or Discard 1 card."
+  },
+  "hubris:Wrath": {
+    "NAME": "Wrath",
+    "DESCRIPTION": "Autoplay. NL Deal !D! damage to a random enemy. NL Place a copy of this copy into your discard pile. Inescapable."
   }
 }
