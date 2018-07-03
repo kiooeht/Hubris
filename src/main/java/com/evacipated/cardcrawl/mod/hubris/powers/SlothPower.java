@@ -15,7 +15,7 @@ public class SlothPower extends AbstractPower
         ID = POWER_ID;
         this.owner = owner;
         type = PowerType.DEBUFF;
-        amount = 1;
+        amount = -1;
         updateDescription();
         img = ImageMaster.loadImage("images/powers/32/slow.png");
     }
@@ -31,7 +31,7 @@ public class SlothPower extends AbstractPower
     {
         if ((isPlayer && owner == AbstractDungeon.player)
                 || (!isPlayer && owner != AbstractDungeon.player)) {
-            ++AbstractDungeon.player.energy.energy;
+            AbstractDungeon.player.energy.energy += 1;
             flash();
         }
     }

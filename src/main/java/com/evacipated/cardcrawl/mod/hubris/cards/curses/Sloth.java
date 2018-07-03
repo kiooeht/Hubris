@@ -39,7 +39,9 @@ public class Sloth extends CustomCard
     {
         AbstractDungeon.actionManager.addToBottom(new LoseEnergyAction(AbstractDungeon.player.energy.energy));
         AbstractDungeon.player.energy.energy = 0;
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new SlothPower(p)));
+        if (!p.hasPower(ID)) {
+            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new SlothPower(p)));
+        }
     }
 
     @Override

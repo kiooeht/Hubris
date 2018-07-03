@@ -49,6 +49,6 @@
   },
   "hubris:Sloth": {
     "NAME": "Sloth",
-    "DESCRIPTION": "Autoplay. NL Lose all energy. Gain 1 max energy at the end of each turn. NL Exhaust. Inescapable."
+    "DESCRIPTION": "Autoplay. NL Lose all max energy. Gain 1 max energy at the end of each turn. NL Exhaust. Inescapable."
   }
 }
