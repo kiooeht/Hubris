@@ -50,5 +50,9 @@
   "hubris:Sloth": {
     "NAME": "Sloth",
     "DESCRIPTION": "Autoplay. NL Lose all max energy. Gain 1 max energy at the end of each turn. NL Exhaust. Inescapable."
+  },
+  "hubris:StunningStrike": {
+    "NAME": "Stunning Strike",
+    "DESCRIPTION": "Deal !D! damage. NL Stun the enemy for !M! turn. NL Exhaust."
   }
 }
