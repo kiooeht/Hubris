@@ -1,5 +1,6 @@
 package com.evacipated.cardcrawl.mod.hubris.actions.tempHp;
 
+import com.evacipated.cardcrawl.mod.hubris.patches.core.AbstractCreature.TempHPField;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -19,12 +20,7 @@ public class AddTemporaryHPAction extends AbstractGameAction
     public void update()
     {
         if (duration == 0.5f) {
-            try {
-                Field f = AbstractCreature.class.getDeclaredField("temporaryHealth");
-                f.set(target, ((int)f.get(target)) + amount);
-            } catch (NoSuchFieldException | IllegalAccessException e) {
-                e.printStackTrace();
-            }
+            TempHPField.tempHp.set(target, TempHPField.tempHp.get(target) + amount);
             if (amount > 0) {
                 AbstractDungeon.effectsQueue.add(new HealEffect(target.hb.cX - target.animX, target.hb.cY, amount));
                 target.healthBarUpdatedEvent();

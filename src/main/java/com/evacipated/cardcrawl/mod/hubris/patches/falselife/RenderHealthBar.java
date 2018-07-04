@@ -3,7 +3,7 @@ package com.evacipated.cardcrawl.mod.hubris.patches.falselife;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.evacipated.cardcrawl.mod.hubris.relics.PeanutButter;
+import com.evacipated.cardcrawl.mod.hubris.patches.core.AbstractCreature.TempHPField;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInsertPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -34,8 +34,7 @@ public class RenderHealthBar
         }
 
         if (!Gdx.input.isKeyPressed(Input.Keys.H)) {
-            //renderGoldHealthBar(__instance, sb, x, y);
-            if (PeanutButter.getTemporaryHealth(__instance) > 0 && __instance.hbAlpha > 0) {
+            if (TempHPField.tempHp.get(__instance) > 0 && __instance.hbAlpha > 0) {
                 renderTempHPIconAndValue(__instance, sb, x, y);
             }
         }
@@ -75,7 +74,7 @@ public class RenderHealthBar
                 0.0f, 0, 0, 64, 64,
                 false, false);
         FontHelper.renderFontCentered(sb, FontHelper.blockInfoFont,
-                Integer.toString(PeanutButter.getTemporaryHealth(creature)),
+                Integer.toString(TempHPField.tempHp.get(creature)),
                 x + getPrivate(AbstractCreature.class, "BLOCK_ICON_X", float.class) + 1.5f * Settings.scale + creature.hb.width,
                 y - 16.0f * Settings.scale,
                 Settings.CREAM_COLOR,

@@ -1,9 +1,8 @@
 package com.evacipated.cardcrawl.mod.hubris.actions.tempHp;
 
+import com.evacipated.cardcrawl.mod.hubris.patches.core.AbstractCreature.TempHPField;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
-
-import java.lang.reflect.Field;
 
 public class RemoveAllTemporaryHPAction extends AbstractGameAction
 {
@@ -15,12 +14,7 @@ public class RemoveAllTemporaryHPAction extends AbstractGameAction
     @Override
     public void update()
     {
-        try {
-            Field f = AbstractCreature.class.getDeclaredField("temporaryHealth");
-            f.set(target, 0);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
+        TempHPField.tempHp.set(target, 0);
         isDone = true;
     }
 }

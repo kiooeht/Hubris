@@ -37,15 +37,4 @@ public class PeanutButter extends AbstractRelic
     {
         return new PeanutButter();
     }
-
-    public static int getTemporaryHealth(AbstractCreature creature)
-    {
-        try {
-            Field f = AbstractCreature.class.getDeclaredField("temporaryHealth");
-            return (int) f.get(creature);
-        } catch (IllegalAccessException | NoSuchFieldException e) {
-            e.printStackTrace();
-        }
-        return 0;
-    }
 }

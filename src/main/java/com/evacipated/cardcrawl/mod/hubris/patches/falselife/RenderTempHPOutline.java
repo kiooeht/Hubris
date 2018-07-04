@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.evacipated.cardcrawl.mod.hubris.relics.PeanutButter;
+import com.evacipated.cardcrawl.mod.hubris.patches.core.AbstractCreature.TempHPField;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInsertPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -32,7 +32,7 @@ public class RenderTempHPOutline
         }
 
         if (!Gdx.input.isKeyPressed(Input.Keys.H)) {
-            if (PeanutButter.getTemporaryHealth(__instance) > 0 && __instance.hbAlpha > 0) {
+            if (TempHPField.tempHp.get(__instance) > 0 && __instance.hbAlpha > 0) {
                 renderTempHPOutline(__instance, sb, x, y);
             }
         }
