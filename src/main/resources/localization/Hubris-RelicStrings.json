@@ -46,5 +46,13 @@
       " NL You get #b",
       " #yStrength from this."
     ]
+  },
+  "hubris:CrystalFace": {
+    "NAME": "Crystalline Mask",
+    "FLAVOR": "Scary.",
+    "DESCRIPTIONS": [
+      "Enemies start combat with #b",
+      "% less HP."
+    ]
   }
 }
