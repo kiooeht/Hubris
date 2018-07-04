@@ -2,15 +2,13 @@ package com.evacipated.cardcrawl.mod.hubris.patches.falselife;
 
 import com.evacipated.cardcrawl.mod.hubris.patches.core.AbstractCreature.TempHPField;
 import com.evacipated.cardcrawl.mod.hubris.vfx.combat.TempDamageNumberEffect;
-import com.evacipated.cardcrawl.modthespire.lib.ByRef;
-import com.evacipated.cardcrawl.modthespire.lib.SpireInsertPatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import javassist.CtBehavior;
 
-import java.lang.reflect.Field;
+import java.util.ArrayList;
 
 @SpirePatch(
         cls="com.megacrit.cardcrawl.characters.AbstractPlayer",
@@ -19,7 +17,6 @@ import java.lang.reflect.Field;
 public class PlayerDamage
 {
     @SpireInsertPatch(
-            rloc=14,
             localvars={"damageAmount"}
     )
     public static void Insert(AbstractPlayer __instance, DamageInfo info, @ByRef int[] damageAmount)
@@ -45,5 +42,22 @@ public class PlayerDamage
         }
 
         System.out.println("Final damage: " + damageAmount[0]);
+    }
+
+    public static class Locator extends SpireInsertLocator
+    {
+        @Override
+        public int[] Locate(CtBehavior ctMethodToPatch) throws Exception
+        {
+            Matcher finalMatcher = new Matcher.MethodCallMatcher("com.megacrit.cardcrawl.characters.AbstractPlayer", "decrementBlock");
+            return offset(LineFinder.findInOrder(ctMethodToPatch, new ArrayList<>(), finalMatcher), 1);
+        }
+
+        private static int[] offset(int[] originalArr, int offset) {
+            for (int i = 0; i < originalArr.length; i++) {
+                originalArr[i] += offset;
+            }
+            return originalArr;
+        }
     }
 }
