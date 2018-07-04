@@ -1,6 +1,7 @@
 package com.evacipated.cardcrawl.mod.hubris.cards.curses;
 
 import basemod.abstracts.CustomCard;
+import com.evacipated.cardcrawl.mod.hubris.CardNoUnlock;
 import com.evacipated.cardcrawl.mod.hubris.actions.common.AutoplayCardAction;
 import com.evacipated.cardcrawl.mod.hubris.patches.cards.AbstractCard.InescapableField;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
@@ -15,6 +16,7 @@ import com.megacrit.cardcrawl.powers.DexterityPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import com.megacrit.cardcrawl.vfx.combat.InflameEffect;
 
+@CardNoUnlock
 public class Hubris extends CustomCard
 {
     public static final String ID = "hubris:Hubris";

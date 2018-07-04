@@ -121,7 +121,9 @@ public class HubrisMod implements
             System.out.println(classInfo.getClassName());
             AbstractCard card = (AbstractCard) cls.newInstance();
             BaseMod.addCard(card);
-            UnlockTracker.unlockCard(card.cardID);
+            if (!cls.isAnnotationPresent(CardNoUnlock.class)) {
+                UnlockTracker.unlockCard(card.cardID);
+            }
         }
     }
 }

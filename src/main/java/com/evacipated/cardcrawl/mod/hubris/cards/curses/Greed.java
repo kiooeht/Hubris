@@ -1,6 +1,7 @@
 package com.evacipated.cardcrawl.mod.hubris.cards.curses;
 
 import basemod.abstracts.CustomCard;
+import com.evacipated.cardcrawl.mod.hubris.CardNoUnlock;
 import com.evacipated.cardcrawl.mod.hubris.patches.cards.AbstractCard.InescapableField;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -11,6 +12,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.BlueCandle;
 
+@CardNoUnlock
 public class Greed extends CustomCard
 {
     public static final String ID = "hubris:Greed";

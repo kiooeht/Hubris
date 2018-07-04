@@ -2,6 +2,7 @@ package com.evacipated.cardcrawl.mod.hubris.cards.curses;
 
 import basemod.abstracts.CustomCard;
 import com.badlogic.gdx.graphics.Color;
+import com.evacipated.cardcrawl.mod.hubris.CardNoUnlock;
 import com.evacipated.cardcrawl.mod.hubris.actions.common.AutoplayCardAction;
 import com.evacipated.cardcrawl.mod.hubris.patches.cards.AbstractCard.InescapableField;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
@@ -17,6 +18,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.vfx.combat.VerticalAuraEffect;
 
+@CardNoUnlock
 public class Wrath extends CustomCard
 {
     public static final String ID = "hubris:Wrath";

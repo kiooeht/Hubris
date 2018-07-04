@@ -13,6 +13,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.BlueCandle;
 
+@CardNoUnlock
 public class NaturalOne extends CustomCard
 {
     public static final String ID = "hubris:NaturalOne";
