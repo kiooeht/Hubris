@@ -1,10 +1,8 @@
 package com.evacipated.cardcrawl.mod.hubris.cards.curses;
 
 import basemod.abstracts.CustomCard;
-import com.evacipated.cardcrawl.mod.hubris.actions.common.AutoplayCardAction;
+import com.evacipated.cardcrawl.mod.hubris.CardNoUnlock;
 import com.evacipated.cardcrawl.mod.hubris.patches.cards.AbstractCard.InescapableField;
-import com.evacipated.cardcrawl.mod.hubris.powers.SlothPower;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.unique.LoseEnergyAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -28,6 +26,8 @@ public class NaturalOne extends CustomCard
     public NaturalOne()
     {
         super(ID, NAME, IMG, COST, DESCRIPTION, CardType.CURSE, CardColor.CURSE, CardRarity.CURSE, CardTarget.NONE);
+
+        InescapableField.inescapable.set(this, true);
     }
 
     @Override
@@ -41,9 +41,9 @@ public class NaturalOne extends CustomCard
     }
 
     @Override
-    public void triggerOnOtherCardPlayed(AbstractCard c)
+    public void triggerWhenDrawn()
     {
-        AbstractDungeon.actionManager.addToTop(new LoseEnergyAction(LOSE_ENERGY_AMT));
+        AbstractDungeon.actionManager.addToBottom(new LoseEnergyAction(LOSE_ENERGY_AMT));
     }
 
     @Override

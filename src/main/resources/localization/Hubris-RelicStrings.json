@@ -3,7 +3,12 @@
     "NAME": "Runic Icosahedron",
     "FLAVOR": "Twisting fate, 1d20 at a time.",
     "DESCRIPTIONS": [
-      "Once per combat, you may roll the Icosahedron."
+      "Once per combat, you may roll the Icosahedron.",
+      " NL You may no longer roll the Icosahedron.",
+      "You are #rCursed.",
+      "Gain [R] at the start of each turn.",
+      "Gain [G] at the start of each turn.",
+      "Gain [B] at the start of each turn."
     ]
   },
   "hubris:Black Hole": {

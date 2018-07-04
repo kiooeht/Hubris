@@ -13,7 +13,7 @@
   },
   "hubris:NaturalOne": {
     "NAME": "Natural One",
-    "DESCRIPTION": "Unplayable. NL While in hand, NL lose [E] when other cards are played"
+    "DESCRIPTION": "Unplayable. NL When this card is drawn, lose 1 Energy. NL Inescapable."
   },
   "hubris:PotOfGreed": {
     "NAME": "Pot of Greed",
