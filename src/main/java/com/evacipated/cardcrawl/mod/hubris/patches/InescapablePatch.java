@@ -53,6 +53,19 @@ public class InescapablePatch
     }
 
     @SpirePatch(
+            cls="com.megacrit.cardcrawl.cards.CardGroup",
+            method="getPurgeableCards"
+    )
+    public static class CardGroup_getPurgeableCards
+    {
+        public static CardGroup Postfix(CardGroup __result, CardGroup __instance)
+        {
+            __result.group.removeIf(c -> InescapableField.inescapable.get(c));
+            return __result;
+        }
+    }
+
+    @SpirePatch(
             cls="com.megacrit.cardcrawl.characters.AbstractPlayer",
             method="isCursed"
     )
