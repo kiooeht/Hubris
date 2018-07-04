@@ -1,7 +1,7 @@
 {
   "hubris:Icosahedron": {
-    "NAME": "Icosahedron",
-    "FLAVOR": "1d20",
+    "NAME": "Runic Icosahedron",
+    "FLAVOR": "Twisting fate, 1d20 at a time.",
     "DESCRIPTIONS": [
       "Once per combat, you may roll the Icosahedron."
     ]
