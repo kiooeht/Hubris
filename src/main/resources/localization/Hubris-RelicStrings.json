@@ -59,5 +59,13 @@
       "Enemies start combat with #b",
       "% less HP."
     ]
+  },
+  "hubris:FunFungus": {
+    "NAME": "Fun Fungus",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "If you do not play any #yAttacks during your turn, heal #b",
+      " HP at the start of your next turn."
+    ]
   }
 }
