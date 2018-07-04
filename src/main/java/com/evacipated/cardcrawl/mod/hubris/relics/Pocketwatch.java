@@ -13,7 +13,7 @@ public class Pocketwatch extends AbstractRelic
     private static final int TIME_LIMIT_M = 5; // minutes
     private static final int TIME_LIMIT_S = TIME_LIMIT_M * 60;
 
-    private float startTime = -1;
+    private float timeCounter = -1;
     private float waitTimer = 0;
 
     public Pocketwatch()
@@ -31,8 +31,8 @@ public class Pocketwatch extends AbstractRelic
     public void atBattleStart()
     {
         flash();
-        startTime = CardCrawlGame.playtime;
-        setCounter(TIME_LIMIT_S);
+        timeCounter = TIME_LIMIT_S;
+        setCounter((int)timeCounter);
     }
 
     @Override
@@ -40,7 +40,12 @@ public class Pocketwatch extends AbstractRelic
     {
         super.update();
         if (counter > 0) {
-            setCounter(TIME_LIMIT_S - (int)(CardCrawlGame.playtime - startTime));
+            if (!CardCrawlGame.stopClock) {
+                if (flashTimer <= 0) {
+                    timeCounter -= Gdx.graphics.getDeltaTime();
+                }
+                setCounter((int)timeCounter);
+            }
         } else if (counter == 0) {
             if (waitTimer <= 0) {
                 if (!AbstractDungeon.player.isDead) {
@@ -59,6 +64,18 @@ public class Pocketwatch extends AbstractRelic
     public void onVictory()
     {
         setCounter(-1);
+    }
+
+    @Override
+    public void onEquip()
+    {
+        AbstractDungeon.player.energy.energyMaster += 1;
+    }
+
+    @Override
+    public void onUnequip()
+    {
+        AbstractDungeon.player.energy.energyMaster -= 1;
     }
 
     @Override
