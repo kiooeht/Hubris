@@ -52,7 +52,7 @@ public class HubrisMod implements
         BaseMod.addRelic(new Icosahedron(), RelicType.SHARED);
         BaseMod.addRelic(new BlackHole(), RelicType.SHARED);
         BaseMod.addRelic(new BlankMap(), RelicType.SHARED);
-        BaseMod.addRelic(new OfFalseLife(), RelicType.SHARED);
+        BaseMod.addRelic(new PeanutButter(), RelicType.SHARED);
         BaseMod.addRelic(new CuriousFeather(), RelicType.SHARED);
         BaseMod.addRelic(new Metronome(), RelicType.SHARED);
         BaseMod.addRelic(new CrystalFace(), RelicType.SHARED);

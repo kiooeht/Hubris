@@ -28,9 +28,9 @@
       "Gain [B] at the start of each turn."
     ]
   },
-  "hubris:False Life": {
-    "NAME": "Talisman of False Life",
-    "FLAVOR": "TODO",
+  "hubris:PeanutButter": {
+    "NAME": "Peanut Butter",
+    "FLAVOR": "Smooth or crunchy?",
     "DESCRIPTIONS": [
       "At the start of each combat, gain #b",
       " #yTemporary HP."
