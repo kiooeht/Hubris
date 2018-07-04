@@ -3,6 +3,7 @@ package com.evacipated.cardcrawl.mod.hubris.cards;
 import basemod.abstracts.CustomCard;
 import com.evacipated.cardcrawl.mod.hubris.actions.unique.RareCodexAction;
 import com.evacipated.cardcrawl.mod.hubris.actions.unique.ReverseEnlightenmentAction;
+import com.evacipated.cardcrawl.mod.hubris.cards.curses.NaturalOne;
 import com.evacipated.cardcrawl.mod.hubris.powers.EnergyGainPower;
 import com.evacipated.cardcrawl.mod.hubris.powers.FixedDrawPower;
 import com.evacipated.cardcrawl.mod.hubris.vfx.combat.ShowRollResult;
@@ -119,7 +120,7 @@ public class Icosahedron extends CustomCard
                 actions.add(new LoseHPAction(p, p, 10));
                 break;
             case 1: // Curse
-                actions.add(new MakeTempCardInHandAction(CardLibrary.getCard(Normality.ID)));
+                actions.add(new MakeTempCardInHandAction(CardLibrary.getCard(NaturalOne.ID)));
                 break;
         }
 

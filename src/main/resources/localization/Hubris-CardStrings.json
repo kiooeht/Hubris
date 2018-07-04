@@ -11,6 +11,10 @@
     "NAME": "Mulligan",
     "DESCRIPTION": "Retain. NL Discard your hand, NL then draw that many cards. NL Purge."
   },
+  "hubris:NaturalOne": {
+    "NAME": "Natural One",
+    "DESCRIPTION": "Unplayable. NL While in hand, NL lose [E] when other cards are played"
+  },
   "hubris:PotOfGreed": {
     "NAME": "Pot of Greed",
     "DESCRIPTION": "Draw 2 cards. NL Permanently add a Greed to your deck."
