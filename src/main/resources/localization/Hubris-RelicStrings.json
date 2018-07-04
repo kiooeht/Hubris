@@ -67,5 +67,14 @@
       "If you do not play any #yAttacks during your turn, heal #b",
       " HP at the start of your next turn."
     ]
+  },
+  "hubris:Pocketwatch": {
+    "NAME": "Pocketwatch",
+    "FLAVOR": "Tick tock...",
+    "DESCRIPTIONS": [
+      " If any battle takes longer than #b",
+      " minutes, you #rdie.",
+      "Gain [R] at the start of each turn."
+    ]
   }
 }

@@ -57,6 +57,7 @@ public class HubrisMod implements
         BaseMod.addRelic(new Metronome(), RelicType.SHARED);
         BaseMod.addRelic(new CrystalFace(), RelicType.SHARED);
         BaseMod.addRelic(new FunFungus(), RelicType.SHARED);
+        BaseMod.addRelic(new Pocketwatch(), RelicType.SHARED);
     }
 
     @Override
