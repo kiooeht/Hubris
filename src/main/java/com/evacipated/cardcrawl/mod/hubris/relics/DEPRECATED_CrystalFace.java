@@ -6,12 +6,12 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-public class CrystalFace extends AbstractRelic
+public class DEPRECATED_CrystalFace extends AbstractRelic
 {
     public static final String ID = "hubris:CrystalFace";
     private static final int AMT = 20;
 
-    public CrystalFace()
+    public DEPRECATED_CrystalFace()
     {
         super(ID, "crystalFace.png", RelicTier.RARE, LandingSound.CLINK);
     }
@@ -36,6 +36,6 @@ public class CrystalFace extends AbstractRelic
     @Override
     public AbstractRelic makeCopy()
     {
-        return new CrystalFace();
+        return new DEPRECATED_CrystalFace();
     }
 }

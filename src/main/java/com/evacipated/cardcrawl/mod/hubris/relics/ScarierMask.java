@@ -6,16 +6,13 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class RingOfIntimidation extends AbstractRelic
+public class ScarierMask extends AbstractRelic
 {
-    public static final String ID = "hubris:RingOfIntimidation";
+    public static final String ID = "hubris:ScarierMask";
 
-    public RingOfIntimidation()
+    public ScarierMask()
     {
-        super(ID, "test4.png", RelicTier.BOSS, LandingSound.CLINK);
+        super(ID, "crystalFace.png", RelicTier.BOSS, LandingSound.CLINK);
     }
 
     @Override
@@ -48,6 +45,6 @@ public class RingOfIntimidation extends AbstractRelic
     @Override
     public AbstractRelic makeCopy()
     {
-        return new RingOfIntimidation();
+        return new ScarierMask();
     }
 }

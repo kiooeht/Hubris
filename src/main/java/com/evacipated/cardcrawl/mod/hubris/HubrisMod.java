@@ -55,10 +55,9 @@ public class HubrisMod implements
         BaseMod.addRelic(new PeanutButter(), RelicType.SHARED);
         BaseMod.addRelic(new CuriousFeather(), RelicType.SHARED);
         BaseMod.addRelic(new Metronome(), RelicType.SHARED);
-        BaseMod.addRelic(new CrystalFace(), RelicType.SHARED);
         BaseMod.addRelic(new FunFungus(), RelicType.SHARED);
         BaseMod.addRelic(new Pocketwatch(), RelicType.SHARED);
-        BaseMod.addRelic(new RingOfIntimidation(), RelicType.SHARED);
+        BaseMod.addRelic(new ScarierMask(), RelicType.SHARED);
     }
 
     @Override
