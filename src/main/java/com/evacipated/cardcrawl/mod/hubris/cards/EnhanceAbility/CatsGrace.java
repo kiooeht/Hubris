@@ -24,7 +24,7 @@ public class CatsGrace extends AbstractCard
 
     public CatsGrace(int amount, int upgrade_amount)
     {
-        super(ID, NAME, IMG, IMG, -2, DESCRIPTION, CardType.POWER, CardColor.RED, CardRarity.RARE, CardTarget.SELF);
+        super(ID, NAME, IMG, IMG, -2, DESCRIPTION, CardType.POWER, CardColor.GREEN, CardRarity.SPECIAL, CardTarget.SELF);
 
         magicNumber = baseMagicNumber = amount;
         amt = amount;

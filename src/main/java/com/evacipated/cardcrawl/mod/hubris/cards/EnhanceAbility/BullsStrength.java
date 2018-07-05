@@ -24,7 +24,7 @@ public class BullsStrength extends AbstractCard
 
     public BullsStrength(int amount, int upgrade_amount)
     {
-        super(ID, NAME, IMG, IMG, -2, DESCRIPTION, CardType.POWER, CardColor.RED, CardRarity.RARE, CardTarget.SELF);
+        super(ID, NAME, IMG, IMG, -2, DESCRIPTION, CardType.POWER, CardColor.RED, CardRarity.SPECIAL, CardTarget.SELF);
 
         magicNumber = baseMagicNumber = amount;
         amt = amount;
