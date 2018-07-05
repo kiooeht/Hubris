@@ -17,7 +17,7 @@ public class HubrisAddToStartingDeck
     {
         if (AbstractDungeon.floorNum <= 1 && CardCrawlGame.dungeon instanceof Exordium) {
             AbstractDungeon.player.masterDeck.addToTop(new Hubris());
-            UnlockTracker.markRelicAsSeen(Hubris.ID);
+            UnlockTracker.markCardAsSeen(Hubris.ID);
         }
     }
 }
