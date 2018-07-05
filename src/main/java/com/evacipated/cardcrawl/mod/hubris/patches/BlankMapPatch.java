@@ -1,6 +1,6 @@
 package com.evacipated.cardcrawl.mod.hubris.patches;
 
-import com.evacipated.cardcrawl.mod.hubris.relics.BlankMap;
+import com.evacipated.cardcrawl.mod.hubris.relics.VirtuousBlindfold;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.map.MapEdge;
@@ -36,7 +36,7 @@ public class BlankMapPatch
     @SuppressWarnings("unused")
     public static boolean doNodeRender(Object nodeObj)
     {
-        if (!AbstractDungeon.player.hasRelic(BlankMap.ID)) {
+        if (!AbstractDungeon.player.hasRelic(VirtuousBlindfold.ID)) {
             return true;
         }
 
@@ -64,7 +64,7 @@ public class BlankMapPatch
     @SuppressWarnings("unused")
     public static boolean doEdgeRender(Object nodeObj, Object edgeObj)
     {
-        if (!AbstractDungeon.player.hasRelic(BlankMap.ID)) {
+        if (!AbstractDungeon.player.hasRelic(VirtuousBlindfold.ID)) {
             return true;
         }
 

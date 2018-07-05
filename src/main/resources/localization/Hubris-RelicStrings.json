@@ -18,9 +18,9 @@
       "All cards cost #b0. NL Any card entering your discard pile is exhausted."
     ]
   },
-  "hubris:Blank Map": {
-    "NAME": "Blank Map",
-    "FLAVOR": "If a map is blank, is it really a map?",
+  "hubris:VirtuousBlindfold": {
+    "NAME": "Virtuous Blindfold",
+    "FLAVOR": "Emotions are prohibited.",
     "DESCRIPTIONS": [
       " You can no longer see the entire map.",
       "Gain [R] at the start of each turn.",
