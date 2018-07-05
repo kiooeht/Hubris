@@ -83,5 +83,12 @@
     "DESCRIPTIONS": [
       "The weakest enemy flees at the beginning of multi-enemy fights."
     ]
+  },
+  "hubris:DeadTorch": {
+    "NAME": "Dead Torch",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "Whenever you #yExhaust a card, gain #b1 Max HP."
+    ]
   }
 }
