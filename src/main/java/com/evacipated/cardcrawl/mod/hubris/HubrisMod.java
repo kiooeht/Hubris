@@ -58,6 +58,7 @@ public class HubrisMod implements
         BaseMod.addRelic(new CrystalFace(), RelicType.SHARED);
         BaseMod.addRelic(new FunFungus(), RelicType.SHARED);
         BaseMod.addRelic(new Pocketwatch(), RelicType.SHARED);
+        BaseMod.addRelic(new RingOfIntimidation(), RelicType.SHARED);
     }
 
     @Override

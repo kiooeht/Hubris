@@ -76,5 +76,12 @@
       " minutes, you #rdie.",
       "Gain [R] at the start of each turn."
     ]
+  },
+  "hubris:RingOfIntimidation": {
+    "NAME": "Ring of Intimidation",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "The weakest enemy flees at the beginning of multi-enemy fights."
+    ]
   }
 }
