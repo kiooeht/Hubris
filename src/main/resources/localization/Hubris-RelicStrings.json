@@ -97,5 +97,14 @@
     "DESCRIPTIONS": [
       "Upon pickup, this relic gains charge equal to half your Max HP and your Max HP is reduced to #b1. NL Start each combat with #yTemporary HP equal to this relic's charge."
     ]
+  },
+  "hubris:DisguiseKit": {
+    "NAME": "Disguise Kit",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "Upon pickup, choose another character. From now on, you receive cards from ",
+      "that character.",
+      "."
+    ]
   }
 }
