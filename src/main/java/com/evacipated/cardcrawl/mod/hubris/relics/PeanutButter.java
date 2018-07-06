@@ -15,7 +15,7 @@ public class PeanutButter extends AbstractRelic
 
     public PeanutButter()
     {
-        super(ID, "peanutButter.png", RelicTier.UNCOMMON, LandingSound.MAGICAL);
+        super(ID, "peanutButter.png", RelicTier.UNCOMMON, LandingSound.SOLID);
     }
 
     @Override

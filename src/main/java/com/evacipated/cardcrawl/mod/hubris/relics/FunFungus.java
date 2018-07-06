@@ -16,7 +16,7 @@ public class FunFungus extends AbstractRelic
 
     public FunFungus()
     {
-        super(ID, "funFungus.png", RelicTier.RARE, LandingSound.MAGICAL);
+        super(ID, "funFungus.png", RelicTier.RARE, LandingSound.FLAT);
 
         pulse = false;
     }

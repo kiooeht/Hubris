@@ -18,7 +18,7 @@ public class DeadTorch extends AbstractRelic
 
     public DeadTorch()
     {
-        super(ID, "deadTorch.png", RelicTier.SPECIAL, LandingSound.MAGICAL);
+        super(ID, "deadTorch.png", RelicTier.SPECIAL, LandingSound.FLAT);
     }
 
     @Override

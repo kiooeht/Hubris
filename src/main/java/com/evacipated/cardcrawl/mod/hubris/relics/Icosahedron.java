@@ -15,7 +15,7 @@ public class Icosahedron extends AbstractRelic
 
     public Icosahedron()
     {
-        super(ID, "icosahedron.png", RelicTier.SPECIAL, LandingSound.MAGICAL);
+        super(ID, "icosahedron.png", RelicTier.SPECIAL, LandingSound.HEAVY);
     }
 
     @Override
