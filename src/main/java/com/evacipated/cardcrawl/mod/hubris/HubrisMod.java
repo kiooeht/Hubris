@@ -59,7 +59,7 @@ public class HubrisMod implements
         BaseMod.addRelic(new Pocketwatch(), RelicType.SHARED);
         BaseMod.addRelic(new ScarierMask(), RelicType.SHARED);
         BaseMod.addRelic(new DeadTorch(), RelicType.SHARED);
-        BaseMod.addRelic(new BottledSoul(), RelicType.SHARED);
+        BaseMod.addRelic(new BottledHeart(), RelicType.SHARED);
     }
 
     @Override

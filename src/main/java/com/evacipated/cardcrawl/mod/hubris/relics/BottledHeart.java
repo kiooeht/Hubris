@@ -5,13 +5,13 @@ import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-public class BottledSoul extends AbstractRelic
+public class BottledHeart extends AbstractRelic
 {
-    public static final String ID = "hubris:BottledSoul";
+    public static final String ID = "hubris:BottledHeart";
 
-    public BottledSoul()
+    public BottledHeart()
     {
-        super(ID, "test2.png", RelicTier.SPECIAL, LandingSound.MAGICAL);
+        super(ID, "bottledHeart.png", RelicTier.SPECIAL, LandingSound.CLINK);
     }
 
     @Override
@@ -39,6 +39,6 @@ public class BottledSoul extends AbstractRelic
     @Override
     public AbstractRelic makeCopy()
     {
-        return new BottledSoul();
+        return new BottledHeart();
     }
 }
