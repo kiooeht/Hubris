@@ -90,5 +90,12 @@
     "DESCRIPTIONS": [
       "Whenever you #yExhaust a card, gain #b1 Max HP."
     ]
+  },
+  "hubris:BottledSoul": {
+    "NAME": "Bottled Soul",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "Upon pickup, give this relic charges equal to half your Max HP, then reduce your Max HP to #b1. NL Start each combat with #yTemporary HP equal to this relic's charges."
+    ]
   }
 }
