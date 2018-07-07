@@ -41,5 +41,11 @@
       "#yEvoke: Add #b",
       " #yDazed to your draw pile."
     ]
+  },
+  "hubris:MonsterWarp": {
+    "NAME": "Warp",
+    "DESCRIPTION": [
+      "#yEvoke: Calls forth another monster from the spire."
+    ]
   }
 }
