@@ -106,5 +106,15 @@
       "that character.",
       "."
     ]
+  },
+  "hubris:Teleporter": {
+    "NAME": "Short Range Teleporter",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "You may skip rooms, instead entering a room two floors away. NL Has #b",
+      " charge",
+      " charges",
+      ". Kill Bosses or Elites to regain charges."
+    ]
   }
 }
