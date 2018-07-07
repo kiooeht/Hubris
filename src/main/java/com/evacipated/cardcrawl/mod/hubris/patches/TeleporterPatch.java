@@ -11,6 +11,16 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 
 public class TeleporterPatch
 {
+    public static boolean isDirectlyConnectedTo(MapRoomNode start, MapRoomNode end)
+    {
+        for (MapEdge edge : start.getEdges()) {
+            if (end.x == edge.dstX && end.y == edge.dstY) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @SpirePatch(
             cls="com.megacrit.cardcrawl.map.MapRoomNode",
             method="isConnectedTo"

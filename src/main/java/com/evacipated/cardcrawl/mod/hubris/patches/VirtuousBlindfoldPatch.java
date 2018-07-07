@@ -15,32 +15,39 @@ import javassist.expr.MethodCall;
         cls="com.megacrit.cardcrawl.map.MapRoomNode",
         method="render"
 )
-public class BlankMapPatch
+public class VirtuousBlindfoldPatch
 {
-    public static void Raw(CtMethod ctMethodToPatch) throws CannotCompileException
+    @SpirePatch(
+            cls="com.megacrit.cardcrawl.map.MapRoomNode",
+            method="render"
+    )
+    public static class Nested
     {
-        String src = "if (!com.evacipated.cardcrawl.mod.hubris.patches.BlankMapPatch.doNodeRender($0)) { return; }";
+        public static void Raw(CtMethod ctMethodToPatch) throws CannotCompileException
+        {
+            String src = "if (!com.evacipated.cardcrawl.mod.hubris.patches.VirtuousBlindfoldPatch.doNodeRender($0)) { return; }";
 
-        ctMethodToPatch.insertBefore(src);
+            ctMethodToPatch.insertBefore(src);
 
-        ctMethodToPatch.instrument(new ExprEditor() {
-            public void edit(MethodCall m) throws CannotCompileException
+            ctMethodToPatch.instrument(new ExprEditor()
             {
-                if (m.getClassName().equals("com.megacrit.cardcrawl.map.MapEdge") && m.getMethodName().equals("render")) {
-                    m.replace("if (com.evacipated.cardcrawl.mod.hubris.patches.BlankMapPatch.doEdgeRender(this, $0)) { $_ = $proceed($$); }");
+                public void edit(MethodCall m) throws CannotCompileException
+                {
+                    if (m.getClassName().equals("com.megacrit.cardcrawl.map.MapEdge") && m.getMethodName().equals("render")) {
+                        m.replace("if (com.evacipated.cardcrawl.mod.hubris.patches.VirtuousBlindfoldPatch.doEdgeRender(this, $0)) { $_ = $proceed($$); }");
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     @SuppressWarnings("unused")
-    public static boolean doNodeRender(Object nodeObj)
+    public static boolean doNodeRender(MapRoomNode node)
     {
         if (!AbstractDungeon.player.hasRelic(VirtuousBlindfold.ID)) {
             return true;
         }
 
-        MapRoomNode node = (MapRoomNode)nodeObj;
         if (node.taken) {
             return true;
         }
@@ -62,14 +69,12 @@ public class BlankMapPatch
     }
 
     @SuppressWarnings("unused")
-    public static boolean doEdgeRender(Object nodeObj, Object edgeObj)
+    public static boolean doEdgeRender(MapRoomNode node, MapEdge edge)
     {
         if (!AbstractDungeon.player.hasRelic(VirtuousBlindfold.ID)) {
             return true;
         }
 
-        MapRoomNode node = (MapRoomNode)nodeObj;
-        MapEdge edge = (MapEdge)edgeObj;
         if (edge.taken) {
             return true;
         }
@@ -77,6 +82,9 @@ public class BlankMapPatch
             return true;
         }
         if (AbstractDungeon.firstRoomChosen && node.equals(AbstractDungeon.getCurrMapNode())) {
+            return true;
+        }
+        if (TeleporterPatch.isDirectlyConnectedTo(AbstractDungeon.getCurrMapNode(), node)) {
             return true;
         }
         return false;
