@@ -9,10 +9,12 @@ import com.evacipated.cardcrawl.mod.hubris.powers.UnfocusedPower;
 import com.megacrit.cardcrawl.actions.animations.TalkAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.RollMoveAction;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.MonsterHelper;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.powers.AbstractPower;
@@ -25,6 +27,8 @@ import javafx.util.Pair;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class GrandSnecko extends OrbUsingMonster
 {
@@ -39,7 +43,14 @@ public class GrandSnecko extends OrbUsingMonster
 
     private static final int ORB_SLOTS = 4;
     private static final ArrayList<Pair<Integer, Class>> orbPercents;
-    private static final int maxPercent;
+    private static int maxPercent;
+
+    private static final List<String> summons = Arrays.asList(
+            MonsterHelper.SNECKO_ENC,
+            MonsterHelper.CULTIST_ENC,
+            MonsterHelper.THREE_SENTRY_ENC,
+            MonsterHelper.SPHERE_GUARDIAN_ENC
+    );
 
     static {
         orbPercents = new ArrayList<>();
@@ -119,7 +130,7 @@ public class GrandSnecko extends OrbUsingMonster
         firstChannel();
     }
 
-    private boolean rerollOrb(AbstractOrb orb)
+    private boolean rerollOrb(ArrayList<String> orbTypesBeingChannelled, AbstractOrb orb)
     {
         if (orb == null) {
             return true;
@@ -140,6 +151,14 @@ public class GrandSnecko extends OrbUsingMonster
         if (miasmaCount >= 3) {
             return true;
         }
+        if (orb.ID.equals(MonsterMiasma.ORB_ID)
+                && (orbTypesBeingChannelled.contains(MonsterMiasma.ORB_ID) || hasOrbType(MonsterMiasma.ORB_ID))) {
+            return true;
+        }
+        if (orb.ID.equals(MonsterWarp.ORB_ID)
+                && (orbTypesBeingChannelled.contains(MonsterWarp.ORB_ID) || hasOrbType(MonsterWarp.ORB_ID))) {
+            return true;
+        }
 
         return false;
     }
@@ -147,11 +166,17 @@ public class GrandSnecko extends OrbUsingMonster
     @Override
     public void takeTurn()
     {
+        ArrayList<String> orbTypesBeingChannelled = new ArrayList<>();
         for (int i=0; i<numberToChannel; ++i) {
             AbstractOrb orb;
             do {
                 orb = getRandomOrb();
-            } while (rerollOrb(orb));
+            } while (rerollOrb(orbTypesBeingChannelled, orb));
+            orbTypesBeingChannelled.add(orb.ID);
+            if (orb instanceof MonsterWarp) {
+                String summonId =summons.get(AbstractDungeon.aiRng.random(summons.size()-1));
+                ((MonsterWarp)orb).summon = MonsterHelper.getEncounter(summonId).monsters.get(0);
+            }
             AbstractDungeon.actionManager.addToBottom(new MonsterChannelAction(this, orb));
         }
 
@@ -173,6 +198,22 @@ public class GrandSnecko extends OrbUsingMonster
         }
 
         setMove((byte)0, OrbUsingMonster.Enums.CHANNEL_ORBS, numberToChannel);
+    }
+
+    @Override
+    public void damage(DamageInfo info)
+    {
+        super.damage(info);
+
+        if (info.owner != null && info.type != DamageInfo.DamageType.THORNS && info.output > 0) {
+            state.setAnimation(0, "Hit", false);
+            state.addAnimation(0, "Idle", true, 0.0F);
+        }
+
+        if (currentHealth <= maxHealth * 0.5f) {
+            orbPercents.set(5, new Pair<>(60, MonsterWarp.class));
+            maxPercent += 40;
+        }
     }
 
     @Override

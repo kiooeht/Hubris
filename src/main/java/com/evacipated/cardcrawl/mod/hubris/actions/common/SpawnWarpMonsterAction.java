@@ -49,6 +49,8 @@ public class SpawnWarpMonsterAction extends SpawnMonsterAction
         try {
             if (used.getBoolean(this) && !usedPrev) {
                 AbstractMonster monster = (AbstractMonster) m.get(this);
+                monster.usePreBattleAction();
+                monster.useUniversalPreBattleAction();
                 AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(monster, monster, new WarpPower(monster, owner)));
             }
         } catch (IllegalAccessException e) {

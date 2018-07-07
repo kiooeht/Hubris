@@ -8,12 +8,11 @@ import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.mod.hubris.actions.common.RemoveMonsterAction;
 import com.evacipated.cardcrawl.mod.hubris.actions.common.SpawnWarpMonsterAction;
 import com.evacipated.cardcrawl.mod.hubris.monsters.OrbUsingMonster;
-import com.megacrit.cardcrawl.actions.common.SpawnMonsterAction;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.OrbStrings;
-import com.megacrit.cardcrawl.monsters.exordium.Cultist;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.vfx.combat.PlasmaOrbActivateEffect;
 import com.megacrit.cardcrawl.vfx.combat.PlasmaOrbPassiveEffect;
@@ -26,10 +25,17 @@ public class MonsterWarp extends AbstractOrb
     private float vfxTimer = 0.5f;
 
     private OrbUsingMonster owner;
+    public AbstractMonster summon;
 
     public MonsterWarp(OrbUsingMonster owner)
     {
+        this(owner, null);
+    }
+
+    public MonsterWarp(OrbUsingMonster owner, AbstractMonster summon)
+    {
         this.owner = owner;
+        this.summon = summon;
         ID = ORB_ID;
         img = new Texture("images/orbs/draining.png");
         name = orbStrings.NAME;
@@ -60,7 +66,7 @@ public class MonsterWarp extends AbstractOrb
         AbstractDungeon.getCurrRoom().cannotLose = true;
 
         AbstractDungeon.actionManager.addToBottom(new RemoveMonsterAction(owner));
-        AbstractDungeon.actionManager.addToBottom(new SpawnWarpMonsterAction(new Cultist(0.0f, -10.0f), owner));
+        AbstractDungeon.actionManager.addToBottom(new SpawnWarpMonsterAction(summon, owner));
     }
 
     @Override
@@ -115,6 +121,6 @@ public class MonsterWarp extends AbstractOrb
     @Override
     public AbstractOrb makeCopy()
     {
-        return new MonsterWarp(owner);
+        return new MonsterWarp(owner, summon);
     }
 }

@@ -201,4 +201,14 @@ public abstract class OrbUsingMonster extends AbstractMonster
         }
         orbs.get(i).triggerEvokeAnimation();
     }
+
+    public boolean hasOrbType(String orbID)
+    {
+        for (AbstractOrb orb : orbs) {
+            if (orb.ID.equals(orbID)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
