@@ -2,14 +2,13 @@ package com.evacipated.cardcrawl.mod.hubris;
 
 import basemod.BaseMod;
 import basemod.helpers.RelicType;
-import basemod.interfaces.EditCardsSubscriber;
-import basemod.interfaces.EditKeywordsSubscriber;
-import basemod.interfaces.EditRelicsSubscriber;
-import basemod.interfaces.EditStringsSubscriber;
+import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.mod.hubris.relics.*;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.OrbStrings;
 import com.megacrit.cardcrawl.localization.RelicStrings;
@@ -26,14 +25,23 @@ import java.util.Collection;
 
 @SpireInitializer
 public class HubrisMod implements
+        PostInitializeSubscriber,
         EditCardsSubscriber,
         EditRelicsSubscriber,
         EditKeywordsSubscriber,
         EditStringsSubscriber
 {
+    public static Texture TEMP_HP_ICON;
+
     public static void initialize()
     {
         BaseMod.subscribe(new HubrisMod());
+    }
+
+    @Override
+    public void receivePostInitialize()
+    {
+        TEMP_HP_ICON = ImageMaster.loadImage("images/ui/tempHP.png");
     }
 
     @Override
