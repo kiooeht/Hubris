@@ -55,10 +55,10 @@ public class GrandSnecko extends OrbUsingMonster
     static {
         orbPercents = new ArrayList<>();
         orbPercents.add(new Pair<>(40, MonsterLightning.class));
-        orbPercents.add(new Pair<>(15, MonsterFrost.class));
-        orbPercents.add(new Pair<>(10, MonsterFocusing.class));
+        orbPercents.add(new Pair<>(20, MonsterFrost.class));
+        orbPercents.add(new Pair<>(15, MonsterFocusing.class));
         orbPercents.add(new Pair<>(5, MonsterMiasma.class));
-        orbPercents.add(new Pair<>(10, MonsterDraining.class));
+        orbPercents.add(new Pair<>(5, MonsterDraining.class));
         orbPercents.add(new Pair<>(20, MonsterWarp.class));
 
         int sum = 0;
