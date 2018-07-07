@@ -1,9 +1,8 @@
 package com.evacipated.cardcrawl.mod.hubris.cards;
 
 import basemod.abstracts.CustomCard;
-import com.evacipated.cardcrawl.mod.hubris.powers.StunPower;
+import com.evacipated.cardcrawl.mod.hubris.actions.common.StunAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -12,9 +11,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.monsters.EnemyMoveInfo;
-
-import java.lang.reflect.Field;
 
 public class StunningStrike extends CustomCard
 {
@@ -41,16 +37,7 @@ public class StunningStrike extends CustomCard
     public void use(AbstractPlayer p, AbstractMonster m)
     {
         AbstractDungeon.actionManager.addToBottom(new DamageAction(m, new DamageInfo(p, baseDamage, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(m, p, new StunPower(m), 1));
-        try {
-            Field f = AbstractMonster.class.getDeclaredField("move");
-            f.setAccessible(true);
-            EnemyMoveInfo move = (EnemyMoveInfo)f.get(m);
-            move.intent = AbstractMonster.Intent.STUN;
-            m.createIntent();
-        } catch (IllegalAccessException | NoSuchFieldException e) {
-            e.printStackTrace();
-        }
+        AbstractDungeon.actionManager.addToBottom(new StunAction(m, p));
     }
 
     @Override
