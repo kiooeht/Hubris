@@ -37,7 +37,7 @@ public class MonsterWarp extends AbstractOrb
         this.owner = owner;
         this.summon = summon;
         ID = ORB_ID;
-        img = new Texture("images/orbs/draining.png");
+        img = new Texture("images/orbs/warp.png");
         name = orbStrings.NAME;
         baseEvokeAmount = 0;
         evokeAmount = baseEvokeAmount;
