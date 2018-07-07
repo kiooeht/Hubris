@@ -39,7 +39,7 @@ public class GrandSnecko extends OrbUsingMonster
             "@THERE.@ @ARE.@ @FOUR.@ @LIGHTS.@",
             "~Tell~ ~me...~ NL How many lights do you see?"
     };
-    public static final int HP = 200;
+    public static final int HP = 300;
 
     private static final int ORB_SLOTS = 4;
     private static final ArrayList<Pair<Integer, Class>> orbPercents;
