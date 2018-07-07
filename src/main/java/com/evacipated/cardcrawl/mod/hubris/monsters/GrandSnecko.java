@@ -174,7 +174,7 @@ public class GrandSnecko extends OrbUsingMonster
             } while (rerollOrb(orbTypesBeingChannelled, orb));
             orbTypesBeingChannelled.add(orb.ID);
             if (orb instanceof MonsterWarp) {
-                String summonId =summons.get(AbstractDungeon.aiRng.random(summons.size()-1));
+                String summonId = summons.get(AbstractDungeon.aiRng.random(summons.size()-1));
                 ((MonsterWarp)orb).summon = MonsterHelper.getEncounter(summonId).monsters.get(0);
             }
             AbstractDungeon.actionManager.addToBottom(new MonsterChannelAction(this, orb));
