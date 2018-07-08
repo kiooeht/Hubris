@@ -21,6 +21,30 @@ public class TeleporterPatch
         return false;
     }
 
+    public static boolean pseudoTaken(MapEdge edge)
+    {
+        if (edge.taken) {
+            return true;
+        }
+
+        if (AbstractDungeon.player.hasRelic(Teleporter.ID)) {
+            MapRoomNode node = getNode(edge.dstX, edge.dstY);
+            // If destination node was taken or is current node
+            return node != null && (node.taken || node.equals(AbstractDungeon.getCurrMapNode()));
+        } else {
+            return false;
+        }
+    }
+
+    private static MapRoomNode getNode(int x, int y)
+    {
+        try {
+            return CardCrawlGame.dungeon.getMap().get(y).get(x);
+        } catch (IndexOutOfBoundsException e) {
+            return null;
+        }
+    }
+
     @SpirePatch(
             cls="com.megacrit.cardcrawl.map.MapRoomNode",
             method="isConnectedTo"
@@ -48,15 +72,6 @@ public class TeleporterPatch
             }
             --depth;
             return __result;
-        }
-
-        private static MapRoomNode getNode(int x, int y)
-        {
-            try {
-                return CardCrawlGame.dungeon.getMap().get(y).get(x);
-            } catch (IndexOutOfBoundsException e) {
-                return null;
-            }
         }
 
         static int getNodeDistance(MapRoomNode start, MapRoomNode end)

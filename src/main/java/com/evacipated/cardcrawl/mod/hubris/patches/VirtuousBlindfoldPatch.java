@@ -1,5 +1,6 @@
 package com.evacipated.cardcrawl.mod.hubris.patches;
 
+import com.evacipated.cardcrawl.mod.hubris.relics.Teleporter;
 import com.evacipated.cardcrawl.mod.hubris.relics.VirtuousBlindfold;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -75,7 +76,7 @@ public class VirtuousBlindfoldPatch
             return true;
         }
 
-        if (edge.taken) {
+        if (TeleporterPatch.pseudoTaken(edge)) {
             return true;
         }
         if (node.taken) {
@@ -84,7 +85,8 @@ public class VirtuousBlindfoldPatch
         if (AbstractDungeon.firstRoomChosen && node.equals(AbstractDungeon.getCurrMapNode())) {
             return true;
         }
-        if (TeleporterPatch.isDirectlyConnectedTo(AbstractDungeon.getCurrMapNode(), node)) {
+        if (AbstractDungeon.player.hasRelic(Teleporter.ID)
+                && TeleporterPatch.isDirectlyConnectedTo(AbstractDungeon.getCurrMapNode(), node)) {
             return true;
         }
         return false;
