@@ -42,7 +42,7 @@ public class GrandSnecko extends OrbUsingMonster
     public static final int HP = 300;
 
     private static final int ORB_SLOTS = 4;
-    private static final ArrayList<Pair<Integer, Class>> orbPercents;
+    private static final ArrayList<Pair<Integer, Class<? extends AbstractOrb>>> orbPercents;
     private static int maxPercent;
 
     private static final List<String> summons = Arrays.asList(
@@ -62,7 +62,7 @@ public class GrandSnecko extends OrbUsingMonster
         orbPercents.add(new Pair<>(20, MonsterWarp.class));
 
         int sum = 0;
-        for (Pair<Integer, Class> kv : orbPercents) {
+        for (Pair<Integer, Class<? extends AbstractOrb>> kv : orbPercents) {
             sum += kv.getKey();
         }
         maxPercent = sum;
@@ -100,7 +100,7 @@ public class GrandSnecko extends OrbUsingMonster
     {
         int r = AbstractDungeon.aiRng.random(maxPercent);
         int sum = 0;
-        for (Pair<Integer, Class> kv : orbPercents) {
+        for (Pair<Integer, Class<? extends AbstractOrb>> kv : orbPercents) {
             sum += kv.getKey();
             if (r <= sum) {
                 return makeOrb(kv.getValue());
