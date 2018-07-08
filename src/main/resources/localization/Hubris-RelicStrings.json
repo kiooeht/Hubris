@@ -116,5 +116,16 @@
       " charges",
       ". Kill Bosses or Elites to regain charges."
     ]
+  },
+  "hubris:MysteriousPyramids": {
+    "NAME": "Mysterious Pyramids",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "Upon pickup, choose two cards. Whenever you play one of these cards, the other is placed into your hand.",
+      "Choose two cards for ",
+      "Whenever you play ",
+      " or ",
+      " the other is placed into your hand."
+    ]
   }
 }

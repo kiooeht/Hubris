@@ -70,6 +70,7 @@ public class HubrisMod implements
         BaseMod.addRelic(new BottledHeart(), RelicType.SHARED);
         BaseMod.addRelic(new DisguiseKit(), RelicType.SHARED);
         BaseMod.addRelic(new Teleporter(), RelicType.SHARED);
+        BaseMod.addRelic(new MysteriousPyramids(), RelicType.SHARED);
     }
 
     @Override
