@@ -23,7 +23,7 @@ public class MysteriousPyramids extends AbstractRelic
 
     public MysteriousPyramids()
     {
-        super(ID, "test8.png", RelicTier.UNCOMMON, LandingSound.CLINK);
+        super(ID, "pyramids.png", RelicTier.UNCOMMON, LandingSound.CLINK);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class MysteriousPyramids extends AbstractRelic
     }
 
     @Override
-    public void onPlayCard(AbstractCard c, AbstractMonster m)
+    public void onCardDraw(AbstractCard c)
     {
         if (PyramidsField.inPyramids.get(c)) {
             for (Iterator<AbstractCard> it = AbstractDungeon.player.drawPile.group.iterator(); it.hasNext();) {
