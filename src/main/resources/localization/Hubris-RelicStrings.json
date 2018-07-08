@@ -127,5 +127,12 @@
       " or ",
       " the other is placed into your hand."
     ]
+  },
+  "hubris:AstralHammer": {
+    "NAME": "Astral Hammer",
+    "FLAVOR": "\"Forged in the heart of celestial fire. Powered by lasers entwined in a star. Crystal enchantment of steel.\"",
+    "DESCRIPTIONS": [
+      "Whenever you play an #yAttack, reduce its cost by #b1 for the rest of combat. Playing an #yAttack that costs #b0 #yExhausts it."
+    ]
   }
 }
