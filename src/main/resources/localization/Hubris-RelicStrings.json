@@ -134,5 +134,12 @@
     "DESCRIPTIONS": [
       "Whenever you play an #yAttack, reduce its cost by #b1 for the rest of combat. Playing an #yAttack that costs #b0 #yExhausts it."
     ]
+  },
+  "hubris:PrototypeTalaria": {
+    "NAME": "Prototype Talaria",
+    "FLAVOR": "Too heavy to achieve real flight.",
+    "DESCRIPTIONS": [
+      "Reduce damage taken from the first #yAttack of each combat by #b50%."
+    ]
   }
 }

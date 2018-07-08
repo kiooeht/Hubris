@@ -26,7 +26,12 @@ public class FlightPlayerPower extends FlightPower
     @Override
     public void updateDescription()
     {
-        description = "Reduce #yAttack damage taken by #b50%. Cancelled for the combat if dealt #yAttack damage #b" + startAmount + " times in one turn.";
+        description = "Reduce #yAttack damage taken by #b50%. Cancelled for the combat if dealt #yAttack damage #b" + startAmount;
+        if (amount == 1) {
+            description += " time in one turn.";
+        } else {
+            description += " times in one turn.";
+        }
     }
 
     @Override
