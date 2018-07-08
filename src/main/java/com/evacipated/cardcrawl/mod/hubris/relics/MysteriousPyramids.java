@@ -39,23 +39,9 @@ public class MysteriousPyramids extends AbstractRelic
             for (Iterator<AbstractCard> it = AbstractDungeon.player.drawPile.group.iterator(); it.hasNext();) {
                 AbstractCard card = it.next();
                 if (PyramidsField.inPyramids.get(card)) {
+                    flash();
                     it.remove();
                     AbstractDungeon.player.hand.addToTop(card);
-                }
-            }
-            for (Iterator<AbstractCard> it = AbstractDungeon.player.discardPile.group.iterator(); it.hasNext();) {
-                AbstractCard card = it.next();
-                if (PyramidsField.inPyramids.get(card)) {
-                    it.remove();
-                    AbstractDungeon.player.hand.addToTop(card);
-                }
-            }
-            for (Iterator<AbstractCard> it = AbstractDungeon.player.exhaustPile.group.iterator(); it.hasNext();) {
-                AbstractCard card = it.next();
-                if (PyramidsField.inPyramids.get(card)) {
-                    it.remove();
-                    AbstractDungeon.player.hand.addToTop(card);
-                    card.unfadeOut();
                 }
             }
 
