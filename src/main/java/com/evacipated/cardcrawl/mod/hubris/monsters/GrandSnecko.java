@@ -54,12 +54,10 @@ public class GrandSnecko extends OrbUsingMonster
 
     static {
         orbPercents = new ArrayList<>();
-        orbPercents.add(new Pair<>(40, MonsterLightning.class));
-        orbPercents.add(new Pair<>(20, MonsterFrost.class));
-        orbPercents.add(new Pair<>(15, MonsterFocusing.class));
-        orbPercents.add(new Pair<>(5, MonsterMiasma.class));
-        orbPercents.add(new Pair<>(5, MonsterDraining.class));
-        orbPercents.add(new Pair<>(20, MonsterWarp.class));
+        orbPercents.add(new Pair<>(50, MonsterLightning.class));
+        orbPercents.add(new Pair<>(25, MonsterFrost.class));
+        orbPercents.add(new Pair<>(15, MonsterMiasma.class));
+        orbPercents.add(new Pair<>(10, MonsterDraining.class));
 
         int sum = 0;
         for (Pair<Integer, Class<? extends AbstractOrb>> kv : orbPercents) {
@@ -169,9 +167,15 @@ public class GrandSnecko extends OrbUsingMonster
         ArrayList<String> orbTypesBeingChannelled = new ArrayList<>();
         for (int i=0; i<numberToChannel; ++i) {
             AbstractOrb orb;
-            do {
-                orb = getRandomOrb();
-            } while (rerollOrb(orbTypesBeingChannelled, orb));
+            if (isMinionDead() && !hasOrbType(MonsterWarp.ORB_ID) && !orbTypesBeingChannelled.contains(MonsterWarp.ORB_ID)) {
+                orb = new MonsterWarp(this);
+            } else if (!hasOrbType(MonsterFocusing.ORB_ID) && !orbTypesBeingChannelled.contains(MonsterFocusing.ORB_ID)) {
+                orb = new MonsterFocusing(this);
+            } else {
+                do {
+                    orb = getRandomOrb();
+                } while (rerollOrb(orbTypesBeingChannelled, orb));
+            }
             orbTypesBeingChannelled.add(orb.ID);
             if (orb instanceof MonsterWarp) {
                 String summonId = summons.get(AbstractDungeon.aiRng.random(summons.size()-1));
@@ -200,6 +204,19 @@ public class GrandSnecko extends OrbUsingMonster
         setMove((byte)0, OrbUsingMonster.Enums.CHANNEL_ORBS, numberToChannel);
     }
 
+    private boolean isMinionDead()
+    {
+        for (AbstractMonster m : AbstractDungeon.getCurrRoom().monsters.monsters) {
+            if (m.equals(this)) {
+                continue;
+            }
+            if (!m.isDeadOrEscaped()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     @Override
     public void damage(DamageInfo info)
     {
@@ -208,11 +225,6 @@ public class GrandSnecko extends OrbUsingMonster
         if (info.owner != null && info.type != DamageInfo.DamageType.THORNS && info.output > 0) {
             state.setAnimation(0, "Hit", false);
             state.addAnimation(0, "Idle", true, 0.0F);
-        }
-
-        if (currentHealth <= maxHealth * 0.5f) {
-            orbPercents.set(5, new Pair<>(60, MonsterWarp.class));
-            maxPercent += 40;
         }
     }
 
