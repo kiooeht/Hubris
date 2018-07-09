@@ -18,6 +18,7 @@ public class BefuddledPower extends AbstractPower
         ID = POWER_ID;
         this.owner = owner;
         type = PowerType.DEBUFF;
+        priority = -999;
         updateDescription();
         loadRegion("confusion");
     }
