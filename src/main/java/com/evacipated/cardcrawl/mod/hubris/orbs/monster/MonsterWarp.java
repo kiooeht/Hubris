@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
-import com.evacipated.cardcrawl.mod.hubris.actions.common.RemoveMonsterAction;
 import com.evacipated.cardcrawl.mod.hubris.actions.common.SpawnWarpMonsterAction;
 import com.evacipated.cardcrawl.mod.hubris.monsters.OrbUsingMonster;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -65,8 +64,8 @@ public class MonsterWarp extends AbstractOrb
     {
         AbstractDungeon.getCurrRoom().cannotLose = true;
 
-        AbstractDungeon.actionManager.addToBottom(new RemoveMonsterAction(owner));
-        AbstractDungeon.actionManager.addToBottom(new SpawnWarpMonsterAction(summon, owner));
+        summon.drawX = Settings.WIDTH * 0.5f;
+        AbstractDungeon.actionManager.addToTop(new SpawnWarpMonsterAction(summon, 1));
     }
 
     @Override

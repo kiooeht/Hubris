@@ -1,9 +1,6 @@
 package com.evacipated.cardcrawl.mod.hubris.actions.common;
 
-import com.evacipated.cardcrawl.mod.hubris.powers.WarpPower;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.SpawnMonsterAction;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
 import java.lang.reflect.Field;
@@ -25,13 +22,9 @@ public class SpawnWarpMonsterAction extends SpawnMonsterAction
         }
     }
 
-    private AbstractMonster owner;
-
-    public SpawnWarpMonsterAction(AbstractMonster m, AbstractMonster owner)
+    public SpawnWarpMonsterAction(AbstractMonster m, int slot)
     {
-        super(m, true);
-
-        this.owner = owner;
+        super(m, true, slot);
     }
 
     @Override
@@ -51,7 +44,6 @@ public class SpawnWarpMonsterAction extends SpawnMonsterAction
                 AbstractMonster monster = (AbstractMonster) m.get(this);
                 monster.usePreBattleAction();
                 monster.useUniversalPreBattleAction();
-                AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(monster, monster, new WarpPower(monster, owner)));
             }
         } catch (IllegalAccessException e) {
             e.printStackTrace();
