@@ -63,7 +63,7 @@ public class MonsterFocusing extends AbstractOrb
     @Override
     public void onEvoke()
     {
-        AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(owner, owner, new FocusPower(owner, evokeAmount), evokeAmount));
+        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(owner, owner, new FocusPower(owner, evokeAmount), evokeAmount));
     }
 
     @Override
