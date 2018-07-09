@@ -36,7 +36,7 @@ public class UnfocusedPower extends AbstractPower
             AbstractPower focus = owner.getPower(FocusPower.POWER_ID);
             if (focus != null && focus.amount > 0) {
                 flash();
-                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(owner, owner, new FocusPower(owner, -amount), -amount));
+                AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(owner, owner, new FocusPower(owner, -amount), -amount));
             }
         }
         return damageAmount;
