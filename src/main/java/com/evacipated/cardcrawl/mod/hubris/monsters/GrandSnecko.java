@@ -66,6 +66,8 @@ public class GrandSnecko extends OrbUsingMonster
         maxPercent = sum;
     }
 
+    private boolean firstSummon = true;
+
     public GrandSnecko()
     {
         super(NAME, ID, HP, -30.0f, -20.0f, 434, 427, null, -50.0f, 30.0f);
@@ -178,7 +180,13 @@ public class GrandSnecko extends OrbUsingMonster
             }
             orbTypesBeingChannelled.add(orb.ID);
             if (orb instanceof MonsterWarp) {
-                String summonId = summons.get(AbstractDungeon.aiRng.random(summons.size()-1));
+                String summonId;
+                if (firstSummon) {
+                    summonId = summons.get(0);
+                    firstSummon = false;
+                } else {
+                    summonId = summons.get(AbstractDungeon.aiRng.random(summons.size()-1));
+                }
                 ((MonsterWarp)orb).summon = MonsterHelper.getEncounter(summonId).monsters.get(0);
             }
             AbstractDungeon.actionManager.addToBottom(new MonsterChannelAction(this, orb));
