@@ -158,5 +158,12 @@
       " #yDexterity.",
       " NL #rWarning: Highly Addictive!"
     ]
+  },
+  "hubris:TinFlute": {
+    "NAME": "Tin Flute",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "At the end of this run, choose one card you have. You start your next run with that card."
+    ]
   }
 }

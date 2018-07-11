@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.mod.hubris.relics.*;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.OrbStrings;
@@ -29,7 +30,8 @@ public class HubrisMod implements
         EditCardsSubscriber,
         EditRelicsSubscriber,
         EditKeywordsSubscriber,
-        EditStringsSubscriber
+        EditStringsSubscriber,
+        PostDeathSubscriber
 {
     public static Texture TEMP_HP_ICON;
 
@@ -42,6 +44,15 @@ public class HubrisMod implements
     public void receivePostInitialize()
     {
         TEMP_HP_ICON = ImageMaster.loadImage("images/ui/tempHP.png");
+    }
+
+    @Override
+    public void receivePostDeath()
+    {
+        if (AbstractDungeon.player != null && AbstractDungeon.player.hasRelic(TinFlute.ID)) {
+            TinFlute flute = (TinFlute) AbstractDungeon.player.getRelic(TinFlute.ID);
+            flute.onDeath();
+        }
     }
 
     @Override
@@ -74,6 +85,7 @@ public class HubrisMod implements
         BaseMod.addRelic(new AstralHammer(), RelicType.SHARED);
         BaseMod.addRelic(new PrototypeTalaria(), RelicType.SHARED);
         BaseMod.addRelic(new Spice(), RelicType.SHARED);
+        BaseMod.addRelic(new TinFlute(), RelicType.SHARED);
     }
 
     @Override
