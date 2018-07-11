@@ -62,8 +62,6 @@ public class MonsterWarp extends AbstractOrb
     @Override
     public void onEvoke()
     {
-        AbstractDungeon.getCurrRoom().cannotLose = true;
-
         summon.drawX = Settings.WIDTH * 0.5f;
         AbstractDungeon.actionManager.addToTop(new SpawnWarpMonsterAction(summon, 1));
     }
