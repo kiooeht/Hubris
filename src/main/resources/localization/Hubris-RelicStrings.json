@@ -141,5 +141,22 @@
     "DESCRIPTIONS": [
       "Reduce damage taken from the first #yAttack of each combat by #b50%."
     ]
+  },
+  "hubris:Spice": {
+    "NAME": "Spice",
+    "FLAVOR": "Must flow.",
+    "DESCRIPTIONS": [
+      "Upon pickup, raise your Max HP by #b8. NL Draw #b1 additional card each turn. NL #rWarning: Highly addictive!",
+      "#pOne #pmore #pcouldn't #phurt. NL Upon pickup, raise your Max HP by #b8. NL Start each combat with #b1 #yDexterity.",
+      "#pJust #pone #pmore #phit... NL Upon pickup, #rlower your Max HP by #b8. NL Start each combat with #b1 #yStrength and #b2 #yDexterity.",
+      "#pMORE NL Upon pickup, #rlower your Max HP by #b8. NL Increase your starting #yStrength by #b1.",
+      "Max HP #b+",
+      "Max HP #r",
+      ". NL Draw #b1 additional card each turn.",
+      " NL Start each combat with #b",
+      " #yStrength and #b",
+      " #yDexterity.",
+      " NL #rWarning: Highly Addictive!"
+    ]
   }
 }
