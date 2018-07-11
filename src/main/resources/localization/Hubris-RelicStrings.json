@@ -165,5 +165,12 @@
     "DESCRIPTIONS": [
       "At the end of this run, choose one card you have. You start your next run with that card."
     ]
+  },
+  "hubris:GlazedTorus": {
+    "NAME": "Glazed Torus",
+    "FLAVOR": "Not actually edible.",
+    "DESCRIPTIONS": [
+      "Gain #b1 #yStrength at the end of each of your odd numbered turns."
+    ]
   }
 }
