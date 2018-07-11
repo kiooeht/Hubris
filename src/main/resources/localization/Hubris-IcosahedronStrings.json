@@ -1,6 +1,6 @@
 {
   "hubris:Icosahedron_1": {
-    "DESCRIPTION": "Curse",
+    "DESCRIPTION": "Natural One.",
     "NAME": "1"
   },
   "hubris:Icosahedron_10": {
@@ -12,19 +12,19 @@
     "NAME": "11"
   },
   "hubris:Icosahedron_12": {
-    "DESCRIPTION": "Gain 2 random common potions.",
+    "DESCRIPTION": "Gain a random common potion.",
     "NAME": "12"
   },
   "hubris:Icosahedron_13": {
-    "DESCRIPTION": "Gain 5 Artifact.",
+    "DESCRIPTION": "Gain 3 Artifact.",
     "NAME": "13"
   },
   "hubris:Icosahedron_14": {
-    "DESCRIPTION": "Gain 3 Strength and 3 Dexterity.",
+    "DESCRIPTION": "Gain 1 Strength, 1 Dexterity, and 1 Focus.",
     "NAME": "14"
   },
   "hubris:Icosahedron_15": {
-    "DESCRIPTION": "Draw 1 additional card at the start of each turn.",
+    "DESCRIPTION": "Draw 1 additional card each turn.",
     "NAME": "15"
   },
   "hubris:Icosahedron_16": {
@@ -48,7 +48,7 @@
     "NAME": "2"
   },
   "hubris:Icosahedron_20": {
-    "DESCRIPTION": "At the start of each turn, gain [E] and draw 2 cards.",
+    "DESCRIPTION": "Natural Twenty.",
     "NAME": "20"
   },
   "hubris:Icosahedron_3": {
@@ -76,7 +76,7 @@
     "NAME": "8"
   },
   "hubris:Icosahedron_9": {
-    "DESCRIPTION": "",
+    "DESCRIPTION": "Lose 50 Gold.",
     "NAME": "9"
   }
 }

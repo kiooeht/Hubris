@@ -5,13 +5,13 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-public class BlankMap extends AbstractRelic
+public class VirtuousBlindfold extends AbstractRelic
 {
-    public static final String ID = "hubris:Blank Map";
+    public static final String ID = "hubris:VirtuousBlindfold";
 
-    public BlankMap()
+    public VirtuousBlindfold()
     {
-        super(ID, "mysticMap.png", RelicTier.SPECIAL, LandingSound.FLAT);
+        super(ID, "virtuousBlindfold.png", RelicTier.BOSS, LandingSound.FLAT);
     }
 
     @Override
@@ -63,6 +63,6 @@ public class BlankMap extends AbstractRelic
     @Override
     public AbstractRelic makeCopy()
     {
-        return new BlankMap();
+        return new VirtuousBlindfold();
     }
 }

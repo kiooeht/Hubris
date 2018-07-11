@@ -2,14 +2,14 @@ package com.evacipated.cardcrawl.mod.hubris;
 
 import basemod.BaseMod;
 import basemod.helpers.RelicType;
-import basemod.interfaces.EditCardsSubscriber;
-import basemod.interfaces.EditKeywordsSubscriber;
-import basemod.interfaces.EditRelicsSubscriber;
-import basemod.interfaces.EditStringsSubscriber;
+import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.mod.hubris.relics.*;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.OrbStrings;
 import com.megacrit.cardcrawl.localization.RelicStrings;
@@ -26,14 +26,33 @@ import java.util.Collection;
 
 @SpireInitializer
 public class HubrisMod implements
+        PostInitializeSubscriber,
         EditCardsSubscriber,
         EditRelicsSubscriber,
         EditKeywordsSubscriber,
-        EditStringsSubscriber
+        EditStringsSubscriber,
+        PostDeathSubscriber
 {
+    public static Texture TEMP_HP_ICON;
+
     public static void initialize()
     {
         BaseMod.subscribe(new HubrisMod());
+    }
+
+    @Override
+    public void receivePostInitialize()
+    {
+        TEMP_HP_ICON = ImageMaster.loadImage("images/ui/tempHP.png");
+    }
+
+    @Override
+    public void receivePostDeath()
+    {
+        if (AbstractDungeon.player != null && AbstractDungeon.player.hasRelic(TinFlute.ID)) {
+            TinFlute flute = (TinFlute) AbstractDungeon.player.getRelic(TinFlute.ID);
+            flute.onDeath();
+        }
     }
 
     @Override
@@ -51,9 +70,23 @@ public class HubrisMod implements
     {
         BaseMod.addRelic(new Icosahedron(), RelicType.SHARED);
         BaseMod.addRelic(new BlackHole(), RelicType.SHARED);
-        BaseMod.addRelic(new BlankMap(), RelicType.SHARED);
-        BaseMod.addRelic(new OfFalseLife(), RelicType.SHARED);
+        BaseMod.addRelic(new VirtuousBlindfold(), RelicType.SHARED);
+        BaseMod.addRelic(new PeanutButter(), RelicType.SHARED);
         BaseMod.addRelic(new CuriousFeather(), RelicType.SHARED);
+        BaseMod.addRelic(new Metronome(), RelicType.SHARED);
+        BaseMod.addRelic(new FunFungus(), RelicType.SHARED);
+        BaseMod.addRelic(new Pocketwatch(), RelicType.SHARED);
+        BaseMod.addRelic(new ScarierMask(), RelicType.SHARED);
+        BaseMod.addRelic(new DeadTorch(), RelicType.SHARED);
+        BaseMod.addRelic(new BottledHeart(), RelicType.SHARED);
+        BaseMod.addRelic(new DisguiseKit(), RelicType.SHARED);
+        BaseMod.addRelic(new Teleporter(), RelicType.SHARED);
+        BaseMod.addRelic(new MysteriousPyramids(), RelicType.SHARED);
+        BaseMod.addRelic(new AstralHammer(), RelicType.SHARED);
+        BaseMod.addRelic(new PrototypeTalaria(), RelicType.SHARED);
+        BaseMod.addRelic(new Spice(), RelicType.SHARED);
+        BaseMod.addRelic(new TinFlute(), RelicType.SHARED);
+        BaseMod.addRelic(new GlazedTorus(), RelicType.SHARED);
     }
 
     @Override
@@ -62,6 +95,9 @@ public class HubrisMod implements
         BaseMod.addKeyword(new String[] {"purge"}, "Disappears upon use.");
         BaseMod.addKeyword(new String[] {"retain"}, "Not discarded at the end of your turn.");
         BaseMod.addKeyword(new String[] {"temporary"}, "Temporary HP disappears at the end of combat.");
+        BaseMod.addKeyword(new String[] {"autoplay"}, "This card automatically plays itself when drawn.");
+        BaseMod.addKeyword(new String[] {"inescapable"}, "Cannot be removed from your deck.");
+        BaseMod.addKeyword(new String[] {"greed"}, "Greed is a curse that gets you more gold.");
     }
 
     @Override
@@ -116,7 +152,9 @@ public class HubrisMod implements
             System.out.println(classInfo.getClassName());
             AbstractCard card = (AbstractCard) cls.newInstance();
             BaseMod.addCard(card);
-            UnlockTracker.unlockCard(card.cardID);
+            if (!cls.isAnnotationPresent(CardNoUnlock.class)) {
+                UnlockTracker.unlockCard(card.cardID);
+            }
         }
     }
 }

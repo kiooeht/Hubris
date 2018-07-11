@@ -3,7 +3,8 @@ package com.evacipated.cardcrawl.mod.hubris.patches.falselife;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.evacipated.cardcrawl.mod.hubris.relics.OfFalseLife;
+import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
+import com.evacipated.cardcrawl.mod.hubris.patches.core.AbstractCreature.TempHPField;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInsertPatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -34,8 +35,7 @@ public class RenderHealthBar
         }
 
         if (!Gdx.input.isKeyPressed(Input.Keys.H)) {
-            //renderGoldHealthBar(__instance, sb, x, y);
-            if (OfFalseLife.getTemporaryHealth(__instance) > 0 && __instance.hbAlpha > 0) {
+            if (TempHPField.tempHp.get(__instance) > 0 && __instance.hbAlpha > 0) {
                 renderTempHPIconAndValue(__instance, sb, x, y);
             }
         }
@@ -68,14 +68,14 @@ public class RenderHealthBar
     private static void renderTempHPIconAndValue(AbstractCreature creature, SpriteBatch sb, float x, float y)
     {
         sb.setColor(Settings.GOLD_COLOR);
-        sb.draw(ImageMaster.BLOCK_ICON,
+        sb.draw(HubrisMod.TEMP_HP_ICON,
                 x + getPrivate(AbstractCreature.class, "BLOCK_ICON_X", float.class) - 32.0f + creature.hb.width,
                 y + getPrivate(AbstractCreature.class, "BLOCK_ICON_Y", float.class) - 32.0f + getPrivate(AbstractCreature.class, creature, "blockOffset", float.class),
                 32.0f, 32.0f, 64.0f, 64.0f, Settings.scale, Settings.scale,
                 0.0f, 0, 0, 64, 64,
                 false, false);
         FontHelper.renderFontCentered(sb, FontHelper.blockInfoFont,
-                Integer.toString(OfFalseLife.getTemporaryHealth(creature)),
+                Integer.toString(TempHPField.tempHp.get(creature)),
                 x + getPrivate(AbstractCreature.class, "BLOCK_ICON_X", float.class) + 1.5f * Settings.scale + creature.hb.width,
                 y - 16.0f * Settings.scale,
                 Settings.CREAM_COLOR,

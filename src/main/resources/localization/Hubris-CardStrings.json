@@ -1,4 +1,8 @@
 {
+  "hubris:Hubris": {
+    "NAME": "Hubris",
+    "DESCRIPTION": "Innate. Autoplay. NL Gain 2 Strength and lose 1 Dexterity. NL Inescapable."
+  },
   "hubris:Icosahedron": {
     "NAME": "Icosahedron",
     "DESCRIPTION": "Retain. NL Roll. NL Purge."
@@ -6,5 +10,53 @@
   "hubris:Mulligan": {
     "NAME": "Mulligan",
     "DESCRIPTION": "Retain. NL Discard your hand, NL then draw that many cards. NL Purge."
+  },
+  "hubris:NaturalOne": {
+    "NAME": "Natural One",
+    "DESCRIPTION": "Unplayable. NL When this card is drawn, lose 1 Energy. NL Inescapable."
+  },
+  "hubris:PotOfGreed": {
+    "NAME": "Pot of Greed",
+    "DESCRIPTION": "Draw 2 cards. NL Permanently add a Greed to your deck."
+  },
+  "hubris:Greed": {
+    "NAME": "Greed",
+    "DESCRIPTION": "Unplayable. NL Gain an additional !M! gold at the end of combat for each Greed in your deck. NL Inescapable."
+  },
+  "hubris:SlightOfHand": {
+    "NAME": "Slight of Hand",
+    "DESCRIPTION": "Draw or Discard 1 card."
+  },
+  "hubris:Wrath": {
+    "NAME": "Wrath",
+    "DESCRIPTION": "Autoplay. NL Deal !D! damage to a random enemy. NL Place a copy of this copy into your discard pile. Inescapable."
+  },
+  "hubris:EnhanceAbility": {
+    "NAME": "Enhance Ability",
+    "DESCRIPTION": "Gain either !M! Strength, !M! Dexterity, !M! Focus, or !M!0  Temporary HP."
+  },
+  "hubris:BullsStrength": {
+    "NAME": "Bull's Strength",
+    "DESCRIPTION": "Gain !M! Strength."
+  },
+  "hubris:CatsGrace": {
+    "NAME": "Cat's Grace",
+    "DESCRIPTION": "Gain !M! Dexterity."
+  },
+  "hubris:FoxsCunning": {
+    "NAME": "Fox's Cunning",
+    "DESCRIPTION": "Gain !M! Focus."
+  },
+  "hubris:BearsEndurance": {
+    "NAME": "Bear's Endurance",
+    "DESCRIPTION": "Gain !M! Temporary HP."
+  },
+  "hubris:Sloth": {
+    "NAME": "Sloth",
+    "DESCRIPTION": "Autoplay. NL Lose all max energy. Gain 1 max energy at the end of each turn. NL Exhaust. Inescapable."
+  },
+  "hubris:StunningStrike": {
+    "NAME": "Stunning Strike",
+    "DESCRIPTION": "Deal !D! damage. NL Stun the enemy for !M! turn. NL Exhaust."
   }
 }

@@ -34,7 +34,9 @@ public class BefuddledAction extends AbstractGameAction
 
         if (isDone) {
             int index = AbstractDungeon.player.hand.group.indexOf(c);
-            System.out.println(index);
+            if (index < 0) {
+                return;
+            }
             AbstractDungeon.player.hand.removeCard(c);
             AbstractDungeon.transformCard(c);
             AbstractCard transformedCard = AbstractDungeon.getTransformedCard();

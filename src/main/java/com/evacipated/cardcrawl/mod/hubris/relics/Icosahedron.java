@@ -1,9 +1,13 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
+import com.evacipated.cardcrawl.mod.hubris.cards.curses.NaturalOne;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 
 public class Icosahedron extends AbstractRelic
 {
@@ -11,21 +15,60 @@ public class Icosahedron extends AbstractRelic
 
     public Icosahedron()
     {
-        super(ID, "icosahedron.png", RelicTier.SPECIAL, LandingSound.MAGICAL);
+        super(ID, "icosahedron.png", RelicTier.SPECIAL, LandingSound.HEAVY);
     }
 
     @Override
     public void atBattleStartPreDraw()
     {
-        flash();
-        AbstractDungeon.actionManager.addToBottom(new RelicAboveCreatureAction(AbstractDungeon.player, this));
-        AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(new com.evacipated.cardcrawl.mod.hubris.cards.Icosahedron(), 1, false));
+        if (counter < 0) {
+            flash();
+            AbstractDungeon.actionManager.addToBottom(new RelicAboveCreatureAction(AbstractDungeon.player, this));
+            AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(new com.evacipated.cardcrawl.mod.hubris.cards.Icosahedron(), 1, false));
+        }
     }
 
     @Override
     public String getUpdatedDescription()
     {
-        return DESCRIPTIONS[0];
+        switch (counter) {
+            case 1:
+                return DESCRIPTIONS[2] + DESCRIPTIONS[1];
+            case 20: {
+                String str = DESCRIPTIONS[1];
+                switch (AbstractDungeon.player.chosenClass) {
+                    case THE_SILENT:
+                        str = DESCRIPTIONS[4] + str;
+                        break;
+                    case DEFECT:
+                        str = DESCRIPTIONS[5] + str;
+                        break;
+                    default:
+                        str = DESCRIPTIONS[3] + str;
+                        break;
+                }
+                return str;
+            }
+            default:
+                return DESCRIPTIONS[0];
+        }
+    }
+
+    @Override
+    public void setCounter(int c)
+    {
+        super.setCounter(c);
+        flash();
+        description = getUpdatedDescription();
+        tips.clear();
+        tips.add(new PowerTip(name, description));
+        initializeTips();
+        if (counter == 20) {
+            AbstractDungeon.player.energy.energy += 1;
+            AbstractDungeon.player.energy.energyMaster += 1;
+        } else if (counter == 1) {
+            AbstractDungeon.topLevelEffects.add(new ShowCardAndObtainEffect(new NaturalOne(), Settings.WIDTH / 2.0f, Settings.HEIGHT / 2.0f));
+        }
     }
 
     @Override

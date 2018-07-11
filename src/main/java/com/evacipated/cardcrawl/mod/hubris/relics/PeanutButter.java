@@ -8,14 +8,14 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 
 import java.lang.reflect.Field;
 
-public class OfFalseLife extends AbstractRelic
+public class PeanutButter extends AbstractRelic
 {
-    public static final String ID = "hubris:False Life";
+    public static final String ID = "hubris:PeanutButter";
     private static final int TEMP_HP_AMOUNT = 10;
 
-    public OfFalseLife()
+    public PeanutButter()
     {
-        super(ID, "goldenCompass.png", RelicTier.UNCOMMON, LandingSound.MAGICAL);
+        super(ID, "peanutButter.png", RelicTier.UNCOMMON, LandingSound.SOLID);
     }
 
     @Override
@@ -35,17 +35,6 @@ public class OfFalseLife extends AbstractRelic
     @Override
     public AbstractRelic makeCopy()
     {
-        return new OfFalseLife();
-    }
-
-    public static int getTemporaryHealth(AbstractCreature creature)
-    {
-        try {
-            Field f = AbstractCreature.class.getDeclaredField("temporaryHealth");
-            return (int) f.get(creature);
-        } catch (IllegalAccessException | NoSuchFieldException e) {
-            e.printStackTrace();
-        }
-        return 0;
+        return new PeanutButter();
     }
 }

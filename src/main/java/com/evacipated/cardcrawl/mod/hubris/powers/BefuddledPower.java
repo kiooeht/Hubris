@@ -1,6 +1,7 @@
 package com.evacipated.cardcrawl.mod.hubris.powers;
 
 import com.evacipated.cardcrawl.mod.hubris.actions.unique.BefuddledAction;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -17,6 +18,7 @@ public class BefuddledPower extends AbstractPower
         ID = POWER_ID;
         this.owner = owner;
         type = PowerType.DEBUFF;
+        priority = -999;
         updateDescription();
         loadRegion("confusion");
     }
@@ -37,7 +39,7 @@ public class BefuddledPower extends AbstractPower
     public void Do(AbstractCard card)
     {
         if (firstCard) {
-            AbstractDungeon.actionManager.addToBottom(new BefuddledAction(card));
+            AbstractDungeon.actionManager.addToTop(new BefuddledAction(card));
             firstCard = false;
         }
     }

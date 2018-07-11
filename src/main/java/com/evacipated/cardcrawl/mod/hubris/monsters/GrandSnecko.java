@@ -9,10 +9,12 @@ import com.evacipated.cardcrawl.mod.hubris.powers.UnfocusedPower;
 import com.megacrit.cardcrawl.actions.animations.TalkAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.RollMoveAction;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.MonsterHelper;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.powers.AbstractPower;
@@ -25,6 +27,8 @@ import javafx.util.Pair;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class GrandSnecko extends OrbUsingMonster
 {
@@ -35,40 +39,49 @@ public class GrandSnecko extends OrbUsingMonster
             "@THERE.@ @ARE.@ @FOUR.@ @LIGHTS.@",
             "~Tell~ ~me...~ NL How many lights do you see?"
     };
-    public static final int HP = 200;
+    public static final int HP = 300;
 
     private static final int ORB_SLOTS = 4;
-    private static final ArrayList<Pair<Integer, Class>> orbPercents;
-    private static final int maxPercent;
+    private static final ArrayList<Pair<Integer, Class<? extends AbstractOrb>>> orbPercents;
+    private static int maxPercent;
+
+    private static final List<String> summons = Arrays.asList(
+            MonsterHelper.SNECKO_ENC,
+            MonsterHelper.CULTIST_ENC,
+            MonsterHelper.THREE_SENTRY_ENC,
+            MonsterHelper.SPHERE_GUARDIAN_ENC
+    );
 
     static {
         orbPercents = new ArrayList<>();
-        orbPercents.add(new Pair<>(40, MonsterLightning.class));
-        orbPercents.add(new Pair<>(15, MonsterFrost.class));
-        orbPercents.add(new Pair<>(10, MonsterFocusing.class));
-        orbPercents.add(new Pair<>(5, MonsterMiasma.class));
+        orbPercents.add(new Pair<>(50, MonsterLightning.class));
+        orbPercents.add(new Pair<>(25, MonsterFrost.class));
+        orbPercents.add(new Pair<>(15, MonsterMiasma.class));
+        orbPercents.add(new Pair<>(10, MonsterDraining.class));
 
         int sum = 0;
-        for (Pair<Integer, Class> kv : orbPercents) {
+        for (Pair<Integer, Class<? extends AbstractOrb>> kv : orbPercents) {
             sum += kv.getKey();
         }
         maxPercent = sum;
     }
 
+    private boolean firstSummon = true;
+
     public GrandSnecko()
     {
         super(NAME, ID, HP, -30.0f, -20.0f, 434, 427, null, -50.0f, 30.0f);
         maxOrbsCap = 12;
-        loadAnimation("images/monsters/theCity/reptile/skeleton.atlas", "images/monsters/theCity/reptile/skeleton.json", 0.6F);
+        loadAnimation("images/monsters/theCity/reptile/skeleton.atlas", "images/monsters/theCity/reptile/skeleton.json", 0.25F);
 
         AnimationState.TrackEntry e = this.state.setAnimation(0, "Idle", true);
         e.setTime(e.getEndTime() * MathUtils.random());
         this.stateData.setMix("Hit", "Idle", 0.1F);
-        e.setTimeScale(0.8F);
+        e.setTimeScale(0.4F);
 
         this.type = AbstractMonster.EnemyType.BOSS;
-        this.dialogX = (-200.0F * Settings.scale);
-        this.dialogY = (10.0F * Settings.scale);
+        this.dialogX = (-400.0F * Settings.scale);
+        this.dialogY = (200.0F * Settings.scale);
     }
 
     private AbstractOrb makeOrb(Class clazz)
@@ -87,7 +100,7 @@ public class GrandSnecko extends OrbUsingMonster
     {
         int r = AbstractDungeon.aiRng.random(maxPercent);
         int sum = 0;
-        for (Pair<Integer, Class> kv : orbPercents) {
+        for (Pair<Integer, Class<? extends AbstractOrb>> kv : orbPercents) {
             sum += kv.getKey();
             if (r <= sum) {
                 return makeOrb(kv.getValue());
@@ -117,7 +130,7 @@ public class GrandSnecko extends OrbUsingMonster
         firstChannel();
     }
 
-    private boolean rerollOrb(AbstractOrb orb)
+    private boolean rerollOrb(ArrayList<String> orbTypesBeingChannelled, AbstractOrb orb)
     {
         if (orb == null) {
             return true;
@@ -138,6 +151,14 @@ public class GrandSnecko extends OrbUsingMonster
         if (miasmaCount >= 3) {
             return true;
         }
+        if (orb.ID.equals(MonsterMiasma.ORB_ID)
+                && (orbTypesBeingChannelled.contains(MonsterMiasma.ORB_ID) || hasOrbType(MonsterMiasma.ORB_ID))) {
+            return true;
+        }
+        if (orb.ID.equals(MonsterWarp.ORB_ID)
+                && (orbTypesBeingChannelled.contains(MonsterWarp.ORB_ID) || hasOrbType(MonsterWarp.ORB_ID))) {
+            return true;
+        }
 
         return false;
     }
@@ -145,11 +166,29 @@ public class GrandSnecko extends OrbUsingMonster
     @Override
     public void takeTurn()
     {
+        ArrayList<String> orbTypesBeingChannelled = new ArrayList<>();
         for (int i=0; i<numberToChannel; ++i) {
             AbstractOrb orb;
-            do {
-                orb = getRandomOrb();
-            } while (rerollOrb(orb));
+            if (isMinionDead() && !hasOrbType(MonsterWarp.ORB_ID) && !orbTypesBeingChannelled.contains(MonsterWarp.ORB_ID)) {
+                orb = new MonsterWarp(this);
+            } else if (!hasOrbType(MonsterFocusing.ORB_ID) && !orbTypesBeingChannelled.contains(MonsterFocusing.ORB_ID)) {
+                orb = new MonsterFocusing(this);
+            } else {
+                do {
+                    orb = getRandomOrb();
+                } while (rerollOrb(orbTypesBeingChannelled, orb));
+            }
+            orbTypesBeingChannelled.add(orb.ID);
+            if (orb instanceof MonsterWarp) {
+                String summonId;
+                if (firstSummon) {
+                    summonId = summons.get(0);
+                    firstSummon = false;
+                } else {
+                    summonId = summons.get(AbstractDungeon.aiRng.random(summons.size()-1));
+                }
+                ((MonsterWarp)orb).summon = MonsterHelper.getEncounter(summonId).monsters.get(0);
+            }
             AbstractDungeon.actionManager.addToBottom(new MonsterChannelAction(this, orb));
         }
 
@@ -171,6 +210,30 @@ public class GrandSnecko extends OrbUsingMonster
         }
 
         setMove((byte)0, OrbUsingMonster.Enums.CHANNEL_ORBS, numberToChannel);
+    }
+
+    private boolean isMinionDead()
+    {
+        for (AbstractMonster m : AbstractDungeon.getCurrRoom().monsters.monsters) {
+            if (m.equals(this)) {
+                continue;
+            }
+            if (!m.isDeadOrEscaped()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public void damage(DamageInfo info)
+    {
+        super.damage(info);
+
+        if (info.owner != null && info.type != DamageInfo.DamageType.THORNS && info.output > 0) {
+            state.setAnimation(0, "Hit", false);
+            state.addAnimation(0, "Idle", true, 0.0F);
+        }
     }
 
     @Override
