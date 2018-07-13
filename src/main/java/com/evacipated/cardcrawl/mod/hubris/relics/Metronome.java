@@ -56,7 +56,7 @@ public class Metronome extends AbstractRelic
     @Override
     public void onEquip()
     {
-        setCounter(10);
+        setCounter(0);
     }
 
     @Override
