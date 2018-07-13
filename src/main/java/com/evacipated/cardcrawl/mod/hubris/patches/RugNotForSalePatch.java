@@ -1,13 +1,20 @@
 package com.evacipated.cardcrawl.mod.hubris.patches;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.evacipated.cardcrawl.mod.hubris.monsters.MerchantMonster;
 import com.evacipated.cardcrawl.modthespire.lib.SpireField;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.Hitbox;
+import com.megacrit.cardcrawl.helpers.HitboxListener;
 import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.monsters.MonsterGroup;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import com.megacrit.cardcrawl.rooms.ShopRoom;
 import com.megacrit.cardcrawl.shop.ShopScreen;
 
 import java.lang.reflect.Field;
@@ -42,6 +49,25 @@ public class RugNotForSalePatch
     )
     public static class Update
     {
+        private static class Listener implements HitboxListener
+        {
+            ShopScreen instance = null;
+
+            @Override
+            public void hoverStarted(Hitbox hitbox) {}
+
+            @Override
+            public void startClicking(Hitbox hitbox) {}
+
+            @Override
+            public void clicked(Hitbox hitbox)
+            {
+                startCombat(instance);
+            }
+        }
+
+        private static Listener hitboxListener = new Listener();
+
         public static void Postfix(ShopScreen __instance)
         {
             float rugY = Settings.HEIGHT;
@@ -53,7 +79,26 @@ public class RugNotForSalePatch
                 e.printStackTrace();
             }
             RugHitbox.rugHB.get(__instance).move(Settings.WIDTH - 85.0f * Settings.scale, rugY + 705.0f * Settings.scale);
-            RugHitbox.rugHB.get(__instance).update();
+            hitboxListener.instance = __instance;
+            RugHitbox.rugHB.get(__instance).encapsulatedUpdate(hitboxListener);
+        }
+
+        private static void startCombat(ShopScreen __instance)
+        {
+            __instance.playCantBuySfx();
+
+            AbstractDungeon.closeCurrentScreen();
+            AbstractDungeon.getCurrRoom().phase = AbstractRoom.RoomPhase.COMBAT;
+            AbstractDungeon.lastCombatMetricKey = MerchantMonster.ID;
+            AbstractDungeon.getCurrRoom().monsters = new MonsterGroup(new MerchantMonster());
+            AbstractDungeon.getCurrRoom().monsters.init();
+            for (AbstractMonster m : AbstractDungeon.getCurrRoom().monsters.monsters) {
+                m.usePreBattleAction();
+                m.useUniversalPreBattleAction();
+            }
+            ((ShopRoom)AbstractDungeon.getCurrRoom()).merchant = null;
+            AbstractRoom.waitTimer = 0.1f;
+            AbstractDungeon.player.preBattlePrep();
         }
     }
 

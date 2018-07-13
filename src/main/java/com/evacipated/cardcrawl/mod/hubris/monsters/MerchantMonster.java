@@ -57,13 +57,13 @@ import java.lang.reflect.Field;
 //     Regen Potion
 //     Strength Potion
 //     Weak Potion
-public class Merchant extends AbstractMonster
+public class MerchantMonster extends AbstractMonster
 {
-    public static final String ID = "TheMerchant";
+    public static final String ID = "hubris:Merchant";
     public static final String NAME = "Merchant";
     public static final String[] MOVES = {};
     public static final String[] DIALOG = {
-            "~Welcome!~",
+            "Hey! NL No stealing!",
             "@Give@ @me@ @all@ @your@ @gold!@",
             "@No@ @Refunds.@",
             "Hey buddy, why'd you do that?",
@@ -73,26 +73,16 @@ public class Merchant extends AbstractMonster
     private static final float DRAW_X = Settings.WIDTH * 0.5F + 34.0F * Settings.scale;
     private static final float DRAW_Y = AbstractDungeon.floorY - 109.0F * Settings.scale;
     public static final int HP = 100;
-    private static final int PRICE_PER_POTION = 25;
     private static final float TIME_SCALE = 4.0f;
 
-    private static final int FIRE_POTION_DMG = 20;
-
     // Moves
-    private static final byte POTION_BLOCK = 2;
-    private static final byte POTION_ANCIENT = 3;
-    private static final byte POTION_REGEN = 4;
-    private static final byte POTION_STRENGTH = 5;
-    private static final byte POTION_FIRE = 6;
-    private static final byte POTION_POISON = 7;
-    private static final byte POTION_WEAK = 8;
 
     private boolean firstTurn = true;
     private boolean halfDead = false;
 
-    public Merchant()
+    public MerchantMonster()
     {
-        super(NAME, ID, 3, -10.0F, -30.0F, 180.0F, 150.0F, null, 0.0F, 0.0F);
+        super(NAME, ID, HP, -10.0F, -30.0F, 180.0F, 150.0F, null, 0.0F, 0.0F);
 
         drawX = 1260.0F * Settings.scale;
         drawY = 370.0F * Settings.scale;
@@ -106,9 +96,7 @@ public class Merchant extends AbstractMonster
         dialogX = -200.0F * Settings.scale;
         dialogY = 10.0F * Settings.scale;
 
-        gold = 500;
-
-        damage.add(new DamageInfo(this, FIRE_POTION_DMG, DamageInfo.DamageType.NORMAL));
+        gold = 300;
     }
 
     @Override
@@ -125,6 +113,8 @@ public class Merchant extends AbstractMonster
     {
         AbstractDungeon.getCurrRoom().cannotLose = true;
         //UnlockTracker.markBossAsSeen("MERCHANT");
+        AbstractDungeon.actionManager.addToTop(new AnimationTimeScaleAction(this, TIME_SCALE));
+        AbstractDungeon.actionManager.addToTop(new StealGoldAction(this, this, gold, true));
         AbstractDungeon.actionManager.addToTop(new TalkAction(this, DIALOG[0], 0.5F, 3.0F));
     }
 
@@ -138,15 +128,6 @@ public class Merchant extends AbstractMonster
         AbstractDungeon.actionManager.addToBottom(new WaitAction(0.5F));
         AbstractDungeon.actionManager.addToBottom(new RelicAboveCreatureAction(this, new Torii()));
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new ToriiPower(this)));
-    }
-
-    private void gainPotions(int gold)
-    {
-        int potion_count = gold / PRICE_PER_POTION;
-        System.out.println("Drinking " + potion_count + " potions");
-        for (int i=0; i<potion_count; ++i) {
-            usePotion((byte)AbstractDungeon.aiRng.random(2, 5));
-        }
     }
 
     @Override
@@ -168,7 +149,6 @@ public class Merchant extends AbstractMonster
 
             AbstractDungeon.actionManager.addToBottom(new CanLoseAction());
             gainRelics();
-            gainPotions(AbstractDungeon.player.gold);
             AbstractDungeon.actionManager.addToBottom(new TalkAction(this, DIALOG[2], 0.5F, 3.5F));
         }
     }
@@ -182,58 +162,9 @@ public class Merchant extends AbstractMonster
             AbstractDungeon.actionManager.addToBottom(new ChangeStateAction(this, "BUYOUT"));
         } else if (nextMove == 1) {
         } else {
-            usePotion(nextMove);
         }
 
         AbstractDungeon.actionManager.addToBottom(new RollMoveAction(this));
-    }
-
-    private void usePotion(byte potion)
-    {
-        switch (potion) {
-            case POTION_POISON:
-                AbstractDungeon.actionManager.addToBottom(new TextAboveCreatureAction(this, PoisonPotion.NAME));
-                AbstractDungeon.actionManager.addToBottom(new AnimateSlowAttackAction(this));
-                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, this, new PoisonPower(AbstractDungeon.player, this, 6), 6));
-                break;
-            case POTION_ANCIENT:
-                AbstractDungeon.actionManager.addToBottom(new TextAboveCreatureAction(this, AncientPotion.NAME));
-                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new ArtifactPower(this, 1), 1));
-                break;
-            case POTION_BLOCK:
-                AbstractDungeon.actionManager.addToBottom(new TextAboveCreatureAction(this, BlockPotion.NAME));
-                AbstractDungeon.actionManager.addToBottom(new GainBlockAction(this, this, 12));
-                break;
-            case POTION_FIRE:
-                AbstractDungeon.actionManager.addToBottom(new TextAboveCreatureAction(this, FirePotion.NAME));
-                try {
-                    Field moveField = AbstractMonster.class.getDeclaredField("move");
-                    moveField.setAccessible(true);
-                    EnemyMoveInfo move = (EnemyMoveInfo) moveField.get(this);
-                    /*
-                    for (int i = 0; i < move.multiplier; ++i) {
-                        AbstractDungeon.actionManager.addToBottom(new AnimateSlowAttackAction(this));
-                        AbstractDungeon.actionManager.addToBottom(new DamageAction(AbstractDungeon.player, damage.get(0), AbstractGameAction.AttackEffect.FIRE));
-                    }
-                    //*/
-                    AbstractDungeon.actionManager.addToTop(new ThrowGoldAction(AbstractDungeon.player, this, 2000, true));
-                } catch (IllegalAccessException | NoSuchFieldException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case POTION_REGEN:
-                AbstractDungeon.actionManager.addToBottom(new TextAboveCreatureAction(this, RegenPotion.NAME));
-                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new RegenerateMonsterPower(this, 5), 5));
-                break;
-            case POTION_STRENGTH:
-                AbstractDungeon.actionManager.addToBottom(new TextAboveCreatureAction(this, StrengthPotion.NAME));
-                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new StrengthPower(this, 2), 2));
-                break;
-            case POTION_WEAK:
-                AbstractDungeon.actionManager.addToBottom(new TextAboveCreatureAction(this, WeakenPotion.NAME));
-                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, this, new WeakPower(AbstractDungeon.player, 3, true), 3));
-                break;
-        }
     }
 
     @Override
@@ -244,46 +175,9 @@ public class Merchant extends AbstractMonster
             return;
         }
 
-        /*if (firstTurn) {
-            firstTurn = false;
-            setMove((byte)1, Intent.UNKNOWN);
-            return;
-        }*/
-        if (num < 21) { // Potion
-            byte type = (byte)((num / 3) + 2);
-            if (lastTwoMoves(type)) {
-                getMove(AbstractDungeon.aiRng.random(20));
-                return;
-            }
-            type = POTION_FIRE;
-            Intent intent = Intent.DEBUG;
-            switch (type) {
-                case POTION_BLOCK:
-                    intent = Intent.DEFEND;
-                    break;
-                case POTION_FIRE:
-                    intent = Intent.ATTACK;
-                    break;
-                case POTION_REGEN:
-                case POTION_STRENGTH:
-                case POTION_ANCIENT:
-                    intent = Intent.BUFF;
-                    break;
-                case POTION_WEAK:
-                case POTION_POISON:
-                    intent = Intent.DEBUFF;
-                    break;
-            }
-            System.out.println(type);
-            if (intent == Intent.ATTACK) {
-                setMove(type, intent, damage.get(0).base, AbstractDungeon.aiRng.random(1, 3), true);
-            } else {
-                setMove(type, intent);
-            }
-            return;
-        }
+        setMove((byte)-1, Intent.UNKNOWN);
 
-        getMove(AbstractDungeon.aiRng.random(20));
+        //getMove(AbstractDungeon.aiRng.random(20));
     }
 
     @Override
