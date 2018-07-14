@@ -1,9 +1,7 @@
 package com.evacipated.cardcrawl.mod.hubris.powers;
 
-import com.evacipated.cardcrawl.mod.hubris.actions.common.StunAction;
+import com.evacipated.cardcrawl.mod.stslib.actions.common.StunMonsterAction;
 import com.megacrit.cardcrawl.actions.ClearCardQueueAction;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.RollMoveAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
@@ -41,6 +39,6 @@ public class WarpPower extends AbstractPower
         AbstractDungeon.getCurrRoom().monsters.add(parent);
 
         parent.createIntent();
-        AbstractDungeon.actionManager.addToBottom(new StunAction(parent, parent));
+        AbstractDungeon.actionManager.addToBottom(new StunMonsterAction(parent, parent));
     }
 }

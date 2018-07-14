@@ -2,6 +2,7 @@ package com.evacipated.cardcrawl.mod.hubris.cards;
 
 import basemod.abstracts.CustomCard;
 import com.evacipated.cardcrawl.mod.hubris.CardNoUnlock;
+import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.AlwaysRetainField;
 import com.megacrit.cardcrawl.actions.unique.CalculatedGambleAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -25,19 +26,13 @@ public class Mulligan extends CustomCard
         super(ID, NAME, IMG, COST, DESCRIPTION, CardType.SKILL, CardColor.COLORLESS, CardRarity.SPECIAL, CardTarget.NONE);
 
         purgeOnUse = true;
-        retain = true;
+        AlwaysRetainField.alwaysRetain.set(this, true);
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m)
     {
         AbstractDungeon.actionManager.addToBottom(new CalculatedGambleAction(false));
-    }
-
-    @Override
-    public void atTurnStart()
-    {
-        retain = true;
     }
 
     @Override

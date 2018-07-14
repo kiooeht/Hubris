@@ -1,7 +1,7 @@
 {
   "hubris:Hubris": {
     "NAME": "Hubris",
-    "DESCRIPTION": "Innate. Autoplay. NL Gain 2 Strength and lose 1 Dexterity. NL Inescapable."
+    "DESCRIPTION": "Innate. Autoplay. NL Gain 2 Strength and lose 1 Dexterity. NL Soulbound."
   },
   "hubris:Icosahedron": {
     "NAME": "Icosahedron",
@@ -13,7 +13,7 @@
   },
   "hubris:NaturalOne": {
     "NAME": "Natural One",
-    "DESCRIPTION": "Unplayable. NL When this card is drawn, lose 1 Energy. NL Inescapable."
+    "DESCRIPTION": "Unplayable. NL When this card is drawn, lose 1 Energy. NL Soulbound."
   },
   "hubris:PotOfGreed": {
     "NAME": "Pot of Greed",
@@ -21,7 +21,7 @@
   },
   "hubris:Greed": {
     "NAME": "Greed",
-    "DESCRIPTION": "Unplayable. NL Gain an additional !M! gold at the end of combat for each Greed in your deck. NL Inescapable."
+    "DESCRIPTION": "Unplayable. NL Gain an additional !M! gold at the end of combat for each Greed in your deck. NL Soulbound."
   },
   "hubris:SlightOfHand": {
     "NAME": "Slight of Hand",
@@ -29,7 +29,7 @@
   },
   "hubris:Wrath": {
     "NAME": "Wrath",
-    "DESCRIPTION": "Autoplay. NL Deal !D! damage to a random enemy. NL Place a copy of this copy into your discard pile. Inescapable."
+    "DESCRIPTION": "Autoplay. NL Deal !D! damage to a random enemy. NL Place a copy of this copy into your discard pile. Soulbound."
   },
   "hubris:EnhanceAbility": {
     "NAME": "Enhance Ability",
@@ -53,7 +53,7 @@
   },
   "hubris:Sloth": {
     "NAME": "Sloth",
-    "DESCRIPTION": "Autoplay. NL Lose all max energy. Gain 1 max energy at the end of each turn. NL Exhaust. Inescapable."
+    "DESCRIPTION": "Autoplay. NL Lose all max energy. Gain 1 max energy at the end of each turn. NL Exhaust. Soulbound."
   },
   "hubris:StunningStrike": {
     "NAME": "Stunning Strike",

@@ -8,6 +8,7 @@ import com.evacipated.cardcrawl.mod.hubris.cards.curses.NaturalOne;
 import com.evacipated.cardcrawl.mod.hubris.powers.EnergyGainPower;
 import com.evacipated.cardcrawl.mod.hubris.powers.FixedDrawPower;
 import com.evacipated.cardcrawl.mod.hubris.vfx.combat.ShowRollResult;
+import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.AlwaysRetainField;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -41,7 +42,7 @@ public class Icosahedron extends CustomCard
         super(ID, NAME, IMG, COST, DESCRIPTION, CardType.SKILL, CardColor.COLORLESS, CardRarity.SPECIAL, CardTarget.NONE);
 
         purgeOnUse = true;
-        retain = true;
+        AlwaysRetainField.alwaysRetain.set(this, true);
     }
 
     private Icosahedron(int roll)
@@ -132,12 +133,6 @@ public class Icosahedron extends CustomCard
         }
 
         AbstractDungeon.topLevelEffects.add(new ShowRollResult(roll, actions));
-    }
-
-    @Override
-    public void atTurnStart()
-    {
-        retain = true;
     }
 
     @Override
