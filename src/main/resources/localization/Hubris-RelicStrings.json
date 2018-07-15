@@ -174,10 +174,10 @@
     ]
   },
   "hubris:Backtick": {
-    "NAME": "`",
+    "NAME": "Backtick",
     "FLAVOR": " relic add ",
     "DESCRIPTIONS": [
-      "Upon pickup, choose any non-boss relic to obtain and choose any card to add to your deck."
+      "Upon pickup, choose any non-boss non-event relic to obtain."
     ]
   },
   "test447": {

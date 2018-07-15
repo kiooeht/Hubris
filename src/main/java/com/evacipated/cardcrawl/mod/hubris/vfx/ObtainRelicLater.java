@@ -18,7 +18,6 @@ public class ObtainRelicLater extends AbstractGameEffect
     @Override
     public void update()
     {
-        System.out.println("OBTAINING!!!!!!!!!!!!!");
         relic.instantObtain();
         isDone = true;
     }
