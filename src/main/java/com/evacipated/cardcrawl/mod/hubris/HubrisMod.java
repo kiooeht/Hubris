@@ -87,6 +87,8 @@ public class HubrisMod implements
         BaseMod.addRelic(new Spice(), RelicType.SHARED);
         BaseMod.addRelic(new TinFlute(), RelicType.SHARED);
         BaseMod.addRelic(new GlazedTorus(), RelicType.SHARED);
+        BaseMod.addRelic(new Backtick(), RelicType.SHARED);
+        BaseMod.addRelic(new Test447(), RelicType.SHARED);
     }
 
     @Override

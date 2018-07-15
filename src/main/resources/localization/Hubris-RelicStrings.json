@@ -172,5 +172,19 @@
     "DESCRIPTIONS": [
       "Gain #b1 #yStrength at the end of each of your odd numbered turns."
     ]
+  },
+  "hubris:Backtick": {
+    "NAME": "`",
+    "FLAVOR": " relic add ",
+    "DESCRIPTIONS": [
+      "Upon pickup, choose any non-boss relic to obtain and choose any card to add to your deck."
+    ]
+  },
+  "test447": {
+    "NAME": "test447",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "TODO"
+    ]
   }
 }
