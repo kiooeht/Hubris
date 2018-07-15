@@ -58,5 +58,10 @@
   "hubris:StunningStrike": {
     "NAME": "Stunning Strike",
     "DESCRIPTION": "Deal !D! damage. NL Stun the enemy for !M! turn. NL Exhaust."
+  },
+  "hubris:Ssssneak": {
+    "NAME": "Ssssneak",
+    "DESCRIPTION": "Draw !M! card. NL Draw additional cards equal to this card's cost. NL Snecko.",
+    "UPGRADE_DESCRIPTION": "Draw !M! cards. NL Draw additional cards equal to double this card's cost. NL Snecko."
   }
 }
