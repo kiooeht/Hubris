@@ -1,4 +1,4 @@
-package com.evacipated.cardcrawl.mod.hubris.cards;
+package com.evacipated.cardcrawl.mod.hubris.cards.green;
 
 import basemod.abstracts.CustomCard;
 import basemod.helpers.ModalChoice;

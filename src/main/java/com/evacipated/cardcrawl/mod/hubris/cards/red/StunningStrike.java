@@ -1,4 +1,4 @@
-package com.evacipated.cardcrawl.mod.hubris.cards;
+package com.evacipated.cardcrawl.mod.hubris.cards.red;
 
 import basemod.abstracts.CustomCard;
 import com.evacipated.cardcrawl.mod.stslib.actions.common.StunMonsterAction;

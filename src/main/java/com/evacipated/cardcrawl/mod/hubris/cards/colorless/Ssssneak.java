@@ -1,4 +1,4 @@
-package com.evacipated.cardcrawl.mod.hubris.cards;
+package com.evacipated.cardcrawl.mod.hubris.cards.colorless;
 
 import basemod.abstracts.CustomCard;
 import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.SneckoField;
