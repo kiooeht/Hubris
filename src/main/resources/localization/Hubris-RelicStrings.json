@@ -70,7 +70,7 @@
   },
   "hubris:Pocketwatch": {
     "NAME": "Pocketwatch",
-    "FLAVOR": "Tick tock...",
+    "FLAVOR": "Maybe time's just a construct of human perception, an illusion created by—",
     "DESCRIPTIONS": [
       " If any battle takes longer than #b",
       " minutes, you #rdie.",
