@@ -63,5 +63,10 @@
     "NAME": "Ssssneak",
     "DESCRIPTION": "Draw !M! card. NL Draw additional cards equal to this card's cost. NL Snecko.",
     "UPGRADE_DESCRIPTION": "Draw !M! cards. NL Draw additional cards equal to double this card's cost. NL Snecko."
+  },
+  "hubris:SpecializedCircuitry": {
+    "NAME": "Specialized Circuitry",
+    "DESCRIPTION": "Choose a type of orb. NL Anytime you Channel an orb, Channel the chosen type instead.",
+    "UPGRADE_DESCRIPTION": "Innate. NL Choose a type of orb. NL Anytime you Channel an orb, Channel the chosen type instead."
   }
 }

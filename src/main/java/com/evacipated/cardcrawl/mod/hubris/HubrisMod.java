@@ -6,6 +6,7 @@ import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.evacipated.cardcrawl.mod.hubris.relics.*;
+import com.evacipated.cardcrawl.modthespire.Loader;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -14,6 +15,8 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.OrbStrings;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.clapper.util.classutil.*;
 
 import java.io.File;
@@ -33,7 +36,20 @@ public class HubrisMod implements
         EditStringsSubscriber,
         PostDeathSubscriber
 {
+    public static final Logger logger = LogManager.getLogger(HubrisMod.class.getSimpleName());
+
+    // Crossover checks
+    public static final boolean hasReplayTheSpire;
+
     public static Texture TEMP_HP_ICON;
+
+    static
+    {
+        hasReplayTheSpire = Loader.isModLoaded("ReplayTheSpireMod");
+        if (hasReplayTheSpire) {
+            logger.info("Detected Replay The Spire");
+        }
+    }
 
     public static void initialize()
     {

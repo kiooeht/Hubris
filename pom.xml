@@ -36,6 +36,13 @@
             <systemPath>${basedir}/../lib/StSLib.jar</systemPath>
         </dependency>
         <dependency>
+            <groupId>ReplayTheSpireMod</groupId>
+            <artifactId>ReplayTheSpireMod</artifactId>
+            <version>1.0.3</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/../_ModTheSpire/mods/ReplayTheSpireMod.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>com.megacrit.cardcrawl</groupId>
             <artifactId>slaythespire</artifactId>
             <version>015</version>
