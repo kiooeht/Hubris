@@ -186,5 +186,12 @@
     "DESCRIPTIONS": [
       "TODO"
     ]
+  },
+  "hubris:BundleOfHerbs": {
+    "NAME": "Bundle of Herbs",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "Upon pickup, add #b2 #yHerbs to your deck. Whenever you enter a Rest Site, add #b2 #yHerbs to your deck."
+    ]
   }
 }
