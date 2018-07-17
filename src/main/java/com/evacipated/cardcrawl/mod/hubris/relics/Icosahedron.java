@@ -24,7 +24,7 @@ public class Icosahedron extends AbstractRelic
         if (counter < 0) {
             flash();
             AbstractDungeon.actionManager.addToBottom(new RelicAboveCreatureAction(AbstractDungeon.player, this));
-            AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(new com.evacipated.cardcrawl.mod.hubris.cards.Icosahedron(), 1, false));
+            AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(new com.evacipated.cardcrawl.mod.hubris.cards.colorless.Icosahedron(), 1, false));
         }
     }
 
