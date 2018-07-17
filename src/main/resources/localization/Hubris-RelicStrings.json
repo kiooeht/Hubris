@@ -193,5 +193,12 @@
     "DESCRIPTIONS": [
       "Upon pickup, add #b2 #yHerbs to your deck. Whenever you enter a Rest Site, add #b2 #yHerbs to your deck."
     ]
+  },
+  "hubris:SphereOfDissonance": {
+    "NAME": "Sphere of Dissonance",
+    "FLAVOR": "You are your own worst enemy. ",
+    "DESCRIPTIONS": [
+      "Start combats with #b1 #yMark #yof #yDissonance in your draw pile."
+    ]
   }
 }

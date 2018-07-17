@@ -72,5 +72,9 @@
   "hubris:Herb": {
     "NAME": "Herb",
     "DESCRIPTION": "Gain !M! Regen. NL Fleeting."
+  },
+  "hubris:MarkOfDissonance": {
+    "NAME": "Mark of Dissonance",
+    "DESCRIPTION": "Apply Dissonance. NL Purge."
   }
 }
