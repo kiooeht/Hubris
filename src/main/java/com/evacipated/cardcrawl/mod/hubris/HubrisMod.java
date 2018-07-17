@@ -13,6 +13,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.localization.OrbStrings;
+import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.localization.RelicStrings;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import org.apache.logging.log4j.LogManager;
@@ -128,6 +129,8 @@ public class HubrisMod implements
                 Gdx.files.internal("localization/Hubris-IcosahedronStrings.json").readString(String.valueOf(StandardCharsets.UTF_8)));
         BaseMod.loadCustomStrings(OrbStrings.class,
                 Gdx.files.internal("localization/Hubris-OrbStrings.json").readString(String.valueOf(StandardCharsets.UTF_8)));
+        BaseMod.loadCustomStrings(PowerStrings.class,
+                Gdx.files.internal("localization/Hubris-PowerStrings.json").readString(String.valueOf(StandardCharsets.UTF_8)));
     }
 
     private static void autoAddCards() throws URISyntaxException, ClassNotFoundException, IllegalAccessException, InstantiationException

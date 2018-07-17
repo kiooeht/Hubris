@@ -5,18 +5,23 @@ import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
+import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class DissonancePower extends AbstractPower
 {
     public static final String POWER_ID = "hubris:Dissonance";
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
+    public static final String NAME = powerStrings.NAME;
+    public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
     private AbstractCard card;
 
     public DissonancePower(AbstractCreature owner)
     {
-        name = "Dissonance";
+        name = NAME;
         ID = POWER_ID;
         this.owner = owner;
         this.card = new MarkOfDissonance();
@@ -28,7 +33,7 @@ public class DissonancePower extends AbstractPower
     @Override
     public void updateDescription()
     {
-        description = "Take #b" + 50 + "% more damage from #yAttacks. NL On death, " + FontHelper.colorString(card.name, "y") + " is shuffled into your draw pile.";
+        description = DESCRIPTIONS[0]+ 50 + DESCRIPTIONS[1] + FontHelper.colorString(card.name, "y") + DESCRIPTIONS[2];
     }
 
     @Override

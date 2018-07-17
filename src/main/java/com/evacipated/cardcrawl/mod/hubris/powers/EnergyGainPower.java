@@ -1,14 +1,17 @@
 package com.evacipated.cardcrawl.mod.hubris.powers;
 
 import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.EnergizedPower;
 
 public class EnergyGainPower extends EnergizedPower
 {
     public static final String POWER_ID = "hubris:EnergyGain";
-    public static final String NAME = "Energy Gain";
-    public static final String[] DESCRIPTIONS = {"Gain #b", " additional [E] each turn.", " additional [E] each turn."};
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
+    public static final String NAME = powerStrings.NAME;
+    public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
     public EnergyGainPower(AbstractCreature owner, int energyAmt)
     {

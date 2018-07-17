@@ -4,17 +4,22 @@ import com.evacipated.cardcrawl.mod.hubris.actions.unique.BefuddledAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class BefuddledPower extends AbstractPower
 {
     public static final String POWER_ID = "hubris:Befuddled";
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
+    public static final String NAME = powerStrings.NAME;
+    public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
     private boolean firstCard = true;
 
     public BefuddledPower(AbstractCreature owner)
     {
-        name = "Befuddled";
+        name = NAME;
         ID = POWER_ID;
         this.owner = owner;
         type = PowerType.DEBUFF;
@@ -26,7 +31,7 @@ public class BefuddledPower extends AbstractPower
     @Override
     public void updateDescription()
     {
-        description = "The first card drawn each turn is transformed.";
+        description = DESCRIPTIONS[0];
     }
 
     @Override
