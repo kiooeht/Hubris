@@ -76,5 +76,9 @@
   "hubris:MarkOfDissonance": {
     "NAME": "Mark of Dissonance",
     "DESCRIPTION": "Apply Dissonance. NL Purge."
+  },
+  "hubris:Counter": {
+    "NAME": "Counter",
+    "DESCRIPTION": "If an enemy intends to attack, deal damage equal to its intended damage."
   }
 }
