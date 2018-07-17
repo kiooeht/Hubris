@@ -24,7 +24,7 @@ public class Herb extends CustomCard
 
     public Herb()
     {
-        super(ID, NAME, IMG, COST, DESCRIPTION, CardType.SKILL, CardColor.COLORLESS, CardRarity.UNCOMMON, CardTarget.SELF);
+        super(ID, NAME, IMG, COST, DESCRIPTION, CardType.SKILL, CardColor.COLORLESS, CardRarity.SPECIAL, CardTarget.SELF);
 
         FleetingField.fleeting.set(this, true);
         magicNumber = baseMagicNumber = REGEN;
