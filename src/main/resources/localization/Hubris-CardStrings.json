@@ -80,5 +80,10 @@
   "hubris:Counter": {
     "NAME": "Counter",
     "DESCRIPTION": "If an enemy intends to attack, deal damage equal to its intended damage."
+  },
+  "hubris:ReadiedAction": {
+    "NAME": "Readied Action",
+    "DESCRIPTION": "At the end of this turn, Retain up to !M! card.",
+    "UPGRADE_DESCRIPTION": "At the end of this turn, Retain up to !M! cards."
   }
 }

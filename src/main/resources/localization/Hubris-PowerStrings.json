@@ -54,5 +54,13 @@
       "On death, ",
       " will return."
     ]
+  },
+  "hubris:ReadiedAction": {
+    "NAME": "Readied Action",
+    "DESCRIPTIONS": [
+      "At the end of your turn, you may retain #b",
+      " card.",
+      " cards."
+    ]
   }
 }
