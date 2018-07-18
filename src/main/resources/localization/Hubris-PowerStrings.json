@@ -62,5 +62,17 @@
       " card.",
       " cards."
     ]
+  },
+  "hubris:TimeStop": {
+    "NAME": "Time Stop",
+    "DESCRIPTIONS": [
+      "At the end of your turn, immediately start another turn. NL You cannot attack during your next turn."
+    ]
+  },
+  "hubris:NoAttack": {
+    "NAME": "No Attack",
+    "DESCRIPTIONS": [
+      "You cannot play #yAttacks this turn."
+    ]
   }
 }

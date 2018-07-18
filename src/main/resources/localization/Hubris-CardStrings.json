@@ -89,5 +89,9 @@
   "hubris:CleavingFinish": {
     "NAME": "Cleaving Finish",
     "DESCRIPTION": "Deal !D! damage. NL If this kills an enemy, this card stays in your hand and costs 0 for the turn."
+  },
+  "hubris:TimeStop": {
+    "NAME": "Time Stop",
+    "DESCRIPTION": "At the end of your turn, immediately start another turn. NL You cannot attack during your next turn. NL Exhaust."
   }
 }
