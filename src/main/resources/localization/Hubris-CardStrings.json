@@ -85,5 +85,9 @@
     "NAME": "Readied Action",
     "DESCRIPTION": "At the end of this turn, Retain up to !M! card.",
     "UPGRADE_DESCRIPTION": "At the end of this turn, Retain up to !M! cards."
+  },
+  "hubris:CleavingFinish": {
+    "NAME": "Cleaving Finish",
+    "DESCRIPTION": "Deal !D! damage. NL If this kills an enemy, this card stays in your hand and costs 0 for the turn."
   }
 }
