@@ -93,5 +93,13 @@
   "hubris:TimeStop": {
     "NAME": "Time Stop",
     "DESCRIPTION": "At the end of your turn, immediately start another turn. NL You cannot attack during your next turn. NL Exhaust."
+  },
+  "hubris:Ukulele": {
+    "NAME": "Ukulele",
+    "DESCRIPTION": "Deal !D! damage for each Lightning you currently have Channeled.",
+    "EXTENDED_DESCRIPTION": [
+      " (Deals damage !M! time).",
+      " (Deals damage !M! times)."
+    ]
   }
 }
