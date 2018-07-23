@@ -200,5 +200,13 @@
     "DESCRIPTIONS": [
       "Start combats with #b1 #yMark #yof #yDissonance in your draw pile."
     ]
+  },
+  "hubris:Pocketwatch2": {
+    "NAME": "Pocketwatch",
+    "FLAVOR": "Maybe time's just a construct of human perception, an illusion created by—",
+    "DESCRIPTIONS": [
+      "Start each combat with a #yTime #yStop in your deck. NL #yTime #yStop can only be used #b",
+      " times."
+    ]
   }
 }

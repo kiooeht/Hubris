@@ -92,7 +92,11 @@
   },
   "hubris:TimeStop": {
     "NAME": "Time Stop",
-    "DESCRIPTION": "At the end of your turn, immediately start another turn. NL You cannot attack during your next turn. NL Exhaust."
+    "DESCRIPTION": "At the end of your turn, immediately start another turn. Energy and Block are maintained.",
+    "EXTENDED_DESCRIPTION": [
+      " NL Exhaust.",
+      " NL Purge."
+    ]
   },
   "hubris:Ukulele": {
     "NAME": "Ukulele",
