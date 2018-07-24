@@ -74,5 +74,12 @@
     "DESCRIPTIONS": [
       "You cannot play #yAttacks this turn."
     ]
+  },
+  "hubris:LustTarget": {
+    "NAME": "Lust",
+    "DESCRIPTIONS": [
+      "When receiving #yAttack damage this turn, you #rlose #b",
+      " HP."
+    ]
   }
 }

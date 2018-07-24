@@ -109,5 +109,9 @@
   "hubris:Prefetch": {
     "NAME": "Prefetch",
     "DESCRIPTION": "Choose a card in your hand. It is Innate for the next combat. NL Exhaust."
+  },
+  "hubris:Lust": {
+    "NAME": "Lust",
+    "DESCRIPTION": "Autoplay. NL Choose a random enemy. This turn, anytime you attack that enemy, lose !M! HP. NL Soulbound."
   }
 }
