@@ -216,5 +216,13 @@
       "Start each combat with #b",
       " #yRegen. NL #yRegen can go negative."
     ]
+  },
+  "hubris:MedicalManual": {
+    "NAME": "Medical Manual",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "#yExhaust the first #yStatus drawn each turn. NL If you have the #yMedical #yKit, each #yStatus played heals you #b",
+      " HP."
+    ]
   }
 }

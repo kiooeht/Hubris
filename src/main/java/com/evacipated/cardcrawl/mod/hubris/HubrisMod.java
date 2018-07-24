@@ -110,6 +110,7 @@ public class HubrisMod implements
         BaseMod.addRelic(new SphereOfDissonance(), RelicType.SHARED);
         BaseMod.addRelic(new Pocketwatch2(), RelicType.SHARED);
         BaseMod.addRelic(new HerbalPaste(), RelicType.SHARED);
+        BaseMod.addRelic(new MedicalManual(), RelicType.SHARED);
     }
 
     @Override
