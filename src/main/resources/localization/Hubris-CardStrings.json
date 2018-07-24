@@ -105,5 +105,9 @@
       " (Deals damage !M! time).",
       " (Deals damage !M! times)."
     ]
+  },
+  "hubris:Prefetch": {
+    "NAME": "Prefetch",
+    "DESCRIPTION": "Choose a card in your hand. It is Innate for the next combat. NL Exhaust."
   }
 }
