@@ -208,5 +208,13 @@
       "Start each combat with a #yTime #yStop in your deck. NL #yTime #yStop can only be used #b",
       " times."
     ]
+  },
+  "hubris:HerbalPaste": {
+    "NAME": "Herbal Paste",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "Start each combat with #b",
+      " #yRegen. NL #yRegen can go negative."
+    ]
   }
 }
