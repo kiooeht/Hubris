@@ -1,7 +1,7 @@
 package com.evacipated.cardcrawl.mod.hubris.cards.EnhanceAbility;
 
 import com.evacipated.cardcrawl.mod.hubris.CardIgnore;
-import com.evacipated.cardcrawl.mod.hubris.actions.tempHp.AddTemporaryHPAction;
+import com.evacipated.cardcrawl.mod.stslib.actions.tempHp.AddTemporaryHPAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;

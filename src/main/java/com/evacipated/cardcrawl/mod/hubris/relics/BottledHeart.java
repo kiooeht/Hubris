@@ -1,6 +1,6 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
-import com.evacipated.cardcrawl.mod.hubris.actions.tempHp.AddTemporaryHPAction;
+import com.evacipated.cardcrawl.mod.stslib.actions.tempHp.AddTemporaryHPAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
