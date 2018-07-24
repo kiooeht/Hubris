@@ -196,9 +196,10 @@
   },
   "hubris:SphereOfDissonance": {
     "NAME": "Sphere of Dissonance",
-    "FLAVOR": "You are your own worst enemy. ",
+    "FLAVOR": "You are your own worst enemy.",
     "DESCRIPTIONS": [
-      "Start combats with #b1 #yMark #yof #yDissonance in your draw pile."
+      "At the start of each combat, apply #b",
+      " #yVulnerable to a random enemy."
     ]
   },
   "hubris:Pocketwatch2": {
