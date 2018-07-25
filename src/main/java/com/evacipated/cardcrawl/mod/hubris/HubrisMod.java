@@ -4,17 +4,13 @@ import basemod.BaseMod;
 import basemod.helpers.RelicType;
 import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
+import com.evacipated.cardcrawl.mod.hubris.events.shrines.TheFatedDie;
 import com.evacipated.cardcrawl.mod.hubris.relics.*;
 import com.evacipated.cardcrawl.modthespire.Loader;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.helpers.ImageMaster;
-import com.megacrit.cardcrawl.localization.CardStrings;
-import com.megacrit.cardcrawl.localization.OrbStrings;
-import com.megacrit.cardcrawl.localization.PowerStrings;
-import com.megacrit.cardcrawl.localization.RelicStrings;
+import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,6 +26,7 @@ import java.util.Collection;
 
 @SpireInitializer
 public class HubrisMod implements
+        PostInitializeSubscriber,
         EditCardsSubscriber,
         EditRelicsSubscriber,
         EditKeywordsSubscriber,
@@ -52,6 +49,12 @@ public class HubrisMod implements
     public static void initialize()
     {
         BaseMod.subscribe(new HubrisMod());
+    }
+
+    @Override
+    public void receivePostInitialize()
+    {
+        BaseMod.addEvent(TheFatedDie.ID, TheFatedDie.class, BaseMod.EventPool.ANY);
     }
 
     @Override
@@ -125,6 +128,8 @@ public class HubrisMod implements
                 Gdx.files.internal("localization/Hubris-OrbStrings.json").readString(String.valueOf(StandardCharsets.UTF_8)));
         BaseMod.loadCustomStrings(PowerStrings.class,
                 Gdx.files.internal("localization/Hubris-PowerStrings.json").readString(String.valueOf(StandardCharsets.UTF_8)));
+        BaseMod.loadCustomStrings(EventStrings.class,
+                Gdx.files.internal("localization/Hubris-EventStrings.json").readString(String.valueOf(StandardCharsets.UTF_8)));
     }
 
     private static void autoAddCards() throws URISyntaxException, ClassNotFoundException, IllegalAccessException, InstantiationException

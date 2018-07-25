@@ -1,0 +1,15 @@
+{
+  "hubris:TheFatedDie" : {
+    "NAME":  "The Fated Die",
+    "DESCRIPTIONS": [
+      "You come across a pedestal with a twenty sided object sitting atop. An inscription on the pedestal reads: NL NL Alter fate, for #gbetter or #rworse.",
+      "Pocketing the mysterious object, an inexplicable sense that your fate has been @twisted@ washes over you.",
+      "You decide it's best not to take strange artifacts from mysterious pedestals."
+    ],
+    "OPTIONS": [
+      "[Take] #gObtain ",
+      ".",
+      "[Leave]"
+    ]
+  }
+}
