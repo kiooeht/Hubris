@@ -30,7 +30,6 @@ import java.util.Collection;
 
 @SpireInitializer
 public class HubrisMod implements
-        PostInitializeSubscriber,
         EditCardsSubscriber,
         EditRelicsSubscriber,
         EditKeywordsSubscriber,
@@ -41,8 +40,6 @@ public class HubrisMod implements
 
     // Crossover checks
     public static final boolean hasReplayTheSpire;
-
-    public static Texture TEMP_HP_ICON;
 
     static
     {
@@ -55,12 +52,6 @@ public class HubrisMod implements
     public static void initialize()
     {
         BaseMod.subscribe(new HubrisMod());
-    }
-
-    @Override
-    public void receivePostInitialize()
-    {
-        TEMP_HP_ICON = ImageMaster.loadImage("images/ui/tempHP.png");
     }
 
     @Override
