@@ -31,7 +31,7 @@ public class Pocketwatch2 extends AbstractRelic
     @Override
     public void onEquip()
     {
-        setCounter(12);
+        setCounter(AMT);
     }
 
     @Override
