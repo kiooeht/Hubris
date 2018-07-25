@@ -1,8 +1,10 @@
 package com.evacipated.cardcrawl.mod.hubris.patches.cards.AbstractCard;
 
-import com.evacipated.cardcrawl.modthespire.lib.SpireField;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
-import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.evacipated.cardcrawl.modthespire.lib.*;
+import com.megacrit.cardcrawl.cards.CardGroup;
+import javassist.CtBehavior;
+
+import java.util.ArrayList;
 
 public class InnateOncePatch
 {
@@ -16,19 +18,35 @@ public class InnateOncePatch
     }
 
     @SpirePatch(
-            cls="com.megacrit.cardcrawl.cards.AbstractCard",
-            method="makeStatEquivalentCopy"
+            cls="com.megacrit.cardcrawl.cards.CardGroup",
+            method="initializeDeck"
     )
-    public static class MakeStatEquivalentCopy
+    public static class PlayingCardMapPatch
     {
-        public static AbstractCard Postfix(AbstractCard __result, AbstractCard __instance)
+        @SpireInsertPatch(
+                localvars={"copy"}
+        )
+        public static void Insert(CardGroup __instance, CardGroup masterDeck, CardGroup copy)
         {
-            if (Field.isInnateOnce.get(__instance)) {
-                __result.isInnate = true; // TODO: Bad. Duplicate shrine makes copy permanently Innate
-                Field.isInnateOnce.set(__instance, false);
-            }
+            assert copy.size() == masterDeck.size();
 
-            return __result;
+            for (int i=0; i<copy.size(); ++i) {
+                if (Field.isInnateOnce.get(masterDeck.group.get(i))) {
+                    copy.group.get(i).isInnate = true;
+                    Field.isInnateOnce.set(masterDeck.group.get(i), false);
+                }
+            }
+        }
+
+        public static class Locator extends SpireInsertLocator
+        {
+            @Override
+            public int[] Locate(CtBehavior ctBehavior) throws Exception
+            {
+                Matcher finalMatcher = new Matcher.MethodCallMatcher("com.megacrit.cardcrawl.cards.CardGroup", "shuffle");
+
+                return LineFinder.findInOrder(ctBehavior, new ArrayList<>(), finalMatcher);
+            }
         }
     }
 }
