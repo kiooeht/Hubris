@@ -1,6 +1,7 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.animations.TalkAction;
 import com.megacrit.cardcrawl.actions.common.DamageAllEnemiesAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -35,6 +36,7 @@ public class ClockworkCow extends AbstractRelic
             pulse = false;
             AbstractDungeon.actionManager.addToTop(new DamageAllEnemiesAction(null,
                     DamageInfo.createDamageMatrix(DAMAGE, true), DamageInfo.DamageType.THORNS, AbstractGameAction.AttackEffect.BLUNT_LIGHT));
+            AbstractDungeon.actionManager.addToTop(new TalkAction(true, "Moo.", 1.0F, 2.0F));
             AbstractDungeon.actionManager.addToTop(new RelicAboveCreatureAction(AbstractDungeon.player, this));
         } else if (counter == 9) {
             beginPulse();
