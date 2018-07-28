@@ -225,5 +225,13 @@
       "#yExhaust the first #yStatus drawn each turn. NL If you have the #yMedical #yKit, each #yStatus played heals you #b",
       " HP."
     ]
+  },
+  "hubris:ClockworkCow": {
+    "NAME": "Clockwork Cow",
+    "FLAVOR": "\"Moo.\" - Cows",
+    "DESCRIPTIONS": [
+      "Every #b10th card you #yCycle, deal #b",
+      " damage to ALL enemies."
+    ]
   }
 }

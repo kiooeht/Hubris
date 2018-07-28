@@ -37,12 +37,17 @@ public class HubrisMod implements
 
     // Crossover checks
     public static final boolean hasReplayTheSpire;
+    public static final boolean hasConstructMod;
 
     static
     {
         hasReplayTheSpire = Loader.isModLoaded("ReplayTheSpireMod");
         if (hasReplayTheSpire) {
             logger.info("Detected Replay The Spire");
+        }
+        hasConstructMod = Loader.isModLoaded("constructmod");
+        if (hasConstructMod) {
+            logger.info("Detected ConstructMod");
         }
     }
 
@@ -105,6 +110,10 @@ public class HubrisMod implements
         BaseMod.addRelic(new Pocketwatch2(), RelicType.SHARED);
         BaseMod.addRelic(new HerbalPaste(), RelicType.SHARED);
         BaseMod.addRelic(new MedicalManual(), RelicType.SHARED);
+
+        if (hasConstructMod) {
+            BaseMod.addRelicToCustomPool(new ClockworkCow(), constructmod.patches.AbstractCardEnum.CONSTRUCTMOD.toString());
+        }
     }
 
     @Override
