@@ -9,5 +9,5 @@ import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 )
 public class NoDiscardField
 {
-    public static SpireField<Boolean> noDiscard = new SpireField<>(false);
+    public static SpireField<Boolean> noDiscard = new SpireField<>(() -> false);
 }

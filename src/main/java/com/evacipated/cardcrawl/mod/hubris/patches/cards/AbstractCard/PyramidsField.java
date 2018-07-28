@@ -10,7 +10,7 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 )
 public class PyramidsField
 {
-    public static SpireField<Boolean> inPyramids = new SpireField<>(false);
+    public static SpireField<Boolean> inPyramids = new SpireField<>(() -> false);
 
     @SpirePatch(
             cls="com.megacrit.cardcrawl.cards.AbstractCard",

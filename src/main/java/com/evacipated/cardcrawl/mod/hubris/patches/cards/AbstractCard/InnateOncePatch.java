@@ -14,7 +14,7 @@ public class InnateOncePatch
     )
     public static class Field
     {
-        public static SpireField<Boolean> isInnateOnce = new SpireField<>(false);
+        public static SpireField<Boolean> isInnateOnce = new SpireField<>(() -> false);
     }
 
     @SpirePatch(
