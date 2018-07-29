@@ -19,9 +19,9 @@ public class StunningStrike extends CustomCard
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
-    private static final int COST = 2;
-    private static final int DAMAGE = 10;
-    private static final int UPGRADE_DAMAGE = 4;
+    private static final int COST = 3;
+    private static final int UPGRADE_COST = 2;
+    private static final int DAMAGE = 6;
     private static final int STUN_LENGTH = 1;
 
     public StunningStrike()
@@ -45,7 +45,7 @@ public class StunningStrike extends CustomCard
     {
         if (!upgraded) {
             upgradeName();
-            upgradeDamage(UPGRADE_DAMAGE);
+            upgradeBaseCost(UPGRADE_COST);
         }
     }
 
