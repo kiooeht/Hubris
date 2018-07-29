@@ -6,9 +6,7 @@
       "Once per combat, you may roll the Icosahedron.",
       " NL You may no longer roll the Icosahedron.",
       "You are #rCursed.",
-      "Gain [R] at the start of each turn.",
-      "Gain [G] at the start of each turn.",
-      "Gain [B] at the start of each turn."
+      "Gain [E] at the start of each turn."
     ]
   },
   "hubris:Black Hole": {
@@ -22,10 +20,7 @@
     "NAME": "Virtuous Blindfold",
     "FLAVOR": "Emotions are prohibited.",
     "DESCRIPTIONS": [
-      " You can no longer see the entire map.",
-      "Gain [R] at the start of each turn.",
-      "Gain [G] at the start of each turn.",
-      "Gain [B] at the start of each turn."
+      "Gain [E] at the start of each turn. You can no longer see the entire map."
     ]
   },
   "hubris:PeanutButter": {
@@ -74,7 +69,7 @@
     "DESCRIPTIONS": [
       " If any battle takes longer than #b",
       " minutes, you #rdie.",
-      "Gain [R] at the start of each turn."
+      "Gain [E] at the start of each turn."
     ]
   },
   "hubris:ScarierMask": {

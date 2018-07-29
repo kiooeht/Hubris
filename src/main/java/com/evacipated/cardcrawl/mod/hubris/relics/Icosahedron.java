@@ -35,19 +35,7 @@ public class Icosahedron extends AbstractRelic
             case 1:
                 return DESCRIPTIONS[2] + DESCRIPTIONS[1];
             case 20: {
-                String str = DESCRIPTIONS[1];
-                switch (AbstractDungeon.player.chosenClass) {
-                    case THE_SILENT:
-                        str = DESCRIPTIONS[4] + str;
-                        break;
-                    case DEFECT:
-                        str = DESCRIPTIONS[5] + str;
-                        break;
-                    default:
-                        str = DESCRIPTIONS[3] + str;
-                        break;
-                }
-                return str;
+                return DESCRIPTIONS[3] + DESCRIPTIONS[1];
             }
             default:
                 return DESCRIPTIONS[0];
