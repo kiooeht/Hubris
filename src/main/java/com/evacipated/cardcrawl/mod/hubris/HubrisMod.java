@@ -123,7 +123,6 @@ public class HubrisMod implements
     {
         BaseMod.addKeyword(new String[] {"temporary"}, "Temporary HP disappears at the end of combat.");
         BaseMod.addKeyword(new String[] {"greed"}, "Greed is a curse that gets you more gold.");
-        BaseMod.addKeyword(new String[] {"dissonance"}, "Dissonant creatures take #b50% more damage from Attacks.");
     }
 
     @Override
