@@ -246,5 +246,14 @@
       " unblocked #yAttack damage.",
       "Gain [E] at the start of each turn."
     ]
+  },
+  "hubris:RGBLights": {
+    "NAME": "RGB Lights",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "Every time you Evoke #b",
+      " Orbs in a single turn, Evoke the third Orb #b",
+      " times."
+    ]
   }
 }

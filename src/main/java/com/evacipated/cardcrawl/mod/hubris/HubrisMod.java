@@ -113,6 +113,8 @@ public class HubrisMod implements
         BaseMod.addRelic(new HollowSoul(), RelicType.SHARED);
         BaseMod.addRelic(new CrystalStatue(), RelicType.SHARED);
 
+        BaseMod.addRelic(new RGBLights(), RelicType.BLUE);
+
         if (hasConstructMod) {
             BaseMod.addRelicToCustomPool(new ClockworkCow(), constructmod.patches.AbstractCardEnum.CONSTRUCTMOD.toString());
         }
