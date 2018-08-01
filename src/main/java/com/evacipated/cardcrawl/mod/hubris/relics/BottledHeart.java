@@ -24,8 +24,9 @@ public class BottledHeart extends AbstractRelic
     public void onEquip()
     {
         flash();
-        setCounter(AbstractDungeon.player.maxHealth / 2);
+        int c = AbstractDungeon.player.maxHealth / 2;
         AbstractDungeon.player.decreaseMaxHealth(AbstractDungeon.player.maxHealth - 1);
+        setCounter(c);
     }
 
     @Override
