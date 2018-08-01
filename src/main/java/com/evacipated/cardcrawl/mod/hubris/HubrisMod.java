@@ -38,6 +38,7 @@ public class HubrisMod implements
     // Crossover checks
     public static final boolean hasReplayTheSpire;
     public static final boolean hasConstructMod;
+    public static final boolean hasFruityMod;
 
     static
     {
@@ -48,6 +49,10 @@ public class HubrisMod implements
         hasConstructMod = Loader.isModLoaded("constructmod");
         if (hasConstructMod) {
             logger.info("Detected ConstructMod");
+        }
+        hasFruityMod = Loader.isModLoaded("fruitymod-sts");
+        if (hasFruityMod) {
+            logger.info("Detected FruityMod");
         }
     }
 
@@ -117,6 +122,9 @@ public class HubrisMod implements
 
         if (hasConstructMod) {
             BaseMod.addRelicToCustomPool(new ClockworkCow(), constructmod.patches.AbstractCardEnum.CONSTRUCTMOD.toString());
+        }
+        if (hasFruityMod) {
+            BaseMod.addRelicToCustomPool(new DustyCowl(), fruitymod.patches.AbstractCardEnum.SEEKER_PURPLE.toString());
         }
     }
 

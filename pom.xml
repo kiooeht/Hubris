@@ -50,6 +50,13 @@
             <systemPath>${basedir}/../_ModTheSpire/mods/ConstructMod.jar</systemPath>
         </dependency>
         <dependency>
+            <groupId>fruitymod</groupId>
+            <artifactId>FruityMod</artifactId>
+            <version>0.1.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/../_ModTheSpire/mods/FruityMod.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>com.megacrit.cardcrawl</groupId>
             <artifactId>slaythespire</artifactId>
             <version>015</version>

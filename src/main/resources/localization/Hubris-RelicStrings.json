@@ -255,5 +255,13 @@
       " Orbs in a single turn, Evoke the third Orb #b",
       " times."
     ]
+  },
+  "hubris:DustyCowl": {
+    "NAME": "Dusty Cowl",
+    "FLAVOR": "An old cowl that seems to collect dust and other filth.",
+    "DESCRIPTIONS": [
+      "Whenever an #yEthereal card is #yExhausted, gain #b",
+      " Block."
+    ]
   }
 }
