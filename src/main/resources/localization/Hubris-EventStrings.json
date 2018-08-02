@@ -34,5 +34,20 @@
       "[Attack] #gHeal #g",
       " #gHP."
     ]
+  },
+  "hubris:TheBottler" : {
+    "NAME":  "The Re-Bottler",
+    "DESCRIPTIONS": [
+      "A machine sits in front of you. A sign on the device reads, NL NL #y\"INSERT #yBOTTLE #yFOR #yREBOTTLING\"",
+      "#y\"STARTING #yREBOTTLING #yPROCEDURE\" NL NL #b@WIRRRRRRRR@ #b@CHURN@ #gKA-CHUNK NL NL The machine spits your bottle back out."
+    ],
+    "OPTIONS": [
+      "[Insert: ",
+      "]",
+      "[Locked] Requires: ",
+      ".",
+      "[Leave]",
+      "[Take Bottle]"
+    ]
   }
 }

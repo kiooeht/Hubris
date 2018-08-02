@@ -5,6 +5,7 @@ import basemod.helpers.RelicType;
 import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
 import com.evacipated.cardcrawl.mod.hubris.events.shrines.TheFatedDie;
+import com.evacipated.cardcrawl.mod.hubris.events.thebeyond.TheBottler;
 import com.evacipated.cardcrawl.mod.hubris.events.thecity.Experiment;
 import com.evacipated.cardcrawl.mod.hubris.relics.*;
 import com.evacipated.cardcrawl.modthespire.Loader;
@@ -67,6 +68,8 @@ public class HubrisMod implements
     {
         BaseMod.addEvent(TheFatedDie.ID, TheFatedDie.class, BaseMod.EventPool.ANY);
         BaseMod.addEvent(Experiment.ID, Experiment.class, BaseMod.EventPool.THE_CITY);
+        // Only appears if player has Bottle relic. See TheBottlerPatch
+        BaseMod.addEvent(TheBottler.ID, TheBottler.class, BaseMod.EventPool.THE_BEYOND);
     }
 
     @Override
