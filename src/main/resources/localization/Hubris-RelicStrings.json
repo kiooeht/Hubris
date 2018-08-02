@@ -194,7 +194,10 @@
     "FLAVOR": "You are your own worst enemy.",
     "DESCRIPTIONS": [
       "At the start of each combat, apply #b",
-      " #yVulnerable to a random enemy."
+      " #yVulnerable to a random enemy. NL #ySynergy: ",
+      "If you have the ",
+      ", whenever you enter a #y? room, heal #b",
+      " HP."
     ]
   },
   "hubris:Pocketwatch2": {
