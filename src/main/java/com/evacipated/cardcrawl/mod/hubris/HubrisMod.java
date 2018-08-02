@@ -5,6 +5,7 @@ import basemod.helpers.RelicType;
 import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
 import com.evacipated.cardcrawl.mod.hubris.events.shrines.TheFatedDie;
+import com.evacipated.cardcrawl.mod.hubris.events.thecity.Experiment;
 import com.evacipated.cardcrawl.mod.hubris.relics.*;
 import com.evacipated.cardcrawl.modthespire.Loader;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
@@ -65,6 +66,7 @@ public class HubrisMod implements
     public void receivePostInitialize()
     {
         BaseMod.addEvent(TheFatedDie.ID, TheFatedDie.class, BaseMod.EventPool.ANY);
+        BaseMod.addEvent(Experiment.ID, Experiment.class, BaseMod.EventPool.THE_CITY);
     }
 
     @Override
