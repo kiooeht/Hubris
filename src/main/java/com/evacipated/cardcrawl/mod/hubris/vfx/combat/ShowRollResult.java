@@ -3,7 +3,7 @@ package com.evacipated.cardcrawl.mod.hubris.vfx.combat;
 import basemod.abstracts.CustomCard;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.evacipated.cardcrawl.mod.hubris.cards.Icosahedron;
+import com.evacipated.cardcrawl.mod.hubris.cards.colorless.Icosahedron;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;

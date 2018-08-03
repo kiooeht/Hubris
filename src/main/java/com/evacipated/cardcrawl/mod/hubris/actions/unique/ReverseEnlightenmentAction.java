@@ -18,10 +18,12 @@ public class ReverseEnlightenmentAction extends AbstractGameAction
     {
         if (duration == Settings.ACTION_DUR_FAST) {
             for (AbstractCard c : AbstractDungeon.player.hand.group) {
-                c.costForTurn += 1;
-                c.isCostModifiedForTurn = true;
-                c.cost += 1;
-                c.isCostModified = true;
+                if (c.costForTurn >= 0) {
+                    c.costForTurn += 1;
+                    c.isCostModifiedForTurn = true;
+                    c.cost += 1;
+                    c.isCostModified = true;
+                }
             }
         }
         tickDuration();

@@ -39,7 +39,7 @@ public class GrandSnecko extends OrbUsingMonster
             "@THERE.@ @ARE.@ @FOUR.@ @LIGHTS.@",
             "~Tell~ ~me...~ NL How many lights do you see?"
     };
-    public static final int HP = 300;
+    public static final int HP = 600;
 
     private static final int ORB_SLOTS = 4;
     private static final ArrayList<Pair<Integer, Class<? extends AbstractOrb>>> orbPercents;
@@ -183,11 +183,16 @@ public class GrandSnecko extends OrbUsingMonster
                 String summonId;
                 if (firstSummon) {
                     summonId = summons.get(0);
-                    firstSummon = false;
                 } else {
                     summonId = summons.get(AbstractDungeon.aiRng.random(summons.size()-1));
                 }
-                ((MonsterWarp)orb).summon = MonsterHelper.getEncounter(summonId).monsters.get(0);
+                AbstractMonster monster = MonsterHelper.getEncounter(summonId).monsters.get(0);
+                if (firstSummon) {
+                    // Decrease Snecko's HP to 75%
+                    monster.decreaseMaxHealth((int) (monster.maxHealth * 0.25f));
+                    firstSummon = false;
+                }
+                ((MonsterWarp)orb).summon = monster;
             }
             AbstractDungeon.actionManager.addToBottom(new MonsterChannelAction(this, orb));
         }

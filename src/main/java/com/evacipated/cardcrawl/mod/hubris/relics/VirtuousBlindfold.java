@@ -17,35 +17,7 @@ public class VirtuousBlindfold extends AbstractRelic
     @Override
     public String getUpdatedDescription()
     {
-        if (AbstractDungeon.player != null) {
-            return setDescription(AbstractDungeon.player.chosenClass);
-        }
-        return setDescription(null);
-    }
-
-    private String setDescription(AbstractPlayer.PlayerClass c)
-    {
-        if (c == null) {
-            return DESCRIPTIONS[1] + DESCRIPTIONS[0];
-        }
-        switch (c) {
-            case IRONCLAD:
-                return DESCRIPTIONS[1] + DESCRIPTIONS[0];
-            case THE_SILENT:
-                return DESCRIPTIONS[2] + DESCRIPTIONS[0];
-            case DEFECT:
-                return DESCRIPTIONS[3] + DESCRIPTIONS[0];
-        }
-        return DESCRIPTIONS[1] + DESCRIPTIONS[0];
-    }
-
-    @Override
-    public void updateDescription(AbstractPlayer.PlayerClass c)
-    {
-        description = setDescription(c);
-        tips.clear();
-        tips.add(new PowerTip(name, description));
-        initializeTips();
+        return DESCRIPTIONS[0];
     }
 
     @Override

@@ -2,28 +2,46 @@ package com.evacipated.cardcrawl.mod.hubris.patches;
 
 import com.evacipated.cardcrawl.mod.hubris.relics.DisguiseKit;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.rewards.RewardItem;
 
-@SpirePatch(
-        cls="com.megacrit.cardcrawl.dungeons.AbstractDungeon",
-        method="initializeCardPools"
-)
+import java.util.ArrayList;
+
 public class DisguiseKitPatch
 {
-    private static AbstractPlayer.PlayerClass realClass;
-
-    public static void Prefix(AbstractDungeon __instance)
+    @SpirePatch(
+            cls="com.megacrit.cardcrawl.rewards.RewardItem",
+            method="claimReward"
+    )
+    public static class ClaimReward
     {
-        realClass = AbstractDungeon.player.chosenClass;
-        DisguiseKit relic = (DisguiseKit) AbstractDungeon.player.getRelic(DisguiseKit.ID);
-        if (relic != null && relic.chosenClass != null) {
-            AbstractDungeon.player.chosenClass = relic.chosenClass;
+        public static void Postfix(RewardItem __instance)
+        {
+            if (__instance.type == RewardItem.RewardType.CARD && AbstractDungeon.player.hasRelic(DisguiseKit.ID)) {
+                AbstractDungeon.player.getRelic(DisguiseKit.ID).flash();
+            }
         }
     }
 
-    public static void Postfix(AbstractDungeon __instance)
+    @SpirePatch(
+            cls="com.megacrit.cardcrawl.dungeons.AbstractDungeon",
+            method="getRewardCards"
+    )
+    public static class AddCardReward
     {
-        AbstractDungeon.player.chosenClass = realClass;
+        public static ArrayList<AbstractCard> Postfix(ArrayList<AbstractCard> __result)
+        {
+            if (AbstractDungeon.player.hasRelic(DisguiseKit.ID)) {
+                DisguiseKit relic = (DisguiseKit) AbstractDungeon.player.getRelic(DisguiseKit.ID);
+
+                AbstractCard.CardRarity rarity = AbstractDungeon.rollRarity();
+                AbstractCard card = relic.getRewardCard(rarity);
+
+                __result.add(card.makeCopy());
+            }
+
+            return __result;
+        }
     }
 }

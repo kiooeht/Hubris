@@ -3,8 +3,8 @@ package com.evacipated.cardcrawl.mod.hubris.cards.curses;
 import basemod.abstracts.CustomCard;
 import com.badlogic.gdx.graphics.Color;
 import com.evacipated.cardcrawl.mod.hubris.CardNoUnlock;
-import com.evacipated.cardcrawl.mod.hubris.actions.common.AutoplayCardAction;
-import com.evacipated.cardcrawl.mod.hubris.patches.cards.AbstractCard.InescapableField;
+import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.AutoplayField;
+import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.SoulboundField;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -33,7 +33,8 @@ public class Wrath extends CustomCard
     {
         super(ID, NAME, IMG, COST, DESCRIPTION, CardType.ATTACK, CardColor.CURSE, CardRarity.CURSE, CardTarget.ALL_ENEMY);
 
-        InescapableField.inescapable.set(this, true);
+        SoulboundField.soulbound.set(this, true);
+        AutoplayField.autoplay.set(this, true);
         baseDamage = ATTACK_DMG;
     }
 
@@ -49,12 +50,6 @@ public class Wrath extends CustomCard
     public boolean canUse(AbstractPlayer p , AbstractMonster m)
     {
         return true;
-    }
-
-    @Override
-    public void triggerWhenDrawn()
-    {
-        AbstractDungeon.actionManager.addToBottom(new AutoplayCardAction(this, AbstractDungeon.player.hand));
     }
 
     @Override

@@ -1,7 +1,7 @@
 {
   "hubris:Hubris": {
     "NAME": "Hubris",
-    "DESCRIPTION": "Innate. Autoplay. NL Gain 2 Strength and lose 1 Dexterity. NL Inescapable."
+    "DESCRIPTION": "Innate. Autoplay. NL Gain 2 Strength and lose 1 Dexterity. NL Soulbound."
   },
   "hubris:Icosahedron": {
     "NAME": "Icosahedron",
@@ -13,7 +13,7 @@
   },
   "hubris:NaturalOne": {
     "NAME": "Natural One",
-    "DESCRIPTION": "Unplayable. NL When this card is drawn, lose 1 Energy. NL Inescapable."
+    "DESCRIPTION": "Unplayable. NL When this card is drawn, lose 1 Energy. NL Soulbound."
   },
   "hubris:PotOfGreed": {
     "NAME": "Pot of Greed",
@@ -21,7 +21,7 @@
   },
   "hubris:Greed": {
     "NAME": "Greed",
-    "DESCRIPTION": "Unplayable. NL Gain an additional !M! gold at the end of combat for each Greed in your deck. NL Inescapable."
+    "DESCRIPTION": "Unplayable. NL Gain an additional !M! gold at the end of combat for each Greed in your deck. NL Soulbound."
   },
   "hubris:SlightOfHand": {
     "NAME": "Slight of Hand",
@@ -29,7 +29,7 @@
   },
   "hubris:Wrath": {
     "NAME": "Wrath",
-    "DESCRIPTION": "Autoplay. NL Deal !D! damage to a random enemy. NL Place a copy of this copy into your discard pile. Inescapable."
+    "DESCRIPTION": "Autoplay. NL Deal !D! damage to a random enemy. NL Place a copy of this copy into your discard pile. Soulbound."
   },
   "hubris:EnhanceAbility": {
     "NAME": "Enhance Ability",
@@ -53,10 +53,65 @@
   },
   "hubris:Sloth": {
     "NAME": "Sloth",
-    "DESCRIPTION": "Autoplay. NL Lose all max energy. Gain 1 max energy at the end of each turn. NL Exhaust. Inescapable."
+    "DESCRIPTION": "Autoplay. NL Lose all max energy. Gain 1 max energy at the end of each turn. NL Exhaust. Soulbound."
   },
   "hubris:StunningStrike": {
     "NAME": "Stunning Strike",
     "DESCRIPTION": "Deal !D! damage. NL Stun the enemy for !M! turn. NL Exhaust."
+  },
+  "hubris:Ssssneak": {
+    "NAME": "Ssssneak",
+    "DESCRIPTION": "Draw !M! card. NL Draw additional cards equal to this card's cost. NL Snecko.",
+    "UPGRADE_DESCRIPTION": "Draw !M! cards. NL Draw additional cards equal to double this card's cost. NL Snecko."
+  },
+  "hubris:SpecializedCircuitry": {
+    "NAME": "Specialized Circuitry",
+    "DESCRIPTION": "Choose a type of orb. NL Anytime you Channel an orb, Channel the chosen type instead.",
+    "UPGRADE_DESCRIPTION": "Innate. NL Choose a type of orb. NL Anytime you Channel an orb, Channel the chosen type instead."
+  },
+  "hubris:Herb": {
+    "NAME": "Herb",
+    "DESCRIPTION": "Gain !M! Regen. NL Fleeting."
+  },
+  "hubris:MarkOfDissonance": {
+    "NAME": "Mark of Dissonance",
+    "DESCRIPTION": "Apply Dissonance. NL Purge."
+  },
+  "hubris:Counter": {
+    "NAME": "Counter",
+    "DESCRIPTION": "If an enemy intends to attack, deal damage equal to its intended damage."
+  },
+  "hubris:ReadiedAction": {
+    "NAME": "Readied Action",
+    "DESCRIPTION": "At the end of this turn, Retain up to !M! card.",
+    "UPGRADE_DESCRIPTION": "At the end of this turn, Retain up to !M! cards."
+  },
+  "hubris:CleavingFinish": {
+    "NAME": "Cleaving Finish",
+    "DESCRIPTION": "Deal !D! damage. NL If this kills an enemy, this card stays in your hand and costs 0 for the turn."
+  },
+  "hubris:TimeStop": {
+    "NAME": "Time Stop",
+    "DESCRIPTION": "At the end of your turn, immediately start another turn. Energy and Block are maintained.",
+    "EXTENDED_DESCRIPTION": [
+      " NL Exhaust.",
+      " NL Purge."
+    ]
+  },
+  "hubris:Ukulele": {
+    "NAME": "Ukulele",
+    "DESCRIPTION": "Deal !D! damage for each Lightning you currently have Channeled.",
+    "EXTENDED_DESCRIPTION": [
+      " (Deals damage !M! time).",
+      " (Deals damage !M! times)."
+    ]
+  },
+  "hubris:Prefetch": {
+    "NAME": "Prefetch",
+    "DESCRIPTION": "Choose a card in your hand. It is Innate for the next combat. NL Exhaust."
+  },
+  "hubris:Lust": {
+    "NAME": "Lust",
+    "DESCRIPTION": "Autoplay. NL Choose a random enemy. This turn, anytime you attack that enemy, lose !M! HP. NL Soulbound."
   }
 }

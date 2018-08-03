@@ -56,11 +56,11 @@ public class Metronome extends AbstractRelic
     @Override
     public void onEquip()
     {
-        setCounter(10);
+        setCounter(0);
     }
 
     @Override
-    public void atBattleStart()
+    public void atPreBattle()
     {
         if (counter > 0) {
             flash();

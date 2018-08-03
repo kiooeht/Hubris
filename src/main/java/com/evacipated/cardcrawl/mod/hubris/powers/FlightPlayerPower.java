@@ -3,19 +3,24 @@ package com.evacipated.cardcrawl.mod.hubris.powers;
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.FlightPower;
 
 public class FlightPlayerPower extends FlightPower
 {
     public static final String POWER_ID = "hubris:FlightPlayer";
+    private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
+    public static final String NAME = powerStrings.NAME;
+    public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
 
     private int startAmount;
 
     public FlightPlayerPower(AbstractCreature owner, int amount)
     {
         super(owner, amount);
-        name = "Flight";
+        name = NAME;
         ID = POWER_ID;
         this.owner = owner;
         type = PowerType.BUFF;
@@ -26,11 +31,11 @@ public class FlightPlayerPower extends FlightPower
     @Override
     public void updateDescription()
     {
-        description = "Reduce #yAttack damage taken by #b50%. Cancelled for the combat if dealt #yAttack damage #b" + startAmount;
+        description = DESCRIPTIONS[0] + startAmount;
         if (amount == 1) {
-            description += " time in one turn.";
+            description += DESCRIPTIONS[1];
         } else {
-            description += " times in one turn.";
+            description += DESCRIPTIONS[2];
         }
     }
 

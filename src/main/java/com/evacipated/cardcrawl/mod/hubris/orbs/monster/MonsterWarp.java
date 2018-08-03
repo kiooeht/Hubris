@@ -63,7 +63,7 @@ public class MonsterWarp extends AbstractOrb
     public void onEvoke()
     {
         summon.drawX = Settings.WIDTH * 0.5f;
-        AbstractDungeon.actionManager.addToTop(new SpawnWarpMonsterAction(summon, 1));
+        AbstractDungeon.actionManager.addToTop(new SpawnWarpMonsterAction(summon, -99));
     }
 
     @Override

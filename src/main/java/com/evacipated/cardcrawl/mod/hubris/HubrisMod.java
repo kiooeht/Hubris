@@ -4,16 +4,18 @@ import basemod.BaseMod;
 import basemod.helpers.RelicType;
 import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
+import com.evacipated.cardcrawl.mod.hubris.events.shrines.TheFatedDie;
+import com.evacipated.cardcrawl.mod.hubris.events.thebeyond.TheBottler;
+import com.evacipated.cardcrawl.mod.hubris.events.thecity.Experiment;
 import com.evacipated.cardcrawl.mod.hubris.relics.*;
+import com.evacipated.cardcrawl.modthespire.Loader;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.helpers.ImageMaster;
-import com.megacrit.cardcrawl.localization.CardStrings;
-import com.megacrit.cardcrawl.localization.OrbStrings;
-import com.megacrit.cardcrawl.localization.RelicStrings;
+import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.clapper.util.classutil.*;
 
 import java.io.File;
@@ -33,7 +35,28 @@ public class HubrisMod implements
         EditStringsSubscriber,
         PostDeathSubscriber
 {
-    public static Texture TEMP_HP_ICON;
+    public static final Logger logger = LogManager.getLogger(HubrisMod.class.getSimpleName());
+
+    // Crossover checks
+    public static final boolean hasReplayTheSpire;
+    public static final boolean hasConstructMod;
+    public static final boolean hasFruityMod;
+
+    static
+    {
+        hasReplayTheSpire = Loader.isModLoaded("ReplayTheSpireMod");
+        if (hasReplayTheSpire) {
+            logger.info("Detected Replay The Spire");
+        }
+        hasConstructMod = Loader.isModLoaded("constructmod");
+        if (hasConstructMod) {
+            logger.info("Detected ConstructMod");
+        }
+        hasFruityMod = Loader.isModLoaded("fruitymod-sts");
+        if (hasFruityMod) {
+            logger.info("Detected FruityMod");
+        }
+    }
 
     public static void initialize()
     {
@@ -43,7 +66,10 @@ public class HubrisMod implements
     @Override
     public void receivePostInitialize()
     {
-        TEMP_HP_ICON = ImageMaster.loadImage("images/ui/tempHP.png");
+        BaseMod.addEvent(TheFatedDie.ID, TheFatedDie.class, BaseMod.EventPool.ANY);
+        BaseMod.addEvent(Experiment.ID, Experiment.class, BaseMod.EventPool.THE_CITY);
+        // Only appears if player has Bottle relic. See TheBottlerPatch
+        BaseMod.addEvent(TheBottler.ID, TheBottler.class, BaseMod.EventPool.THE_BEYOND);
     }
 
     @Override
@@ -87,16 +113,30 @@ public class HubrisMod implements
         BaseMod.addRelic(new Spice(), RelicType.SHARED);
         BaseMod.addRelic(new TinFlute(), RelicType.SHARED);
         BaseMod.addRelic(new GlazedTorus(), RelicType.SHARED);
+        BaseMod.addRelic(new Backtick(), RelicType.SHARED);
+        BaseMod.addRelic(new Test447(), RelicType.SHARED);
+        BaseMod.addRelic(new BundleOfHerbs(), RelicType.SHARED);
+        BaseMod.addRelic(new SphereOfDissonance(), RelicType.SHARED);
+        BaseMod.addRelic(new Pocketwatch2(), RelicType.SHARED);
+        BaseMod.addRelic(new HerbalPaste(), RelicType.SHARED);
+        BaseMod.addRelic(new MedicalManual(), RelicType.SHARED);
+        BaseMod.addRelic(new HollowSoul(), RelicType.SHARED);
+        BaseMod.addRelic(new CrystalStatue(), RelicType.SHARED);
+
+        BaseMod.addRelic(new RGBLights(), RelicType.BLUE);
+
+        if (hasConstructMod) {
+            BaseMod.addRelicToCustomPool(new ClockworkCow(), constructmod.patches.AbstractCardEnum.CONSTRUCTMOD.toString());
+        }
+        if (hasFruityMod) {
+            BaseMod.addRelicToCustomPool(new DustyCowl(), fruitymod.patches.AbstractCardEnum.SEEKER_PURPLE.toString());
+        }
     }
 
     @Override
     public void receiveEditKeywords()
     {
-        BaseMod.addKeyword(new String[] {"purge"}, "Disappears upon use.");
-        BaseMod.addKeyword(new String[] {"retain"}, "Not discarded at the end of your turn.");
         BaseMod.addKeyword(new String[] {"temporary"}, "Temporary HP disappears at the end of combat.");
-        BaseMod.addKeyword(new String[] {"autoplay"}, "This card automatically plays itself when drawn.");
-        BaseMod.addKeyword(new String[] {"inescapable"}, "Cannot be removed from your deck.");
         BaseMod.addKeyword(new String[] {"greed"}, "Greed is a curse that gets you more gold.");
     }
 
@@ -111,6 +151,10 @@ public class HubrisMod implements
                 Gdx.files.internal("localization/Hubris-IcosahedronStrings.json").readString(String.valueOf(StandardCharsets.UTF_8)));
         BaseMod.loadCustomStrings(OrbStrings.class,
                 Gdx.files.internal("localization/Hubris-OrbStrings.json").readString(String.valueOf(StandardCharsets.UTF_8)));
+        BaseMod.loadCustomStrings(PowerStrings.class,
+                Gdx.files.internal("localization/Hubris-PowerStrings.json").readString(String.valueOf(StandardCharsets.UTF_8)));
+        BaseMod.loadCustomStrings(EventStrings.class,
+                Gdx.files.internal("localization/Hubris-EventStrings.json").readString(String.valueOf(StandardCharsets.UTF_8)));
     }
 
     private static void autoAddCards() throws URISyntaxException, ClassNotFoundException, IllegalAccessException, InstantiationException

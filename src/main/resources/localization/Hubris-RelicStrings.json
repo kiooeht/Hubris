@@ -6,9 +6,7 @@
       "Once per combat, you may roll the Icosahedron.",
       " NL You may no longer roll the Icosahedron.",
       "You are #rCursed.",
-      "Gain [R] at the start of each turn.",
-      "Gain [G] at the start of each turn.",
-      "Gain [B] at the start of each turn."
+      "Gain [E] at the start of each turn."
     ]
   },
   "hubris:Black Hole": {
@@ -22,10 +20,7 @@
     "NAME": "Virtuous Blindfold",
     "FLAVOR": "Emotions are prohibited.",
     "DESCRIPTIONS": [
-      " You can no longer see the entire map.",
-      "Gain [R] at the start of each turn.",
-      "Gain [G] at the start of each turn.",
-      "Gain [B] at the start of each turn."
+      "Gain [E] at the start of each turn. You can no longer see the entire map."
     ]
   },
   "hubris:PeanutButter": {
@@ -70,11 +65,11 @@
   },
   "hubris:Pocketwatch": {
     "NAME": "Pocketwatch",
-    "FLAVOR": "Tick tock...",
+    "FLAVOR": "Maybe time's just a construct of human perception, an illusion created by—",
     "DESCRIPTIONS": [
       " If any battle takes longer than #b",
       " minutes, you #rdie.",
-      "Gain [R] at the start of each turn."
+      "Gain [E] at the start of each turn."
     ]
   },
   "hubris:ScarierMask": {
@@ -95,14 +90,18 @@
     "NAME": "Bottled Heart",
     "FLAVOR": "TODO",
     "DESCRIPTIONS": [
-      "Upon pickup, this relic gains charge equal to half your Max HP and your Max HP is reduced to #b1. NL Start each combat with #yTemporary HP equal to this relic's charge."
+      "Upon pickup, this relic gains charge equal to half your Max HP and your Max HP is reduced to #b1. NL Start each combat with #yTemporary HP equal to this relic's charge. NL Any changes to Max HP affect this instead.",
+      " NL #ySynergy: ",
+      "If you have the ",
+      ", this gains an additional #b",
+      " charges."
     ]
   },
   "hubris:DisguiseKit": {
     "NAME": "Disguise Kit",
     "FLAVOR": "TODO",
     "DESCRIPTIONS": [
-      "Upon pickup, choose another character. From now on, you receive cards from ",
+      "Upon pickup, choose another character. On future Card Reward screens you have 1 additional card to choose from that will be from ",
       "that character.",
       "."
     ]
@@ -171,6 +170,107 @@
     "FLAVOR": "Not actually edible.",
     "DESCRIPTIONS": [
       "Gain #b1 #yStrength at the end of each of your odd numbered turns."
+    ]
+  },
+  "hubris:Backtick": {
+    "NAME": "Backtick",
+    "FLAVOR": " relic add ",
+    "DESCRIPTIONS": [
+      "Upon pickup, choose any non-boss non-event relic to obtain."
+    ]
+  },
+  "test447": {
+    "NAME": "test447",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "TODO"
+    ]
+  },
+  "hubris:BundleOfHerbs": {
+    "NAME": "Bundle of Herbs",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "Upon pickup, add #b2 #yHerbs to your deck. NL Whenever you enter a Rest Site, add #b2 #yHerbs to your deck."
+    ]
+  },
+  "hubris:SphereOfDissonance": {
+    "NAME": "Sphere of Dissonance",
+    "FLAVOR": "You are your own worst enemy.",
+    "DESCRIPTIONS": [
+      "At the start of each combat, apply #b",
+      " #yVulnerable to a random enemy. NL #ySynergy: ",
+      "If you have the ",
+      ", whenever you enter a #y? room, heal #b",
+      " HP."
+    ]
+  },
+  "hubris:Pocketwatch2": {
+    "NAME": "Pocketwatch",
+    "FLAVOR": "Maybe time's just a construct of human perception, an illusion created by—",
+    "DESCRIPTIONS": [
+      "Start each combat with a #yTime #yStop in your deck. NL #yTime #yStop can only be used #b",
+      " times."
+    ]
+  },
+  "hubris:HerbalPaste": {
+    "NAME": "Herbal Paste",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "Start each combat with #b",
+      " #yRegen. NL #yRegen can go negative."
+    ]
+  },
+  "hubris:MedicalManual": {
+    "NAME": "Medical Manual",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "#yExhaust the first #yStatus drawn each turn. NL #ySynergy: ",
+      "If you have the ",
+      ", each #yStatus played heals you #b",
+      " HP."
+    ]
+  },
+  "hubris:ClockworkCow": {
+    "NAME": "Clockwork Cow",
+    "FLAVOR": "\"Moo.\" - Cows",
+    "DESCRIPTIONS": [
+      "Every #b10th card you #yCycle, deal #b",
+      " damage to ALL enemies."
+    ]
+  },
+  "hubris:HollowSoul": {
+    "NAME": "Hollow Soul",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "When you would die in combat, immediately restart the fight with #b",
+      "% Max HP. NL Regain your original Max HP and recharge this relic if you win the fight."
+    ]
+  },
+  "hubris:CrystalStatue": {
+    "NAME": "Crystal Statue",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "Broken.",
+      " Breaks after you take #b",
+      " unblocked #yAttack damage.",
+      "Gain [E] at the start of each turn."
+    ]
+  },
+  "hubris:RGBLights": {
+    "NAME": "RGB Lights",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "Every time you Evoke #b",
+      " Orbs in a single turn, Evoke the third Orb #b",
+      " times."
+    ]
+  },
+  "hubris:DustyCowl": {
+    "NAME": "Dusty Cowl",
+    "FLAVOR": "An old cowl that seems to collect dust and other filth.",
+    "DESCRIPTIONS": [
+      "Whenever an #yEthereal card is #yExhausted, gain #b",
+      " Block."
     ]
   }
 }

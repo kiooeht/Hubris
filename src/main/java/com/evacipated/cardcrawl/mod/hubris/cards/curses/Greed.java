@@ -2,7 +2,7 @@ package com.evacipated.cardcrawl.mod.hubris.cards.curses;
 
 import basemod.abstracts.CustomCard;
 import com.evacipated.cardcrawl.mod.hubris.CardNoUnlock;
-import com.evacipated.cardcrawl.mod.hubris.patches.cards.AbstractCard.InescapableField;
+import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.SoulboundField;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -28,7 +28,7 @@ public class Greed extends CustomCard
     {
         super(ID, NAME, IMG, COST, DESCRIPTION, CardType.CURSE, CardColor.CURSE, CardRarity.SPECIAL, CardTarget.NONE);
 
-        InescapableField.inescapable.set(this, true);
+        SoulboundField.soulbound.set(this, true);
         magicNumber = baseMagicNumber = GOLD_AMOUNT;
     }
 

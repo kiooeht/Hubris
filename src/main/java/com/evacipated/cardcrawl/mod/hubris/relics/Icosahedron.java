@@ -24,7 +24,7 @@ public class Icosahedron extends AbstractRelic
         if (counter < 0) {
             flash();
             AbstractDungeon.actionManager.addToBottom(new RelicAboveCreatureAction(AbstractDungeon.player, this));
-            AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(new com.evacipated.cardcrawl.mod.hubris.cards.Icosahedron(), 1, false));
+            AbstractDungeon.actionManager.addToBottom(new MakeTempCardInHandAction(new com.evacipated.cardcrawl.mod.hubris.cards.colorless.Icosahedron(), 1, false));
         }
     }
 
@@ -35,19 +35,7 @@ public class Icosahedron extends AbstractRelic
             case 1:
                 return DESCRIPTIONS[2] + DESCRIPTIONS[1];
             case 20: {
-                String str = DESCRIPTIONS[1];
-                switch (AbstractDungeon.player.chosenClass) {
-                    case THE_SILENT:
-                        str = DESCRIPTIONS[4] + str;
-                        break;
-                    case DEFECT:
-                        str = DESCRIPTIONS[5] + str;
-                        break;
-                    default:
-                        str = DESCRIPTIONS[3] + str;
-                        break;
-                }
-                return str;
+                return DESCRIPTIONS[3] + DESCRIPTIONS[1];
             }
             default:
                 return DESCRIPTIONS[0];

@@ -22,7 +22,7 @@ public class CultistEasterEgg
     )
     public static class IsCultistField
     {
-        public static SpireField<Boolean> isCultist = new SpireField<>(false);
+        public static SpireField<Boolean> isCultist = new SpireField<>(() -> false);
     }
 
     @SpirePatch(
