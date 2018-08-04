@@ -20,7 +20,7 @@ public class SphereOfDissonance extends AbstractRelic
 
     public SphereOfDissonance()
     {
-        super(ID, "test6.png", RelicTier.UNCOMMON, LandingSound.MAGICAL);
+        super(ID, "sphereOfDissonance.png", RelicTier.UNCOMMON, LandingSound.MAGICAL);
 
         tips.clear();
         tips.add(new PowerTip(name, description));
