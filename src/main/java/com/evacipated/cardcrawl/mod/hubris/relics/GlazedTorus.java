@@ -12,7 +12,7 @@ public class GlazedTorus extends AbstractRelic
 
     public GlazedTorus()
     {
-        super(ID, "test3.png", RelicTier.RARE, LandingSound.SOLID);
+        super(ID, "glazedTorus.png", RelicTier.RARE, LandingSound.SOLID);
     }
 
     @Override
