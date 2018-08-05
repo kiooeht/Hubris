@@ -28,7 +28,7 @@ public class DisguiseKit extends AbstractRelic
 
     public DisguiseKit()
     {
-        super(ID, "test3.png", RelicTier.UNCOMMON, LandingSound.FLAT);
+        super(ID, "disguiseKit.png", RelicTier.UNCOMMON, LandingSound.FLAT);
     }
 
     @Override
