@@ -162,7 +162,7 @@
     "NAME": "Tin Flute",
     "FLAVOR": "TODO",
     "DESCRIPTIONS": [
-      "At the end of this run, choose one card you have. You start your next run with that card."
+      "At the end of this run, choose one card in your deck. You start your next run with that card in your deck."
     ]
   },
   "hubris:GlazedTorus": {

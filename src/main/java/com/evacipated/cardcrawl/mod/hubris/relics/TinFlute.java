@@ -23,7 +23,7 @@ public class TinFlute extends AbstractRelic
 
     public TinFlute()
     {
-        super(ID, "test4.png", RelicTier.UNCOMMON, LandingSound.CLINK);
+        super(ID, "tinFlute.png", RelicTier.UNCOMMON, LandingSound.CLINK);
     }
 
     @Override
