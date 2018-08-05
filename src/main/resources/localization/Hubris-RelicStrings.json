@@ -9,7 +9,7 @@
       "Gain [E] at the start of each turn."
     ]
   },
-  "hubris:Black Hole": {
+  "hubris:BlackHole": {
     "NAME": "Black Hole",
     "FLAVOR": "TODO",
     "DESCRIPTIONS": [
@@ -31,7 +31,7 @@
       " #yTemporary HP."
     ]
   },
-  "hubris:Curious Feather": {
+  "hubris:CuriousFeather": {
     "NAME": "Curious Feather",
     "FLAVOR": "TODO",
     "DESCRIPTIONS": [

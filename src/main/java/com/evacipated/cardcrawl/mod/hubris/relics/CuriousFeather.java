@@ -8,7 +8,7 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 
 public class CuriousFeather extends AbstractRelic
 {
-    public static final String ID = "hubris:Curious Feather";
+    public static final String ID = "hubris:CuriousFeather";
 
     public CuriousFeather()
     {

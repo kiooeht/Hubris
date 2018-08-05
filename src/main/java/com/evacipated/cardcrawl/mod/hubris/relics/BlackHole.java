@@ -7,7 +7,7 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 
 public class BlackHole extends AbstractRelic
 {
-    public static final String ID = "hubris:Black Hole";
+    public static final String ID = "hubris:BlackHole";
 
     public BlackHole()
     {
