@@ -18,7 +18,7 @@ public class MedicalManual extends AbstractRelic
 
     public MedicalManual()
     {
-        super(ID, "test6.png", RelicTier.RARE, LandingSound.CLINK);
+        super(ID, "medicalManual.png", RelicTier.RARE, LandingSound.CLINK);
 
         tips.clear();
         tips.add(new PowerTip(name, description));

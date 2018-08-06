@@ -222,7 +222,7 @@
   },
   "hubris:MedicalManual": {
     "NAME": "Medical Manual",
-    "FLAVOR": "TODO",
+    "FLAVOR": "\"It's Spireblight.\"",
     "DESCRIPTIONS": [
       "#yExhaust the first #yStatus drawn each turn. NL #ySynergy: ",
       "If you have the ",
