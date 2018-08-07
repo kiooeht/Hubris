@@ -7,31 +7,25 @@ import com.esotericsoftware.spine.AnimationState;
 import com.evacipated.cardcrawl.mod.hubris.actions.AnimationTimeScaleAction;
 import com.evacipated.cardcrawl.mod.hubris.actions.StealGoldAction;
 import com.evacipated.cardcrawl.mod.hubris.actions.ThrowGoldAction;
-import com.evacipated.cardcrawl.mod.hubris.powers.ToriiPower;
-import com.megacrit.cardcrawl.actions.ClearCardQueueAction;
-import com.megacrit.cardcrawl.actions.animations.*;
+import com.evacipated.cardcrawl.mod.hubris.actions.utility.ForceWaitAction;
+import com.megacrit.cardcrawl.actions.animations.TalkAction;
+import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.*;
-import com.megacrit.cardcrawl.actions.unique.CanLoseAction;
-import com.megacrit.cardcrawl.actions.unique.RemoveDebuffsAction;
 import com.megacrit.cardcrawl.actions.utility.ShakeScreenAction;
-import com.megacrit.cardcrawl.actions.utility.TextAboveCreatureAction;
 import com.megacrit.cardcrawl.actions.utility.WaitAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.monsters.EnemyMoveInfo;
-import com.megacrit.cardcrawl.potions.*;
-import com.megacrit.cardcrawl.powers.*;
-import com.megacrit.cardcrawl.relics.BronzeScales;
-import com.megacrit.cardcrawl.relics.ThreadAndNeedle;
-import com.megacrit.cardcrawl.relics.Torii;
+import com.megacrit.cardcrawl.potions.StrengthPotion;
+import com.megacrit.cardcrawl.powers.MetallicizePower;
+import com.megacrit.cardcrawl.powers.StrengthPower;
 import com.megacrit.cardcrawl.vfx.combat.IntenseZoomEffect;
 
-import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
 
 // Ideas
 // First turn
@@ -75,10 +69,15 @@ public class MerchantMonster extends AbstractMonster
     public static final int HP = 100;
     private static final float TIME_SCALE = 4.0f;
 
+    private static final int METALLICIZE_AMT = 50;
+    private static final Map<Integer, Integer> throwAmounts = new HashMap<>();
+
     // Moves
 
-    private boolean firstTurn = true;
-    private boolean halfDead = false;
+    static
+    {
+        throwAmounts.put(1, 20);
+    }
 
     public MerchantMonster()
     {
@@ -97,6 +96,8 @@ public class MerchantMonster extends AbstractMonster
         dialogY = 10.0F * Settings.scale;
 
         gold = 300;
+
+        damage.add(new DamageInfo(this, 1));
     }
 
     @Override
@@ -111,46 +112,12 @@ public class MerchantMonster extends AbstractMonster
     @Override
     public void usePreBattleAction()
     {
-        AbstractDungeon.getCurrRoom().cannotLose = true;
         //UnlockTracker.markBossAsSeen("MERCHANT");
+        AbstractDungeon.actionManager.addToTop(new GainBlockAction(this, this, METALLICIZE_AMT));
+        AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(this, this, new MetallicizePower(this, METALLICIZE_AMT), METALLICIZE_AMT));
         AbstractDungeon.actionManager.addToTop(new AnimationTimeScaleAction(this, TIME_SCALE));
         AbstractDungeon.actionManager.addToTop(new StealGoldAction(this, this, gold, true));
         AbstractDungeon.actionManager.addToTop(new TalkAction(this, DIALOG[0], 0.5F, 3.0F));
-    }
-
-    private void gainRelics()
-    {
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new SharpHidePower(this, 3), 3));
-        AbstractDungeon.actionManager.addToBottom(new RelicAboveCreatureAction(this, new BronzeScales()));
-        AbstractDungeon.actionManager.addToBottom(new WaitAction(0.5F));
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new PlatedArmorPower(this, 5), 5));
-        AbstractDungeon.actionManager.addToBottom(new RelicAboveCreatureAction(this, new ThreadAndNeedle()));
-        AbstractDungeon.actionManager.addToBottom(new WaitAction(0.5F));
-        AbstractDungeon.actionManager.addToBottom(new RelicAboveCreatureAction(this, new Torii()));
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new ToriiPower(this)));
-    }
-
-    @Override
-    public void changeState(String key)
-    {
-        if (key.equals("BUYOUT")) {
-            CardCrawlGame.music.unsilenceBGM();
-            AbstractDungeon.scene.fadeOutAmbiance();
-            AbstractDungeon.getCurrRoom().playBgmInstantly("BOSS_BEYOND");
-
-            maxHealth = HP;
-
-            AbstractDungeon.actionManager.addToTop(new GainBlockAction(this, this, AbstractDungeon.player.gold));
-            AbstractDungeon.actionManager.addToTop(new HealAction(this, this, HP));
-            AbstractDungeon.actionManager.addToTop(new RemoveDebuffsAction(this));
-            AbstractDungeon.actionManager.addToTop(new AnimationTimeScaleAction(this, TIME_SCALE));
-            AbstractDungeon.actionManager.addToTop(new StealGoldAction(AbstractDungeon.player, this, AbstractDungeon.player.gold, true));
-            AbstractDungeon.actionManager.addToTop(new ShoutAction(this, DIALOG[1], 0.5F, 2.0F));
-
-            AbstractDungeon.actionManager.addToBottom(new CanLoseAction());
-            gainRelics();
-            AbstractDungeon.actionManager.addToBottom(new TalkAction(this, DIALOG[2], 0.5F, 3.5F));
-        }
     }
 
     @Override
@@ -160,8 +127,18 @@ public class MerchantMonster extends AbstractMonster
             AbstractDungeon.actionManager.addToTop(new VFXAction(this, new IntenseZoomEffect(hb.cX, hb.cY, true), 1.3F, true));
             AbstractDungeon.actionManager.addToTop(new ShakeScreenAction(1.3F, ScreenShake.ShakeDur.XLONG, ScreenShake.ShakeIntensity.HIGH));
             AbstractDungeon.actionManager.addToBottom(new ChangeStateAction(this, "BUYOUT"));
-        } else if (nextMove == 1) {
+        } else if (nextMove == 2) {
+            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new StrengthPower(this, 1), 1));
         } else {
+            Integer throwAmount = throwAmounts.get((int)nextMove);
+
+            if (throwAmount != null && throwAmount > 0) {
+                AbstractDungeon.actionManager.addToBottom(new ThrowGoldAction(AbstractDungeon.player, this, throwAmount, false));
+                AbstractDungeon.actionManager.addToBottom(new ForceWaitAction(1.6f));
+                for (int i = 0; i < throwAmount; ++i) {
+                    AbstractDungeon.actionManager.addToBottom(new DamageAction(AbstractDungeon.player, damage.get(0), true));
+                }
+            }
         }
 
         AbstractDungeon.actionManager.addToBottom(new RollMoveAction(this));
@@ -170,12 +147,10 @@ public class MerchantMonster extends AbstractMonster
     @Override
     protected void getMove(int num)
     {
-        if (!halfDead) {
-            setMove((byte)-1, Intent.NONE);
-            return;
-        }
-
         setMove((byte)-1, Intent.UNKNOWN);
+        setMove((byte)1, Intent.ATTACK, 1, throwAmounts.get(1), true);
+
+        //setMove(StrengthPotion.NAME, (byte)2, Intent.BUFF);
 
         //getMove(AbstractDungeon.aiRng.random(20));
     }
@@ -183,30 +158,8 @@ public class MerchantMonster extends AbstractMonster
     @Override
     public void damage(DamageInfo info)
     {
-        int oldHealth = currentHealth;
         super.damage(info);
 
-        if (currentHealth <= 0 && !halfDead) {
-            halfDead = true;
-            state.setTimeScale(0.0F);
-            AbstractDungeon.actionManager.addToTop(new ClearCardQueueAction());
-            setMove((byte) 0, Intent.UNKNOWN);
-            createIntent();
-        } else if (!halfDead && currentHealth < oldHealth) {
-            if (oldHealth == maxHealth || MathUtils.random(2) == 0) {
-                AbstractDungeon.actionManager.addToBottom(new TalkAction(this, DIALOG[MathUtils.random(3, 5)], 0.5F, 2.0F));
-            }
-        }
-        if (halfDead) {
-            state.setTimeScale(TIME_SCALE * ((float)currentHealth / (float)maxHealth));
-        }
-    }
-
-    @Override
-    public void die()
-    {
-        if (!AbstractDungeon.getCurrRoom().cannotLose) {
-            super.die();
-        }
+        state.setTimeScale(TIME_SCALE * ((float)currentHealth / (float)maxHealth));
     }
 }

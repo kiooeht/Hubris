@@ -25,9 +25,11 @@ public class ThrowGoldAction extends AbstractGameAction
     {
         if (effect == null) {
             CardCrawlGame.sound.play("GOLD_JINGLE");
+            float stagger = 0;
             for (int i=0; i<goldAmount; ++i) {
-                effect = new ThrowPennyEffect(source, source.hb.cX, source.hb.cY, target.hb.cX, target.hb.cY);
+                effect = new ThrowPennyEffect(source, source.hb.cX, source.hb.cY, target.hb.cX, target.hb.cY, stagger);
                 AbstractDungeon.effectList.add(effect);
+                stagger += 0.15f;
             }
         }
 

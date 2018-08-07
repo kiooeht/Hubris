@@ -37,7 +37,7 @@ public class ThrowPennyEffect extends AbstractGameEffect
     private float EPSILON = 0.0001F;
     private boolean hitTarget = false;
 
-    public ThrowPennyEffect(AbstractCreature owner, float x, float y, float targetX, float targetY)
+    public ThrowPennyEffect(AbstractCreature owner, float x, float y, float targetX, float targetY, float staggerTimer)
     {
         if (MathUtils.randomBoolean()) {
             img = ImageMaster.COPPER_COIN_1;
@@ -49,7 +49,7 @@ public class ThrowPennyEffect extends AbstractGameEffect
         this.targetX = targetX + MathUtils.random(-TARGET_JITTER, TARGET_JITTER);
         this.targetY = targetY + MathUtils.random(-TARGET_JITTER, TARGET_JITTER);
 
-        this.staggerTimer = MathUtils.random(0.0F, 0.5F);
+        this.staggerTimer = staggerTimer;
         this.vX = MathUtils.random(START_VX, START_VX_JITTER);
         this.rotationSpeed = MathUtils.random(500.0F, 2000.0F);
         if (MathUtils.randomBoolean()) {
@@ -58,6 +58,11 @@ public class ThrowPennyEffect extends AbstractGameEffect
         this.vY = MathUtils.random(START_VY, START_VY_JITTER);
         this.scale = Settings.scale;
         this.color = new Color(1.0F,1.0F,1.0F,0.0F);
+    }
+
+    public ThrowPennyEffect(AbstractCreature owner, float x, float y, float targetX, float targetY)
+    {
+        this(owner, x, y, targetX, targetY, MathUtils.random(0.0F, 0.5F));
     }
 
     @Override
