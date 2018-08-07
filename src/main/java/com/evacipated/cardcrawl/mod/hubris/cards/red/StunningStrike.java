@@ -1,6 +1,7 @@
 package com.evacipated.cardcrawl.mod.hubris.cards.red;
 
 import basemod.abstracts.CustomCard;
+import basemod.helpers.CardTags;
 import com.evacipated.cardcrawl.mod.stslib.actions.common.StunMonsterAction;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
@@ -28,6 +29,7 @@ public class StunningStrike extends CustomCard
     {
         super(ID, NAME, IMG, COST, DESCRIPTION, CardType.ATTACK, CardColor.RED, CardRarity.RARE, CardTarget.ENEMY);
 
+        CardTags.addTag(this, CardTags.STRIKE);
         exhaust = true;
         baseDamage = DAMAGE;
         baseMagicNumber = STUN_LENGTH;
