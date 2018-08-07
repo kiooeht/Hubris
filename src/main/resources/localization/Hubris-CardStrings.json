@@ -113,5 +113,9 @@
   "hubris:Lust": {
     "NAME": "Lust",
     "DESCRIPTION": "Autoplay. NL Choose a random enemy. This turn, anytime you attack that enemy, lose !M! HP. NL Soulbound."
+  },
+  "hubris:Gluttony": {
+    "NAME": "Gluttony",
+    "DESCRIPTION": "Unplayable. NL While in hand, all cards Exhaust. NL Soulbound."
   }
 }
