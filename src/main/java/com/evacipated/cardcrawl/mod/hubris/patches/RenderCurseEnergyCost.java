@@ -1,10 +1,7 @@
 package com.evacipated.cardcrawl.mod.hubris.patches;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.evacipated.cardcrawl.mod.hubris.cards.curses.Hubris;
-import com.evacipated.cardcrawl.mod.hubris.cards.curses.Lust;
-import com.evacipated.cardcrawl.mod.hubris.cards.curses.Sloth;
-import com.evacipated.cardcrawl.mod.hubris.cards.curses.Wrath;
+import com.evacipated.cardcrawl.mod.hubris.cards.curses.*;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.curses.Pride;
@@ -22,7 +19,8 @@ public class RenderCurseEnergyCost
             Hubris.ID,
             Wrath.ID,
             Sloth.ID,
-            Lust.ID
+            Lust.ID,
+            Envy.ID
     );
     private static String save_ID;
 

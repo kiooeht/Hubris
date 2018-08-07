@@ -117,5 +117,9 @@
   "hubris:Gluttony": {
     "NAME": "Gluttony",
     "DESCRIPTION": "Unplayable. NL While in hand, all cards Exhaust. NL Soulbound."
+  },
+  "hubris:Envy": {
+    "NAME": "Envy",
+    "DESCRIPTION": "Autoplay. NL A random card in your hand becomes Unplayable for the turn. Soulbound."
   }
 }
