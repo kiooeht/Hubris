@@ -81,5 +81,11 @@
       "When receiving #yAttack damage this turn, you #rlose #b",
       " HP."
     ]
+  },
+  "hubris:ArmorPiercing": {
+    "NAME": "Armor Piercing Rounds",
+    "DESCRIPTIONS": [
+      "#b50% of its attack damage pass through your #yBlock."
+    ]
   }
 }
