@@ -16,7 +16,7 @@ public class BottledRain extends AbstractRelic
 
     public BottledRain()
     {
-        super(ID, "test2.png", RelicTier.UNCOMMON, LandingSound.CLINK);
+        super(ID, "bottledRain.png", RelicTier.UNCOMMON, LandingSound.CLINK);
     }
 
     @Override
