@@ -83,9 +83,9 @@
     ]
   },
   "hubris:ArmorPiercing": {
-    "NAME": "Armor Piercing Rounds",
+    "NAME": "Piercing Rounds",
     "DESCRIPTIONS": [
-      "#b50% of its attack damage pass through your #yBlock."
+      "#b50% of attack damage pass through #yBlock."
     ]
   }
 }
