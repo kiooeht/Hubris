@@ -9,6 +9,7 @@ import com.evacipated.cardcrawl.mod.hubris.events.thebeyond.TheBottler;
 import com.evacipated.cardcrawl.mod.hubris.events.thecity.Experiment;
 import com.evacipated.cardcrawl.mod.hubris.relics.*;
 import com.evacipated.cardcrawl.modthespire.Loader;
+import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -19,6 +20,7 @@ import org.apache.logging.log4j.Logger;
 import org.clapper.util.classutil.*;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Modifier;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -61,6 +63,42 @@ public class HubrisMod implements
     public static void initialize()
     {
         BaseMod.subscribe(new HubrisMod());
+    }
+
+    public static void loadData()
+    {
+        logger.info("Loading Save Data");
+        try {
+            SpireConfig config = new SpireConfig("Hubris", "SaveData");
+
+            BottledRain.load(config);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void saveData()
+    {
+        logger.info("Saving Data");
+        try {
+            SpireConfig config = new SpireConfig("Hubris", "SaveData");
+            BottledRain.save(config);
+            config.save();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void clearData()
+    {
+        logger.info("Clearing Saved Data");
+        try {
+            SpireConfig config = new SpireConfig("Hubris", "SaveData");
+            config.clear();
+            config.save();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

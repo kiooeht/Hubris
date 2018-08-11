@@ -1,6 +1,7 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
 import com.evacipated.cardcrawl.mod.hubris.patches.cards.AbstractCard.BottleRainField;
+import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
@@ -14,9 +15,20 @@ public class BottledRain extends AbstractRelic
     private boolean cardSelected = true;
     private AbstractCard card = null;
 
+    private static final String CONFIG_KEY = "bottledRain";
+    private static int cardIndex = -1;
+
     public BottledRain()
     {
         super(ID, "bottledRain.png", RelicTier.UNCOMMON, LandingSound.CLINK);
+
+        if (card == null && cardIndex >= 0 && cardIndex < AbstractDungeon.player.masterDeck.group.size()) {
+            card = AbstractDungeon.player.masterDeck.group.get(cardIndex);
+            if (card != null) {
+                BottleRainField.inBottleRain.set(card, true);
+                setDescriptionAfterLoading();
+            }
+        }
     }
 
     @Override
@@ -28,6 +40,25 @@ public class BottledRain extends AbstractRelic
     public AbstractCard getCard()
     {
         return card.makeCopy();
+    }
+
+    public static void save(SpireConfig config)
+    {
+        if (AbstractDungeon.player != null && AbstractDungeon.player.hasRelic(BottledRain.ID)) {
+            BottledRain relic = (BottledRain) AbstractDungeon.player.getRelic(ID);
+            config.setInt(CONFIG_KEY, AbstractDungeon.player.masterDeck.group.indexOf(relic.card));
+        } else {
+            config.remove(CONFIG_KEY);
+        }
+    }
+
+    public static void load(SpireConfig config)
+    {
+        if (config.has(CONFIG_KEY)) {
+            cardIndex = config.getInt(CONFIG_KEY);
+        } else {
+            cardIndex = -1;
+        }
     }
 
     @Override
