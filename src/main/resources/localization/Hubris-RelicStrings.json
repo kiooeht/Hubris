@@ -267,7 +267,7 @@
   },
   "hubris:DustyCowl": {
     "NAME": "Dusty Cowl",
-    "FLAVOR": "An old cowl that seems to collect dust and other filth.",
+    "FLAVOR": "An old cowl that seems to collect dust and other ",
     "DESCRIPTIONS": [
       "Whenever an #yEthereal card is #yExhausted, gain #b",
       " Block."
