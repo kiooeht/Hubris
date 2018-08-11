@@ -36,7 +36,7 @@ public class MusketHawk extends AbstractMonster
 
     public MusketHawk()
     {
-        super(NAME, ID, HP, -8.0f, 110.0f, 330, 500, "images/monsters/theCity/musketHawk.png", -100.0f, -130.0f);
+        super(NAME, ID, HP, -8.0f, 80.0f, 330, 530, "images/monsters/theCity/musketHawk.png", -100.0f, -100.0f);
         /*
         loadAnimation("images/monsters/theBottom/cultist/skeleton.atlas", "images/monsters/theBottom/cultist/skeleton.json", 0.75F);
 
