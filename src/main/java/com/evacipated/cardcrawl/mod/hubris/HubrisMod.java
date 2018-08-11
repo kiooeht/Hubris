@@ -72,6 +72,7 @@ public class HubrisMod implements
             SpireConfig config = new SpireConfig("Hubris", "SaveData");
 
             BottledRain.load(config);
+            DisguiseKit.load(config);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -83,6 +84,7 @@ public class HubrisMod implements
         try {
             SpireConfig config = new SpireConfig("Hubris", "SaveData");
             BottledRain.save(config);
+            DisguiseKit.save(config);
             config.save();
         } catch (IOException e) {
             e.printStackTrace();

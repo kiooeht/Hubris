@@ -101,7 +101,7 @@
     "NAME": "Cunning Disguise",
     "FLAVOR": "TODO",
     "DESCRIPTIONS": [
-      "Upon pickup, choose another character. On future Card Reward screens you have 1 additional card to choose from that will be from ",
+      "Upon pickup, choose another character. On future Card Reward screens you have #y1 additional card to choose from that will be from ",
       "that character.",
       "."
     ]

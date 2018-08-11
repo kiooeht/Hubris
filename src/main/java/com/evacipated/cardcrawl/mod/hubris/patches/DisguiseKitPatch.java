@@ -38,7 +38,9 @@ public class DisguiseKitPatch
                 AbstractCard.CardRarity rarity = AbstractDungeon.rollRarity();
                 AbstractCard card = relic.getRewardCard(rarity);
 
-                __result.add(card.makeCopy());
+                if (card != null) {
+                    __result.add(card.makeCopy());
+                }
             }
 
             return __result;

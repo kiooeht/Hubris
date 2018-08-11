@@ -2,6 +2,7 @@ package com.evacipated.cardcrawl.mod.hubris.relics;
 
 import basemod.BaseMod;
 import com.evacipated.cardcrawl.mod.hubris.cards.DisguiseKitOption;
+import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -26,9 +27,17 @@ public class DisguiseKit extends AbstractRelic
     private boolean pickCard = false;
     private Map<AbstractCard.CardRarity, CardGroup> chosenPools = null;
 
+    private static final String CONFIG_KEY = "disguiseKit";
+    private static AbstractPlayer.PlayerClass savedChosenClass = null;
+
     public DisguiseKit()
     {
         super(ID, "disguiseKit.png", RelicTier.UNCOMMON, LandingSound.FLAT);
+
+        if (savedChosenClass != null) {
+            chooseClass(savedChosenClass);
+        }
+
     }
 
     @Override
@@ -38,6 +47,33 @@ public class DisguiseKit extends AbstractRelic
             return DESCRIPTIONS[0] + DESCRIPTIONS[1];
         } else {
             return DESCRIPTIONS[0] + chosenClassName() + DESCRIPTIONS[2];
+        }
+    }
+
+    public static void save(SpireConfig config)
+    {
+        if (AbstractDungeon.player != null && AbstractDungeon.player.hasRelic(DisguiseKit.ID)) {
+            DisguiseKit relic = (DisguiseKit) AbstractDungeon.player.getRelic(ID);
+            if (relic.chosenClass != null) {
+                config.setString(CONFIG_KEY, relic.chosenClass.name());
+            } else {
+                config.remove(CONFIG_KEY);
+            }
+        } else {
+            config.remove(CONFIG_KEY);
+        }
+    }
+
+    public static void load(SpireConfig config)
+    {
+        if (config.has(CONFIG_KEY)) {
+            try {
+                savedChosenClass = AbstractPlayer.PlayerClass.valueOf(config.getString(CONFIG_KEY));
+            } catch (IllegalArgumentException ignored) {
+                savedChosenClass = null;
+            }
+        } else {
+            savedChosenClass = null;
         }
     }
 
@@ -71,63 +107,71 @@ public class DisguiseKit extends AbstractRelic
             DisguiseKitOption selected = (DisguiseKitOption) AbstractDungeon.gridSelectScreen.selectedCards.get(0);
             AbstractDungeon.gridSelectScreen.selectedCards.clear();
 
-            chosenClass = selected.chosenClass;
-            description = getUpdatedDescription();
-            tips.clear();
-            tips.add(new PowerTip(name, description));
-            initializeTips();
+            chooseClass(selected.chosenClass);
+        }
+    }
 
-            if (chosenClass == AbstractPlayer.PlayerClass.DEFECT && AbstractDungeon.player.masterMaxOrbs == 0) {
-                AbstractDungeon.player.masterMaxOrbs = 1;
-            }
+    private void chooseClass(AbstractPlayer.PlayerClass chosenClass)
+    {
+        this.chosenClass = chosenClass;
+        description = getUpdatedDescription();
+        tips.clear();
+        tips.add(new PowerTip(name, description));
+        initializeTips();
 
-            ArrayList<AbstractCard> tmpPool = new ArrayList<>();
-            try {
-                Method addRedCards = AbstractDungeon.class.getDeclaredMethod("addRedCards", ArrayList.class);
-                addRedCards.setAccessible(true);
-                Method addGreenCards = AbstractDungeon.class.getDeclaredMethod("addGreenCards", ArrayList.class);
-                addGreenCards.setAccessible(true);
-                Method addBlueCards = AbstractDungeon.class.getDeclaredMethod("addBlueCards", ArrayList.class);
-                addBlueCards.setAccessible(true);
+        if (chosenClass == AbstractPlayer.PlayerClass.DEFECT && AbstractDungeon.player.masterMaxOrbs == 0) {
+            AbstractDungeon.player.masterMaxOrbs = 1;
+        }
 
-                switch (chosenClass) {
-                    case IRONCLAD:
-                        addRedCards.invoke(CardCrawlGame.dungeon, tmpPool);
-                        break;
-                    case THE_SILENT:
-                        addGreenCards.invoke(CardCrawlGame.dungeon, tmpPool);
-                        break;
-                    case DEFECT:
-                        addBlueCards.invoke(CardCrawlGame.dungeon, tmpPool);
-                        break;
-                    default:
-                        String color = BaseMod.getColor(chosenClass.name());
-                        AbstractCard card;
-                        for (Map.Entry<String, AbstractCard> c : CardLibrary.cards.entrySet()) {
-                            card = c.getValue();
-                            if (card.color.name().equals(color) && card.rarity != AbstractCard.CardRarity.BASIC
-                            && (!UnlockTracker.isCardLocked(c.getKey()) || Settings.isDailyRun)) {
-                                tmpPool.add(card);
-                            }
+        ArrayList<AbstractCard> tmpPool = new ArrayList<>();
+        try {
+            Method addRedCards = AbstractDungeon.class.getDeclaredMethod("addRedCards", ArrayList.class);
+            addRedCards.setAccessible(true);
+            Method addGreenCards = AbstractDungeon.class.getDeclaredMethod("addGreenCards", ArrayList.class);
+            addGreenCards.setAccessible(true);
+            Method addBlueCards = AbstractDungeon.class.getDeclaredMethod("addBlueCards", ArrayList.class);
+            addBlueCards.setAccessible(true);
+
+            switch (chosenClass) {
+                case IRONCLAD:
+                    addRedCards.invoke(CardCrawlGame.dungeon, tmpPool);
+                    break;
+                case THE_SILENT:
+                    addGreenCards.invoke(CardCrawlGame.dungeon, tmpPool);
+                    break;
+                case DEFECT:
+                    addBlueCards.invoke(CardCrawlGame.dungeon, tmpPool);
+                    break;
+                default:
+                    String color = BaseMod.getColor(chosenClass.name());
+                    AbstractCard card;
+                    for (Map.Entry<String, AbstractCard> c : CardLibrary.cards.entrySet()) {
+                        card = c.getValue();
+                        if (card.color.name().equals(color) && card.rarity != AbstractCard.CardRarity.BASIC
+                                && (!UnlockTracker.isCardLocked(c.getKey()) || Settings.isDailyRun)) {
+                            tmpPool.add(card);
                         }
-                        break;
-                }
-            } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-                e.printStackTrace();
+                    }
+                    break;
             }
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
 
-            chosenPools = new HashMap<>();
-            for (AbstractCard c : tmpPool) {
-                if (!chosenPools.containsKey(c.rarity)) {
-                    chosenPools.put(c.rarity, new CardGroup(CardGroup.CardGroupType.CARD_POOL));
-                }
-                chosenPools.get(c.rarity).addToTop(c);
+        chosenPools = new HashMap<>();
+        for (AbstractCard c : tmpPool) {
+            if (!chosenPools.containsKey(c.rarity)) {
+                chosenPools.put(c.rarity, new CardGroup(CardGroup.CardGroupType.CARD_POOL));
             }
+            chosenPools.get(c.rarity).addToTop(c);
         }
     }
 
     public AbstractCard getRewardCard(AbstractCard.CardRarity rarity)
     {
+        if (chosenPools == null) {
+            return null;
+        }
         if (chosenPools.containsKey(rarity)) {
             return chosenPools.get(rarity).getRandomCard(true);
         } else {
