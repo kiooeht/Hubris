@@ -7,12 +7,19 @@ import com.badlogic.gdx.Gdx;
 import com.evacipated.cardcrawl.mod.hubris.events.shrines.TheFatedDie;
 import com.evacipated.cardcrawl.mod.hubris.events.thebeyond.TheBottler;
 import com.evacipated.cardcrawl.mod.hubris.events.thecity.Experiment;
+import com.evacipated.cardcrawl.mod.hubris.monsters.GrandSnecko;
+import com.evacipated.cardcrawl.mod.hubris.monsters.MusketHawk;
 import com.evacipated.cardcrawl.mod.hubris.relics.*;
 import com.evacipated.cardcrawl.modthespire.Loader;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.dungeons.Exordium;
+import com.megacrit.cardcrawl.dungeons.TheBeyond;
+import com.megacrit.cardcrawl.dungeons.TheCity;
 import com.megacrit.cardcrawl.localization.*;
+import com.megacrit.cardcrawl.monsters.MonsterGroup;
+import com.megacrit.cardcrawl.monsters.MonsterInfo;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -66,10 +73,16 @@ public class HubrisMod implements
     @Override
     public void receivePostInitialize()
     {
-        BaseMod.addEvent(TheFatedDie.ID, TheFatedDie.class, BaseMod.EventPool.ANY);
-        BaseMod.addEvent(Experiment.ID, Experiment.class, BaseMod.EventPool.THE_CITY);
+        BaseMod.addEvent(TheFatedDie.ID, TheFatedDie.class);
+        BaseMod.addEvent(Experiment.ID, Experiment.class, TheCity.ID);
         // Only appears if player has Bottle relic. See TheBottlerPatch
-        BaseMod.addEvent(TheBottler.ID, TheBottler.class, BaseMod.EventPool.THE_BEYOND);
+        BaseMod.addEvent(TheBottler.ID, TheBottler.class, TheBeyond.ID);
+
+        BaseMod.addMonster(GrandSnecko.ID, GrandSnecko::new);
+        BaseMod.addMonster(MusketHawk.ID, MusketHawk::new);
+
+        BaseMod.addBoss(TheBeyond.ID, GrandSnecko.ID, null, null);
+        BaseMod.addBoss(TheCity.ID, MusketHawk.ID, null, null);
     }
 
     @Override
