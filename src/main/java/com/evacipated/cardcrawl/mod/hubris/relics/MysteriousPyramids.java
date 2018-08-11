@@ -1,12 +1,11 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
 import com.evacipated.cardcrawl.mod.hubris.patches.cards.AbstractCard.PyramidsField;
-import com.megacrit.cardcrawl.actions.unique.DeckToHandAction;
+import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.PowerTip;
-import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
@@ -21,15 +20,67 @@ public class MysteriousPyramids extends AbstractRelic
     private boolean cardSelected = true;
     private List<AbstractCard> cards = new ArrayList<>(COUNT);
 
+    private static final String CONFIG_KEY = "pyramid_";
+    private static List<Integer> cardIndexes = new ArrayList<>(COUNT);
+
     public MysteriousPyramids()
     {
         super(ID, "pyramids.png", RelicTier.UNCOMMON, LandingSound.CLINK);
+
+        if (cards.isEmpty() && !cardIndexes.isEmpty()) {
+            for (int i : cardIndexes) {
+                AbstractCard c = AbstractDungeon.player.masterDeck.group.get(i);
+                if (c == null) {
+                    cards.clear();
+                    return;
+                }
+                PyramidsField.inPyramids.set(c, true);
+                cards.add(c);
+            }
+            setDescriptionAfterLoading();
+        }
     }
 
     @Override
     public String getUpdatedDescription()
     {
         return DESCRIPTIONS[0];
+    }
+
+    private void setDescriptionAfterLoading()
+    {
+        description = DESCRIPTIONS[2] + FontHelper.colorString(cards.get(0).name, "y")
+                + DESCRIPTIONS[3] + FontHelper.colorString(cards.get(1).name, "y") + DESCRIPTIONS[4];
+        tips.clear();
+        tips.add(new PowerTip(name, description));
+        initializeTips();
+    }
+
+    public static void save(SpireConfig config)
+    {
+        if (AbstractDungeon.player != null && AbstractDungeon.player.hasRelic(MysteriousPyramids.ID)) {
+            MysteriousPyramids relic = (MysteriousPyramids) AbstractDungeon.player.getRelic(ID);
+            for (int i=0; i<COUNT; ++i) {
+                config.setInt(CONFIG_KEY + i, AbstractDungeon.player.masterDeck.group.indexOf(relic.cards.get(i)));
+            }
+        } else {
+            for (int i=0; i<COUNT; ++i) {
+                config.remove(CONFIG_KEY + i);
+            }
+        }
+    }
+
+    public static void load(SpireConfig config)
+    {
+        cardIndexes.clear();
+        for (int i=0; i<COUNT; ++i) {
+            if (config.has(CONFIG_KEY + i)) {
+                cardIndexes.add(config.getInt(CONFIG_KEY + i));
+            } else {
+                cardIndexes.clear();
+                break;
+            }
+        }
     }
 
     @Override
@@ -74,6 +125,7 @@ public class MysteriousPyramids extends AbstractRelic
         if (!cardSelected && AbstractDungeon.gridSelectScreen.selectedCards.size() == COUNT) {
             cardSelected = true;
 
+            cards.clear();
             for (int i=0; i<COUNT; ++i) {
                 cards.add(AbstractDungeon.gridSelectScreen.selectedCards.get(i));
                 PyramidsField.inPyramids.set(cards.get(i), true);
@@ -82,11 +134,7 @@ public class MysteriousPyramids extends AbstractRelic
             AbstractDungeon.getCurrRoom().phase = AbstractRoom.RoomPhase.COMPLETE;
             AbstractDungeon.gridSelectScreen.selectedCards.clear();
 
-            description = DESCRIPTIONS[2] + FontHelper.colorString(cards.get(0).name, "y")
-                    + DESCRIPTIONS[3] + FontHelper.colorString(cards.get(1).name, "y") + DESCRIPTIONS[4];
-            tips.clear();
-            tips.add(new PowerTip(name, description));
-            initializeTips();
+            setDescriptionAfterLoading();
         }
     }
 

@@ -102,7 +102,7 @@ public class BottledRain extends AbstractRelic
         }
     }
 
-    public void setDescriptionAfterLoading()
+    private void setDescriptionAfterLoading()
     {
         description = FontHelper.colorString(card.name, "y") + DESCRIPTIONS[2];
         tips.clear();

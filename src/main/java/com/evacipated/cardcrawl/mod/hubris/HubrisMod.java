@@ -73,6 +73,7 @@ public class HubrisMod implements
 
             BottledRain.load(config);
             DisguiseKit.load(config);
+            MysteriousPyramids.load(config);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -83,8 +84,10 @@ public class HubrisMod implements
         logger.info("Saving Data");
         try {
             SpireConfig config = new SpireConfig("Hubris", "SaveData");
+
             BottledRain.save(config);
             DisguiseKit.save(config);
+            MysteriousPyramids.save(config);
             config.save();
         } catch (IOException e) {
             e.printStackTrace();
