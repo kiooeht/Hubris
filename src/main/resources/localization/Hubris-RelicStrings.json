@@ -272,5 +272,14 @@
       "Whenever an #yEthereal card is #yExhausted, gain #b",
       " Block."
     ]
+  },
+  "hubris:BottledRain": {
+    "NAME": "Bottled Rain",
+    "FLAVOR": "Petrichor.",
+    "DESCRIPTIONS": [
+      "Upon pickup, choose a card. This card will always #yRetain.",
+      "Choose a card for ",
+      " will always #yRetain."
+    ]
   }
 }

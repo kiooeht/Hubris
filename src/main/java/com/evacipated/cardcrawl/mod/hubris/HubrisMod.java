@@ -122,6 +122,7 @@ public class HubrisMod implements
         BaseMod.addRelic(new MedicalManual(), RelicType.SHARED);
         BaseMod.addRelic(new HollowSoul(), RelicType.SHARED);
         BaseMod.addRelic(new CrystalStatue(), RelicType.SHARED);
+        BaseMod.addRelic(new BottledRain(), RelicType.SHARED);
 
         BaseMod.addRelic(new RGBLights(), RelicType.BLUE);
 
