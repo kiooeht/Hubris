@@ -1,5 +1,6 @@
 package com.evacipated.cardcrawl.mod.hubris.events.thebeyond;
 
+import com.evacipated.cardcrawl.mod.hubris.relics.BottledRain;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.dungeons.TheBeyond;
@@ -26,12 +27,15 @@ public class TheBottler extends AbstractImageEvent
 
     private static List<String> bottleIDs;
 
+    private int bottleToReBottle = -1;
+
     static
     {
-        bottleIDs = new ArrayList<>(3);
+        bottleIDs = new ArrayList<>(4);
         addBottleRelic(BottledFlame.ID);
         addBottleRelic(BottledLightning.ID);
         addBottleRelic(BottledTornado.ID);
+        addBottleRelic(BottledRain.ID);
     }
 
     public static void addBottleRelic(String id)
@@ -75,6 +79,7 @@ public class TheBottler extends AbstractImageEvent
                 if (buttonPressed == imageEventText.optionList.size()-1) {
                     openMap();
                 } else {
+                    bottleToReBottle = buttonPressed;
                     screenNum = 1;
                     imageEventText.updateBodyText(DESCRIPTIONS[1]);
                     imageEventText.updateDialogOption(0, FontHelper.colorString(OPTIONS[5], "g"));
@@ -82,19 +87,15 @@ public class TheBottler extends AbstractImageEvent
                 }
                 break;
             case 1:
-                switch (buttonPressed) {
-                    default:
-                        AbstractRelic oldBottle = AbstractDungeon.player.getRelic(bottleIDs.get(buttonPressed));
-                        int relicIndex = AbstractDungeon.player.relics.indexOf(oldBottle);
-                        oldBottle.onUnequip();
-                        AbstractRelic newBottle = RelicLibrary.getRelic(bottleIDs.get(buttonPressed)).makeCopy();
-                        newBottle.instantObtain(AbstractDungeon.player, relicIndex, true);
+                AbstractRelic oldBottle = AbstractDungeon.player.getRelic(bottleIDs.get(bottleToReBottle));
+                int relicIndex = AbstractDungeon.player.relics.indexOf(oldBottle);
+                oldBottle.onUnequip();
+                AbstractRelic newBottle = RelicLibrary.getRelic(bottleIDs.get(bottleToReBottle)).makeCopy();
+                newBottle.instantObtain(AbstractDungeon.player, relicIndex, true);
 
-                        screenNum = 2;
-                        imageEventText.updateDialogOption(0, OPTIONS[4]);
-                        imageEventText.clearRemainingOptions();
-                        break;
-                }
+                screenNum = 2;
+                imageEventText.updateDialogOption(0, OPTIONS[4]);
+                imageEventText.clearRemainingOptions();
                 break;
             case 2:
                 switch (buttonPressed) {
