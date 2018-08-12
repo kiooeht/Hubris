@@ -1,7 +1,5 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
-import basemod.DevConsole;
-import com.badlogic.gdx.Input;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -18,7 +16,7 @@ public class DustyCowl extends AbstractRelic
 
     public DustyCowl()
     {
-        super(ID, "test2.png", RelicTier.COMMON, LandingSound.HEAVY);
+        super(ID, "dustyCowl.png", RelicTier.COMMON, LandingSound.HEAVY);
 
         rerollFlavorText();
     }
