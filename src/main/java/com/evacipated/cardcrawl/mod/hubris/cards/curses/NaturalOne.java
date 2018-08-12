@@ -26,7 +26,7 @@ public class NaturalOne extends CustomCard
 
     public NaturalOne()
     {
-        super(ID, NAME, IMG, COST, DESCRIPTION, CardType.CURSE, CardColor.CURSE, CardRarity.CURSE, CardTarget.NONE);
+        super(ID, NAME, IMG, COST, DESCRIPTION, CardType.CURSE, CardColor.CURSE, CardRarity.SPECIAL, CardTarget.NONE);
 
         SoulboundField.soulbound.set(this, true);
     }
