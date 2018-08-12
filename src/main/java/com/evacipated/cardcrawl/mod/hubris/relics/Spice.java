@@ -90,8 +90,6 @@ public class Spice extends AbstractRelic
     public void setCounter(int c)
     {
         super.setCounter(c);
-
-
     }
 
     private void updateOtherDescriptions()
@@ -196,7 +194,6 @@ public class Spice extends AbstractRelic
     @Override
     public void instantObtain()
     {
-        System.out.println("instantObtain()");
         if (AbstractDungeon.player.hasRelic(Spice.ID)) {
             Spice spice = (Spice) AbstractDungeon.player.getRelic(Spice.ID);
             spice.increment();
@@ -209,7 +206,6 @@ public class Spice extends AbstractRelic
     @Override
     public void instantObtain(AbstractPlayer p, int slot, boolean callOnEquip)
     {
-        System.out.println("instantObtain(...)");
         if (AbstractDungeon.player.hasRelic(Spice.ID)) {
             Spice spice = (Spice) AbstractDungeon.player.getRelic(Spice.ID);
             spice.increment();
@@ -226,7 +222,6 @@ public class Spice extends AbstractRelic
     @Override
     public void obtain()
     {
-        System.out.println("obtain()");
         if (AbstractDungeon.player.hasRelic(Spice.ID)) {
             Spice spice = (Spice) AbstractDungeon.player.getRelic(Spice.ID);
             spice.increment();
@@ -245,19 +240,20 @@ public class Spice extends AbstractRelic
         }
 
         int threshold;
-        switch (spice.counter) {
-            case 4:
-                threshold = 50;
-                break;
-            case 3:
-                threshold = 45;
-                break;
-            case 2:
-                threshold = 35;
-                break;
-            default:
-                threshold = 20;
-                break;
+        if (spice.counter >= 4) {
+            threshold = 50;
+        } else {
+            switch (spice.counter) {
+                case 3:
+                    threshold = 45;
+                    break;
+                case 2:
+                    threshold = 35;
+                    break;
+                default:
+                    threshold = 20;
+                    break;
+            }
         }
         int rand = AbstractDungeon.relicRng.random(0, 99);
 
