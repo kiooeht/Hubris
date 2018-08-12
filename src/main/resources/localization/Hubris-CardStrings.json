@@ -128,6 +128,10 @@
   },
   "hubris:Compulsion": {
     "NAME": "Compulsion",
-    "DESCRIPTION": "Unplayable. NL When drawn, plays a random card in your hand."
+    "DESCRIPTION": "Unplayable. NL When drawn, chooses a random card in your hand. You must play that card before any other.",
+    "EXTENDED_DESCRIPTION": [
+      "I must play ",
+      "."
+    ]
   }
 }
