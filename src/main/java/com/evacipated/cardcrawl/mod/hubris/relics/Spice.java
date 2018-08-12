@@ -2,7 +2,9 @@ package com.evacipated.cardcrawl.mod.hubris.relics;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.evacipated.cardcrawl.mod.hubris.cards.curses.SpiceAddiction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.Settings;
@@ -231,12 +233,36 @@ public class Spice extends AbstractRelic
         }
     }
 
-    public static boolean replaceWithSpice()
+    @Override
+    public void onObtainCard(AbstractCard c)
+    {
+        if (c.cardID.equals(SpiceAddiction.ID)) {
+            flash();
+            increment();
+        }
+    }
+
+    @Override
+    public void onMasterDeckChange()
+    {
+        boolean remove = false;
+        for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
+            if (c.cardID.equals(SpiceAddiction.ID)) {
+                remove = true;
+                break;
+            }
+        }
+        if (remove) {
+            AbstractDungeon.player.masterDeck.removeCard(SpiceAddiction.ID);
+        }
+    }
+
+    private static int replaceWithSpiceChance()
     {
         AbstractRelic spice = AbstractDungeon.player.getRelic(Spice.ID);
 
         if (spice == null) {
-            return false;
+            return 0;
         }
 
         int threshold;
@@ -255,9 +281,24 @@ public class Spice extends AbstractRelic
                     break;
             }
         }
-        int rand = AbstractDungeon.relicRng.random(0, 99);
 
-        return rand < threshold;
+        return threshold;
+    }
+
+    public static boolean replaceWithSpice()
+    {
+        int chance = replaceWithSpiceChance();
+
+        return AbstractDungeon.relicRng.random(0, 99) < chance;
+    }
+
+    public static boolean replaceCardWithSpice()
+    {
+        int chance = replaceWithSpiceChance();
+        chance /= 2;
+        chance -= 10;
+
+        return AbstractDungeon.relicRng.random(0, 99) < chance;
     }
 
     @Override

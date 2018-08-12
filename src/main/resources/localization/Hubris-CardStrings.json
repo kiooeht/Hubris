@@ -121,5 +121,9 @@
   "hubris:Envy": {
     "NAME": "Envy",
     "DESCRIPTION": "Autoplay. NL A random card in your hand becomes Unplayable for the turn. Soulbound."
+  },
+  "hubris:SpiceAddiction": {
+    "NAME": "SPICE",
+    "DESCRIPTION": "Obtain the Spice relic instead of this card."
   }
 }
