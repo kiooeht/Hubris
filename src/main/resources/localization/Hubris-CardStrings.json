@@ -125,5 +125,9 @@
   "hubris:SpiceAddiction": {
     "NAME": "SPICE",
     "DESCRIPTION": "Obtain the Spice relic instead of this card."
+  },
+  "hubris:Compulsion": {
+    "NAME": "Compulsion",
+    "DESCRIPTION": "Unplayable. NL When drawn, plays a random card in your hand."
   }
 }
