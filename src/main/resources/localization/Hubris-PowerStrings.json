@@ -81,5 +81,11 @@
       "When receiving #yAttack damage this turn, you #rlose #b",
       " HP."
     ]
+  },
+  "hubris:WhilePower": {
+    "NAME": "While",
+    "DESCRIPTIONS": [
+      "Draw and play the top card of your draw pile. Repeat until unable to play the drawn card."
+    ]
   }
 }

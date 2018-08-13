@@ -133,5 +133,12 @@
       "I must play ",
       "."
     ]
+  },
+  "hubris:While": {
+    "NAME": "While",
+    "DESCRIPTION": "Draw and play the top card of your draw pile. Repeat until unable to play the drawn card.",
+    "EXTENDED_DESCRIPTION": [
+      " Exhaust."
+    ]
   }
 }
