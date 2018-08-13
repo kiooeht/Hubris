@@ -140,5 +140,10 @@
     "EXTENDED_DESCRIPTION": [
       " Exhaust."
     ]
+  },
+  "hubris:TrickCloak": {
+    "NAME": "Trick Cloak",
+    "DESCRIPTION": "Fetch a random card from your discard pile. NL Draw !M! card.",
+    "UPGRADE_DESCRIPTION": "Fetch a card from your discard pile. NL Draw !M! card."
   }
 }
