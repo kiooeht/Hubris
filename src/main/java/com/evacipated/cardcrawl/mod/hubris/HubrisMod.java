@@ -74,6 +74,7 @@ public class HubrisMod implements
             BottledRain.load(config);
             DisguiseKit.load(config);
             MysteriousPyramids.load(config);
+            Zylophone.load(config);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -88,6 +89,7 @@ public class HubrisMod implements
             BottledRain.save(config);
             DisguiseKit.save(config);
             MysteriousPyramids.save(config);
+            Zylophone.save(config);
             config.save();
         } catch (IOException e) {
             e.printStackTrace();
@@ -166,6 +168,7 @@ public class HubrisMod implements
         BaseMod.addRelic(new HollowSoul(), RelicType.SHARED);
         BaseMod.addRelic(new CrystalStatue(), RelicType.SHARED);
         BaseMod.addRelic(new BottledRain(), RelicType.SHARED);
+        BaseMod.addRelic(new Zylophone(), RelicType.SHARED);
 
         BaseMod.addRelic(new RGBLights(), RelicType.BLUE);
 
