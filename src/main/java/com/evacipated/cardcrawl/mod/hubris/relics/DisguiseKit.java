@@ -33,11 +33,6 @@ public class DisguiseKit extends AbstractRelic
     public DisguiseKit()
     {
         super(ID, "disguiseKit.png", RelicTier.UNCOMMON, LandingSound.FLAT);
-
-        if (savedChosenClass != null) {
-            chooseClass(savedChosenClass);
-        }
-
     }
 
     @Override
@@ -108,6 +103,12 @@ public class DisguiseKit extends AbstractRelic
     {
         super.update();
 
+        if (savedChosenClass != null) {
+            if (chooseClass(savedChosenClass)) {
+                savedChosenClass = null;
+            }
+        }
+
         if (pickCard && !AbstractDungeon.isScreenUp && !AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
             DisguiseKitOption selected = (DisguiseKitOption) AbstractDungeon.gridSelectScreen.selectedCards.get(0);
             AbstractDungeon.gridSelectScreen.selectedCards.clear();
@@ -116,9 +117,12 @@ public class DisguiseKit extends AbstractRelic
         }
     }
 
-    private void chooseClass(AbstractPlayer.PlayerClass chosenClass)
+    private boolean chooseClass(AbstractPlayer.PlayerClass chosenClass)
     {
         this.chosenClass = chosenClass;
+        if (chosenClass == null || CardCrawlGame.dungeon == null) {
+            return false;
+        }
         description = getUpdatedDescription();
         tips.clear();
         tips.add(new PowerTip(name, description));
@@ -170,6 +174,8 @@ public class DisguiseKit extends AbstractRelic
             }
             chosenPools.get(c.rarity).addToTop(c);
         }
+
+        return true;
     }
 
     public AbstractCard getRewardCard(AbstractCard.CardRarity rarity)
