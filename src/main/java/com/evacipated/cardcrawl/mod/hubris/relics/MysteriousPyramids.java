@@ -83,6 +83,11 @@ public class MysteriousPyramids extends AbstractRelic
         }
     }
 
+    public static void clear()
+    {
+        cardIndexes.clear();
+    }
+
     @Override
     public void onCardDraw(AbstractCard c)
     {

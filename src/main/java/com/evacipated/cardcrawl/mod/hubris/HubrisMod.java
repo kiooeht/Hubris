@@ -103,6 +103,11 @@ public class HubrisMod implements
             SpireConfig config = new SpireConfig("Hubris", "SaveData");
             config.clear();
             config.save();
+
+            BottledRain.clear();
+            DisguiseKit.clear();
+            MysteriousPyramids.clear();
+            Zylophone.clear();
         } catch (IOException e) {
             e.printStackTrace();
         }

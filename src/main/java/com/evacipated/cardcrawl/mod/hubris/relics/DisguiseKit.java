@@ -77,6 +77,11 @@ public class DisguiseKit extends AbstractRelic
         }
     }
 
+    public static void clear()
+    {
+        savedChosenClass = null;
+    }
+
     private String chosenClassName()
     {
         return "#b" + String.join(" #b", AbstractPlayer.getTitle(chosenClass).split(" "));

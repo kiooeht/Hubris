@@ -61,6 +61,11 @@ public class BottledRain extends AbstractRelic
         }
     }
 
+    public static void clear()
+    {
+        cardIndex = -1;
+    }
+
     @Override
     public void onEquip()
     {
