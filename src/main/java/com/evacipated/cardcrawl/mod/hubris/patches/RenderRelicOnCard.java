@@ -1,6 +1,10 @@
 package com.evacipated.cardcrawl.mod.hubris.patches;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.evacipated.cardcrawl.mod.hubris.patches.cards.AbstractCard.BottleRainField;
 import com.evacipated.cardcrawl.mod.hubris.patches.cards.AbstractCard.PyramidsField;
 import com.evacipated.cardcrawl.mod.hubris.relics.BottledRain;
@@ -23,18 +27,13 @@ public class RenderRelicOnCard
 {
     private static class RelicInfo
     {
-        private interface RelicMaker
-        {
-            AbstractRelic make();
-        }
-
         private final SpireField<Boolean> field;
-        private final RelicMaker maker;
+        private final AbstractRelic relic;
 
-        private RelicInfo(SpireField<Boolean> field, RelicMaker maker)
+        private RelicInfo(SpireField<Boolean> field, AbstractRelic relic)
         {
             this.field = field;
-            this.maker = maker;
+            this.relic = relic;
         }
     }
     private static List<RelicInfo> relics = new ArrayList<>();
@@ -42,8 +41,8 @@ public class RenderRelicOnCard
     private static Field relicRotation;
 
     static {
-        relics.add(new RelicInfo(PyramidsField.inPyramids, MysteriousPyramids::new));
-        relics.add(new RelicInfo(BottleRainField.inBottleRain, BottledRain::new));
+        relics.add(new RelicInfo(PyramidsField.inPyramids, new MysteriousPyramids()));
+        relics.add(new RelicInfo(BottleRainField.inBottleRain, new BottledRain()));
 
         try {
             relicRotation = AbstractRelic.class.getDeclaredField("rotation");
@@ -58,16 +57,19 @@ public class RenderRelicOnCard
         if (!Settings.hideCards /*&& !__instance.isOnScreen()*/ && !__instance.isFlipped) {
             for (RelicInfo info : relics) {
                 if (info.field.get(__instance)) {
-                    AbstractRelic r = info.maker.make();
+                    AbstractRelic r = info.relic;
                     r.scale = __instance.drawScale * 0.8f;
                     try {
                         relicRotation.set(r, __instance.angle);
                     } catch (IllegalAccessException e) {
                         e.printStackTrace();
                     }
-                    r.currentX = __instance.current_x + 390.0f * __instance.drawScale / 3.0f * Settings.scale;
-                    r.currentY = __instance.current_y + 566.0f * __instance.drawScale / 3.0f * Settings.scale;
-                    r.renderOutline(sb, false);
+
+                    Vector2 tmp = new Vector2(135.0f, 185.0f);
+                    tmp.scl(__instance.drawScale * Settings.scale);
+                    tmp.rotate(__instance.angle);
+                    r.currentX = __instance.current_x + tmp.x;
+                    r.currentY = __instance.current_y + tmp.y;
                     r.render(sb);
                 }
             }
