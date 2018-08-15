@@ -17,7 +17,7 @@ public class Teleporter extends AbstractRelic
 
     public Teleporter(int charges)
     {
-        super(ID, "test6.png", RelicTier.RARE, LandingSound.HEAVY);
+        super(ID, "shortRangeTeleporter.png", RelicTier.RARE, LandingSound.HEAVY);
         setCounter(charges);
     }
 
