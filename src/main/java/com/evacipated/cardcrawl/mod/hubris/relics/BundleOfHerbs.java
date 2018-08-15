@@ -16,7 +16,7 @@ public class BundleOfHerbs extends AbstractRelic
 
     public BundleOfHerbs()
     {
-        super(ID, "test2.png", RelicTier.RARE, LandingSound.FLAT);
+        super(ID, "bundleOfHerbs.png", RelicTier.RARE, LandingSound.FLAT);
 
         tips.clear();
         tips.add(new PowerTip(name, description));
