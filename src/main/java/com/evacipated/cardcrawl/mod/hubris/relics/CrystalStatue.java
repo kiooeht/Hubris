@@ -2,6 +2,7 @@ package com.evacipated.cardcrawl.mod.hubris.relics;
 
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
@@ -36,6 +37,9 @@ public class CrystalStatue extends AbstractRelic
         if (counter == 0) {
             AbstractDungeon.player.energy.energyMaster -= 1;
             AbstractDungeon.player.energy.energy -= 1;
+
+            img = ImageMaster.loadImage("images/relics/crystalStatueBROKEN.png");
+            outlineImg = ImageMaster.loadImage("images/relics/outline/crystalStatueBROKEN.png");
         }
 
         description = getUpdatedDescription();
