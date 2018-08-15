@@ -13,7 +13,7 @@ public class RGBLights extends AbstractRelic
 
     public RGBLights()
     {
-        super(ID, "test1.png", RelicTier.UNCOMMON, LandingSound.HEAVY);
+        super(ID, "rgbLights.png", RelicTier.UNCOMMON, LandingSound.HEAVY);
     }
 
     @Override
