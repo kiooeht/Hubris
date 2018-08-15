@@ -6,8 +6,6 @@ import com.megacrit.cardcrawl.actions.common.EmptyDeckShuffleAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import javassist.CtBehavior;
 
-import java.util.ArrayList;
-
 @SpirePatch(
         cls="com.megacrit.cardcrawl.actions.common.DrawCardAction",
         method="update"
@@ -32,7 +30,7 @@ public class DrawCardActionPatch
         public int[] Locate(CtBehavior ctMethodToPatch) throws Exception
         {
             Matcher finalMatcher = new Matcher.MethodCallMatcher("org.apache.logging.log4j.Logger", "warn");
-            return LineFinder.findInOrder(ctMethodToPatch, new ArrayList<>(), finalMatcher);
+            return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
         }
     }
 }

@@ -2,17 +2,13 @@ package com.evacipated.cardcrawl.mod.hubris.patches;
 
 import com.evacipated.cardcrawl.mod.hubris.patches.cards.AbstractCard.ZylophoneField;
 import com.evacipated.cardcrawl.modthespire.lib.*;
-import com.megacrit.cardcrawl.actions.unique.LoseEnergyAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.red.Corruption;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.ChemicalX;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import javassist.CtBehavior;
-
-import java.util.ArrayList;
 
 public class ZylophonePatch
 {
@@ -43,7 +39,7 @@ public class ZylophonePatch
             public int[] Locate(CtBehavior ctMethodToPatch) throws Exception
             {
                 Matcher finalMatcher = new Matcher.MethodCallMatcher("com.megacrit.cardcrawl.cards.AbstractCard", "use");
-                return LineFinder.findInOrder(ctMethodToPatch, new ArrayList<>(), finalMatcher);
+                return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
             }
         }
     }
@@ -69,7 +65,7 @@ public class ZylophonePatch
             public int[] Locate(CtBehavior ctMethodToPatch) throws Exception
             {
                 Matcher finalMatcher = new Matcher.FieldAccessMatcher("com.megacrit.cardcrawl.cards.AbstractCard", "cost");
-                return LineFinder.findInOrder(ctMethodToPatch, new ArrayList<>(), finalMatcher);
+                return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
             }
         }
     }

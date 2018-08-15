@@ -9,8 +9,6 @@ import com.megacrit.cardcrawl.relics.MarkOfTheBloom;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import javassist.CtBehavior;
 
-import java.util.ArrayList;
-
 @SpirePatch(
         cls="com.megacrit.cardcrawl.characters.AbstractPlayer",
         method="damage",
@@ -45,7 +43,7 @@ public class HollowSoulPatch
         {
             Matcher finalMatcher = new Matcher.FieldAccessMatcher("com.megacrit.cardcrawl.characters.AbstractPlayer", "isDead");
 
-            return LineFinder.findInOrder(ctBehavior, new ArrayList<>(), finalMatcher);
+            return LineFinder.findInOrder(ctBehavior, finalMatcher);
         }
     }
 }

@@ -28,7 +28,7 @@ public class TheBottlerPatch
         public int[] Locate(CtBehavior ctMethodToPatch) throws Exception
         {
             Matcher finalMatcher = new Matcher.MethodCallMatcher("java.util.ArrayList", "isEmpty");
-            return LineFinder.findInOrder(ctMethodToPatch, new ArrayList<>(), finalMatcher);
+            return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
         }
     }
 }

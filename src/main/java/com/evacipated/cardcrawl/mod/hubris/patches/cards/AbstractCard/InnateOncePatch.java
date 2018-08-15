@@ -4,8 +4,6 @@ import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import javassist.CtBehavior;
 
-import java.util.ArrayList;
-
 public class InnateOncePatch
 {
     @SpirePatch(
@@ -45,7 +43,7 @@ public class InnateOncePatch
             {
                 Matcher finalMatcher = new Matcher.MethodCallMatcher("com.megacrit.cardcrawl.cards.CardGroup", "shuffle");
 
-                return LineFinder.findInOrder(ctBehavior, new ArrayList<>(), finalMatcher);
+                return LineFinder.findInOrder(ctBehavior, finalMatcher);
             }
         }
     }

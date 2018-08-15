@@ -55,7 +55,7 @@ public class BottleRainField
             {
                 Matcher finalMatcher = new Matcher.MethodCallMatcher("com.megacrit.cardcrawl.cards.AbstractCard", "atTurnStart");
 
-                return LineFinder.findAllInOrder(ctBehavior, new ArrayList<>(), finalMatcher);
+                return LineFinder.findAllInOrder(ctBehavior, finalMatcher);
             }
         }
     }
