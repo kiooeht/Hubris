@@ -21,7 +21,7 @@ public class Zylophone extends AbstractRelic
 
     public Zylophone()
     {
-        super(ID, "test1.png", RelicTier.RARE, LandingSound.CLINK);
+        super(ID, "zylophone.png", RelicTier.RARE, LandingSound.CLINK);
 
         if (card == null && cardIndex >= 0 && cardIndex < AbstractDungeon.player.masterDeck.group.size()) {
             card = AbstractDungeon.player.masterDeck.group.get(cardIndex);
