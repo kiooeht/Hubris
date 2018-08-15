@@ -13,7 +13,7 @@ public class HerbalPaste extends AbstractRelic
 
     public HerbalPaste()
     {
-        super(ID, "test5.png", RelicTier.RARE, LandingSound.CLINK);
+        super(ID, "herbalPaste.png", RelicTier.RARE, LandingSound.CLINK);
     }
 
     @Override
