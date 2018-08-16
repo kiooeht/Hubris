@@ -35,7 +35,8 @@ public class HubrisMod implements
         EditRelicsSubscriber,
         EditKeywordsSubscriber,
         EditStringsSubscriber,
-        PostDeathSubscriber
+        PostDeathSubscriber,
+        StartGameSubscriber
 {
     public static final Logger logger = LogManager.getLogger(HubrisMod.class.getSimpleName());
 
@@ -75,6 +76,7 @@ public class HubrisMod implements
             DisguiseKit.load(config);
             MysteriousPyramids.load(config);
             Zylophone.load(config);
+            EmptyBottle.load(config);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -90,6 +92,7 @@ public class HubrisMod implements
             DisguiseKit.save(config);
             MysteriousPyramids.save(config);
             Zylophone.save(config);
+            EmptyBottle.save(config);
             config.save();
         } catch (IOException e) {
             e.printStackTrace();
@@ -108,9 +111,16 @@ public class HubrisMod implements
             DisguiseKit.clear();
             MysteriousPyramids.clear();
             Zylophone.clear();
+            EmptyBottle.clear();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void receiveStartGame()
+    {
+        loadData();
     }
 
     @Override
@@ -174,6 +184,7 @@ public class HubrisMod implements
         BaseMod.addRelic(new CrystalStatue(), RelicType.SHARED);
         BaseMod.addRelic(new BottledRain(), RelicType.SHARED);
         BaseMod.addRelic(new Zylophone(), RelicType.SHARED);
+        BaseMod.addRelic(new EmptyBottle(), RelicType.SHARED);
 
         BaseMod.addRelic(new RGBLights(), RelicType.BLUE);
 

@@ -290,5 +290,12 @@
       "Choose a card for ",
       " is now #bX cost."
     ]
+  },
+  "hubris:EmptyBottle": {
+    "NAME": "Empty Bottle",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "Potions may be used twice."
+    ]
   }
 }

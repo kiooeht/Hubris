@@ -21,24 +21,10 @@ public class MysteriousPyramids extends AbstractRelic
     private List<AbstractCard> cards = new ArrayList<>(COUNT);
 
     private static final String CONFIG_KEY = "pyramid_";
-    private static List<Integer> cardIndexes = new ArrayList<>(COUNT);
 
     public MysteriousPyramids()
     {
         super(ID, "pyramids.png", RelicTier.UNCOMMON, LandingSound.CLINK);
-
-        if (cards.isEmpty() && !cardIndexes.isEmpty()) {
-            for (int i : cardIndexes) {
-                AbstractCard c = AbstractDungeon.player.masterDeck.group.get(i);
-                if (c == null) {
-                    cards.clear();
-                    return;
-                }
-                PyramidsField.inPyramids.set(c, true);
-                cards.add(c);
-            }
-            setDescriptionAfterLoading();
-        }
     }
 
     @Override
@@ -72,20 +58,32 @@ public class MysteriousPyramids extends AbstractRelic
 
     public static void load(SpireConfig config)
     {
-        cardIndexes.clear();
-        for (int i=0; i<COUNT; ++i) {
-            if (config.has(CONFIG_KEY + i)) {
-                cardIndexes.add(config.getInt(CONFIG_KEY + i));
-            } else {
-                cardIndexes.clear();
-                break;
+        if (AbstractDungeon.player.hasRelic(ID)) {
+            MysteriousPyramids relic = (MysteriousPyramids) AbstractDungeon.player.getRelic(ID);
+
+            if (relic.cards.isEmpty()) {
+                for (int i=0; i<COUNT; ++i) {
+                    if (config.has(CONFIG_KEY + i)) {
+                        int idx = config.getInt(CONFIG_KEY + i);
+                        AbstractCard c = AbstractDungeon.player.masterDeck.group.get(idx);
+                        if (c == null) {
+                            relic.cards.clear();
+                            return;
+                        }
+                        PyramidsField.inPyramids.set(c, true);
+                        relic.cards.add(c);
+                    } else {
+                        relic.cards.clear();
+                        return;
+                    }
+                }
+                relic.setDescriptionAfterLoading();
             }
         }
     }
 
     public static void clear()
     {
-        cardIndexes.clear();
     }
 
     @Override

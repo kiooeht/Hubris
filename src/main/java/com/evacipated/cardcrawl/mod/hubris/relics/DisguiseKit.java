@@ -28,7 +28,6 @@ public class DisguiseKit extends AbstractRelic
     private Map<AbstractCard.CardRarity, CardGroup> chosenPools = null;
 
     private static final String CONFIG_KEY = "disguiseKit";
-    private static AbstractPlayer.PlayerClass savedChosenClass = null;
 
     public DisguiseKit()
     {
@@ -61,20 +60,20 @@ public class DisguiseKit extends AbstractRelic
 
     public static void load(SpireConfig config)
     {
-        if (config.has(CONFIG_KEY)) {
+        if (AbstractDungeon.player.hasRelic(ID) && config.has(CONFIG_KEY)) {
+            DisguiseKit relic = (DisguiseKit) AbstractDungeon.player.getRelic(ID);
             try {
-                savedChosenClass = AbstractPlayer.PlayerClass.valueOf(config.getString(CONFIG_KEY));
+                if (!relic.chooseClass(AbstractPlayer.PlayerClass.valueOf(config.getString(CONFIG_KEY)))) {
+                    System.out.println("OH GOD WTF!!");
+                }
             } catch (IllegalArgumentException ignored) {
-                savedChosenClass = null;
+                relic.chosenClass = null;
             }
-        } else {
-            savedChosenClass = null;
         }
     }
 
     public static void clear()
     {
-        savedChosenClass = null;
     }
 
     private String chosenClassName()
@@ -102,12 +101,6 @@ public class DisguiseKit extends AbstractRelic
     public void update()
     {
         super.update();
-
-        if (savedChosenClass != null) {
-            if (chooseClass(savedChosenClass)) {
-                savedChosenClass = null;
-            }
-        }
 
         if (pickCard && !AbstractDungeon.isScreenUp && !AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
             DisguiseKitOption selected = (DisguiseKitOption) AbstractDungeon.gridSelectScreen.selectedCards.get(0);

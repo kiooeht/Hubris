@@ -9,19 +9,6 @@ public class SavePatch
 {
     @SpirePatch(
             cls="com.megacrit.cardcrawl.saveAndContinue.SaveAndContinue",
-            method="loadSaveFile",
-            paramtypes={"java.lang.String"}
-    )
-    public static class LoadGameByString
-    {
-        public static void Prefix(String filePath)
-        {
-            HubrisMod.loadData();
-        }
-    }
-
-    @SpirePatch(
-            cls="com.megacrit.cardcrawl.saveAndContinue.SaveAndContinue",
             method="save"
     )
     public static class SaveGame

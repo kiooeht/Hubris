@@ -17,19 +17,10 @@ public class Zylophone extends AbstractRelic
     private AbstractCard card = null;
 
     private static final String CONFIG_KEY = "zylophone";
-    private static int cardIndex = -1;
 
     public Zylophone()
     {
         super(ID, "zylophone.png", RelicTier.RARE, LandingSound.CLINK);
-
-        if (card == null && cardIndex >= 0 && cardIndex < AbstractDungeon.player.masterDeck.group.size()) {
-            card = AbstractDungeon.player.masterDeck.group.get(cardIndex);
-            if (card != null) {
-                ZylophoneField.costsX.set(card, true);
-                setDescriptionAfterLoading();
-            }
-        }
     }
 
     @Override
@@ -55,16 +46,22 @@ public class Zylophone extends AbstractRelic
 
     public static void load(SpireConfig config)
     {
-        if (config.has(CONFIG_KEY)) {
-            cardIndex = config.getInt(CONFIG_KEY);
-        } else {
-            cardIndex = -1;
+        if (AbstractDungeon.player.hasRelic(ID) && config.has(CONFIG_KEY)) {
+            Zylophone relic = (Zylophone) AbstractDungeon.player.getRelic(ID);
+            int cardIndex = config.getInt(CONFIG_KEY);
+
+            if (cardIndex >= 0 && cardIndex < AbstractDungeon.player.masterDeck.group.size()) {
+                relic.card = AbstractDungeon.player.masterDeck.group.get(cardIndex);
+                if (relic.card != null) {
+                    ZylophoneField.costsX.set(relic.card, true);
+                    relic.setDescriptionAfterLoading();
+                }
+            }
         }
     }
 
     public static void clear()
     {
-        cardIndex = -1;
     }
 
     @Override
