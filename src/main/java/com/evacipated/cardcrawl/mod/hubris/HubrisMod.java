@@ -13,6 +13,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import org.apache.logging.log4j.LogManager;
@@ -126,6 +127,8 @@ public class HubrisMod implements
     @Override
     public void receivePostInitialize()
     {
+        BaseMod.registerModBadge(ImageMaster.loadImage("images/hubris/modBadge.png"), "Hubris", "kiooeht", "TODO", null);
+
         BaseMod.addEvent(TheFatedDie.ID, TheFatedDie.class, BaseMod.EventPool.ANY);
         BaseMod.addEvent(Experiment.ID, Experiment.class, BaseMod.EventPool.THE_CITY);
         // Only appears if player has Bottle relic. See TheBottlerPatch
