@@ -1,10 +1,10 @@
 {
-  "modid": "hubris",
-  "name": "Hubris",
+  "modid": "${project.artifactId}",
+  "name": "${project.name}",
   "author_list": ["kiooeht"],
   "description": "???",
-  "version": "0.1",
-  "sts_version": "07-19-2018",
-  "mts_version": "2.9.0",
+  "version": "${project.version}",
+  "sts_version": "${SlayTheSpire.version}",
+  "mts_version": "${ModTheSpire.version}",
   "dependencies": ["basemod", "stslib"]
 }
