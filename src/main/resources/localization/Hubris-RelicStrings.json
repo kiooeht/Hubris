@@ -297,5 +297,13 @@
     "DESCRIPTIONS": [
       "Potions may be used twice."
     ]
+  },
+  "hubris:DuctTape": {
+    "NAME": "Duct Tape",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "Upon pickup, choose #b2 cards of the same type and combine them.",
+      "Choose two cards for "
+    ]
   }
 }
