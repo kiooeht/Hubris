@@ -19,7 +19,7 @@ public class DuctTape extends AbstractRelic
 
     public DuctTape()
     {
-        super(ID, "test5.png", RelicTier.UNCOMMON, LandingSound.HEAVY);
+        super(ID, "ductTape.png", RelicTier.UNCOMMON, LandingSound.HEAVY);
     }
 
     @Override
