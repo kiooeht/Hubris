@@ -4,7 +4,12 @@ import basemod.BaseMod;
 import basemod.abstracts.CustomCard;
 import basemod.abstracts.DynamicVariable;
 import basemod.helpers.TooltipInfo;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.evacipated.cardcrawl.mod.hubris.CardIgnore;
 import com.evacipated.cardcrawl.mod.hubris.actions.unique.DuctTapeUseNextAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -17,6 +22,7 @@ import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -48,7 +54,53 @@ public class DuctTapeCard extends CustomCard
             cards.add(c.makeStatEquivalentCopy());
         }
 
-        type = cards.get(0).type;
+        // Construct the combined artwork
+        FrameBuffer fbo = new FrameBuffer(Pixmap.Format.RGBA8888, 250, 188, false);
+        TextureRegion region = new TextureRegion(fbo.getColorBufferTexture());
+
+        TextureAtlas.AtlasRegion portrait0 = null;
+        TextureAtlas.AtlasRegion portrait1 = null;
+        try {
+            Field f = AbstractCard.class.getDeclaredField("portrait");
+            f.setAccessible(true);
+
+            portrait0 = (TextureAtlas.AtlasRegion) f.get(cards.get(0));
+            portrait1 = (TextureAtlas.AtlasRegion) f.get(cards.get(1));
+        } catch (IllegalAccessException | NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+
+        if (portrait0 != null && portrait1 != null) {
+            portrait1 = new TextureAtlas.AtlasRegion(portrait1);
+            portrait1.setRegion(
+                    portrait1.getRegionX() + portrait1.getRegionWidth() / 2,
+                    portrait1.getRegionY(),
+                    portrait1.getRegionWidth() / 2,
+                    portrait1.getRegionHeight()
+            );
+
+            fbo.begin();
+            SpriteBatch sb = new SpriteBatch();
+            sb.begin();
+
+            sb.draw(portrait0, 0.0f, 0.0f, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
+            sb.draw(portrait1, Gdx.graphics.getWidth() / 2.0f, 0.0f, Gdx.graphics.getWidth() / 2.0f, Gdx.graphics.getHeight());
+
+            sb.end();
+            fbo.end();
+
+            try {
+                Field f = AbstractCard.class.getDeclaredField("portrait");
+                f.setAccessible(true);
+
+                TextureAtlas.AtlasRegion atlasRegion = new TextureAtlas.AtlasRegion(region.getTexture(), 0, 0, region.getTexture().getWidth(), region.getTexture().getHeight());
+                atlasRegion.flip(false, true);
+                f.set(this, atlasRegion);
+            } catch (IllegalAccessException | NoSuchFieldException e) {
+                e.printStackTrace();
+            }
+        }
 
         calculateCard();
     }
