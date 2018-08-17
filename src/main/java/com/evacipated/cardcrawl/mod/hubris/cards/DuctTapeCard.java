@@ -5,7 +5,9 @@ import basemod.abstracts.CustomCard;
 import basemod.abstracts.DynamicVariable;
 import basemod.helpers.TooltipInfo;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -15,18 +17,18 @@ import com.evacipated.cardcrawl.mod.hubris.actions.unique.DuctTapeUseNextAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DescriptionLine;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.GameDictionary;
+import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.lang.reflect.InvocationTargetException;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -38,9 +40,40 @@ public class DuctTapeCard extends CustomCard
     private static final List<String> keywordBlacklist = Arrays.asList(
             "strike"
     );
+    private static final Map<CardColor, Map<CardType, Texture>> cardBgMap;
 
     private List<AbstractCard> cards;
+    private List<Texture> cardBgs = new ArrayList<>();
     private List<String> savedKeywords = new ArrayList<>();
+
+    static
+    {
+        cardBgMap = new HashMap<>();
+        Map<CardType, Texture> red = new HashMap<>();
+        cardBgMap.put(CardColor.RED, red);
+        Map<CardType, Texture> green = new HashMap<>();
+        cardBgMap.put(CardColor.GREEN, green);
+        Map<CardType, Texture> blue = new HashMap<>();
+        cardBgMap.put(CardColor.BLUE, blue);
+        Map<CardType, Texture> colorless = new HashMap<>();
+        cardBgMap.put(CardColor.COLORLESS, colorless);
+        
+        red.put(CardType.ATTACK, ImageMaster.CARD_ATTACK_BG_RED);
+        red.put(CardType.SKILL, ImageMaster.CARD_SKILL_BG_RED);
+        red.put(CardType.POWER, ImageMaster.CARD_POWER_BG_RED);
+
+        green.put(CardType.ATTACK, ImageMaster.CARD_ATTACK_BG_GREEN);
+        green.put(CardType.SKILL, ImageMaster.CARD_SKILL_BG_GREEN);
+        green.put(CardType.POWER, ImageMaster.CARD_POWER_BG_GREEN);
+
+        blue.put(CardType.ATTACK, ImageMaster.CARD_ATTACK_BG_BLUE);
+        blue.put(CardType.SKILL, ImageMaster.CARD_SKILL_BG_BLUE);
+        blue.put(CardType.POWER, ImageMaster.CARD_POWER_BG_BLUE);
+
+        colorless.put(CardType.ATTACK, ImageMaster.CARD_ATTACK_BG_GRAY);
+        colorless.put(CardType.SKILL, ImageMaster.CARD_SKILL_BG_GRAY);
+        colorless.put(CardType.POWER, ImageMaster.CARD_POWER_BG_GRAY);
+    }
 
     public DuctTapeCard(List<AbstractCard> pCards)
     {
@@ -71,6 +104,14 @@ public class DuctTapeCard extends CustomCard
         }
 
         if (portrait0 != null && portrait1 != null) {
+            portrait0 = new TextureAtlas.AtlasRegion(portrait0);
+            portrait0.setRegion(
+                    portrait0.getRegionX(),
+                    portrait0.getRegionY(),
+                    portrait0.getRegionWidth() / 2,
+                    portrait0.getRegionHeight()
+            );
+
             portrait1 = new TextureAtlas.AtlasRegion(portrait1);
             portrait1.setRegion(
                     portrait1.getRegionX() + portrait1.getRegionWidth() / 2,
@@ -83,7 +124,7 @@ public class DuctTapeCard extends CustomCard
             SpriteBatch sb = new SpriteBatch();
             sb.begin();
 
-            sb.draw(portrait0, 0.0f, 0.0f, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            sb.draw(portrait0, 0.0f, 0.0f, Gdx.graphics.getWidth() / 2.0f, Gdx.graphics.getHeight());
 
             sb.draw(portrait1, Gdx.graphics.getWidth() / 2.0f, 0.0f, Gdx.graphics.getWidth() / 2.0f, Gdx.graphics.getHeight());
 
@@ -107,6 +148,8 @@ public class DuctTapeCard extends CustomCard
 
     private void calculateCard()
     {
+        calculateBgs();
+
         calculateCost();
         calculateTarget();
 
@@ -141,6 +184,47 @@ public class DuctTapeCard extends CustomCard
         calculateKeywords();
 
         calculateDescription();
+    }
+
+    private void calculateBgs()
+    {
+        cardBgs.clear();
+        for (AbstractCard c : cards) {
+            if (cardBgMap.containsKey(c.color)) {
+                Map<CardType, Texture> tmp = cardBgMap.get(c.color);
+                if (tmp.containsKey(c.type)) {
+                    cardBgs.add(tmp.get(c.type));
+                } else {
+                    cardBgs.add(ImageMaster.CARD_SKILL_BG_BLACK);
+                }
+            } else {
+                Texture texture;
+                switch (c.type) {
+                    case POWER:
+                        if (BaseMod.getPowerBgTexture(c.color.toString()) == null) {
+                            BaseMod.savePowerBgTexture(c.color.toString(), ImageMaster.loadImage(BaseMod.getPowerBg(c.color.toString())));
+                        }
+                        texture = BaseMod.getPowerBgTexture(c.color.toString());
+                        break;
+                    case ATTACK:
+                        if (BaseMod.getAttackBgTexture(c.color.toString()) == null) {
+                            BaseMod.saveAttackBgTexture(c.color.toString(), ImageMaster.loadImage(BaseMod.getAttackBg(c.color.toString())));
+                        }
+                        texture = BaseMod.getAttackBgTexture(c.color.toString());
+                        break;
+                    case SKILL:
+                        if (BaseMod.getSkillBgTexture(c.color.toString()) == null) {
+                            BaseMod.saveSkillBgTexture(c.color.toString(), ImageMaster.loadImage(BaseMod.getSkillBg(c.color.toString())));
+                        }
+                        texture = BaseMod.getSkillBgTexture(c.color.toString());
+                        break;
+                    default:
+                        texture = ImageMaster.CARD_SKILL_BG_BLACK;
+                        break;
+                }
+                cardBgs.add(texture);
+            }
+        }
     }
 
     private void calculateCost()
@@ -253,6 +337,23 @@ public class DuctTapeCard extends CustomCard
                 line.text = "*" + line.text;
             }
         }
+    }
+
+    public void renderDuctTapeCardBg(SpriteBatch sb, float x, float y)
+    {
+        sb.setColor(Color.WHITE);
+        sb.draw(cardBgs.get(0),
+                x, y,
+                256.0f, 256.0f, 256.0f, 512.0f,
+                drawScale * Settings.scale, drawScale * Settings.scale,
+                angle, 0, 0, 256, 512, false, false
+        );
+        sb.draw(cardBgs.get(1),
+                x + 256.0f, y,
+                0.0f, 256.0f, 256.0f, 512.0f,
+                drawScale * Settings.scale, drawScale * Settings.scale,
+                angle, 256, 0, 256, 512, false, false
+        );
     }
 
     @Override
