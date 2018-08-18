@@ -87,5 +87,12 @@
     "DESCRIPTIONS": [
       "#b50% of attack damage pass through #yBlock."
     ]
+  },
+  "hubris:IrradiatedRounds": {
+    "NAME": "Irradiated Rounds",
+    "DESCRIPTIONS": [
+      "On dealing unblocked, non-piercing damage, applies #b",
+      " #yPoison."
+    ]
   }
 }
