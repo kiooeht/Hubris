@@ -302,7 +302,7 @@
     "NAME": "Duct Tape",
     "FLAVOR": "TODO",
     "DESCRIPTIONS": [
-      "Upon pickup, choose #b2 cards of the same type and combine them.",
+      "Upon pickup, choose #b2 cards and combine them.",
       "Choose two cards for "
     ]
   }
