@@ -389,10 +389,14 @@ public class DuctTapeCard extends CustomCard
         super.initializeDescription();
 
         for (DescriptionLine line : description) {
-            if (!line.text.startsWith("*")) {
-                line.text = String.join(" *" , line.text.split(" "));
-                line.text = "*" + line.text;
+            String[] words = line.text.split(" ");
+            for (int i=0; i<words.length; ++i) {
+                if (words[i].startsWith("*")) {
+                    words[i] = words[i].substring(1);
+                }
             }
+            line.text = String.join(" *" , words);
+            line.text = "*" + line.text;
         }
     }
 
