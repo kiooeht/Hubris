@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.evacipated.cardcrawl.mod.hubris.CardIgnore;
 import com.evacipated.cardcrawl.mod.hubris.actions.unique.DuctTapeUseNextAction;
+import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.AlwaysRetainField;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DescriptionLine;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -351,6 +352,14 @@ public class DuctTapeCard extends CustomCard
                 break;
             }
         }
+        // Retain
+        AlwaysRetainField.alwaysRetain.set(this, false);
+        for (AbstractCard c : cards) {
+            if (AlwaysRetainField.alwaysRetain.get(c)) {
+                AlwaysRetainField.alwaysRetain.set(this, true);
+                break;
+            }
+        }
     }
 
     private void calculateDescription()
@@ -360,13 +369,17 @@ public class DuctTapeCard extends CustomCard
         if (exhaust) {
             rawDescription += " NL Exhaust.";
         }
-        if (isInnate && isEthereal) {
-            rawDescription = "Innate. Ethereal. NL " + rawDescription;
-        } else if (isInnate) {
-            rawDescription = "Innate. NL " + rawDescription;
-        } else if (isEthereal) {
-            rawDescription = "Ethereal. NL " + rawDescription;
+        String prefix = "";
+        if (isInnate) {
+            prefix += " Innate.";
         }
+        if (isEthereal) {
+            prefix += " Ethereal.";
+        }
+        if (AlwaysRetainField.alwaysRetain.get(this)) {
+            prefix += " Retain.";
+        }
+        rawDescription = prefix.trim() + " NL " + rawDescription;
         initializeDescription();
     }
 
