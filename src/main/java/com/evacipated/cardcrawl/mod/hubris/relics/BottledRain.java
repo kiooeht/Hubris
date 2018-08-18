@@ -3,6 +3,7 @@ package com.evacipated.cardcrawl.mod.hubris.relics;
 import com.evacipated.cardcrawl.mod.hubris.patches.cards.AbstractCard.BottleRainField;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.PowerTip;
@@ -73,7 +74,8 @@ public class BottledRain extends AbstractRelic
             AbstractDungeon.previousScreen = AbstractDungeon.screen;
         }
         AbstractDungeon.getCurrRoom().phase = AbstractRoom.RoomPhase.INCOMPLETE;
-        AbstractDungeon.gridSelectScreen.open(AbstractDungeon.player.masterDeck, 1, DESCRIPTIONS[1] + name + ".",
+        AbstractDungeon.gridSelectScreen.open(CardGroup.getGroupWithoutBottledCards(AbstractDungeon.player.masterDeck),
+                1, DESCRIPTIONS[1] + name + ".",
                 false, false, false, false);
     }
 

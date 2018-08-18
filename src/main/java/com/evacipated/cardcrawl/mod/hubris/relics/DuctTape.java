@@ -2,6 +2,7 @@ package com.evacipated.cardcrawl.mod.hubris.relics;
 
 import com.evacipated.cardcrawl.mod.hubris.cards.DuctTapeCard;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
@@ -39,7 +40,7 @@ public class DuctTape extends AbstractRelic
         }
         AbstractDungeon.getCurrRoom().phase = AbstractRoom.RoomPhase.INCOMPLETE;
 
-        AbstractDungeon.gridSelectScreen.open(AbstractDungeon.player.masterDeck,
+        AbstractDungeon.gridSelectScreen.open(CardGroup.getGroupWithoutBottledCards(AbstractDungeon.player.masterDeck),
                 COUNT, DESCRIPTIONS[1] + name + ".",
                 false, false, false, false);
     }
