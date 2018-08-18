@@ -25,6 +25,12 @@ public class DuctTapePatch
                                 "} else {" +
                                 "$_ = $proceed($$);" +
                                 "}");
+                    } else if (m.getMethodName().equals("renderPortraitFrame")) {
+                        m.replace("if (this instanceof com.evacipated.cardcrawl.mod.hubris.cards.DuctTapeCard) {" +
+                                "((com.evacipated.cardcrawl.mod.hubris.cards.DuctTapeCard) this).renderDuctTapePortraitFrame($$);" +
+                                "} else {" +
+                                "$_ = $proceed($$);" +
+                                "}");
                     }
                 }
             };

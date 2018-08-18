@@ -27,7 +27,6 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -41,13 +40,16 @@ public class DuctTapeCard extends CustomCard
             "strike"
     );
     private static final Map<CardColor, Map<CardType, Texture>> cardBgMap;
+    private static final Map<CardRarity, Map<CardType, Texture>> cardFrameMap;
 
     private List<AbstractCard> cards;
     private List<Texture> cardBgs = new ArrayList<>();
+    private List<Texture> cardFrames = new ArrayList<>();
     private List<String> savedKeywords = new ArrayList<>();
 
     static
     {
+        // Base Game card backgrounds
         cardBgMap = new HashMap<>();
         Map<CardType, Texture> red = new HashMap<>();
         cardBgMap.put(CardColor.RED, red);
@@ -73,6 +75,29 @@ public class DuctTapeCard extends CustomCard
         colorless.put(CardType.ATTACK, ImageMaster.CARD_ATTACK_BG_GRAY);
         colorless.put(CardType.SKILL, ImageMaster.CARD_SKILL_BG_GRAY);
         colorless.put(CardType.POWER, ImageMaster.CARD_POWER_BG_GRAY);
+        
+        // Base game card frames
+        cardFrameMap = new HashMap<>();
+        Map<CardType, Texture> common = new HashMap<>();
+        cardFrameMap.put(CardRarity.COMMON, common);
+        cardFrameMap.put(CardRarity.BASIC, common);
+        cardFrameMap.put(CardRarity.CURSE, common);
+        Map<CardType, Texture> uncommon = new HashMap<>();
+        cardFrameMap.put(CardRarity.UNCOMMON, uncommon);
+        Map<CardType, Texture> rare = new HashMap<>();
+        cardFrameMap.put(CardRarity.RARE, rare);
+
+        common.put(CardType.ATTACK, ImageMaster.CARD_FRAME_ATTACK_COMMON);
+        common.put(CardType.SKILL, ImageMaster.CARD_FRAME_SKILL_COMMON);
+        common.put(CardType.POWER, ImageMaster.CARD_FRAME_POWER_COMMON);
+
+        uncommon.put(CardType.ATTACK, ImageMaster.CARD_FRAME_ATTACK_UNCOMMON);
+        uncommon.put(CardType.SKILL, ImageMaster.CARD_FRAME_SKILL_UNCOMMON);
+        uncommon.put(CardType.POWER, ImageMaster.CARD_FRAME_POWER_UNCOMMON);
+
+        rare.put(CardType.ATTACK, ImageMaster.CARD_FRAME_ATTACK_RARE);
+        rare.put(CardType.SKILL, ImageMaster.CARD_FRAME_SKILL_RARE);
+        rare.put(CardType.POWER, ImageMaster.CARD_FRAME_POWER_RARE);
     }
 
     public DuctTapeCard(List<AbstractCard> pCards)
@@ -181,6 +206,8 @@ public class DuctTapeCard extends CustomCard
             }
         }
 
+        calculateFrames();
+
         calculateKeywords();
 
         calculateDescription();
@@ -223,6 +250,23 @@ public class DuctTapeCard extends CustomCard
                         break;
                 }
                 cardBgs.add(texture);
+            }
+        }
+    }
+
+    private void calculateFrames()
+    {
+        cardFrames.clear();
+        for (AbstractCard c : cards) {
+            if (cardFrameMap.containsKey(c.rarity)) {
+                Map<CardType, Texture> tmp = cardFrameMap.get(c.rarity);
+                if (tmp.containsKey(c.type)) {
+                    cardFrames.add(tmp.get(c.type));
+                } else {
+                    cardFrames.add(ImageMaster.CARD_FRAME_SKILL_COMMON);
+                }
+            } else {
+                cardFrames.add(ImageMaster.CARD_FRAME_SKILL_COMMON);
             }
         }
     }
@@ -349,6 +393,23 @@ public class DuctTapeCard extends CustomCard
                 angle, 0, 0, 256, 512, false, false
         );
         sb.draw(cardBgs.get(1),
+                x + 256.0f, y,
+                0.0f, 256.0f, 256.0f, 512.0f,
+                drawScale * Settings.scale, drawScale * Settings.scale,
+                angle, 256, 0, 256, 512, false, false
+        );
+    }
+
+    public void renderDuctTapePortraitFrame(SpriteBatch sb, float x, float y)
+    {
+        sb.setColor(Color.WHITE);
+        sb.draw(cardFrames.get(0),
+                x, y,
+                256.0f, 256.0f, 256.0f, 512.0f,
+                drawScale * Settings.scale, drawScale * Settings.scale,
+                angle, 0, 0, 256, 512, false, false
+        );
+        sb.draw(cardFrames.get(1),
                 x + 256.0f, y,
                 0.0f, 256.0f, 256.0f, 512.0f,
                 drawScale * Settings.scale, drawScale * Settings.scale,
