@@ -145,11 +145,11 @@ public class DisguiseKit extends AbstractRelic
                     addBlueCards.invoke(CardCrawlGame.dungeon, tmpPool);
                     break;
                 default:
-                    String color = BaseMod.getColor(chosenClass.name());
+                    AbstractCard.CardColor color = BaseMod.getColor(chosenClass);
                     AbstractCard card;
                     for (Map.Entry<String, AbstractCard> c : CardLibrary.cards.entrySet()) {
                         card = c.getValue();
-                        if (card.color.name().equals(color) && card.rarity != AbstractCard.CardRarity.BASIC
+                        if (card.color.equals(color) && card.rarity != AbstractCard.CardRarity.BASIC
                                 && (!UnlockTracker.isCardLocked(c.getKey()) || Settings.isDailyRun)) {
                             tmpPool.add(card);
                         }

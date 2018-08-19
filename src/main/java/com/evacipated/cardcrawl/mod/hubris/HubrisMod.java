@@ -208,10 +208,10 @@ public class HubrisMod implements
         BaseMod.addRelic(new RGBLights(), RelicType.BLUE);
 
         if (hasConstructMod) {
-            BaseMod.addRelicToCustomPool(new ClockworkCow(), constructmod.patches.AbstractCardEnum.CONSTRUCTMOD.toString());
+            BaseMod.addRelicToCustomPool(new ClockworkCow(), constructmod.patches.AbstractCardEnum.CONSTRUCTMOD);
         }
         if (hasFruityMod) {
-            BaseMod.addRelicToCustomPool(new DustyCowl(), fruitymod.patches.AbstractCardEnum.SEEKER_PURPLE.toString());
+            BaseMod.addRelicToCustomPool(new DustyCowl(), fruitymod.patches.AbstractCardEnum.SEEKER_PURPLE);
         }
         if (hasInfiniteSpire) {
             BaseMod.addRelic(new MobiusCoin(), RelicType.SHARED);

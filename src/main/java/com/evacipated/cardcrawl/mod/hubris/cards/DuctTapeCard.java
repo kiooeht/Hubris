@@ -229,22 +229,22 @@ public class DuctTapeCard extends CustomCard
                 Texture texture;
                 switch (c.type) {
                     case POWER:
-                        if (BaseMod.getPowerBgTexture(c.color.toString()) == null) {
-                            BaseMod.savePowerBgTexture(c.color.toString(), ImageMaster.loadImage(BaseMod.getPowerBg(c.color.toString())));
+                        if (BaseMod.getPowerBgTexture(c.color) == null) {
+                            BaseMod.savePowerBgTexture(c.color, ImageMaster.loadImage(BaseMod.getPowerBg(c.color)));
                         }
-                        texture = BaseMod.getPowerBgTexture(c.color.toString());
+                        texture = BaseMod.getPowerBgTexture(c.color);
                         break;
                     case ATTACK:
-                        if (BaseMod.getAttackBgTexture(c.color.toString()) == null) {
-                            BaseMod.saveAttackBgTexture(c.color.toString(), ImageMaster.loadImage(BaseMod.getAttackBg(c.color.toString())));
+                        if (BaseMod.getAttackBgTexture(c.color) == null) {
+                            BaseMod.saveAttackBgTexture(c.color, ImageMaster.loadImage(BaseMod.getAttackBg(c.color)));
                         }
-                        texture = BaseMod.getAttackBgTexture(c.color.toString());
+                        texture = BaseMod.getAttackBgTexture(c.color);
                         break;
                     case SKILL:
-                        if (BaseMod.getSkillBgTexture(c.color.toString()) == null) {
-                            BaseMod.saveSkillBgTexture(c.color.toString(), ImageMaster.loadImage(BaseMod.getSkillBg(c.color.toString())));
+                        if (BaseMod.getSkillBgTexture(c.color) == null) {
+                            BaseMod.saveSkillBgTexture(c.color, ImageMaster.loadImage(BaseMod.getSkillBg(c.color)));
                         }
-                        texture = BaseMod.getSkillBgTexture(c.color.toString());
+                        texture = BaseMod.getSkillBgTexture(c.color);
                         break;
                     default:
                         texture = ImageMaster.CARD_SKILL_BG_BLACK;
