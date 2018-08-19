@@ -12,7 +12,7 @@ public class GetEncounterPatch
     )
     public static class GetEncounter
     {
-        private static final boolean testing = true;
+        private static final boolean testing = false;
         private static boolean doneOnce = false;
 
         public static void Prefix(@ByRef String[] key)
