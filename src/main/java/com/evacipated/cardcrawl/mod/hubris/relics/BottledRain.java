@@ -1,5 +1,6 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
+import basemod.abstracts.CustomBottleRelic;
 import com.evacipated.cardcrawl.mod.hubris.patches.cards.AbstractCard.BottleRainField;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -10,7 +11,7 @@ import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
-public class BottledRain extends AbstractRelic
+public class BottledRain extends CustomBottleRelic
 {
     public static final String ID = "hubris:BottledRain";
     private boolean cardSelected = true;
@@ -20,7 +21,7 @@ public class BottledRain extends AbstractRelic
 
     public BottledRain()
     {
-        super(ID, "bottledRain.png", RelicTier.UNCOMMON, LandingSound.CLINK);
+        super(ID, "bottledRain.png", RelicTier.UNCOMMON, LandingSound.CLINK, BottleRainField.inBottleRain);
     }
 
     @Override

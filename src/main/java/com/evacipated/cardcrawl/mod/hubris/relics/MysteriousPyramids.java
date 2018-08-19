@@ -1,5 +1,6 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
+import basemod.abstracts.CustomBottleRelic;
 import com.evacipated.cardcrawl.mod.hubris.patches.cards.AbstractCard.PyramidsField;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class MysteriousPyramids extends AbstractRelic
+public class MysteriousPyramids extends CustomBottleRelic
 {
     public static final String ID = "hubris:MysteriousPyramids";
     private static final int COUNT = 2;
@@ -25,7 +26,7 @@ public class MysteriousPyramids extends AbstractRelic
 
     public MysteriousPyramids()
     {
-        super(ID, "pyramids.png", RelicTier.UNCOMMON, LandingSound.CLINK);
+        super(ID, "pyramids.png", RelicTier.UNCOMMON, LandingSound.CLINK, PyramidsField.inPyramids);
     }
 
     @Override
