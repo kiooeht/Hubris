@@ -305,5 +305,13 @@
       "Upon pickup, choose #b2 cards and combine them.",
       "Choose two cards for "
     ]
+  },
+  "hubris:MobiusCoin": {
+    "NAME": "Möbius Coin",
+    "FLAVOR": "An inscription on the back reads: \"Porrprety of Blnak The Eivl.\"",
+    "DESCRIPTIONS": [
+      "Gain an additional #b",
+      " #yGold every time you complete a quest."
+    ]
   }
 }

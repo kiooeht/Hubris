@@ -45,6 +45,7 @@ public class HubrisMod implements
     public static final boolean hasReplayTheSpire;
     public static final boolean hasConstructMod;
     public static final boolean hasFruityMod;
+    public static final boolean hasInfiniteSpire;
 
     static
     {
@@ -59,6 +60,10 @@ public class HubrisMod implements
         hasFruityMod = Loader.isModLoaded("fruitymod-sts");
         if (hasFruityMod) {
             logger.info("Detected FruityMod");
+        }
+        hasInfiniteSpire = Loader.isModLoaded("infinitespire");
+        if (hasInfiniteSpire) {
+            logger.info("Detected Infinite Spire");
         }
     }
 
@@ -197,6 +202,9 @@ public class HubrisMod implements
         }
         if (hasFruityMod) {
             BaseMod.addRelicToCustomPool(new DustyCowl(), fruitymod.patches.AbstractCardEnum.SEEKER_PURPLE.toString());
+        }
+        if (hasInfiniteSpire) {
+            BaseMod.addRelic(new MobiusCoin(), RelicType.SHARED);
         }
     }
 
