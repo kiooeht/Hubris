@@ -121,10 +121,6 @@ public class DisguiseKit extends AbstractRelic
         tips.add(new PowerTip(name, description));
         initializeTips();
 
-        if (chosenClass == AbstractPlayer.PlayerClass.DEFECT && AbstractDungeon.player.masterMaxOrbs == 0) {
-            AbstractDungeon.player.masterMaxOrbs = 1;
-        }
-
         ArrayList<AbstractCard> tmpPool = new ArrayList<>();
         try {
             Method addRedCards = AbstractDungeon.class.getDeclaredMethod("addRedCards", ArrayList.class);
