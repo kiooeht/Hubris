@@ -49,5 +49,14 @@
       "[Leave]",
       "[Take Bottle]"
     ]
+  },
+  "hubris:TheLibraryExtra" : {
+    "NAME": "The Library",
+    "DESCRIPTIONS": [
+      "The story is about a warrior climbing a tall tower. They encounter many strange monsters and other oddities. NL Very familiar."
+    ],
+    "OPTIONS": [
+      "[Read] #gChoose #g1 #gof #g20 #gcards #pfrom #panother #pcharacter #gto #gadd #gto #gyour #gdeck."
+    ]
   }
 }
