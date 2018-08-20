@@ -551,6 +551,14 @@ public class DuctTapeCard extends CustomCard
     }
 
     @Override
+    public void triggerOnManualDiscard()
+    {
+        for (AbstractCard c : cards) {
+            c.triggerOnManualDiscard();
+        }
+    }
+
+    @Override
     public boolean canUpgrade()
     {
         for (AbstractCard c : cards) {
