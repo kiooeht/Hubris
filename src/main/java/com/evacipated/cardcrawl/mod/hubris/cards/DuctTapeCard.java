@@ -543,6 +543,14 @@ public class DuctTapeCard extends CustomCard
     }
 
     @Override
+    public void triggerOnExhaust()
+    {
+        for (AbstractCard c : cards) {
+            c.triggerOnExhaust();
+        }
+    }
+
+    @Override
     public boolean canUpgrade()
     {
         for (AbstractCard c : cards) {
