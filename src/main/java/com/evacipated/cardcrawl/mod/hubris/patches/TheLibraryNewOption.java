@@ -150,11 +150,7 @@ public class TheLibraryNewOption
             public int[] Locate(CtBehavior ctMethodToPatch) throws Exception
             {
                 Matcher finalMatcher = new Matcher.NewExprMatcher("com.megacrit.cardcrawl.cards.CardGroup");
-                int[] lines = LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
-                for (int i : lines) {
-                    System.out.println(i);
-                }
-                return lines;
+                return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
             }
         }
     }
