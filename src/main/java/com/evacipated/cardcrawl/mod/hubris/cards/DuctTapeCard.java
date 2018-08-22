@@ -48,6 +48,8 @@ public class DuctTapeCard extends CustomCard
     private List<Texture> cardFrames = new ArrayList<>();
     private List<String> savedKeywords = new ArrayList<>();
 
+    public TextureRegion largePortrait = null;
+
     static
     {
         // Base Game card backgrounds
@@ -169,6 +171,8 @@ public class DuctTapeCard extends CustomCard
             }
         }
 
+        calculateLargePortrait();
+
         calculateCard();
     }
 
@@ -212,6 +216,32 @@ public class DuctTapeCard extends CustomCard
         calculateKeywords();
 
         calculateDescription();
+    }
+
+    private void calculateLargePortrait()
+    {
+        FrameBuffer fbo = new FrameBuffer(Pixmap.Format.RGBA8888, 500, 380, false);
+        TextureRegion region = new TextureRegion(fbo.getColorBufferTexture());
+
+        Texture portrait0 = ImageMaster.loadImage("images/1024Portraits/" + cards.get(0).assetURL + ".png");
+        Texture portrait1 = ImageMaster.loadImage("images/1024Portraits/" + cards.get(1).assetURL + ".png");
+
+        fbo.begin();
+        SpriteBatch sb = new SpriteBatch();
+        sb.begin();
+
+        if (portrait0 != null) {
+            sb.draw(portrait0, 0.0f, 0.0f, Gdx.graphics.getWidth() / 2.0f, Gdx.graphics.getHeight());
+        }
+
+        if (portrait1 != null) {
+            sb.draw(portrait1, Gdx.graphics.getWidth() / 2.0f, 0.0f, Gdx.graphics.getWidth() / 2.0f, Gdx.graphics.getHeight());
+        }
+
+        sb.end();
+        fbo.end();
+
+        largePortrait = region;
     }
 
     private void calculateBgs()
