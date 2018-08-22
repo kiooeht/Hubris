@@ -132,21 +132,27 @@ public class DuctTapeCard extends CustomCard
         }
 
         if (portrait0 != null && portrait1 != null) {
+            boolean sameCard = cards.get(0).cardID.equals(cards.get(1).cardID);
+
             portrait0 = new TextureAtlas.AtlasRegion(portrait0);
-            portrait0.setRegion(
-                    portrait0.getRegionX(),
-                    portrait0.getRegionY(),
-                    portrait0.getRegionWidth() / 2,
-                    portrait0.getRegionHeight()
-            );
+            if (!sameCard) {
+                portrait0.setRegion(
+                        portrait0.getRegionX(),
+                        portrait0.getRegionY(),
+                        portrait0.getRegionWidth() / 2,
+                        portrait0.getRegionHeight()
+                );
+            }
 
             portrait1 = new TextureAtlas.AtlasRegion(portrait1);
-            portrait1.setRegion(
-                    portrait1.getRegionX() + portrait1.getRegionWidth() / 2,
-                    portrait1.getRegionY(),
-                    portrait1.getRegionWidth() / 2,
-                    portrait1.getRegionHeight()
-            );
+            if (!sameCard) {
+                portrait1.setRegion(
+                        portrait1.getRegionX() + portrait1.getRegionWidth() / 2,
+                        portrait1.getRegionY(),
+                        portrait1.getRegionWidth() / 2,
+                        portrait1.getRegionHeight()
+                );
+            }
 
             fbo.begin();
             SpriteBatch sb = new SpriteBatch();
