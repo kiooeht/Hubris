@@ -36,6 +36,7 @@ public class BottleRainField
     public static class Retain
     {
         @SpireInsertPatch(
+                locator=Locator.class,
                 localvars={"c"}
         )
         public static void Insert(AbstractPlayer __instance, AbstractCard c)
@@ -48,7 +49,7 @@ public class BottleRainField
             }
         }
 
-        public static class Locator extends SpireInsertLocator
+        private static class Locator extends SpireInsertLocator
         {
             @Override
             public int[] Locate(CtBehavior ctBehavior) throws Exception

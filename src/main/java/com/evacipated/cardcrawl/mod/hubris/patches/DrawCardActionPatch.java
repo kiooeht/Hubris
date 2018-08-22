@@ -12,7 +12,9 @@ import javassist.CtBehavior;
 )
 public class DrawCardActionPatch
 {
-    @SpireInsertPatch
+    @SpireInsertPatch(
+            locator=Locator.class
+    )
     public static SpireReturn Insert(DrawCardAction __instance)
     {
         if (!AbstractDungeon.player.discardPile.isEmpty()) {
@@ -24,7 +26,7 @@ public class DrawCardActionPatch
         return SpireReturn.Continue();
     }
 
-    public static class Locator extends SpireInsertLocator
+    private static class Locator extends SpireInsertLocator
     {
         @Override
         public int[] Locate(CtBehavior ctMethodToPatch) throws Exception

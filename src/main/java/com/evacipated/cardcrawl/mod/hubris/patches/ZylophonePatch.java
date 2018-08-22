@@ -18,7 +18,9 @@ public class ZylophonePatch
     )
     public static class MultiUse
     {
-        @SpireInsertPatch
+        @SpireInsertPatch(
+                locator=Locator.class
+        )
         public static void Insert(AbstractPlayer __instance, AbstractCard c, AbstractMonster monster, int energyOnUse)
         {
             if (ZylophoneField.costsX.get(c)) {
@@ -33,7 +35,7 @@ public class ZylophonePatch
             }
         }
 
-        public static class Locator extends SpireInsertLocator
+        private static class Locator extends SpireInsertLocator
         {
             @Override
             public int[] Locate(CtBehavior ctMethodToPatch) throws Exception
@@ -50,7 +52,9 @@ public class ZylophonePatch
     )
     public static class UseEnergy
     {
-        @SpireInsertPatch
+        @SpireInsertPatch(
+                locator=Locator.class
+        )
         public static void Insert(AbstractPlayer __instance, AbstractCard c, AbstractMonster monster, int energyOnUse)
         {
             if (ZylophoneField.costsX.get(c) && c.costForTurn == -1 && !c.freeToPlayOnce
@@ -59,7 +63,7 @@ public class ZylophonePatch
             }
         }
 
-        public static class Locator extends SpireInsertLocator
+        private static class Locator extends SpireInsertLocator
         {
             @Override
             public int[] Locate(CtBehavior ctMethodToPatch) throws Exception

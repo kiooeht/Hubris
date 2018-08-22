@@ -111,7 +111,9 @@ public class TheLibraryNewOption
             return false;
         }
 
-        @SpireInsertPatch
+        @SpireInsertPatch(
+                locator=Locator.class
+        )
         public static SpireReturn Insert(TheLibrary __instance, int buttonPressed)
         {
             if (pools != null) {
@@ -144,7 +146,7 @@ public class TheLibraryNewOption
             return SpireReturn.Continue();
         }
 
-        public static class Locator extends SpireInsertLocator
+        private static class Locator extends SpireInsertLocator
         {
             @Override
             public int[] Locate(CtBehavior ctMethodToPatch) throws Exception

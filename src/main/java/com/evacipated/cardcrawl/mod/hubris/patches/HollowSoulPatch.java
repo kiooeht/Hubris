@@ -16,7 +16,9 @@ import javassist.CtBehavior;
 )
 public class HollowSoulPatch
 {
-    @SpireInsertPatch
+    @SpireInsertPatch(
+            locator=Locator.class
+    )
     public static SpireReturn Insert(AbstractPlayer __instance, DamageInfo info)
     {
         if (AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT && !__instance.hasRelic(MarkOfTheBloom.ID)) {
@@ -36,7 +38,7 @@ public class HollowSoulPatch
         return SpireReturn.Continue();
     }
 
-    public static class Locator extends SpireInsertLocator
+    private static class Locator extends SpireInsertLocator
     {
         @Override
         public int[] Locate(CtBehavior ctBehavior) throws Exception

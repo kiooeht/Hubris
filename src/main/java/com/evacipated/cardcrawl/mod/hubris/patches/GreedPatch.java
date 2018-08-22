@@ -11,13 +11,15 @@ import javassist.CtBehavior;
 )
 public class GreedPatch
 {
-    @SpireInsertPatch
+    @SpireInsertPatch(
+            locator=Locator.class
+    )
     public static void Insert(RewardItem __instance, boolean theft)
     {
         __instance.bonusGold += Greed.countCopiesInDeck() * Greed.GOLD_AMOUNT;
     }
 
-    public static class Locator extends SpireInsertLocator
+    private static class Locator extends SpireInsertLocator
     {
         @Override
         public int[] Locate(CtBehavior ctMethodToPatch) throws Exception
