@@ -313,5 +313,12 @@
       "Gain an additional #b",
       " #yGold every time you complete a quest."
     ]
+  },
+  "hubris:BloodyCrown": {
+    "NAME": "Bloody Crown",
+    "FLAVOR": "\"FLÄSHYN\"",
+    "DESCRIPTIONS": [
+      "Gain [E] [E] at the start of each turn. NL More enemies. NL #rMore #rblood."
+    ]
   }
 }
