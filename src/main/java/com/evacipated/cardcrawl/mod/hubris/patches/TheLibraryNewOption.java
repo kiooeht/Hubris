@@ -6,7 +6,7 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.events.thecity.TheLibrary;
+import com.megacrit.cardcrawl.events.city.TheLibrary;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.localization.EventStrings;
 import com.megacrit.cardcrawl.relics.FrozenEgg2;
@@ -15,7 +15,9 @@ import com.megacrit.cardcrawl.relics.ToxicEgg2;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import javassist.CtBehavior;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Predicate;
 
 public class TheLibraryNewOption
@@ -36,7 +38,7 @@ public class TheLibraryNewOption
     }
 
     @SpirePatch(
-            cls="com.megacrit.cardcrawl.events.thecity.TheLibrary",
+            clz=TheLibrary.class,
             method=SpirePatch.CONSTRUCTOR
     )
     public static class ChangeOptionText
@@ -96,7 +98,7 @@ public class TheLibraryNewOption
     }
 
     @SpirePatch(
-            cls="com.megacrit.cardcrawl.events.thecity.TheLibrary",
+            clz=TheLibrary.class,
             method="buttonEffect"
     )
     public static class ChangeOptionEffect
