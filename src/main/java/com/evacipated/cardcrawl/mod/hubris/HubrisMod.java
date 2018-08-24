@@ -229,18 +229,12 @@ public class HubrisMod implements
     @Override
     public void receiveEditStrings()
     {
-        BaseMod.loadCustomStrings(RelicStrings.class,
-                Gdx.files.internal("localization/Hubris-RelicStrings.json").readString(String.valueOf(StandardCharsets.UTF_8)));
-        BaseMod.loadCustomStrings(CardStrings.class,
-                Gdx.files.internal("localization/Hubris-CardStrings.json").readString(String.valueOf(StandardCharsets.UTF_8)));
-        BaseMod.loadCustomStrings(CardStrings.class,
-                Gdx.files.internal("localization/Hubris-IcosahedronStrings.json").readString(String.valueOf(StandardCharsets.UTF_8)));
-        BaseMod.loadCustomStrings(OrbStrings.class,
-                Gdx.files.internal("localization/Hubris-OrbStrings.json").readString(String.valueOf(StandardCharsets.UTF_8)));
-        BaseMod.loadCustomStrings(PowerStrings.class,
-                Gdx.files.internal("localization/Hubris-PowerStrings.json").readString(String.valueOf(StandardCharsets.UTF_8)));
-        BaseMod.loadCustomStrings(EventStrings.class,
-                Gdx.files.internal("localization/Hubris-EventStrings.json").readString(String.valueOf(StandardCharsets.UTF_8)));
+        BaseMod.loadCustomStringsFile(RelicStrings.class, "localization/Hubris-RelicStrings.json");
+        BaseMod.loadCustomStringsFile(CardStrings.class, "localization/Hubris-CardStrings.json");
+        BaseMod.loadCustomStringsFile(CardStrings.class, "localization/Hubris-IcosahedronStrings.json");
+        BaseMod.loadCustomStringsFile(OrbStrings.class, "localization/Hubris-OrbStrings.json");
+        BaseMod.loadCustomStringsFile(PowerStrings.class, "localization/Hubris-PowerStrings.json");
+        BaseMod.loadCustomStringsFile(EventStrings.class, "localization/Hubris-EventStrings.json");
     }
 
     private static void autoAddCards() throws URISyntaxException, ClassNotFoundException, IllegalAccessException, InstantiationException
