@@ -58,5 +58,22 @@
     "OPTIONS": [
       "[Read] #gChoose #g1 #gof #g20 #gcards #pfrom #panother #pcharacter #gto #gadd #gto #gyour #gdeck."
     ]
+  },
+  "hubris:UPDATEBODYTEXT" : {
+    "NAME": "UPDATE BODY TEXT",
+    "DESCRIPTIONS": [
+      "A man sits on the ground next to a wall. His clothes are in tatters and his hair is frazzled. NL He is scribbling on the wall: NL NL #yUPDATE #yBODY #yTEXT #yUPDATE #yBODY #yTEXTUPDATE #yBODY #yTEXTUPDATE #yBODY #yTEXT",
+      "As you approach, the man turns towards you. Seeing you, he stands, runs up to you, and grabs you by the shoulders. His eyes are bulging out of their sockets. NL NL #r@\"UPDATE@ #r@BODY@ #r@TEXT@ #r@UPDATE@ #r@BODY@ #r@TEXTUPDATE@ #r@BODY@ #r@TEXTUPDATE@ #r@BODY@ #r@TEXT\"@ NL NL #b\"UPDATE #bBODY #bTEXT?\"",
+      "UPDATE BODY TEXT"
+    ],
+    "OPTIONS": [
+      "[Approach]",
+      "[UPDATE] #gUpgrade #ga #gcard.",
+      "[BODY] #gGain #g3 #gMax #gHP.",
+      "[TEXT] #gChoose #g1 #gof #g10 #gcards #gto #gadd #gto #gyour #gdeck.",
+      "[Leave]",
+      "Choose a Card to Upgrade.",
+      "Add a card to your deck."
+    ]
   }
 }

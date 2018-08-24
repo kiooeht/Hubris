@@ -5,6 +5,7 @@ import basemod.helpers.RelicType;
 import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
 import com.evacipated.cardcrawl.mod.hubris.events.shrines.TheFatedDie;
+import com.evacipated.cardcrawl.mod.hubris.events.shrines.UpdateBodyText;
 import com.evacipated.cardcrawl.mod.hubris.events.thebeyond.TheBottler;
 import com.evacipated.cardcrawl.mod.hubris.events.thecity.Experiment;
 import com.evacipated.cardcrawl.mod.hubris.monsters.GrandSnecko;
@@ -142,6 +143,7 @@ public class HubrisMod implements
         BaseMod.addEvent(Experiment.ID, Experiment.class, TheCity.ID);
         // Only appears if player has Bottle relic. See TheBottlerPatch
         BaseMod.addEvent(TheBottler.ID, TheBottler.class, TheBeyond.ID);
+        BaseMod.addEvent(UpdateBodyText.ID, UpdateBodyText.class);
 
         BaseMod.addMonster(GrandSnecko.ID, GrandSnecko::new);
         BaseMod.addMonster(MusketHawk.ID, MusketHawk::new);
