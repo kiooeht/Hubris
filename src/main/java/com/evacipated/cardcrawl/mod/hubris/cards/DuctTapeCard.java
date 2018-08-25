@@ -424,6 +424,12 @@ public class DuctTapeCard extends CustomCard
             cost += c.cost;
         }
         costForTurn = cost;
+
+        if (cost < 0) {
+            for (AbstractCard c : cards) {
+                c.costForTurn = c.cost = cost;
+            }
+        }
     }
 
     private void calculateTarget()
