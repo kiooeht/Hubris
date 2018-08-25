@@ -34,9 +34,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-// TODO test: Haste + Spell Combat
-// TODO mod split cards
-
 @CardIgnore
 public class DuctTapeCard extends CustomCard
 {
