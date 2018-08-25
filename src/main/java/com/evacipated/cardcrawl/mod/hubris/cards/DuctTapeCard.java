@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FrameBuffer;
 import com.evacipated.cardcrawl.mod.hubris.CardIgnore;
+import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.hubris.actions.unique.DuctTapeUseNextAction;
 import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.AlwaysRetainField;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -32,6 +33,9 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+// TODO test: Haste + Spell Combat
+// TODO mod split cards
 
 @CardIgnore
 public class DuctTapeCard extends CustomCard
@@ -276,39 +280,56 @@ public class DuctTapeCard extends CustomCard
 
     public Texture calculateLargePortrait()
     {
-        FrameBuffer fbo = new FrameBuffer(Pixmap.Format.RGBA8888, 500, 380, false);
-        TextureRegion region = new TextureRegion(fbo.getColorBufferTexture());
+        try {
+            FrameBuffer fbo = new FrameBuffer(Pixmap.Format.RGBA8888, 500, 380, false);
+            TextureRegion region = new TextureRegion(fbo.getColorBufferTexture());
 
-        TextureRegion portrait0 = new TextureRegion(ImageMaster.loadImage("images/1024Portraits/" + cards.get(0).assetURL + ".png"));
-        portrait0.setRegion(
-                portrait0.getRegionX(),
-                portrait0.getRegionY(),
-                portrait0.getRegionWidth() / 2,
-                portrait0.getRegionHeight()
-        );
-        portrait0.flip(false, true);
-        TextureRegion portrait1 = new TextureRegion(ImageMaster.loadImage("images/1024Portraits/" + cards.get(1).assetURL + ".png"));
-        portrait1.setRegion(
-                portrait1.getRegionX() + portrait1.getRegionWidth() / 2,
-                portrait1.getRegionY(),
-                portrait1.getRegionWidth() / 2,
-                portrait1.getRegionHeight()
-        );
-        portrait1.flip(false, true);
+            Texture portraitTexture;
+            if (cards.get(0) instanceof CustomCard) {
+                portraitTexture = CustomCard.getPortraitImage((CustomCard) cards.get(0));
+            } else {
+                portraitTexture = ImageMaster.loadImage("images/1024Portraits/" + cards.get(0).assetURL + ".png");
+            }
+            TextureRegion portrait0 = new TextureRegion(portraitTexture);
+            portrait0.setRegion(
+                    portrait0.getRegionX(),
+                    portrait0.getRegionY(),
+                    portrait0.getRegionWidth() / 2,
+                    portrait0.getRegionHeight()
+            );
+            portrait0.flip(false, true);
 
-        fbo.begin();
-        SpriteBatch sb = new SpriteBatch();
-        sb.begin();
+            if (cards.get(1) instanceof CustomCard) {
+                portraitTexture = CustomCard.getPortraitImage((CustomCard) cards.get(1));
+            } else {
+                portraitTexture = ImageMaster.loadImage("images/1024Portraits/" + cards.get(1).assetURL + ".png");
+            }
+            TextureRegion portrait1 = new TextureRegion(portraitTexture);
+            portrait1.setRegion(
+                    portrait1.getRegionX() + portrait1.getRegionWidth() / 2,
+                    portrait1.getRegionY(),
+                    portrait1.getRegionWidth() / 2,
+                    portrait1.getRegionHeight()
+            );
+            portrait1.flip(false, true);
 
-        sb.draw(portrait0, 0.0f, 0.0f, Gdx.graphics.getWidth() / 2.0f, Gdx.graphics.getHeight());
+            fbo.begin();
+            SpriteBatch sb = new SpriteBatch();
+            sb.begin();
 
-        sb.draw(portrait1, Gdx.graphics.getWidth() / 2.0f, 0.0f, Gdx.graphics.getWidth() / 2.0f, Gdx.graphics.getHeight());
+            sb.draw(portrait0, 0.0f, 0.0f, Gdx.graphics.getWidth() / 2.0f, Gdx.graphics.getHeight());
 
-        sb.end();
-        fbo.end();
+            sb.draw(portrait1, Gdx.graphics.getWidth() / 2.0f, 0.0f, Gdx.graphics.getWidth() / 2.0f, Gdx.graphics.getHeight());
 
-        region.flip(false, true);
-        return region.getTexture();
+            sb.end();
+            fbo.end();
+
+            region.flip(false, true);
+            return region.getTexture();
+        } catch (Exception e) {
+            HubrisMod.logger.error(e);
+            return null;
+        }
     }
 
     private void calculateBgs()
