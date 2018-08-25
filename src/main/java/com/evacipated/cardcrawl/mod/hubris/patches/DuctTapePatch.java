@@ -1,12 +1,9 @@
 package com.evacipated.cardcrawl.mod.hubris.patches;
 
 import com.evacipated.cardcrawl.mod.hubris.cards.DuctTapeCard;
-import com.evacipated.cardcrawl.mod.hubris.relics.DuctTape;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
-import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.screens.SingleCardViewPopup;
 import javassist.CannotCompileException;
 import javassist.expr.ExprEditor;
@@ -62,7 +59,7 @@ public class DuctTapePatch
                 try {
                     Field f = SingleCardViewPopup.class.getDeclaredField("portraitImg");
                     f.setAccessible(true);
-                    f.set(__instance, ductTapeCard.largePortrait.getTexture());
+                    f.set(__instance, ductTapeCard.calculateLargePortrait());
                 } catch (IllegalAccessException | NoSuchFieldException e) {
                     e.printStackTrace();
                 }
@@ -83,6 +80,36 @@ public class DuctTapePatch
         public static void Postfix(SingleCardViewPopup __instance, AbstractCard card, CardGroup group)
         {
             LargeCardView_1.Postfix(__instance, card);
+        }
+    }
+
+    @SpirePatch(
+            clz=SingleCardViewPopup.class,
+            method="render"
+    )
+    public static class LargeRenderCardBg
+    {
+        public static ExprEditor Instrument()
+        {
+            return new ExprEditor() {
+                @Override
+                public void edit(MethodCall m) throws CannotCompileException
+                {
+                    if (m.getMethodName().equals("renderCardBack")) {
+                        m.replace("if (card instanceof com.evacipated.cardcrawl.mod.hubris.cards.DuctTapeCard) {" +
+                                "((com.evacipated.cardcrawl.mod.hubris.cards.DuctTapeCard) card).renderDuctTapeLargeCardBg($$);" +
+                                "} else {" +
+                                "$_ = $proceed($$);" +
+                                "}");
+                    } else if (m.getMethodName().equals("renderFrame")) {
+                        m.replace("if (card instanceof com.evacipated.cardcrawl.mod.hubris.cards.DuctTapeCard) {" +
+                                "((com.evacipated.cardcrawl.mod.hubris.cards.DuctTapeCard) card).renderDuctTapeLargeFrame($$);" +
+                                "} else {" +
+                                "$_ = $proceed($$);" +
+                                "}");
+                    }
+                }
+            };
         }
     }
 }

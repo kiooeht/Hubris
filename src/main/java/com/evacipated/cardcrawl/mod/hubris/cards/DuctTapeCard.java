@@ -41,14 +41,16 @@ public class DuctTapeCard extends CustomCard
             "strike"
     );
     private static final Map<CardColor, Map<CardType, Texture>> cardBgMap;
+    private static final Map<CardColor, Map<CardType, Texture>> cardLargeBgMap;
     private static final Map<CardRarity, Map<CardType, Texture>> cardFrameMap;
+    private static final Map<CardRarity, Map<CardType, Texture>> cardLargeFrameMap;
 
     private List<AbstractCard> cards;
     private List<Texture> cardBgs = new ArrayList<>();
+    private List<Texture> cardLargeBgs = new ArrayList<>();
     private List<Texture> cardFrames = new ArrayList<>();
+    private List<Texture> cardLargeFrames = new ArrayList<>();
     private List<String> savedKeywords = new ArrayList<>();
-
-    public TextureRegion largePortrait = null;
 
     static
     {
@@ -79,6 +81,32 @@ public class DuctTapeCard extends CustomCard
         colorless.put(CardType.SKILL, ImageMaster.CARD_SKILL_BG_GRAY);
         colorless.put(CardType.POWER, ImageMaster.CARD_POWER_BG_GRAY);
         
+        cardLargeBgMap = new HashMap<>();
+        red = new HashMap<>();
+        cardLargeBgMap.put(CardColor.RED, red);
+        green = new HashMap<>();
+        cardLargeBgMap.put(CardColor.GREEN, green);
+        blue = new HashMap<>();
+        cardLargeBgMap.put(CardColor.BLUE, blue);
+        colorless = new HashMap<>();
+        cardLargeBgMap.put(CardColor.COLORLESS, colorless);
+
+        red.put(CardType.ATTACK, ImageMaster.CARD_ATTACK_BG_RED_L);
+        red.put(CardType.SKILL, ImageMaster.CARD_SKILL_BG_RED_L);
+        red.put(CardType.POWER, ImageMaster.CARD_POWER_BG_RED_L);
+
+        green.put(CardType.ATTACK, ImageMaster.CARD_ATTACK_BG_GREEN_L);
+        green.put(CardType.SKILL, ImageMaster.CARD_SKILL_BG_GREEN_L);
+        green.put(CardType.POWER, ImageMaster.CARD_POWER_BG_GREEN_L);
+
+        blue.put(CardType.ATTACK, ImageMaster.CARD_ATTACK_BG_BLUE_L);
+        blue.put(CardType.SKILL, ImageMaster.CARD_SKILL_BG_BLUE_L);
+        blue.put(CardType.POWER, ImageMaster.CARD_POWER_BG_BLUE_L);
+
+        colorless.put(CardType.ATTACK, ImageMaster.CARD_ATTACK_BG_GRAY_L);
+        colorless.put(CardType.SKILL, ImageMaster.CARD_SKILL_BG_GRAY_L);
+        colorless.put(CardType.POWER, ImageMaster.CARD_POWER_BG_GRAY_L);
+        
         // Base game card frames
         cardFrameMap = new HashMap<>();
         Map<CardType, Texture> common = new HashMap<>();
@@ -101,6 +129,28 @@ public class DuctTapeCard extends CustomCard
         rare.put(CardType.ATTACK, ImageMaster.CARD_FRAME_ATTACK_RARE);
         rare.put(CardType.SKILL, ImageMaster.CARD_FRAME_SKILL_RARE);
         rare.put(CardType.POWER, ImageMaster.CARD_FRAME_POWER_RARE);
+
+        cardLargeFrameMap = new HashMap<>();
+        common = new HashMap<>();
+        cardLargeFrameMap.put(CardRarity.COMMON, common);
+        cardLargeFrameMap.put(CardRarity.BASIC, common);
+        cardLargeFrameMap.put(CardRarity.CURSE, common);
+        uncommon = new HashMap<>();
+        cardLargeFrameMap.put(CardRarity.UNCOMMON, uncommon);
+        rare = new HashMap<>();
+        cardLargeFrameMap.put(CardRarity.RARE, rare);
+
+        common.put(CardType.ATTACK, ImageMaster.CARD_FRAME_ATTACK_COMMON_L);
+        common.put(CardType.SKILL, ImageMaster.CARD_FRAME_SKILL_COMMON_L);
+        common.put(CardType.POWER, ImageMaster.CARD_FRAME_POWER_COMMON_L);
+
+        uncommon.put(CardType.ATTACK, ImageMaster.CARD_FRAME_ATTACK_UNCOMMON_L);
+        uncommon.put(CardType.SKILL, ImageMaster.CARD_FRAME_SKILL_UNCOMMON_L);
+        uncommon.put(CardType.POWER, ImageMaster.CARD_FRAME_POWER_UNCOMMON_L);
+
+        rare.put(CardType.ATTACK, ImageMaster.CARD_FRAME_ATTACK_RARE_L);
+        rare.put(CardType.SKILL, ImageMaster.CARD_FRAME_SKILL_RARE_L);
+        rare.put(CardType.POWER, ImageMaster.CARD_FRAME_POWER_RARE_L);
     }
 
     public DuctTapeCard(List<AbstractCard> pCards)
@@ -224,69 +274,98 @@ public class DuctTapeCard extends CustomCard
         calculateDescription();
     }
 
-    private void calculateLargePortrait()
+    public Texture calculateLargePortrait()
     {
         FrameBuffer fbo = new FrameBuffer(Pixmap.Format.RGBA8888, 500, 380, false);
         TextureRegion region = new TextureRegion(fbo.getColorBufferTexture());
 
-        Texture portrait0 = ImageMaster.loadImage("images/1024Portraits/" + cards.get(0).assetURL + ".png");
-        Texture portrait1 = ImageMaster.loadImage("images/1024Portraits/" + cards.get(1).assetURL + ".png");
+        TextureRegion portrait0 = new TextureRegion(ImageMaster.loadImage("images/1024Portraits/" + cards.get(0).assetURL + ".png"));
+        portrait0.setRegion(
+                portrait0.getRegionX(),
+                portrait0.getRegionY(),
+                portrait0.getRegionWidth() / 2,
+                portrait0.getRegionHeight()
+        );
+        portrait0.flip(false, true);
+        TextureRegion portrait1 = new TextureRegion(ImageMaster.loadImage("images/1024Portraits/" + cards.get(1).assetURL + ".png"));
+        portrait1.setRegion(
+                portrait1.getRegionX() + portrait1.getRegionWidth() / 2,
+                portrait1.getRegionY(),
+                portrait1.getRegionWidth() / 2,
+                portrait1.getRegionHeight()
+        );
+        portrait1.flip(false, true);
 
         fbo.begin();
         SpriteBatch sb = new SpriteBatch();
         sb.begin();
 
-        if (portrait0 != null) {
-            sb.draw(portrait0, 0.0f, 0.0f, Gdx.graphics.getWidth() / 2.0f, Gdx.graphics.getHeight());
-        }
+        sb.draw(portrait0, 0.0f, 0.0f, Gdx.graphics.getWidth() / 2.0f, Gdx.graphics.getHeight());
 
-        if (portrait1 != null) {
-            sb.draw(portrait1, Gdx.graphics.getWidth() / 2.0f, 0.0f, Gdx.graphics.getWidth() / 2.0f, Gdx.graphics.getHeight());
-        }
+        sb.draw(portrait1, Gdx.graphics.getWidth() / 2.0f, 0.0f, Gdx.graphics.getWidth() / 2.0f, Gdx.graphics.getHeight());
 
         sb.end();
         fbo.end();
 
-        largePortrait = region;
+        region.flip(false, true);
+        return region.getTexture();
     }
 
     private void calculateBgs()
     {
         cardBgs.clear();
+        cardLargeBgs.clear();
         for (AbstractCard c : cards) {
             if (cardBgMap.containsKey(c.color)) {
                 Map<CardType, Texture> tmp = cardBgMap.get(c.color);
                 if (tmp.containsKey(c.type)) {
                     cardBgs.add(tmp.get(c.type));
+                    cardLargeBgs.add(cardLargeBgMap.get(c.color).get(c.type));
                 } else {
                     cardBgs.add(ImageMaster.CARD_SKILL_BG_BLACK);
+                    cardLargeBgs.add(ImageMaster.CARD_SKILL_BG_BLACK_L);
                 }
             } else {
                 Texture texture;
+                Texture largeTexture;
                 switch (c.type) {
                     case POWER:
                         if (BaseMod.getPowerBgTexture(c.color) == null) {
                             BaseMod.savePowerBgTexture(c.color, ImageMaster.loadImage(BaseMod.getPowerBg(c.color)));
                         }
                         texture = BaseMod.getPowerBgTexture(c.color);
+                        if (BaseMod.getPowerBgPortraitTexture(c.color) == null) {
+                            BaseMod.savePowerBgPortraitTexture(c.color, ImageMaster.loadImage(BaseMod.getPowerBgPortrait(c.color)));
+                        }
+                        largeTexture = BaseMod.getPowerBgPortraitTexture(c.color);
                         break;
                     case ATTACK:
                         if (BaseMod.getAttackBgTexture(c.color) == null) {
                             BaseMod.saveAttackBgTexture(c.color, ImageMaster.loadImage(BaseMod.getAttackBg(c.color)));
                         }
                         texture = BaseMod.getAttackBgTexture(c.color);
+                        if (BaseMod.getAttackBgPortraitTexture(c.color) == null) {
+                            BaseMod.saveAttackBgPortraitTexture(c.color, ImageMaster.loadImage(BaseMod.getAttackBgPortrait(c.color)));
+                        }
+                        largeTexture = BaseMod.getAttackBgPortraitTexture(c.color);
                         break;
                     case SKILL:
                         if (BaseMod.getSkillBgTexture(c.color) == null) {
                             BaseMod.saveSkillBgTexture(c.color, ImageMaster.loadImage(BaseMod.getSkillBg(c.color)));
                         }
                         texture = BaseMod.getSkillBgTexture(c.color);
+                        if (BaseMod.getSkillBgPortraitTexture(c.color) == null) {
+                            BaseMod.saveSkillBgPortraitTexture(c.color, ImageMaster.loadImage(BaseMod.getSkillBgPortrait(c.color)));
+                        }
+                        largeTexture = BaseMod.getSkillBgPortraitTexture(c.color);
                         break;
                     default:
                         texture = ImageMaster.CARD_SKILL_BG_BLACK;
+                        largeTexture = ImageMaster.CARD_SKILL_BG_BLACK_L;
                         break;
                 }
                 cardBgs.add(texture);
+                cardLargeBgs.add(largeTexture);
             }
         }
     }
@@ -294,16 +373,20 @@ public class DuctTapeCard extends CustomCard
     private void calculateFrames()
     {
         cardFrames.clear();
+        cardLargeFrames.clear();
         for (AbstractCard c : cards) {
             if (cardFrameMap.containsKey(c.rarity)) {
                 Map<CardType, Texture> tmp = cardFrameMap.get(c.rarity);
                 if (tmp.containsKey(c.type)) {
                     cardFrames.add(tmp.get(c.type));
+                    cardLargeFrames.add(cardLargeFrameMap.get(c.rarity).get(c.type));
                 } else {
                     cardFrames.add(ImageMaster.CARD_FRAME_SKILL_COMMON);
+                    cardLargeFrames.add(ImageMaster.CARD_FRAME_SKILL_COMMON_L);
                 }
             } else {
                 cardFrames.add(ImageMaster.CARD_FRAME_SKILL_COMMON);
+                cardLargeFrames.add(ImageMaster.CARD_FRAME_SKILL_COMMON_L);
             }
         }
     }
@@ -436,6 +519,7 @@ public class DuctTapeCard extends CustomCard
         }
     }
 
+    @SuppressWarnings("unused")
     public void renderDuctTapeCardBg(SpriteBatch sb, float x, float y)
     {
         sb.setColor(Color.WHITE);
@@ -453,6 +537,25 @@ public class DuctTapeCard extends CustomCard
         );
     }
 
+    @SuppressWarnings("unused")
+    public void renderDuctTapeLargeCardBg(SpriteBatch sb)
+    {
+        sb.setColor(Color.WHITE);
+        sb.draw(cardLargeBgs.get(0),
+                Settings.WIDTH / 2.0f - 512.0f, Settings.HEIGHT / 2.0f - 512.0f,
+                512, 512, 512, 1024,
+                Settings.scale, Settings.scale,
+                0, 0, 0, 512, 1024, false, false
+        );
+        sb.draw(cardLargeBgs.get(1),
+                Settings.WIDTH / 2.0f, Settings.HEIGHT / 2.0f - 512.0f,
+                0, 512, 512, 1024,
+                Settings.scale, Settings.scale,
+                0, 512, 0, 512, 1024, false, false
+        );
+    }
+
+    @SuppressWarnings("unused")
     public void renderDuctTapePortraitFrame(SpriteBatch sb, float x, float y)
     {
         sb.setColor(Color.WHITE);
@@ -467,6 +570,24 @@ public class DuctTapeCard extends CustomCard
                 0.0f, 256.0f, 256.0f, 512.0f,
                 drawScale * Settings.scale, drawScale * Settings.scale,
                 angle, 256, 0, 256, 512, false, false
+        );
+    }
+
+    @SuppressWarnings("unused")
+    public void renderDuctTapeLargeFrame(SpriteBatch sb)
+    {
+        sb.setColor(Color.WHITE);
+        sb.draw(cardLargeFrames.get(0),
+                Settings.WIDTH / 2.0f - 512.0f, Settings.HEIGHT / 2.0f - 512.0f,
+                512, 512, 512, 1024,
+                Settings.scale, Settings.scale,
+                0, 0, 0, 512, 1024, false, false
+        );
+        sb.draw(cardLargeFrames.get(1),
+                Settings.WIDTH / 2.0f, Settings.HEIGHT / 2.0f - 512.0f,
+                0.0f, 512, 512, 1024,
+                Settings.scale, Settings.scale,
+                0, 512, 0, 512, 1024, false, false
         );
     }
 
