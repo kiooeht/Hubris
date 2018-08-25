@@ -271,6 +271,18 @@ public class DuctTapeCard extends CustomCard
             }
         }
 
+        // Upgrade name
+        name = "Duct Tape";
+        for (AbstractCard c : cards) {
+            if (c.upgraded) {
+                name += "+";
+                if (c.timesUpgraded > 1) {
+                    name += c.timesUpgraded;
+                }
+            }
+        }
+        initializeTitle();
+
         calculateFrames();
 
         calculateKeywords();
@@ -756,22 +768,51 @@ public class DuctTapeCard extends CustomCard
     @Override
     public void upgrade()
     {
-        if (!upgraded) {
-            upgradeName();
-            for (int i=0; i<cards.size(); ++i) {
-                AbstractCard c = cards.get(i).makeStatEquivalentCopy();
-                if (c.canUpgrade()) {
-                    c.upgrade();
-                }
-                cards.set(i, c);
+        timesUpgraded = 0;
+        upgraded = true;
+        for (int i=0; i<cards.size(); ++i) {
+            AbstractCard c = cards.get(i);//.makeStatEquivalentCopy();
+            if (c.canUpgrade()) {
+                c.upgrade();
             }
-            calculateCard();
+            timesUpgraded += c.timesUpgraded;
+            cards.set(i, c);
         }
+        calculateCard();
     }
 
     @Override
     public AbstractCard makeCopy()
     {
         return new DuctTapeCard(cards);
+    }
+
+    @Override
+    public AbstractCard makeStatEquivalentCopy()
+    {
+        DuctTapeCard card = (DuctTapeCard) makeCopy();
+
+        for (int i=0; i<cards.size(); ++i) {
+            card.cards.set(i, cards.get(i).makeStatEquivalentCopy());
+        }
+
+        card.name = this.name;
+        card.target = this.target;
+        card.upgraded = this.upgraded;
+        card.timesUpgraded = this.timesUpgraded;
+        card.baseDamage = this.baseDamage;
+        card.baseBlock = this.baseBlock;
+        card.baseMagicNumber = this.baseMagicNumber;
+        card.cost = this.cost;
+        card.costForTurn = this.costForTurn;
+        card.isCostModified = this.isCostModified;
+        card.isCostModifiedForTurn = this.isCostModifiedForTurn;
+        card.inBottleLightning = this.inBottleLightning;
+        card.inBottleFlame = this.inBottleFlame;
+        card.inBottleTornado = this.inBottleTornado;
+        card.isSeen = this.isSeen;
+        card.isLocked = this.isLocked;
+        card.misc = this.misc;
+        return card;
     }
 }
