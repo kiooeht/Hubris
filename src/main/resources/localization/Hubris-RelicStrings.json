@@ -232,10 +232,9 @@
   },
   "hubris:ClockworkCow": {
     "NAME": "Clockwork Cow",
-    "FLAVOR": "\"Moo.\" - Cows",
+    "FLAVOR": "\"Moo.\"",
     "DESCRIPTIONS": [
-      "Every #b10th card you #yCycle, deal #b",
-      " damage to ALL enemies."
+      "Cards can cycle one additional time per turn."
     ]
   },
   "hubris:HollowSoul": {
