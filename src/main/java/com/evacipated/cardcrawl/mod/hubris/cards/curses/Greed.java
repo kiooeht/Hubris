@@ -18,7 +18,7 @@ import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 public class Greed extends CustomCard
 {
     public static final String ID = "hubris:Greed";
-    public static final String IMG = "images/cards/potOfGreed.png";
+    public static final String IMG = null;
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
