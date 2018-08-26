@@ -20,7 +20,8 @@ public class RenderCurseEnergyCost
             Wrath.ID,
             Sloth.ID,
             Lust.ID,
-            Envy.ID
+            Envy.ID,
+            Greed.ID
     );
     private static String save_ID;
 
