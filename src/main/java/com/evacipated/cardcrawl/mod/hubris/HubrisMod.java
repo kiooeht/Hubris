@@ -3,7 +3,6 @@ package com.evacipated.cardcrawl.mod.hubris;
 import basemod.BaseMod;
 import basemod.helpers.RelicType;
 import basemod.interfaces.*;
-import com.badlogic.gdx.Gdx;
 import com.evacipated.cardcrawl.mod.hubris.events.shrines.TheFatedDie;
 import com.evacipated.cardcrawl.mod.hubris.events.shrines.UpdateBodyText;
 import com.evacipated.cardcrawl.mod.hubris.events.thebeyond.TheBottler;
@@ -30,7 +29,6 @@ import java.io.IOException;
 import java.lang.reflect.Modifier;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -276,7 +274,9 @@ public class HubrisMod implements
             System.out.println(classInfo.getClassName());
             AbstractCard card = (AbstractCard) cls.newInstance();
             BaseMod.addCard(card);
-            if (!cls.isAnnotationPresent(CardNoUnlock.class)) {
+            if (cls.isAnnotationPresent(CardNoSeen.class)) {
+                UnlockTracker.hardUnlockOverride(card.cardID);
+            } else {
                 UnlockTracker.unlockCard(card.cardID);
             }
         }

@@ -1,7 +1,7 @@
 package com.evacipated.cardcrawl.mod.hubris.cards.colorless;
 
 import basemod.abstracts.CustomCard;
-import com.evacipated.cardcrawl.mod.hubris.CardNoUnlock;
+import com.evacipated.cardcrawl.mod.hubris.CardNoSeen;
 import com.evacipated.cardcrawl.mod.hubris.actions.unique.RareCodexAction;
 import com.evacipated.cardcrawl.mod.hubris.actions.unique.ReverseEnlightenmentAction;
 import com.evacipated.cardcrawl.mod.hubris.cards.curses.NaturalOne;
@@ -26,7 +26,7 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import java.util.ArrayList;
 import java.util.List;
 
-@CardNoUnlock
+@CardNoSeen
 public class Icosahedron extends CustomCard
 {
     public static final String ID = "hubris:Icosahedron";

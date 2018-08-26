@@ -1,7 +1,7 @@
 package com.evacipated.cardcrawl.mod.hubris.cards.colorless;
 
 import basemod.abstracts.CustomCard;
-import com.evacipated.cardcrawl.mod.hubris.CardNoUnlock;
+import com.evacipated.cardcrawl.mod.hubris.CardNoSeen;
 import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.AlwaysRetainField;
 import com.megacrit.cardcrawl.actions.unique.CalculatedGambleAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -11,7 +11,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-@CardNoUnlock
+@CardNoSeen
 public class Mulligan extends CustomCard
 {
     public static final String ID = "hubris:Mulligan";

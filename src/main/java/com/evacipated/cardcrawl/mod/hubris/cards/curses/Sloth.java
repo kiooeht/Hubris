@@ -1,7 +1,7 @@
 package com.evacipated.cardcrawl.mod.hubris.cards.curses;
 
 import basemod.abstracts.CustomCard;
-import com.evacipated.cardcrawl.mod.hubris.CardNoUnlock;
+import com.evacipated.cardcrawl.mod.hubris.CardNoSeen;
 import com.evacipated.cardcrawl.mod.hubris.powers.SlothPower;
 import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.AutoplayField;
 import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.SoulboundField;
@@ -14,7 +14,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-@CardNoUnlock
+@CardNoSeen
 public class Sloth extends CustomCard
 {
     public static final String ID = "hubris:Sloth";

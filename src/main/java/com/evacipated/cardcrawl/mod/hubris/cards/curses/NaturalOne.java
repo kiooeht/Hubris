@@ -1,7 +1,7 @@
 package com.evacipated.cardcrawl.mod.hubris.cards.curses;
 
 import basemod.abstracts.CustomCard;
-import com.evacipated.cardcrawl.mod.hubris.CardNoUnlock;
+import com.evacipated.cardcrawl.mod.hubris.CardNoSeen;
 import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.SoulboundField;
 import com.megacrit.cardcrawl.actions.unique.LoseEnergyAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
@@ -13,7 +13,7 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.BlueCandle;
 
-@CardNoUnlock
+@CardNoSeen
 public class NaturalOne extends CustomCard
 {
     public static final String ID = "hubris:NaturalOne";
