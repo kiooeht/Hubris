@@ -6,7 +6,6 @@ import com.evacipated.cardcrawl.mod.hubris.powers.SlothPower;
 import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.AutoplayField;
 import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.SoulboundField;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.unique.LoseEnergyAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -36,7 +35,6 @@ public class Sloth extends CustomCard
     @Override
     public void use(AbstractPlayer p, AbstractMonster m)
     {
-        AbstractDungeon.actionManager.addToBottom(new LoseEnergyAction(AbstractDungeon.player.energy.energy));
         AbstractDungeon.player.energy.energy = 0;
         if (!p.hasPower(ID)) {
             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new SlothPower(p)));
