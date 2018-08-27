@@ -1,7 +1,7 @@
 {
   "hubris:Hubris": {
     "NAME": "Hubris",
-    "DESCRIPTION": "Innate. Autoplay. NL Gain 2 Strength and lose 1 Dexterity. NL Soulbound."
+    "DESCRIPTION": "Innate. Autoplay. NL Shuffle a random Deadly Sin Curse into your draw pile. NL Purge. Soulbound."
   },
   "hubris:Icosahedron": {
     "NAME": "Icosahedron",
