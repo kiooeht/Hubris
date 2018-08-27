@@ -1,7 +1,8 @@
 package com.evacipated.cardcrawl.mod.hubris.cards.blue;
 
 import basemod.abstracts.CustomCard;
-import com.evacipated.cardcrawl.mod.hubris.actions.unique.WhileAction;
+import com.evacipated.cardcrawl.mod.hubris.powers.DoWhilePower;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -9,27 +10,24 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-public class While extends CustomCard
+public class DoWhile extends CustomCard
 {
-    public static final String ID = "hubris:While";
+    public static final String ID = "hubris:DoWhile";
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
-    private static final int COST = 0;
+    private static final int COST = 1;
+    private static final int UPGRADE_COST = 0;
 
-    public While()
+    public DoWhile()
     {
         super(ID, NAME, null,  COST, DESCRIPTION, CardType.SKILL, CardColor.BLUE, CardRarity.RARE, CardTarget.SELF);
-
-        exhaust = true;
-        rawDescription = DESCRIPTION + cardStrings.EXTENDED_DESCRIPTION[0];
-        initializeDescription();
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m)
     {
-        AbstractDungeon.actionManager.addToBottom(new WhileAction());
+        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new DoWhilePower(p)));
     }
 
     @Override
@@ -37,15 +35,13 @@ public class While extends CustomCard
     {
         if (!upgraded) {
             upgradeName();
-            exhaust = false;
-            rawDescription = DESCRIPTION;
-            initializeDescription();
+            upgradeBaseCost(UPGRADE_COST);
         }
     }
 
     @Override
     public AbstractCard makeCopy()
     {
-        return new While();
+        return new DoWhile();
     }
 }

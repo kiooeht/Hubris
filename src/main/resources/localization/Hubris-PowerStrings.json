@@ -82,10 +82,10 @@
       " HP."
     ]
   },
-  "hubris:WhilePower": {
-    "NAME": "While",
+  "hubris:DoWhilePower": {
+    "NAME": "Do While",
     "DESCRIPTIONS": [
-      "Draw and play the top card of your draw pile. Repeat until unable to play the drawn card."
+      "This turn, play your next card at +1 [E] until you run out of [E]."
     ]
   },
   "hubris:ArmorPiercing": {

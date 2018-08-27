@@ -134,12 +134,9 @@
       "."
     ]
   },
-  "hubris:While": {
-    "NAME": "While",
-    "DESCRIPTION": "Draw and play the top card of your draw pile. Repeat until unable to play the drawn card.",
-    "EXTENDED_DESCRIPTION": [
-      " Exhaust."
-    ]
+  "hubris:DoWhile": {
+    "NAME": "Do While",
+    "DESCRIPTION": "This turn, your next card is repeated at NL +1 [E] until you run out of [E]."
   },
   "hubris:TrickCloak": {
     "NAME": "Trick Cloak",
