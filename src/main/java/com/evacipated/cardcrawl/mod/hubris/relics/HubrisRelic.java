@@ -13,10 +13,5 @@ public abstract class HubrisRelic extends AbstractRelic
         img = ImageMaster.loadImage(HubrisMod.assetPath("images/relics/" + imgName));
         largeImg = ImageMaster.loadImage(HubrisMod.assetPath("images/largeRelics/" + imgName));
         outlineImg = ImageMaster.loadImage(HubrisMod.assetPath("images/relics/outline/" + imgName));
-        System.out.println("OUTLINE PATH: " + HubrisMod.assetPath("images/relics/outline/" + imgName));
-        if (outlineImg == null) {
-            System.out.println("FAILED RELIC OUTLINE: " + setId);
-            System.out.println(HubrisMod.assetPath("images/relics/outline") + imgName);
-        }
     }
 }
