@@ -1,4 +1,4 @@
-package com.evacipated.cardcrawl.mod.hubris.relics;
+package com.evacipated.cardcrawl.mod.hubris.relics.abstracts;
 
 import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
