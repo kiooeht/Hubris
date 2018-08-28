@@ -19,17 +19,15 @@ public class Test447 extends HubrisRelic
     }
 
     @Override
-    public void obtain()
+    public void onEquip()
     {
-        if (AbstractDungeon.player.hasRelic(Backtick.ID)) {
-            for (int i=0; i<AbstractDungeon.player.relics.size(); ++i) {
-                if (AbstractDungeon.player.relics.get(i).relicId.equals(Backtick.ID)) {
-                    instantObtain(AbstractDungeon.player, i, true);
-                }
-            }
-        } else {
-            super.obtain();
-        }
+        AbstractDungeon.player.energy.energyMaster += 1;
+    }
+
+    @Override
+    public void onUnequip()
+    {
+        AbstractDungeon.player.energy.energyMaster -= 1;
     }
 
     @Override
