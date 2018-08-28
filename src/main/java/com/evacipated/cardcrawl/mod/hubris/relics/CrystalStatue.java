@@ -6,7 +6,7 @@ import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-public class CrystalStatue extends AbstractRelic
+public class CrystalStatue extends HubrisRelic
 {
     public static final String ID = "hubris:CrystalStatue";
     private static final int AMT = 20;

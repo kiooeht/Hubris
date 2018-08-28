@@ -75,6 +75,11 @@ public class HubrisMod implements
         BaseMod.subscribe(new HubrisMod());
     }
 
+    public static String assetPath(String path)
+    {
+        return "hubrisAssets/" + path;
+    }
+
     public static void loadData()
     {
         logger.info("Loading Save Data");
@@ -135,7 +140,7 @@ public class HubrisMod implements
     @Override
     public void receivePostInitialize()
     {
-        BaseMod.registerModBadge(ImageMaster.loadImage("images/hubris/modBadge.png"), "Hubris", "kiooeht", "TODO", null);
+        BaseMod.registerModBadge(ImageMaster.loadImage(assetPath("images/hubris/modBadge.png")), "Hubris", "kiooeht", "TODO", null);
 
         BaseMod.addEvent(TheFatedDie.ID, TheFatedDie.class);
         BaseMod.addEvent(Experiment.ID, Experiment.class, TheCity.ID);
@@ -227,12 +232,12 @@ public class HubrisMod implements
     @Override
     public void receiveEditStrings()
     {
-        BaseMod.loadCustomStringsFile(RelicStrings.class, "localization/Hubris-RelicStrings.json");
-        BaseMod.loadCustomStringsFile(CardStrings.class, "localization/Hubris-CardStrings.json");
-        BaseMod.loadCustomStringsFile(CardStrings.class, "localization/Hubris-IcosahedronStrings.json");
-        BaseMod.loadCustomStringsFile(OrbStrings.class, "localization/Hubris-OrbStrings.json");
-        BaseMod.loadCustomStringsFile(PowerStrings.class, "localization/Hubris-PowerStrings.json");
-        BaseMod.loadCustomStringsFile(EventStrings.class, "localization/Hubris-EventStrings.json");
+        BaseMod.loadCustomStringsFile(RelicStrings.class, assetPath("localization/Hubris-RelicStrings.json"));
+        BaseMod.loadCustomStringsFile(CardStrings.class, assetPath("localization/Hubris-CardStrings.json"));
+        BaseMod.loadCustomStringsFile(CardStrings.class, assetPath("localization/Hubris-IcosahedronStrings.json"));
+        BaseMod.loadCustomStringsFile(OrbStrings.class, assetPath("localization/Hubris-OrbStrings.json"));
+        BaseMod.loadCustomStringsFile(PowerStrings.class, assetPath("localization/Hubris-PowerStrings.json"));
+        BaseMod.loadCustomStringsFile(EventStrings.class, assetPath("localization/Hubris-EventStrings.json"));
     }
 
     private static void autoAddCards() throws URISyntaxException, ClassNotFoundException, IllegalAccessException, InstantiationException

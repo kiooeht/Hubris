@@ -6,7 +6,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-public class DEPRECATED_CrystalFace extends AbstractRelic
+public class DEPRECATED_CrystalFace extends HubrisRelic
 {
     public static final String ID = "hubris:CrystalFace";
     private static final int AMT = 20;

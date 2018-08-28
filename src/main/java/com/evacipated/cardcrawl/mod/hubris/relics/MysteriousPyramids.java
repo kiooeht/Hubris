@@ -14,8 +14,9 @@ import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
 
-public class MysteriousPyramids extends CustomBottleRelic
+public class MysteriousPyramids extends HubrisRelic implements CustomBottleRelic
 {
     public static final String ID = "hubris:MysteriousPyramids";
     private static final int COUNT = 2;
@@ -26,7 +27,13 @@ public class MysteriousPyramids extends CustomBottleRelic
 
     public MysteriousPyramids()
     {
-        super(ID, "pyramids.png", RelicTier.UNCOMMON, LandingSound.CLINK, PyramidsField.inPyramids);
+        super(ID, "pyramids.png", RelicTier.UNCOMMON, LandingSound.CLINK);
+    }
+
+    @Override
+    public Predicate<AbstractCard> isOnCard()
+    {
+        return PyramidsField.inPyramids::get;
     }
 
     @Override

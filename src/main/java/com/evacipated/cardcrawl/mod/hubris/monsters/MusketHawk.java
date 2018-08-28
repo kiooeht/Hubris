@@ -2,6 +2,7 @@ package com.evacipated.cardcrawl.mod.hubris.monsters;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
+import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.hubris.actions.common.PureDamageAction;
 import com.evacipated.cardcrawl.mod.hubris.powers.ArmorPiercingPower;
 import com.evacipated.cardcrawl.mod.hubris.powers.IrradiatedRoundsPower;
@@ -47,7 +48,7 @@ public class MusketHawk extends AbstractMonster
 
     public MusketHawk()
     {
-        super(NAME, ID, HP, -8.0f, 80.0f, 330, 530, "images/monsters/theCity/musketHawk.png", -100.0f, -100.0f);
+        super(NAME, ID, HP, -8.0f, 80.0f, 330, 530, HubrisMod.assetPath("images/monsters/theCity/musketHawk.png"), -100.0f, -100.0f);
         /*
         loadAnimation("images/monsters/theBottom/cultist/skeleton.atlas", "images/monsters/theBottom/cultist/skeleton.json", 0.75F);
 

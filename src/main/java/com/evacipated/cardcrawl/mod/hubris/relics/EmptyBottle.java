@@ -10,7 +10,7 @@ import com.megacrit.cardcrawl.ui.panels.PotionPopUp;
 
 import java.lang.reflect.Field;
 
-public class EmptyBottle extends AbstractRelic
+public class EmptyBottle extends HubrisRelic
 {
     public static final String ID = "hubris:EmptyBottle";
     public static final int POTION_USES = 2;

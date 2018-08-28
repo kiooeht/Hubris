@@ -9,7 +9,7 @@ import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.relics.MedicalKit;
 
-public class MedicalManual extends AbstractRelic
+public class MedicalManual extends HubrisRelic
 {
     public static final String ID = "hubris:MedicalManual";
     public static final int HEAL = 1;

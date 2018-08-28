@@ -7,7 +7,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-public class ScarierMask extends AbstractRelic
+public class ScarierMask extends HubrisRelic
 {
     public static final String ID = "hubris:ScarierMask";
     private AbstractMonster toRemoveAfterEscape = null;

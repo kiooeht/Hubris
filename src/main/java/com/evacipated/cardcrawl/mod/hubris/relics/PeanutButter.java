@@ -5,7 +5,7 @@ import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-public class PeanutButter extends AbstractRelic
+public class PeanutButter extends HubrisRelic
 {
     public static final String ID = "hubris:PeanutButter";
     private static final int TEMP_HP_AMOUNT = 10;

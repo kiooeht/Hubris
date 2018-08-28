@@ -2,6 +2,7 @@ package com.evacipated.cardcrawl.mod.hubris.cards.colorless;
 
 import basemod.abstracts.CustomCard;
 import com.evacipated.cardcrawl.mod.hubris.CardNoSeen;
+import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.hubris.actions.unique.RareCodexAction;
 import com.evacipated.cardcrawl.mod.hubris.actions.unique.ReverseEnlightenmentAction;
 import com.evacipated.cardcrawl.mod.hubris.cards.curses.NaturalOne;
@@ -30,7 +31,7 @@ import java.util.List;
 public class Icosahedron extends CustomCard
 {
     public static final String ID = "hubris:Icosahedron";
-    public static final String IMG = "images/cards/icosahedron.png";
+    public static final String IMG = HubrisMod.assetPath("images/cards/icosahedron.png");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;

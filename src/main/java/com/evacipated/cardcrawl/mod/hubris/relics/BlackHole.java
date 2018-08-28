@@ -5,7 +5,7 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-public class BlackHole extends AbstractRelic
+public class BlackHole extends HubrisRelic
 {
     public static final String ID = "hubris:BlackHole";
 

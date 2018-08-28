@@ -11,7 +11,9 @@ import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
-public class BottledRain extends CustomBottleRelic
+import java.util.function.Predicate;
+
+public class BottledRain extends HubrisRelic implements CustomBottleRelic
 {
     public static final String ID = "hubris:BottledRain";
     private boolean cardSelected = true;
@@ -21,7 +23,13 @@ public class BottledRain extends CustomBottleRelic
 
     public BottledRain()
     {
-        super(ID, "bottledRain.png", RelicTier.UNCOMMON, LandingSound.CLINK, BottleRainField.inBottleRain);
+        super(ID, "bottledRain.png", RelicTier.UNCOMMON, LandingSound.CLINK);
+    }
+
+    @Override
+    public Predicate<AbstractCard> isOnCard()
+    {
+        return BottleRainField.inBottleRain::get;
     }
 
     @Override

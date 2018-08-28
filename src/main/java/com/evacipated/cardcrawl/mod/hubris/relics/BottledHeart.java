@@ -9,7 +9,7 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.relics.MedicalKit;
 import com.megacrit.cardcrawl.relics.Necronomicon;
 
-public class BottledHeart extends AbstractRelic
+public class BottledHeart extends HubrisRelic
 {
     public static final String ID = "hubris:BottledHeart";
     private static final int NECRONOMICON_BONUS = 10;

@@ -7,7 +7,7 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-public class FunFungus extends AbstractRelic
+public class FunFungus extends HubrisRelic
 {
     public static final String ID = "hubris:FunFungus";
     private static final int AMT = 5;

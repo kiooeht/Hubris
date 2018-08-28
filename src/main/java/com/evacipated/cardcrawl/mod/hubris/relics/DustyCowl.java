@@ -9,7 +9,7 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 
 import java.util.Random;
 
-public class DustyCowl extends AbstractRelic
+public class DustyCowl extends HubrisRelic
 {
     public static final String ID = "hubris:DustyCowl";
     private static final int BLOCK = 3;

@@ -15,7 +15,7 @@ import com.megacrit.cardcrawl.unlock.UnlockTracker;
 
 import java.util.ArrayList;
 
-public class Backtick extends AbstractRelic
+public class Backtick extends HubrisRelic
 {
     public static final String ID = "hubris:Backtick";
     private boolean relicSelected = true;

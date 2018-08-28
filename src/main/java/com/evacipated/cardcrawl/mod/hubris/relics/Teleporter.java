@@ -6,7 +6,7 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.MonsterRoomBoss;
 import com.megacrit.cardcrawl.rooms.MonsterRoomElite;
 
-public class Teleporter extends AbstractRelic
+public class Teleporter extends HubrisRelic
 {
     public static final String ID = "hubris:Teleporter";
 

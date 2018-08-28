@@ -6,7 +6,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.RegenPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-public class HerbalPaste extends AbstractRelic
+public class HerbalPaste extends HubrisRelic
 {
     public static final String ID = "hubris:HerbalPaste";
     private static final int AMT = 3;

@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DisguiseKit extends AbstractRelic
+public class DisguiseKit extends HubrisRelic
 {
     public static final String ID = "hubris:DisguiseKit";
     public AbstractPlayer.PlayerClass chosenClass = null;

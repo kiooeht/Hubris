@@ -5,7 +5,7 @@ import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.orbs.EmptyOrbSlot;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-public class RGBLights extends AbstractRelic
+public class RGBLights extends HubrisRelic
 {
     public static final String ID = "hubris:RGBLights";
     private static final int AMT = 3;

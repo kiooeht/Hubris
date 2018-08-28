@@ -10,7 +10,7 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PrototypeTalaria extends AbstractRelic
+public class PrototypeTalaria extends HubrisRelic
 {
     public static final String ID = "hubris:PrototypeTalaria";
     private static final int COUNT = 2;

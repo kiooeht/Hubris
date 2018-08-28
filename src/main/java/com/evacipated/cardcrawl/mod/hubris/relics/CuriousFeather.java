@@ -6,7 +6,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.CuriosityPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-public class CuriousFeather extends AbstractRelic
+public class CuriousFeather extends HubrisRelic
 {
     public static final String ID = "hubris:CuriousFeather";
 

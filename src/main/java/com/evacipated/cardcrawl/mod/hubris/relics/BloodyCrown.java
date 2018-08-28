@@ -13,7 +13,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 
-public class BloodyCrown extends AbstractRelic
+public class BloodyCrown extends HubrisRelic
 {
     public static final String ID = "hubris:BloodyCrown";
 

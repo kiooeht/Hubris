@@ -6,7 +6,7 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-public class AstralHammer extends AbstractRelic
+public class AstralHammer extends HubrisRelic
 {
     public static final String ID = "hubris:AstralHammer";
     private static final int COST_DECREASE = -1;

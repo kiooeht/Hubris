@@ -7,7 +7,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-public class Pocketwatch extends AbstractRelic
+public class Pocketwatch extends HubrisRelic
 {
     public static final String ID = "hubris:Pocketwatch";
     private static final int TIME_LIMIT_M = 5; // minutes

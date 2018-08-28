@@ -16,7 +16,7 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.vfx.TextAboveCreatureEffect;
 import javafx.util.Pair;
 
-public class Spice extends AbstractRelic
+public class Spice extends HubrisRelic
 {
     public static final String ID = "hubris:Spice";
     private static final int HP_AMT = 8;

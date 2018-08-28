@@ -17,7 +17,7 @@ import com.megacrit.cardcrawl.vfx.combat.BattleStartEffect;
 
 import java.lang.reflect.Field;
 
-public class HollowSoul extends AbstractRelic
+public class HollowSoul extends HubrisRelic
 {
     public static final String ID = "hubris:HollowSoul";
     private static final int HP_PERCENT = 10;

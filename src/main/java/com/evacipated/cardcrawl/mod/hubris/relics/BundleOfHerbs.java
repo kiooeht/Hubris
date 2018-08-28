@@ -10,7 +10,7 @@ import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.RestRoom;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 
-public class BundleOfHerbs extends AbstractRelic
+public class BundleOfHerbs extends HubrisRelic
 {
     public static final String ID = "hubris:BundleOfHerbs";
 

@@ -16,7 +16,7 @@ import com.megacrit.cardcrawl.saveAndContinue.SaveFileObfuscator;
 
 import java.util.HashMap;
 
-public class TinFlute extends AbstractRelic
+public class TinFlute extends HubrisRelic
 {
     public static final String ID = "hubris:TinFlute";
     private boolean chosen = true;

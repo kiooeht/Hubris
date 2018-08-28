@@ -10,7 +10,7 @@ import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
-public class Zylophone extends AbstractRelic
+public class Zylophone extends HubrisRelic
 {
     public static final String ID = "hubris:Zylophone";
     private boolean cardSelected = true;

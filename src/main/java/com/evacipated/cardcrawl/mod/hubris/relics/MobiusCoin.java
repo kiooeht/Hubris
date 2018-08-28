@@ -4,7 +4,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-public class MobiusCoin extends AbstractRelic
+public class MobiusCoin extends HubrisRelic
 {
     public static final String ID = "hubris:MobiusCoin";
     private static final int GOLD_AMOUNT = 50;

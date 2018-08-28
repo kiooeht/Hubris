@@ -3,7 +3,7 @@ package com.evacipated.cardcrawl.mod.hubris.relics;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-public class Test447 extends AbstractRelic
+public class Test447 extends HubrisRelic
 {
     public static final String ID = "test447";
 

@@ -12,7 +12,7 @@ import com.megacrit.cardcrawl.relics.JuzuBracelet;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.EventRoom;
 
-public class SphereOfDissonance extends AbstractRelic
+public class SphereOfDissonance extends HubrisRelic
 {
     public static final String ID = "hubris:SphereOfDissonance";
     private static final int AMT = 3;

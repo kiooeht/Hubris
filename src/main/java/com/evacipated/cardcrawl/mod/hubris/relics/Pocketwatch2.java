@@ -7,7 +7,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-public class Pocketwatch2 extends AbstractRelic
+public class Pocketwatch2 extends HubrisRelic
 {
     public static final String ID = "hubris:Pocketwatch2";
     private static final int AMT = 6;
