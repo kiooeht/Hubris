@@ -17,6 +17,7 @@ import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.hubris.actions.unique.DuctTapeUseNextAction;
 import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.AlwaysRetainField;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.CardSave;
 import com.megacrit.cardcrawl.cards.DescriptionLine;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
@@ -811,5 +812,16 @@ public class DuctTapeCard extends CustomCard
         card.isLocked = this.isLocked;
         card.misc = this.misc;
         return card;
+    }
+
+    public List<CardSave> makeCardSaves()
+    {
+        ArrayList<CardSave> ret = new ArrayList<>();
+
+        for (AbstractCard card : cards) {
+            ret.add(new CardSave(card.cardID, card.timesUpgraded, card.misc));
+        }
+
+        return ret;
     }
 }

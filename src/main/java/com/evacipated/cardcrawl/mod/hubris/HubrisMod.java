@@ -118,6 +118,7 @@ public class HubrisMod implements
             MysteriousPyramids.load(config);
             Zylophone.load(config);
             EmptyBottle.load(config);
+            DuctTape.load(config);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -134,6 +135,7 @@ public class HubrisMod implements
             MysteriousPyramids.save(config);
             Zylophone.save(config);
             EmptyBottle.save(config);
+            // Duct Tape saving is handled separately
             config.save();
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,6 +1,7 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
 import com.evacipated.cardcrawl.mod.hubris.cards.DuctTapeCard;
+import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.core.Settings;
@@ -12,11 +13,13 @@ import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DuctTape extends AbstractRelic
+public class DuctTape extends HubrisRelic
 {
     public static final String ID = "hubris:DuctTape";
     private static final int COUNT = 2;
     private boolean cardSelected = true;
+
+    private static final String CONFIG_KEY = "ductTape_";
 
     public DuctTape()
     {
@@ -27,6 +30,43 @@ public class DuctTape extends AbstractRelic
     public String getUpdatedDescription()
     {
         return DESCRIPTIONS[0];
+    }
+
+    public static void save(SpireConfig config, int startIndex, int endIndex)
+    {
+        if (AbstractDungeon.player != null && AbstractDungeon.player.hasRelic(ID)) {
+            for (int i=startIndex; i<endIndex; ++i) {
+                config.setInt(CONFIG_KEY + (i - startIndex), i);
+            }
+        } else {
+            config.remove(CONFIG_KEY);
+        }
+    }
+
+    public static void load(SpireConfig config)
+    {
+        if (AbstractDungeon.player.hasRelic(ID)) {
+            int insertIndex = -1;
+            List<AbstractCard> cards = new ArrayList<>(COUNT);
+            for (int i=0; i<COUNT; ++i) {
+                if (config.has(CONFIG_KEY + i)) {
+                    int cardIndex = config.getInt(CONFIG_KEY + i);
+
+                    if (cardIndex >= 0 && cardIndex < AbstractDungeon.player.masterDeck.group.size()) {
+                        if (insertIndex == -1) {
+                            insertIndex = cardIndex;
+                        }
+                        AbstractCard c = AbstractDungeon.player.masterDeck.group.get(cardIndex);
+                        if (c == null) {
+                            return;
+                        }
+                        cards.add(c);
+                    }
+                }
+            }
+            AbstractDungeon.player.masterDeck.group.removeAll(cards);
+            AbstractDungeon.player.masterDeck.group.add(insertIndex, new DuctTapeCard(cards));
+        }
     }
 
     @Override
@@ -57,14 +97,11 @@ public class DuctTape extends AbstractRelic
             for (int i=0; i<COUNT; ++i) {
                 cards.add(AbstractDungeon.gridSelectScreen.selectedCards.get(i));
                 AbstractDungeon.player.masterDeck.group.remove(AbstractDungeon.gridSelectScreen.selectedCards.get(i));
-                //PyramidsField.inPyramids.set(cards.get(i), true);
             }
             AbstractDungeon.effectList.add(new ShowCardAndObtainEffect(new DuctTapeCard(cards), Settings.WIDTH / 2.0f, Settings.HEIGHT / 2.0f));
 
             AbstractDungeon.getCurrRoom().phase = AbstractRoom.RoomPhase.COMPLETE;
             AbstractDungeon.gridSelectScreen.selectedCards.clear();
-
-            //setDescriptionAfterLoading();
         }
     }
 
