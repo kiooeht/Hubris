@@ -1,6 +1,8 @@
 package com.evacipated.cardcrawl.mod.hubris;
 
 import basemod.BaseMod;
+import basemod.ModLabeledToggleButton;
+import basemod.ModPanel;
 import basemod.helpers.RelicType;
 import basemod.interfaces.*;
 import com.evacipated.cardcrawl.mod.hubris.events.shrines.TheFatedDie;
@@ -14,7 +16,9 @@ import com.evacipated.cardcrawl.modthespire.Loader;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.dungeons.TheBeyond;
 import com.megacrit.cardcrawl.dungeons.TheCity;
@@ -31,6 +35,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Properties;
 
 @SpireInitializer
 public class HubrisMod implements
@@ -43,6 +48,8 @@ public class HubrisMod implements
         StartGameSubscriber
 {
     public static final Logger logger = LogManager.getLogger(HubrisMod.class.getSimpleName());
+
+    private static SpireConfig modConfig = null;
 
     // Crossover checks
     public static final boolean hasReplayTheSpire;
@@ -73,11 +80,31 @@ public class HubrisMod implements
     public static void initialize()
     {
         BaseMod.subscribe(new HubrisMod());
+
+        try {
+            Properties defaults = new Properties();
+            defaults.put("startingHubris", Boolean.toString(true));
+            modConfig = new SpireConfig("Hubris", "Config", defaults);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static String assetPath(String path)
     {
         return "hubrisAssets/" + path;
+    }
+
+    public static boolean startingHubris()
+    {
+        System.out.println("startingHubris()");
+        System.out.println(modConfig);
+        if (modConfig == null) {
+            return true;
+        }
+
+        System.out.println(modConfig.getBool("startingHubris"));
+        return modConfig.getBool("startingHubris");
     }
 
     public static void loadData()
@@ -140,7 +167,24 @@ public class HubrisMod implements
     @Override
     public void receivePostInitialize()
     {
-        BaseMod.registerModBadge(ImageMaster.loadImage(assetPath("images/hubris/modBadge.png")), "Hubris", "kiooeht", "TODO", null);
+        ModPanel settingsPanel = new ModPanel();
+        ModLabeledToggleButton hubrisBtn = new ModLabeledToggleButton("Add Hubris curse to starting deck",
+                350, 600, Settings.CREAM_COLOR, FontHelper.charDescFont,
+                startingHubris(), settingsPanel, l -> {},
+                button ->
+                {
+                    if (modConfig != null) {
+                        modConfig.setBool("startingHubris", button.enabled);
+                        try {
+                            modConfig.save();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+        settingsPanel.addUIElement(hubrisBtn);
+
+        BaseMod.registerModBadge(ImageMaster.loadImage(assetPath("images/hubris/modBadge.png")), "Hubris", "kiooeht", "TODO", settingsPanel);
 
         BaseMod.addEvent(TheFatedDie.ID, TheFatedDie.class);
         BaseMod.addEvent(Experiment.ID, Experiment.class, TheCity.ID);
