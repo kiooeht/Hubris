@@ -24,7 +24,7 @@ public class Lust extends CustomCard
 
     public Lust()
     {
-        super(ID, NAME, IMG, COST, DESCRIPTION, CardType.SKILL, CardColor.CURSE, CardRarity.CURSE, CardTarget.ALL_ENEMY);
+        super(ID, NAME, IMG, COST, DESCRIPTION, CardType.SKILL, CardColor.CURSE, CardRarity.SPECIAL, CardTarget.ALL_ENEMY);
 
         SoulboundField.soulbound.set(this, true);
         AutoplayField.autoplay.set(this, true);

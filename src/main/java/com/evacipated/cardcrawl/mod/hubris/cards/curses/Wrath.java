@@ -31,7 +31,7 @@ public class Wrath extends CustomCard
 
     public Wrath()
     {
-        super(ID, NAME, IMG, COST, DESCRIPTION, CardType.ATTACK, CardColor.CURSE, CardRarity.CURSE, CardTarget.ALL_ENEMY);
+        super(ID, NAME, IMG, COST, DESCRIPTION, CardType.ATTACK, CardColor.CURSE, CardRarity.SPECIAL, CardTarget.ALL_ENEMY);
 
         SoulboundField.soulbound.set(this, true);
         AutoplayField.autoplay.set(this, true);
