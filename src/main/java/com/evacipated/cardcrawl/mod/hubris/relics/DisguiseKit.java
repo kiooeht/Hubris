@@ -104,6 +104,7 @@ public class DisguiseKit extends HubrisRelic
         super.update();
 
         if (pickCard && !AbstractDungeon.isScreenUp && !AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
+            pickCard = false;
             DisguiseKitOption selected = (DisguiseKitOption) AbstractDungeon.gridSelectScreen.selectedCards.get(0);
             AbstractDungeon.gridSelectScreen.selectedCards.clear();
 
