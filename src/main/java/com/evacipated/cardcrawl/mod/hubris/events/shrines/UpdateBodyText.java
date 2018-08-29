@@ -1,5 +1,6 @@
 package com.evacipated.cardcrawl.mod.hubris.events.shrines;
 
+import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -41,7 +42,7 @@ public class UpdateBodyText extends AbstractImageEvent
 
     public UpdateBodyText()
     {
-        super(NAME, DESCRIPTIONS[0], "images/events/updatebodytext1.jpg");
+        super(NAME, DESCRIPTIONS[0], HubrisMod.assetPath("images/events/updatebodytext1.jpg"));
 
         imageEventText.setDialogOption(OPTIONS[0]);
     }
@@ -75,7 +76,7 @@ public class UpdateBodyText extends AbstractImageEvent
     {
         switch (curScreen) {
             case INTRO:
-                imageEventText.loadImage("images/events/updatebodytext2.jpg");
+                imageEventText.loadImage(HubrisMod.assetPath("images/events/updatebodytext2.jpg"));
                 imageEventText.updateBodyText(DESCRIPTIONS[1]);
                 imageEventText.updateDialogOption(0, OPTIONS[1], !AbstractDungeon.player.masterDeck.hasUpgradableCards());
                 imageEventText.setDialogOption(OPTIONS[2]);
