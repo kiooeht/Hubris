@@ -70,6 +70,13 @@
             <systemPath>${basedir}/../_ModTheSpire/mods/InfiniteSpire.jar</systemPath>
         </dependency>
         <dependency>
+            <groupId>coloredmap</groupId>
+            <artifactId>coloredmap</artifactId>
+            <version>1.2.1</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/../_ModTheSpire/mods/ColoredMap.jar</systemPath>
+        </dependency>
+        <dependency>
             <groupId>com.megacrit.cardcrawl</groupId>
             <artifactId>slaythespire</artifactId>
             <version>${SlayTheSpire.version}</version>

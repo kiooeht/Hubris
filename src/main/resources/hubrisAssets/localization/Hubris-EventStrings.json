@@ -75,5 +75,26 @@
       "Choose a Card to Upgrade.",
       "Add a card to your deck."
     ]
+  },
+  "hubris:Nailsmith" : {
+    "NAME":  "Nailsmith",
+    "DESCRIPTIONS": [
+      "MAIN",
+      "PURE NAIL",
+      "UPGRADE",
+      "IGNORE"
+    ],
+    "OPTIONS": [
+      "[Forge] #gUpgrade #ga #gcard.",
+      "[Locked] Requires: Upgradable Card.",
+      "[Leave]",
+      "Choose a Card to Upgrade.",
+      "[Reforge Nail] #rLose #r",
+      " #rGold #rand #rtwo #rUpgraded #rcards. #gUpgrade ",
+      ".",
+      "[Locked] Requires: ",
+      " Gold and two Upgraded cards.",
+      "Choose 2 Cards to Remove."
+    ]
   }
 }

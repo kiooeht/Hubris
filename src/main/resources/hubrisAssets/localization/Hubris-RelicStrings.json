@@ -326,5 +326,19 @@
     "DESCRIPTIONS": [
       "Whenever you #yChannel a #yLightning, trigger its passive ability."
     ]
+  },
+  "hubris:OldNail": {
+    "NAME": "Old Nail",
+    "FLAVOR": "Blunt with age and wear.",
+    "DESCRIPTIONS": [
+      "Perhaps it can be reforged..."
+    ]
+  },
+  "hubris:PureNail": {
+    "NAME": "Pure Nail",
+    "FLAVOR": "Crafted to perfection.",
+    "DESCRIPTIONS": [
+      "Attacks deal double damage."
+    ]
   }
 }
