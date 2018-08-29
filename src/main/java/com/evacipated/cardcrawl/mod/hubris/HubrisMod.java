@@ -258,6 +258,7 @@ public class HubrisMod implements
         //BaseMod.addRelic(new BloodyCrown(), RelicType.SHARED);
 
         BaseMod.addRelic(new RGBLights(), RelicType.BLUE);
+        BaseMod.addRelic(new BallOfEels(), RelicType.BLUE);
 
         if (hasConstructMod) {
             BaseMod.addRelicToCustomPool(new ClockworkCow(), constructmod.patches.AbstractCardEnum.CONSTRUCTMOD);
