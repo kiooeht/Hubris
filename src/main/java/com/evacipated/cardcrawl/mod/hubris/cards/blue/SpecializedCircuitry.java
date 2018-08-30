@@ -40,14 +40,9 @@ public class SpecializedCircuitry extends CustomCard implements ModalChoice.Call
         AbstractDungeon.player = new FakePlayer();
 
         // Base game orbs
-        allowedOrbs.add(new Lightning());
-        allowedOrbs.add(new Frost());
-        allowedOrbs.add(new Dark());
-
-        // Replay the Spire orbs
-        if (HubrisMod.hasReplayTheSpire) {
-            allowedOrbs.add(new HellFireOrb());
-        }
+        addOrbType(new Lightning());
+        addOrbType(new Frost());
+        addOrbType(new Dark());
 
         AbstractDungeon.player = realPlayer;
     }
