@@ -43,6 +43,19 @@ public class BottledHeart extends HubrisRelic
         setCounter(c);
     }
 
+    public int onMaxHPChange(int amount)
+    {
+        if (counter >= 0) {
+            flash();
+            setCounter(counter + amount);
+            if (counter < 0) {
+                setCounter(0);
+            }
+            return 0;
+        }
+        return amount;
+    }
+
     @Override
     public void atBattleStart()
     {

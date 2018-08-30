@@ -45,7 +45,8 @@ public class HubrisMod implements
         EditKeywordsSubscriber,
         EditStringsSubscriber,
         PostDeathSubscriber,
-        StartGameSubscriber
+        StartGameSubscriber,
+        MaxHPChangeSubscriber
 {
     public static final Logger logger = LogManager.getLogger(HubrisMod.class.getSimpleName());
 
@@ -334,5 +335,15 @@ public class HubrisMod implements
                 UnlockTracker.unlockCard(card.cardID);
             }
         }
+    }
+
+    @Override
+    public int receiveMapHPChange(int amount)
+    {
+        if (AbstractDungeon.player != null && AbstractDungeon.player.hasRelic(BottledHeart.ID)) {
+            BottledHeart relic = (BottledHeart) AbstractDungeon.player.getRelic(BottledHeart.ID);
+            return relic.onMaxHPChange(amount);
+        }
+        return amount;
     }
 }
