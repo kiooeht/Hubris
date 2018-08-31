@@ -331,13 +331,9 @@
     "NAME": "Old Nail",
     "FLAVOR": "Blunt with age and wear.",
     "DESCRIPTIONS": [
-      "Perhaps it can be reforged..."
-    ]
-  },
-  "hubris:PureNail": {
-    "NAME": "Pure Nail",
-    "FLAVOR": "Crafted to perfection.",
-    "DESCRIPTIONS": [
+      "Perhaps it can be reforged...",
+      "Pure Nail",
+      "Crafted to perfection.",
       "Attacks deal double damage."
     ]
   }

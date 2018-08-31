@@ -258,7 +258,6 @@ public class HubrisMod implements
         BaseMod.addRelic(new DuctTape(), RelicType.SHARED);
         //BaseMod.addRelic(new BloodyCrown(), RelicType.SHARED);
         BaseMod.addRelic(new OldNail(), RelicType.SHARED);
-        BaseMod.addRelic(new PureNail(), RelicType.SHARED);
 
         BaseMod.addRelic(new RGBLights(), RelicType.BLUE);
         BaseMod.addRelic(new BallOfEels(), RelicType.BLUE);

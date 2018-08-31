@@ -1,7 +1,6 @@
 package com.evacipated.cardcrawl.mod.hubris.events.thebeyond;
 
 import com.evacipated.cardcrawl.mod.hubris.relics.OldNail;
-import com.evacipated.cardcrawl.mod.hubris.relics.PureNail;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -11,6 +10,7 @@ import com.megacrit.cardcrawl.events.AbstractImageEvent;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.RelicLibrary;
 import com.megacrit.cardcrawl.localization.EventStrings;
+import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.relics.Circlet;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.vfx.UpgradeShineEffect;
@@ -87,12 +87,9 @@ public class Nailsmith extends AbstractImageEvent
                     AbstractDungeon.player.masterDeck.removeCard(card1);
                     AbstractDungeon.player.masterDeck.removeCard(card2);
 
-                    if (AbstractDungeon.player.hasRelic(PureNail.ID)) {
-                        AbstractDungeon.getCurrRoom().spawnRelicAndObtain(Settings.WIDTH / 2.0f, Settings.HEIGHT / 2.0f,
-                                RelicLibrary.getRelic(Circlet.ID).makeCopy());
-                    } else {
-                        AbstractDungeon.getCurrRoom().spawnRelicAndObtain(Settings.WIDTH / 2.0f, Settings.HEIGHT / 2.0f,
-                                RelicLibrary.getRelic(PureNail.ID).makeCopy());
+                    AbstractRelic nail = AbstractDungeon.player.getRelic(OldNail.ID);
+                    if (nail != null) {
+                        nail.setCounter(-42);
                     }
                     break;
             }
