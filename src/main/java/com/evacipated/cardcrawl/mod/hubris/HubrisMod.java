@@ -98,13 +98,11 @@ public class HubrisMod implements
 
     public static boolean startingHubris()
     {
-        System.out.println("startingHubris()");
         System.out.println(modConfig);
         if (modConfig == null) {
             return true;
         }
 
-        System.out.println(modConfig.getBool("startingHubris"));
         return modConfig.getBool("startingHubris");
     }
 
