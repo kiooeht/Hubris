@@ -1,5 +1,6 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
+import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
@@ -37,10 +38,10 @@ public class HollowSoul extends HubrisRelic
     public void setCounter(int counter)
     {
         if (counter == -2) {
-            img = ImageMaster.loadImage("images/relics/hollowSoulUsed.png");
+            img = ImageMaster.loadImage(HubrisMod.assetPath("images/relics/hollowSoulUsed.png"));
             this.counter = -2;
         } else if (counter == -1) {
-            img = ImageMaster.loadImage("images/relics/hollowSoul.png");
+            img = ImageMaster.loadImage(HubrisMod.assetPath("images/relics/hollowSoul.png"));
             this.counter = -1;
         }
     }
