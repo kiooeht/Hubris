@@ -1,8 +1,8 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
-import basemod.ReflectionHacks;
+import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
-import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
@@ -31,6 +31,7 @@ public class OldNail extends HubrisRelic
 
         if (counter == -42) {
             flash();
+            img = ImageMaster.loadImage(HubrisMod.assetPath("images/relics/pureNail.png"));
             try {
                 Field targetField = AbstractRelic.class.getDeclaredField("name");
 
@@ -52,6 +53,7 @@ public class OldNail extends HubrisRelic
         }
     }
 
+    /*
     @Override
     public int onAttackedMonster(DamageInfo info, int damageAmount)
     {
@@ -62,6 +64,7 @@ public class OldNail extends HubrisRelic
         }
         return damageAmount;
     }
+    */
 
     @Override
     public AbstractRelic makeCopy()
