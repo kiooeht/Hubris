@@ -190,7 +190,9 @@
     "NAME": "Bundle of Herbs",
     "FLAVOR": "TODO",
     "DESCRIPTIONS": [
-      "Upon pickup, add #b2 #yHerbs to your deck. NL Whenever you enter a Rest Site, add #b2 #yHerbs to your deck."
+      "Right click to activate. NL Lose #b1 charge, gain #b",
+      " #yRegen. NL Whenever you enter a Rest Site, add #b",
+      " charges."
     ]
   },
   "hubris:SphereOfDissonance": {
