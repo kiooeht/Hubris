@@ -210,8 +210,7 @@
     "NAME": "Pocketwatch",
     "FLAVOR": "Maybe time's just a construct of human perception, an illusion created by—",
     "DESCRIPTIONS": [
-      "Start each combat with a #yTime #yStop in your deck. NL #yTime #yStop can only be used #b",
-      " times."
+      "Right click to activate. NL Lose #b1 charge. At the end of your turn, immediately start another turn. Energy and #yBlock are maintained between these turns."
     ]
   },
   "hubris:HerbalPaste": {
