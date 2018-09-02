@@ -77,12 +77,12 @@
     ]
   },
   "hubris:Nailsmith" : {
-    "NAME":  "Nailsmith",
+    "NAME": "Nailsmith",
     "DESCRIPTIONS": [
-      "MAIN",
-      "PURE NAIL",
-      "UPGRADE",
-      "IGNORE"
+      "You spot a small hut. You hear the sound of hammering emanating from within. Ducking inside, you find an old smith working a forge. NL NL \"Hello again, young one. What can I do for you today?\"",
+      "You hand the old smith your #bOld #bNail... NL NL \"Hmmm... I see. I can fix this, but I'll need some of your arsenal to do it.\" NL NL You hand him some of what you have and he starts to work. NL #y@CLANG@ #y@CLAAANG@ #y@CLANG!@ NL He hammers the nail together with the supplies you gave him. NL NL The nail is reforged.",
+      "\"Gladly.\" NL NL Your arsenal is improved.",
+      "You decide to pass the smith by. Exiting the way you came in, you turn to continue your climb."
     ],
     "OPTIONS": [
       "[Forge] #gUpgrade #ga #gcard.",
