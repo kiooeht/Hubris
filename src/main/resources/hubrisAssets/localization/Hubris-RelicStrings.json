@@ -190,7 +190,9 @@
     "NAME": "Bundle of Herbs",
     "FLAVOR": "TODO",
     "DESCRIPTIONS": [
-      "Upon pickup, add #b2 #yHerbs to your deck. NL Whenever you enter a Rest Site, add #b2 #yHerbs to your deck."
+      "Right click to activate. NL Lose #b1 charge, gain #b",
+      " #yRegen. NL Whenever you enter a Rest Site, add #b",
+      " charges."
     ]
   },
   "hubris:SphereOfDissonance": {
@@ -208,8 +210,7 @@
     "NAME": "Pocketwatch",
     "FLAVOR": "Maybe time's just a construct of human perception, an illusion created by—",
     "DESCRIPTIONS": [
-      "Start each combat with a #yTime #yStop in your deck. NL #yTime #yStop can only be used #b",
-      " times."
+      "Right click to activate. NL Lose #b1 charge. At the end of your turn, immediately start another turn. Energy and #yBlock are maintained between these turns."
     ]
   },
   "hubris:HerbalPaste": {

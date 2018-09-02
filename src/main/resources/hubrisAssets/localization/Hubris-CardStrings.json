@@ -69,10 +69,6 @@
     "DESCRIPTION": "Choose a type of orb. NL Anytime you Channel an orb, Channel the chosen type instead.",
     "UPGRADE_DESCRIPTION": "Innate. NL Choose a type of orb. NL Anytime you Channel an orb, Channel the chosen type instead."
   },
-  "hubris:Herb": {
-    "NAME": "Herb",
-    "DESCRIPTION": "Gain !M! Regen. NL Fleeting."
-  },
   "hubris:MarkOfDissonance": {
     "NAME": "Mark of Dissonance",
     "DESCRIPTION": "Apply Dissonance. NL Purge."
@@ -89,14 +85,6 @@
   "hubris:CleavingFinish": {
     "NAME": "Cleaving Finish",
     "DESCRIPTION": "Deal !D! damage. NL If this kills an enemy, this card stays in your hand and costs 0 for the turn."
-  },
-  "hubris:TimeStop": {
-    "NAME": "Time Stop",
-    "DESCRIPTION": "At the end of your turn, immediately start another turn. Energy and Block are maintained.",
-    "EXTENDED_DESCRIPTION": [
-      " NL Exhaust.",
-      " NL Purge."
-    ]
   },
   "hubris:Ukulele": {
     "NAME": "Ukulele",
