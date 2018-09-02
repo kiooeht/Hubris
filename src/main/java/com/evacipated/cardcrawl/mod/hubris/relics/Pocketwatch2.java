@@ -6,6 +6,8 @@ import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.monsters.beyond.TimeEater;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
@@ -42,6 +44,23 @@ public class Pocketwatch2 extends HubrisRelic implements ClickableRelic
             setCounter(counter - 1);
             AbstractPlayer p = AbstractDungeon.player;
             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new TimeStopPower(p, 1), 1));
+        }
+    }
+
+    @Override
+    public void onVictory()
+    {
+        boolean beatTimeEater = false;
+        for (AbstractMonster m : AbstractDungeon.getCurrRoom().monsters.monsters) {
+            if (m instanceof TimeEater) {
+                beatTimeEater = true;
+                break;
+            }
+        }
+
+        if (beatTimeEater) {
+            flash();
+            setCounter(AMT);
         }
     }
 
