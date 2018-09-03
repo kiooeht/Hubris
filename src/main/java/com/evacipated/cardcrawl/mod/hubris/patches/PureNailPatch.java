@@ -5,14 +5,36 @@ import com.evacipated.cardcrawl.mod.hubris.relics.OldNail;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.dungeons.TheCity;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import javassist.CtBehavior;
 
+import java.util.ArrayList;
+import java.util.function.Predicate;
+
 public class PureNailPatch
 {
+    // Makes Old Nail only available in the Exordium
+    @SpirePatch(
+            clz=TheCity.class,
+            method=SpirePatch.CONSTRUCTOR,
+            paramtypez={
+                    AbstractPlayer.class,
+                    ArrayList.class
+            }
+    )
+    public static class RemoveFromRelicPool
+    {
+        public static void Postfix(TheCity __intance, AbstractPlayer p, ArrayList<String> theList)
+        {
+            AbstractDungeon.commonRelicPool.removeIf(Predicate.isEqual(OldNail.ID));
+        }
+    }
+
     private static float doubleDamage(AbstractCard card, float damage)
     {
         AbstractRelic nail = AbstractDungeon.player.getRelic(OldNail.ID);
