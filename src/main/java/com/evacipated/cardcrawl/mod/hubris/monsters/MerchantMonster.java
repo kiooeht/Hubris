@@ -69,7 +69,7 @@ public class MerchantMonster extends AbstractMonster
     public static final int HP = 100;
     private static final float TIME_SCALE = 4.0f;
 
-    private static final int METALLICIZE_AMT = 50;
+    private static final int METALLICIZE_AMT = 25;
     private static final Map<Integer, Integer> throwAmounts = new HashMap<>();
 
     // Moves
