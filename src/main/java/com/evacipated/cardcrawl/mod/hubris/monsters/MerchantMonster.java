@@ -72,6 +72,8 @@ public class MerchantMonster extends AbstractMonster
     private static final int METALLICIZE_AMT = 25;
     private static final Map<Integer, Integer> throwAmounts = new HashMap<>();
 
+    private boolean firstTurn = true;
+
     // Moves
 
     static
@@ -147,10 +149,17 @@ public class MerchantMonster extends AbstractMonster
     @Override
     protected void getMove(int num)
     {
-        setMove((byte)-1, Intent.UNKNOWN);
-        setMove((byte)1, Intent.ATTACK, 1, throwAmounts.get(1), true);
-
-        //setMove(StrengthPotion.NAME, (byte)2, Intent.BUFF);
+        if (firstTurn) {
+            firstTurn = false;
+            setMove((byte) 1, Intent.ATTACK, 1, throwAmounts.get(1), true);
+            return;
+        }
+        //setMove((byte)-1, Intent.UNKNOWN);
+        if (num < 40) {
+            setMove(StrengthPotion.NAME, (byte)2, Intent.BUFF);
+        } else {
+            setMove((byte) 1, Intent.ATTACK, 1, throwAmounts.get(1), true);
+        }
 
         //getMove(AbstractDungeon.aiRng.random(20));
     }
