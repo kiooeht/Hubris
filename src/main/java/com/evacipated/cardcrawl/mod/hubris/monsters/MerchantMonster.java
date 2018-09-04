@@ -22,6 +22,8 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.potions.StrengthPotion;
 import com.megacrit.cardcrawl.powers.MetallicizePower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
+import com.megacrit.cardcrawl.rooms.ShopRoom;
+import com.megacrit.cardcrawl.shop.Merchant;
 import com.megacrit.cardcrawl.vfx.combat.IntenseZoomEffect;
 
 import java.util.HashMap;
@@ -72,6 +74,7 @@ public class MerchantMonster extends AbstractMonster
     private static final int METALLICIZE_AMT = 25;
     private static final Map<Integer, Integer> throwAmounts = new HashMap<>();
 
+    private Merchant npc;
     private boolean firstTurn = true;
 
     // Moves
@@ -81,9 +84,11 @@ public class MerchantMonster extends AbstractMonster
         throwAmounts.put(1, 20);
     }
 
-    public MerchantMonster()
+    public MerchantMonster(Merchant npc)
     {
         super(NAME, ID, HP, -10.0F, -30.0F, 180.0F, 150.0F, null, 0.0F, 0.0F);
+
+        this.npc = npc;
 
         drawX = 1260.0F * Settings.scale;
         drawY = 370.0F * Settings.scale;
@@ -170,5 +175,12 @@ public class MerchantMonster extends AbstractMonster
         super.damage(info);
 
         state.setTimeScale(TIME_SCALE * ((float)currentHealth / (float)maxHealth));
+    }
+
+    @Override
+    public void die()
+    {
+        super.die();
+        ((ShopRoom)AbstractDungeon.getCurrRoom()).merchant = npc;
     }
 }
