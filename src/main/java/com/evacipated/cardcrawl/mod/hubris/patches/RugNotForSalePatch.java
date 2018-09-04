@@ -28,7 +28,7 @@ public class RugNotForSalePatch
     )
     public static class RugHitbox
     {
-        public static SpireField<Hitbox> rugHB = new SpireField<>(new Hitbox(100.0f * Settings.scale, 130.0f * Settings.scale));
+        public static SpireField<Hitbox> rugHB = new SpireField<>(() -> new Hitbox(100.0f * Settings.scale, 130.0f * Settings.scale));
     }
 
     @SpirePatch(
