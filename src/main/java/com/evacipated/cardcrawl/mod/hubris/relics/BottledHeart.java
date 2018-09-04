@@ -1,15 +1,15 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
+import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.evacipated.cardcrawl.mod.stslib.actions.tempHp.AddTemporaryHPAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
-import com.megacrit.cardcrawl.relics.MedicalKit;
 import com.megacrit.cardcrawl.relics.Necronomicon;
 
-public class BottledHeart extends AbstractRelic
+public class BottledHeart extends HubrisRelic
 {
     public static final String ID = "hubris:BottledHeart";
     private static final int NECRONOMICON_BONUS = 10;
@@ -41,6 +41,19 @@ public class BottledHeart extends AbstractRelic
         }
         AbstractDungeon.player.decreaseMaxHealth(AbstractDungeon.player.maxHealth - 1);
         setCounter(c);
+    }
+
+    public int onMaxHPChange(int amount)
+    {
+        if (counter >= 0) {
+            flash();
+            setCounter(counter + amount);
+            if (counter < 0) {
+                setCounter(0);
+            }
+            return 0;
+        }
+        return amount;
     }
 
     @Override

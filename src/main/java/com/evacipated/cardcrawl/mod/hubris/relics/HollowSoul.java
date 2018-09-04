@@ -1,12 +1,13 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
+import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
+import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.EnableEndTurnButtonAction;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAndEnableControlsAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.blights.Muzzle;
-import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.MonsterHelper;
@@ -15,9 +16,7 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.vfx.combat.BattleStartEffect;
 
-import java.lang.reflect.Field;
-
-public class HollowSoul extends AbstractRelic
+public class HollowSoul extends HubrisRelic
 {
     public static final String ID = "hubris:HollowSoul";
     private static final int HP_PERCENT = 10;
@@ -39,10 +38,10 @@ public class HollowSoul extends AbstractRelic
     public void setCounter(int counter)
     {
         if (counter == -2) {
-            img = ImageMaster.loadImage("images/relics/hollowSoulUsed.png");
+            img = ImageMaster.loadImage(HubrisMod.assetPath("images/relics/hollowSoulUsed.png"));
             this.counter = -2;
         } else if (counter == -1) {
-            img = ImageMaster.loadImage("images/relics/hollowSoul.png");
+            img = ImageMaster.loadImage(HubrisMod.assetPath("images/relics/hollowSoul.png"));
             this.counter = -1;
         }
     }

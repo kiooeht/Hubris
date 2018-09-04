@@ -1,7 +1,9 @@
 package com.evacipated.cardcrawl.mod.hubris.cards.curses;
 
 import basemod.abstracts.CustomCard;
-import com.evacipated.cardcrawl.mod.hubris.CardNoUnlock;
+import com.evacipated.cardcrawl.mod.hubris.CardNoSeen;
+import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
+import com.evacipated.cardcrawl.mod.hubris.cards.colorless.Icosahedron;
 import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.SoulboundField;
 import com.megacrit.cardcrawl.actions.unique.LoseEnergyAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
@@ -13,11 +15,11 @@ import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.BlueCandle;
 
-@CardNoUnlock
+@CardNoSeen
 public class NaturalOne extends CustomCard
 {
     public static final String ID = "hubris:NaturalOne";
-    public static final String IMG = "images/cards/icosahedron.png";
+    public static final String IMG = Icosahedron.IMG;
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -26,7 +28,7 @@ public class NaturalOne extends CustomCard
 
     public NaturalOne()
     {
-        super(ID, NAME, IMG, COST, DESCRIPTION, CardType.CURSE, CardColor.CURSE, CardRarity.CURSE, CardTarget.NONE);
+        super(ID, NAME, IMG, COST, DESCRIPTION, CardType.CURSE, CardColor.CURSE, CardRarity.SPECIAL, CardTarget.NONE);
 
         SoulboundField.soulbound.set(this, true);
     }

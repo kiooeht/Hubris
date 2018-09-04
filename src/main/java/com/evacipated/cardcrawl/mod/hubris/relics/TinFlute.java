@@ -2,6 +2,7 @@ package com.evacipated.cardcrawl.mod.hubris.relics;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -16,14 +17,14 @@ import com.megacrit.cardcrawl.saveAndContinue.SaveFileObfuscator;
 
 import java.util.HashMap;
 
-public class TinFlute extends AbstractRelic
+public class TinFlute extends HubrisRelic
 {
     public static final String ID = "hubris:TinFlute";
     private boolean chosen = true;
 
     public TinFlute()
     {
-        super(ID, "test4.png", RelicTier.UNCOMMON, LandingSound.CLINK);
+        super(ID, "tinFlute.png", RelicTier.UNCOMMON, LandingSound.CLINK);
     }
 
     @Override

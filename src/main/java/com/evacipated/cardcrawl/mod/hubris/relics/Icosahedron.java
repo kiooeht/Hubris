@@ -1,6 +1,7 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
 import com.evacipated.cardcrawl.mod.hubris.cards.curses.NaturalOne;
+import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.core.Settings;
@@ -9,7 +10,7 @@ import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 
-public class Icosahedron extends AbstractRelic
+public class Icosahedron extends HubrisRelic
 {
     public static final String ID = "hubris:Icosahedron";
 

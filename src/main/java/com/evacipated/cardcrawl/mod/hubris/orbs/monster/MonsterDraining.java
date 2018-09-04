@@ -5,12 +5,14 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.hubris.monsters.OrbUsingMonster;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
 import com.megacrit.cardcrawl.cards.status.Dazed;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.OrbStrings;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.orbs.Plasma;
@@ -33,7 +35,7 @@ public class MonsterDraining extends AbstractOrb
     {
         this.owner = owner;
         ID = ORB_ID;
-        img = new Texture("images/orbs/draining.png");
+        img = ImageMaster.loadImage(HubrisMod.assetPath("images/orbs/draining.png"));
         name = orbStrings.NAME;
         baseEvokeAmount = AMOUNT;
         evokeAmount = baseEvokeAmount;

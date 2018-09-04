@@ -9,8 +9,6 @@ import com.megacrit.cardcrawl.relics.MarkOfTheBloom;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import javassist.CtBehavior;
 
-import java.util.ArrayList;
-
 @SpirePatch(
         cls="com.megacrit.cardcrawl.characters.AbstractPlayer",
         method="damage",
@@ -18,7 +16,9 @@ import java.util.ArrayList;
 )
 public class HollowSoulPatch
 {
-    @SpireInsertPatch
+    @SpireInsertPatch(
+            locator=Locator.class
+    )
     public static SpireReturn Insert(AbstractPlayer __instance, DamageInfo info)
     {
         if (AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT && !__instance.hasRelic(MarkOfTheBloom.ID)) {
@@ -38,14 +38,14 @@ public class HollowSoulPatch
         return SpireReturn.Continue();
     }
 
-    public static class Locator extends SpireInsertLocator
+    private static class Locator extends SpireInsertLocator
     {
         @Override
         public int[] Locate(CtBehavior ctBehavior) throws Exception
         {
             Matcher finalMatcher = new Matcher.FieldAccessMatcher("com.megacrit.cardcrawl.characters.AbstractPlayer", "isDead");
 
-            return LineFinder.findInOrder(ctBehavior, new ArrayList<>(), finalMatcher);
+            return LineFinder.findInOrder(ctBehavior, finalMatcher);
         }
     }
 }

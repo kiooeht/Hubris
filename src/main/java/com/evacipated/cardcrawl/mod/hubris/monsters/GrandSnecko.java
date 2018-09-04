@@ -32,7 +32,7 @@ import java.util.List;
 
 public class GrandSnecko extends OrbUsingMonster
 {
-    public static final String ID = "hubris:OrbBoss";
+    public static final String ID = "hubris:GrandSnecko";
     public static final String NAME = "Grand Snecko";
     public static final String[] MOVES = {};
     public static final String[] DIALOG = {

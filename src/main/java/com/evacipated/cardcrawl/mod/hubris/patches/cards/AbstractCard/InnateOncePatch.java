@@ -4,8 +4,6 @@ import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import javassist.CtBehavior;
 
-import java.util.ArrayList;
-
 public class InnateOncePatch
 {
     @SpirePatch(
@@ -24,6 +22,7 @@ public class InnateOncePatch
     public static class PlayingCardMapPatch
     {
         @SpireInsertPatch(
+                locator=Locator.class,
                 localvars={"copy"}
         )
         public static void Insert(CardGroup __instance, CardGroup masterDeck, CardGroup copy)
@@ -38,14 +37,14 @@ public class InnateOncePatch
             }
         }
 
-        public static class Locator extends SpireInsertLocator
+        private static class Locator extends SpireInsertLocator
         {
             @Override
             public int[] Locate(CtBehavior ctBehavior) throws Exception
             {
                 Matcher finalMatcher = new Matcher.MethodCallMatcher("com.megacrit.cardcrawl.cards.CardGroup", "shuffle");
 
-                return LineFinder.findInOrder(ctBehavior, new ArrayList<>(), finalMatcher);
+                return LineFinder.findInOrder(ctBehavior, finalMatcher);
             }
         }
     }

@@ -1,5 +1,6 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
+import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.megacrit.cardcrawl.actions.common.HealAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
@@ -7,7 +8,7 @@ import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-public class FunFungus extends AbstractRelic
+public class FunFungus extends HubrisRelic
 {
     public static final String ID = "hubris:FunFungus";
     private static final int AMT = 5;

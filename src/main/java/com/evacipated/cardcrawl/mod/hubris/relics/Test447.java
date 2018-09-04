@@ -1,9 +1,10 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
+import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-public class Test447 extends AbstractRelic
+public class Test447 extends HubrisRelic
 {
     public static final String ID = "test447";
 
@@ -19,17 +20,15 @@ public class Test447 extends AbstractRelic
     }
 
     @Override
-    public void obtain()
+    public void onEquip()
     {
-        if (AbstractDungeon.player.hasRelic(Backtick.ID)) {
-            for (int i=0; i<AbstractDungeon.player.relics.size(); ++i) {
-                if (AbstractDungeon.player.relics.get(i).relicId.equals(Backtick.ID)) {
-                    instantObtain(AbstractDungeon.player, i, true);
-                }
-            }
-        } else {
-            super.obtain();
-        }
+        AbstractDungeon.player.energy.energyMaster += 1;
+    }
+
+    @Override
+    public void onUnequip()
+    {
+        AbstractDungeon.player.energy.energyMaster -= 1;
     }
 
     @Override

@@ -1,12 +1,13 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
+import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.megacrit.cardcrawl.actions.common.ReduceCostAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-public class AstralHammer extends AbstractRelic
+public class AstralHammer extends HubrisRelic
 {
     public static final String ID = "hubris:AstralHammer";
     private static final int COST_DECREASE = -1;

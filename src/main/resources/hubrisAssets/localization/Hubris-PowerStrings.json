@@ -1,0 +1,104 @@
+{
+  "hubris:Befuddled": {
+    "NAME": "Befuddled",
+    "DESCRIPTIONS": [
+      "The first card drawn each turn is transformed."
+    ]
+  },
+  "hubris:Dissonance": {
+    "NAME": "Dissonance",
+    "DESCRIPTIONS": [
+      "Take #b",
+      "% more damage from #yAttacks. NL On death, ",
+      " is shuffled into your draw pile."
+    ]
+  },
+  "hubris:EnergyGain": {
+    "NAME": "Energy Gain",
+    "DESCRIPTIONS": [
+      "Gain #b",
+      " additional [E] each turn.",
+      " additional [E] each turn."
+    ]
+  },
+  "hubris:FlightPlayer": {
+    "NAME": "Flight",
+    "DESCRIPTIONS": [
+      "Reduce #yAttack damage taken by #b50%. Cancelled for the combat if dealt #yAttack damage #b",
+      " time in one turn.",
+      " times in one turn."
+    ]
+  },
+  "hubris:Sloth": {
+    "NAME": "Sloth",
+    "DESCRIPTIONS": [
+      "Gain #b1 max energy at the end of each turn."
+    ]
+  },
+  "hubris:SpecializedCircuitry": {
+    "NAME": " Circuitry",
+    "DESCRIPTIONS": [
+      "All orbs you #yChannel are #y",
+      " orbs."
+    ]
+  },
+  "hubris:Unfocused": {
+    "NAME": "Unfocused",
+    "DESCRIPTIONS": [
+      "On taking Attack damage, loses #b1 Focus. Cannot go below 0 Focus."
+    ]
+  },
+  "hubris:Warp": {
+    "NAME": "Warp",
+    "DESCRIPTIONS": [
+      "On death, ",
+      " will return."
+    ]
+  },
+  "hubris:ReadiedAction": {
+    "NAME": "Readied Action",
+    "DESCRIPTIONS": [
+      "At the end of your turn, you may retain #b",
+      " card.",
+      " cards."
+    ]
+  },
+  "hubris:TimeStop": {
+    "NAME": "Time Stop",
+    "DESCRIPTIONS": [
+      "At the end of your turn, immediately start another turn. NL Energy and Block are maintained."
+    ]
+  },
+  "hubris:NoAttack": {
+    "NAME": "No Attack",
+    "DESCRIPTIONS": [
+      "You cannot play #yAttacks this turn."
+    ]
+  },
+  "hubris:LustTarget": {
+    "NAME": "Lust",
+    "DESCRIPTIONS": [
+      "When receiving #yAttack damage this turn, you #rlose #b",
+      " HP."
+    ]
+  },
+  "hubris:DoWhilePower": {
+    "NAME": "Do While",
+    "DESCRIPTIONS": [
+      "This turn, play your next card at +1 [E] until you run out of [E]."
+    ]
+  },
+  "hubris:ArmorPiercing": {
+    "NAME": "Piercing Rounds",
+    "DESCRIPTIONS": [
+      "#b50% of attack damage pass through #yBlock."
+    ]
+  },
+  "hubris:IrradiatedRounds": {
+    "NAME": "Irradiated Rounds",
+    "DESCRIPTIONS": [
+      "On dealing unblocked, non-piercing damage, applies #b",
+      " #yPoison."
+    ]
+  }
+}

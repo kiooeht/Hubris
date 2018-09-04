@@ -1,6 +1,7 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
 import com.badlogic.gdx.Gdx;
+import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.evacipated.cardcrawl.mod.hubris.vfx.scene.DeadTorchParticleEffect;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.Settings;
@@ -8,7 +9,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.vfx.scene.LightFlareMEffect;
 
-public class DeadTorch extends AbstractRelic
+public class DeadTorch extends HubrisRelic
 {
     public static final String ID = "hubris:DeadTorch";
     private static final int AMT = 1;

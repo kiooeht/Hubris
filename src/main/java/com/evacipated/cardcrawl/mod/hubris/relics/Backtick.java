@@ -3,6 +3,7 @@ package com.evacipated.cardcrawl.mod.hubris.relics;
 import basemod.DevConsole;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.evacipated.cardcrawl.mod.hubris.screens.select.RelicSelectScreen;
 import com.evacipated.cardcrawl.mod.hubris.vfx.ObtainRelicLater;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -15,7 +16,7 @@ import com.megacrit.cardcrawl.unlock.UnlockTracker;
 
 import java.util.ArrayList;
 
-public class Backtick extends AbstractRelic
+public class Backtick extends HubrisRelic
 {
     public static final String ID = "hubris:Backtick";
     private boolean relicSelected = true;

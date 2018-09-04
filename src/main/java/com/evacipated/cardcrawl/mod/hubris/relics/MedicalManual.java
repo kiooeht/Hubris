@@ -1,5 +1,6 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
+import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -9,7 +10,7 @@ import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.relics.MedicalKit;
 
-public class MedicalManual extends AbstractRelic
+public class MedicalManual extends HubrisRelic
 {
     public static final String ID = "hubris:MedicalManual";
     public static final int HEAL = 1;
@@ -18,7 +19,7 @@ public class MedicalManual extends AbstractRelic
 
     public MedicalManual()
     {
-        super(ID, "test6.png", RelicTier.RARE, LandingSound.CLINK);
+        super(ID, "medicalManual.png", RelicTier.RARE, LandingSound.CLINK);
 
         tips.clear();
         tips.add(new PowerTip(name, description));

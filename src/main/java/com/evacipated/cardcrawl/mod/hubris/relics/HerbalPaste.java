@@ -1,19 +1,20 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
+import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.RegenPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-public class HerbalPaste extends AbstractRelic
+public class HerbalPaste extends HubrisRelic
 {
     public static final String ID = "hubris:HerbalPaste";
     private static final int AMT = 3;
 
     public HerbalPaste()
     {
-        super(ID, "test5.png", RelicTier.RARE, LandingSound.CLINK);
+        super(ID, "herbalPaste.png", RelicTier.RARE, LandingSound.CLINK);
     }
 
     @Override

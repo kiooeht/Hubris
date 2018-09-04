@@ -1,12 +1,13 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
+import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.MonsterRoomBoss;
 import com.megacrit.cardcrawl.rooms.MonsterRoomElite;
 
-public class Teleporter extends AbstractRelic
+public class Teleporter extends HubrisRelic
 {
     public static final String ID = "hubris:Teleporter";
 
@@ -17,7 +18,7 @@ public class Teleporter extends AbstractRelic
 
     public Teleporter(int charges)
     {
-        super(ID, "test6.png", RelicTier.RARE, LandingSound.HEAVY);
+        super(ID, "shortRangeTeleporter.png", RelicTier.RARE, LandingSound.HEAVY);
         setCounter(charges);
     }
 

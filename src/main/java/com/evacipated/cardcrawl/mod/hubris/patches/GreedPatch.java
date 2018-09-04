@@ -5,27 +5,27 @@ import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.rewards.RewardItem;
 import javassist.CtBehavior;
 
-import java.util.ArrayList;
-
 @SpirePatch(
         cls="com.megacrit.cardcrawl.rewards.RewardItem",
         method="applyGoldBonus"
 )
 public class GreedPatch
 {
-    @SpireInsertPatch
+    @SpireInsertPatch(
+            locator=Locator.class
+    )
     public static void Insert(RewardItem __instance, boolean theft)
     {
         __instance.bonusGold += Greed.countCopiesInDeck() * Greed.GOLD_AMOUNT;
     }
 
-    public static class Locator extends SpireInsertLocator
+    private static class Locator extends SpireInsertLocator
     {
         @Override
         public int[] Locate(CtBehavior ctMethodToPatch) throws Exception
         {
             Matcher finalMatcher = new Matcher.MethodCallMatcher("com.megacrit.cardcrawl.characters.AbstractPlayer", "hasRelic");
-            return LineFinder.findInOrder(ctMethodToPatch, new ArrayList<>(), finalMatcher);
+            return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
         }
     }
 }

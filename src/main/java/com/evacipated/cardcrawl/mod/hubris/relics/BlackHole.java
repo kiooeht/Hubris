@@ -1,13 +1,14 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
+import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-public class BlackHole extends AbstractRelic
+public class BlackHole extends HubrisRelic
 {
-    public static final String ID = "hubris:Black Hole";
+    public static final String ID = "hubris:BlackHole";
 
     public BlackHole()
     {

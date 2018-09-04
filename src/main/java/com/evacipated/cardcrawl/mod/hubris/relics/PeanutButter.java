@@ -1,11 +1,12 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
+import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.evacipated.cardcrawl.mod.stslib.actions.tempHp.AddTemporaryHPAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-public class PeanutButter extends AbstractRelic
+public class PeanutButter extends HubrisRelic
 {
     public static final String ID = "hubris:PeanutButter";
     private static final int TEMP_HP_AMOUNT = 10;

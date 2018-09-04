@@ -1,6 +1,7 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
 import com.evacipated.cardcrawl.mod.hubris.powers.FlightPlayerPower;
+import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -10,7 +11,7 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PrototypeTalaria extends AbstractRelic
+public class PrototypeTalaria extends HubrisRelic
 {
     public static final String ID = "hubris:PrototypeTalaria";
     private static final int COUNT = 2;

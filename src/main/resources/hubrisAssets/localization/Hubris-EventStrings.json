@@ -1,0 +1,100 @@
+{
+  "hubris:TheFatedDie" : {
+    "NAME":  "The Fated Die",
+    "DESCRIPTIONS": [
+      "You come across a pedestal with a twenty sided object sitting atop. An inscription on the pedestal reads: NL NL Alter fate, for #gbetter or #rworse.",
+      "Pocketing the mysterious object, an inexplicable sense that your fate has been @twisted@ washes over you.",
+      "You decide it's best not to take strange artifacts from mysterious pedestals."
+    ],
+    "OPTIONS": [
+      "[Take] #gObtain ",
+      ".",
+      "[Leave]"
+    ]
+  },
+  "hubris:Experiment" : {
+    "NAME":  "The Experiment",
+    "DESCRIPTIONS": [
+      "Rounding a corner, you spot a hooded figure reading a strange book and mumbling to himself. NL \"Hmm... Yes... ...heart... ...remove... I see...\" NL NL As you approach he looks up, NL \"Ah! Hey you! Care to help me with an #pexperiment?\"",
+      "This sounds risky, you decide to leave. NL NL \"What? You're leaving? But I could have made you #yimmortal! ...maybe.\"",
+      "\"You will? Oh good! Just lie down on this table here and we'll get started.\" NL NL As you lie down on the table the figure pulls out a strange dagger and opens his book. The book's cover seems to be made of skin. NL \"Alright, first we must remove the heart...\"",
+      "#r@\"AAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHH!!!\"@ NL NL Your screams fills the chamber as the figure plunges the knife into your chest. NL NL Slowly you watch as he removes your heart from your chest NL #r@tu-thump@ #r@...@ #r@tu-thump@ #r@...@ NL #r@tu-thump@ #r@...@ NL NL \"Now, wait here while I complete the ritual.\"",
+      "You shove the figure to the ground before he can do anything and flee.",
+      "Lying on the table, your life fading, you question if this is where you die. NL NL \"There we go! All done!\" NL The figure returns to your side holding a bottle containing a heart. ~tu-thump~ ... ~tu-thump~ ... NL NL \"Look at this, it's your heart and it's still beating. Facinating, isn't it? My experiment is over now, here you go.\" NL He hands you your heart, sits down, and continues to read his book.",
+      "As he turns his back to you, you stab the figure. NL NL Grabbing your heart, you shove it back into your chest in a vague hope doing so will keep you alive. NL NL Then continue your climb."
+    ],
+    "OPTIONS": [
+      "[Agree] #p???",
+      "[Leave]",
+      "[Continue] #rLose #r",
+      " #rHP. #p???",
+      "[Flee]",
+      "[Wait] #rLose #r",
+      " #rMax #rHP. #p???",
+      "[Attack] #gHeal #g",
+      " #gHP."
+    ]
+  },
+  "hubris:TheBottler" : {
+    "NAME":  "The Re-Bottler",
+    "DESCRIPTIONS": [
+      "A machine sits in front of you. A sign on the device reads, NL NL #y\"INSERT #yBOTTLE #yFOR #yREBOTTLING\"",
+      "#y\"STARTING #yREBOTTLING #yPROCEDURE\" NL NL #b@WIRRRRRRRR@ #b@CHURN@ #gKA-CHUNK NL NL The machine spits your bottle back out."
+    ],
+    "OPTIONS": [
+      "[Insert: ",
+      "]",
+      "[Locked] Requires: ",
+      ".",
+      "[Leave]",
+      "[Take Bottle]"
+    ]
+  },
+  "hubris:TheLibraryExtra" : {
+    "NAME": "The Library",
+    "DESCRIPTIONS": [
+      "The story is about a warrior climbing a tall tower. They encounter many strange monsters and other oddities. NL Very familiar."
+    ],
+    "OPTIONS": [
+      "[Read] #gChoose #g1 #gof #g20 #gcards #pfrom #panother #pcharacter #gto #gadd #gto #gyour #gdeck."
+    ]
+  },
+  "hubris:UPDATEBODYTEXT" : {
+    "NAME": "UPDATE BODY TEXT",
+    "DESCRIPTIONS": [
+      "A man sits on the ground next to a wall. His clothes are in tatters and his hair is frazzled. NL He is scribbling on the wall: NL NL #yUPDATE #yBODY #yTEXT #yUPDATE #yBODY #yTEXTUPDATE #yBODY #yTEXTUPDATE #yBODY #yTEXT",
+      "As you approach, the man turns towards you. Seeing you, he stands, runs up to you, and grabs you by the shoulders. His eyes are bulging out of their sockets. NL NL #r@\"UPDATE@ #r@BODY@ #r@TEXT@ #r@UPDATE@ #r@BODY@ #r@TEXTUPDATE@ #r@BODY@ #r@TEXTUPDATE@ #r@BODY@ #r@TEXT\"@ NL NL #b\"UPDATE #bBODY #bTEXT?\"",
+      "UPDATE BODY TEXT"
+    ],
+    "OPTIONS": [
+      "[Approach]",
+      "[UPDATE] #gUpgrade #ga #gcard.",
+      "[BODY] #gGain #g3 #gMax #gHP.",
+      "[TEXT] #gChoose #g1 #gof #g10 #gcards #gto #gadd #gto #gyour #gdeck.",
+      "[Leave]",
+      "Choose a Card to Upgrade.",
+      "Add a card to your deck."
+    ]
+  },
+  "hubris:Nailsmith" : {
+    "NAME": "Nailsmith",
+    "DESCRIPTIONS": [
+      "You spot a small hut. You hear the sound of hammering emanating from within. Ducking inside, you find an old smith working a forge. NL NL \"Hello again, young one. What can I do for you today?\"",
+      "You hand the old smith your #bOld #bNail... NL NL \"Hmmm... I see. I can fix this, but I'll need some of your arsenal to do it.\" NL NL You hand him some of what you have and he starts to work. NL #y@CLANG@ #y@CLAAANG@ #y@CLANG!@ NL He hammers the nail together with the supplies you gave him. NL NL The nail is reforged.",
+      "\"Gladly.\" NL NL Your arsenal is improved.",
+      "You decide to pass the smith by. Exiting the way you came in, you turn to continue your climb."
+    ],
+    "OPTIONS": [
+      "[Forge] #gUpgrade #ga #gcard.",
+      "[Locked] Requires: Upgradable Card.",
+      "[Leave]",
+      "Choose a Card to Upgrade.",
+      "[Reforge Nail] #rLose #r",
+      " #rGold #rand #rtwo #rUpgraded #rcards. #gUpgrade ",
+      ".",
+      "[Locked] Requires: ",
+      " Gold and two Upgraded cards.",
+      "Choose 2 Cards to Remove."
+    ]
+  }
+}

@@ -1,11 +1,10 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-public class VirtuousBlindfold extends AbstractRelic
+public class VirtuousBlindfold extends HubrisRelic
 {
     public static final String ID = "hubris:VirtuousBlindfold";
 

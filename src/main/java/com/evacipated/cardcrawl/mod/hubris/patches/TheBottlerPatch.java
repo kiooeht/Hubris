@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class TheBottlerPatch
 {
     @SpireInsertPatch(
+            locator=Locator.class,
             localvars={"tmp"}
     )
     public static void Insert(ArrayList<String> tmp)
@@ -22,13 +23,13 @@ public class TheBottlerPatch
         }
     }
 
-    public static class Locator extends SpireInsertLocator
+    private static class Locator extends SpireInsertLocator
     {
         @Override
         public int[] Locate(CtBehavior ctMethodToPatch) throws Exception
         {
             Matcher finalMatcher = new Matcher.MethodCallMatcher("java.util.ArrayList", "isEmpty");
-            return LineFinder.findInOrder(ctMethodToPatch, new ArrayList<>(), finalMatcher);
+            return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
         }
     }
 }

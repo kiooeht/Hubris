@@ -1,0 +1,341 @@
+{
+  "hubris:Icosahedron": {
+    "NAME": "Runic Icosahedron",
+    "FLAVOR": "Twisting fate, 1d20 at a time.",
+    "DESCRIPTIONS": [
+      "Once per combat, you may roll the Icosahedron.",
+      " NL You may no longer roll the Icosahedron.",
+      "You are #rCursed.",
+      "Gain [E] at the start of each turn."
+    ]
+  },
+  "hubris:BlackHole": {
+    "NAME": "Black Hole",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "All cards cost #b0. NL Any card entering your discard pile is exhausted."
+    ]
+  },
+  "hubris:VirtuousBlindfold": {
+    "NAME": "Virtuous Blindfold",
+    "FLAVOR": "Emotions are prohibited.",
+    "DESCRIPTIONS": [
+      "Gain [E] at the start of each turn. You can no longer see the entire map."
+    ]
+  },
+  "hubris:PeanutButter": {
+    "NAME": "Peanut Butter",
+    "FLAVOR": "If it pronounced gif or gif?",
+    "DESCRIPTIONS": [
+      "At the start of each combat, gain #b",
+      " #yTemporary HP."
+    ]
+  },
+  "hubris:CuriousFeather": {
+    "NAME": "Curious Feather",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "Whenever you play a #yPower, gain #b1 #yStrength."
+    ]
+  },
+  "hubris:Metronome": {
+    "NAME": "Metronome",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "Increases #yStrength for each sequential #yAttack played. Playing a #yNon-Attack card resets the bonus to #b0.",
+      " NL You get #b",
+      " #yStrength from this."
+    ]
+  },
+  "hubris:CrystalFace": {
+    "NAME": "Crystalline Mask",
+    "FLAVOR": "Scary.",
+    "DESCRIPTIONS": [
+      "Enemies start combat with #b",
+      "% less HP."
+    ]
+  },
+  "hubris:FunFungus": {
+    "NAME": "Fun Fungus",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "If you do not play any #yAttacks during your turn, heal #b",
+      " HP at the start of your next turn."
+    ]
+  },
+  "hubris:Pocketwatch": {
+    "NAME": "Pocketwatch",
+    "FLAVOR": "Maybe time's just a construct of human perception, an illusion created by—",
+    "DESCRIPTIONS": [
+      " If any battle takes longer than #b",
+      " minutes, you #rdie.",
+      "Gain [E] at the start of each turn."
+    ]
+  },
+  "hubris:ScarierMask": {
+    "NAME": "Scarier Mask",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "The weakest enemy flees at the beginning of multi-enemy fights."
+    ]
+  },
+  "hubris:DeadTorch": {
+    "NAME": "Dead Torch",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "Whenever you #yExhaust a card, gain #b1 Max HP."
+    ]
+  },
+  "hubris:BottledHeart": {
+    "NAME": "Bottled Heart",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "Upon pickup, this relic gains charge equal to half your Max HP and your Max HP is reduced to #b1. NL Start each combat with #yTemporary HP equal to this relic's charge. NL Any changes to Max HP affect this instead.",
+      " NL #ySynergy: ",
+      "If you have the ",
+      ", this gains an additional #b",
+      " charges."
+    ]
+  },
+  "hubris:DisguiseKit": {
+    "NAME": "Cunning Disguise",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "Upon pickup, choose another character. On future Card Reward screens you have #y1 additional card to choose from that will be from ",
+      "that character.",
+      "."
+    ]
+  },
+  "hubris:Teleporter": {
+    "NAME": "Short Range Teleporter",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "You may skip rooms, instead entering a room two floors away. NL Has #b",
+      " charge",
+      " charges",
+      ". Kill Bosses or Elites to regain charges."
+    ]
+  },
+  "hubris:MysteriousPyramids": {
+    "NAME": "Mysterious Pyramids",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "Upon pickup, choose two cards. Whenever you draw one of these cards, draw the other.",
+      "Choose two cards for ",
+      "Whenever you draw ",
+      " or ",
+      ", draw the other."
+    ]
+  },
+  "hubris:AstralHammer": {
+    "NAME": "Astral Hammer",
+    "FLAVOR": "\"Forged in the heart of celestial fire. Powered by lasers entwined in a star. Crystal enchantment of steel.\"",
+    "DESCRIPTIONS": [
+      "Whenever you play an #yAttack, reduce its cost by #b1 for the rest of combat. Playing an #yAttack that costs #b0 #yExhausts it."
+    ]
+  },
+  "hubris:PrototypeTalaria": {
+    "NAME": "Prototype Talaria",
+    "FLAVOR": "Too heavy to achieve real flight.",
+    "DESCRIPTIONS": [
+      "Reduce damage taken from the first #yAttack of each combat by #b50%."
+    ]
+  },
+  "hubris:Spice": {
+    "NAME": "Spice",
+    "FLAVOR": "Must flow.",
+    "DESCRIPTIONS": [
+      "Upon pickup, raise your Max HP by #b8. NL Draw #b1 additional card each turn. NL #rWarning: Highly addictive!",
+      "#pOne #pmore #pcouldn't #phurt. NL Upon pickup, raise your Max HP by #b8. NL Start each combat with #b1 #yDexterity.",
+      "#pJust #pone #pmore #phit... NL Upon pickup, #rlower your Max HP by #b8. NL Start each combat with #b1 #yStrength and #b2 #yDexterity.",
+      "#pMORE NL Upon pickup, #rlower your Max HP by #b8. NL Increase your starting #yStrength by #b1.",
+      "Max HP #b+",
+      "Max HP #r",
+      ". NL Draw #b1 additional card each turn.",
+      " NL Start each combat with #b",
+      " #yStrength and #b",
+      " #yDexterity.",
+      " NL #rWarning: Highly Addictive!"
+    ]
+  },
+  "hubris:TinFlute": {
+    "NAME": "Tin Flute",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "At the end of this run, choose one card in your deck. You start your next run with that card in your deck."
+    ]
+  },
+  "hubris:GlazedTorus": {
+    "NAME": "Glazed Torus",
+    "FLAVOR": "Not actually edible.",
+    "DESCRIPTIONS": [
+      "Gain #b1 #yStrength at the end of each of your odd numbered turns."
+    ]
+  },
+  "hubris:Backtick": {
+    "NAME": "Backtick",
+    "FLAVOR": " relic add ",
+    "DESCRIPTIONS": [
+      "Upon pickup, choose any non-boss non-event relic to obtain."
+    ]
+  },
+  "test447": {
+    "NAME": "test447",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "Gain [E] at the start of each turn."
+    ]
+  },
+  "hubris:BundleOfHerbs": {
+    "NAME": "Bundle of Herbs",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "[#2aecd7]Right [#2aecd7]click [#2aecd7]during [#2aecd7]combat [#2aecd7]to [#2aecd7]activate.[] NL Lose #b1 charge, gain #b",
+      " #yRegen. NL Whenever you enter a Rest Site, add #b",
+      " charges."
+    ]
+  },
+  "hubris:SphereOfDissonance": {
+    "NAME": "Sphere of Dissonance",
+    "FLAVOR": "You are your own worst enemy.",
+    "DESCRIPTIONS": [
+      "At the start of each combat, apply #b",
+      " #yVulnerable to a random enemy. NL #ySynergy: ",
+      "If you have the ",
+      ", whenever you enter a #y? room, heal #b",
+      " HP."
+    ]
+  },
+  "hubris:Pocketwatch2": {
+    "NAME": "Pocketwatch",
+    "FLAVOR": "Maybe time's just a construct of human perception, an illusion created by—",
+    "DESCRIPTIONS": [
+      "[#2aecd7]Right [#2aecd7]click [#2aecd7]during [#2aecd7]combat [#2aecd7]to [#2aecd7]activate.[] NL Lose #b1 charge. At the end of your turn, immediately start another turn. Energy and #yBlock are maintained between these turns."
+    ]
+  },
+  "hubris:HerbalPaste": {
+    "NAME": "Herbal Paste",
+    "FLAVOR": "A fowl smelling substance. Perhaps slathering it on your skin will heal your wounds.",
+    "DESCRIPTIONS": [
+      "Start each combat with #b",
+      " #yRegen. NL #yRegen can go negative."
+    ]
+  },
+  "hubris:MedicalManual": {
+    "NAME": "Medical Manual",
+    "FLAVOR": "\"It's Spireblight.\"",
+    "DESCRIPTIONS": [
+      "#yExhaust the first #yStatus drawn each turn. NL #ySynergy: ",
+      "If you have the ",
+      ", each #yStatus played heals you #b",
+      " HP."
+    ]
+  },
+  "hubris:ClockworkCow": {
+    "NAME": "Clockwork Cow",
+    "FLAVOR": "\"Moo.\"",
+    "DESCRIPTIONS": [
+      "Cards can cycle one additional time per turn."
+    ]
+  },
+  "hubris:HollowSoul": {
+    "NAME": "Hollow Soul",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "When you would die in combat, immediately restart the fight with #b",
+      "% Max HP. NL Regain your original Max HP and recharge this relic if you win the fight."
+    ]
+  },
+  "hubris:CrystalStatue": {
+    "NAME": "Crystal Statue",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "Broken.",
+      " Breaks after you take #b",
+      " unblocked #yAttack damage.",
+      "Gain [E] at the start of each turn."
+    ]
+  },
+  "hubris:RGBLights": {
+    "NAME": "RGB Lights",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "Every time you Evoke #b",
+      " Orbs in a single turn, Evoke the third Orb #b",
+      " times."
+    ]
+  },
+  "hubris:DustyCowl": {
+    "NAME": "Dusty Cowl",
+    "FLAVOR": "An old cowl that seems to collect dust and other ",
+    "DESCRIPTIONS": [
+      "Whenever an #yEthereal card is #yExhausted, gain #b",
+      " Block."
+    ]
+  },
+  "hubris:BottledRain": {
+    "NAME": "Bottled Rain",
+    "FLAVOR": "Petrichor.",
+    "DESCRIPTIONS": [
+      "Upon pickup, choose a card. This card will always #yRetain.",
+      "Choose a card for ",
+      " will always #yRetain."
+    ]
+  },
+  "hubris:Zylophone": {
+    "NAME": "Zylophone",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "Upon pickup, choose a #b0 or #b1 cost card. This card now costs #bX, applying its effect #bX times when played.",
+      "Choose a card for ",
+      " is now #bX cost."
+    ]
+  },
+  "hubris:EmptyBottle": {
+    "NAME": "Empty Bottle",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "Potions may be used twice."
+    ]
+  },
+  "hubris:DuctTape": {
+    "NAME": "Duct Tape",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "Upon pickup, choose #b2 cards and combine them.",
+      "Choose two cards for "
+    ]
+  },
+  "hubris:MobiusCoin": {
+    "NAME": "Möbius Coin",
+    "FLAVOR": "An inscription on the back reads: \"Porrprety of Blnak The Eivl.\"",
+    "DESCRIPTIONS": [
+      "Gain an additional #b",
+      " #yGold every time you complete a quest."
+    ]
+  },
+  "hubris:BloodyCrown": {
+    "NAME": "Bloody Crown",
+    "FLAVOR": "\"FLÄSHYN\"",
+    "DESCRIPTIONS": [
+      "Gain [E] [E] at the start of each turn. NL More enemies. NL #rMore #rblood."
+    ]
+  },
+  "hubris:BallOfEels": {
+    "NAME": "Ball of Eels",
+    "FLAVOR": "At least they're not in your hovercraft.",
+    "DESCRIPTIONS": [
+      "Whenever you #yChannel a #yLightning, trigger its passive ability."
+    ]
+  },
+  "hubris:OldNail": {
+    "NAME": "Old Nail",
+    "FLAVOR": "Blunt with age and wear.",
+    "DESCRIPTIONS": [
+      "Perhaps it can be reforged...",
+      "Pure Nail",
+      "Crafted to perfection.",
+      "Attacks deal double damage."
+    ]
+  }
+}

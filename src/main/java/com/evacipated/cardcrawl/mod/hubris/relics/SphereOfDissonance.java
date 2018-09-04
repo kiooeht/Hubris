@@ -1,5 +1,6 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
+import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -12,7 +13,7 @@ import com.megacrit.cardcrawl.relics.JuzuBracelet;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.EventRoom;
 
-public class SphereOfDissonance extends AbstractRelic
+public class SphereOfDissonance extends HubrisRelic
 {
     public static final String ID = "hubris:SphereOfDissonance";
     private static final int AMT = 3;
@@ -20,7 +21,7 @@ public class SphereOfDissonance extends AbstractRelic
 
     public SphereOfDissonance()
     {
-        super(ID, "test6.png", RelicTier.UNCOMMON, LandingSound.MAGICAL);
+        super(ID, "sphereOfDissonance.png", RelicTier.UNCOMMON, LandingSound.MAGICAL);
 
         tips.clear();
         tips.add(new PowerTip(name, description));

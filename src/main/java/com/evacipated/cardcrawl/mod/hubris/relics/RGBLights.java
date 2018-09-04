@@ -1,11 +1,12 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
+import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.orbs.EmptyOrbSlot;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-public class RGBLights extends AbstractRelic
+public class RGBLights extends HubrisRelic
 {
     public static final String ID = "hubris:RGBLights";
     private static final int AMT = 3;
@@ -13,7 +14,7 @@ public class RGBLights extends AbstractRelic
 
     public RGBLights()
     {
-        super(ID, "test1.png", RelicTier.UNCOMMON, LandingSound.HEAVY);
+        super(ID, "rgbLights.png", RelicTier.UNCOMMON, LandingSound.HEAVY);
     }
 
     @Override
