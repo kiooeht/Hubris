@@ -1,6 +1,7 @@
 package com.evacipated.cardcrawl.mod.hubris.patches;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.evacipated.cardcrawl.mod.hubris.events.shrines.MerchantFight;
 import com.evacipated.cardcrawl.mod.hubris.monsters.MerchantMonster;
 import com.evacipated.cardcrawl.modthespire.lib.SpireField;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
@@ -13,9 +14,13 @@ import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.MonsterGroup;
+import com.megacrit.cardcrawl.rewards.RewardItem;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.ShopRoom;
+import com.megacrit.cardcrawl.shop.Merchant;
 import com.megacrit.cardcrawl.shop.ShopScreen;
+import com.megacrit.cardcrawl.shop.StorePotion;
+import com.megacrit.cardcrawl.shop.StoreRelic;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -87,10 +92,60 @@ public class RugNotForSalePatch
         {
             __instance.playCantBuySfx();
 
+            Merchant merchant = ((ShopRoom)AbstractDungeon.getCurrRoom()).merchant;
+
             AbstractDungeon.closeCurrentScreen();
             AbstractDungeon.getCurrRoom().phase = AbstractRoom.RoomPhase.COMBAT;
             AbstractDungeon.lastCombatMetricKey = MerchantMonster.ID;
-            AbstractDungeon.getCurrRoom().monsters = new MonsterGroup(new MerchantMonster(((ShopRoom)AbstractDungeon.getCurrRoom()).merchant));
+            AbstractDungeon.getCurrRoom().monsters = new MonsterGroup(new MerchantMonster(merchant));
+            AbstractDungeon.getCurrRoom().event = new MerchantFight();
+
+            // TODO: Make rewards scrollable
+            AbstractDungeon.getCurrRoom().rewards.clear();
+            ArrayList<StoreRelic> shopRelics = new ArrayList<>();
+            ArrayList<AbstractCard> coloredCards = new ArrayList<>();
+            ArrayList<AbstractCard> colorlessCards = new ArrayList<>();
+            ArrayList<StorePotion> potions = new ArrayList<>();
+            try {
+                Field f = ShopScreen.class.getDeclaredField("relics");
+                f.setAccessible(true);
+                shopRelics = (ArrayList<StoreRelic>) f.get(AbstractDungeon.shopScreen);
+
+                f = ShopScreen.class.getDeclaredField("coloredCards");
+                f.setAccessible(true);
+                coloredCards = (ArrayList<AbstractCard>) f.get(AbstractDungeon.shopScreen);
+
+                f = ShopScreen.class.getDeclaredField("colorlessCards");
+                f.setAccessible(true);
+                colorlessCards = (ArrayList<AbstractCard>) f.get(AbstractDungeon.shopScreen);
+
+                f = ShopScreen.class.getDeclaredField("potions");
+                f.setAccessible(true);
+                potions = (ArrayList<StorePotion>) f.get(AbstractDungeon.shopScreen);
+            } catch (IllegalAccessException | NoSuchFieldException e) {
+                e.printStackTrace();
+            }
+
+            for (StoreRelic relic : shopRelics) {
+                AbstractDungeon.getCurrRoom().addRelicToRewards(relic.relic);
+            }
+            for (AbstractCard card : coloredCards) {
+                RewardItem rewardItem = new RewardItem();
+                rewardItem.cards.clear();
+                rewardItem.cards.add(card);
+                AbstractDungeon.getCurrRoom().addCardReward(rewardItem);
+            }
+            for (AbstractCard card : colorlessCards) {
+                RewardItem rewardItem = new RewardItem();
+                rewardItem.cards.clear();
+                rewardItem.cards.add(card);
+                AbstractDungeon.getCurrRoom().addCardReward(rewardItem);
+            }
+            for (StorePotion potion : potions) {
+                AbstractDungeon.getCurrRoom().addPotionToRewards(potion.potion);
+            }
+            AbstractDungeon.getCurrRoom().addGoldToRewards(300);
+
             AbstractDungeon.getCurrRoom().monsters.init();
             for (AbstractMonster m : AbstractDungeon.getCurrRoom().monsters.monsters) {
                 m.usePreBattleAction();
