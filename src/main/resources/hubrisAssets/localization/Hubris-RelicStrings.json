@@ -323,8 +323,8 @@
       "Gain [E] [E] at the start of each turn. NL More enemies. NL #rMore #rblood."
     ]
   },
-  "hubris:BallOfEels": {
-    "NAME": "Ball of Eels",
+  "hubris:BallOfYels": {
+    "NAME": "Ball of Yels",
     "FLAVOR": "At least they're not in your hovercraft.",
     "DESCRIPTIONS": [
       "Whenever you #yChannel a #yLightning, trigger its passive ability."
