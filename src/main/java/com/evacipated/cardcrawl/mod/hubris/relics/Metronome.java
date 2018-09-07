@@ -23,7 +23,11 @@ public class Metronome extends HubrisRelic
     @Override
     public String getUpdatedDescription()
     {
-        return DESCRIPTIONS[0] + DESCRIPTIONS[1] + counter + DESCRIPTIONS[2];
+        if (counter >= 0) {
+            return DESCRIPTIONS[0] + DESCRIPTIONS[1] + counter + DESCRIPTIONS[2];
+        } else {
+            return DESCRIPTIONS[0];
+        }
     }
 
     @Override

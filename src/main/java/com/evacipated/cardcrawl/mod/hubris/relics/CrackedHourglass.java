@@ -8,18 +8,18 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-public class Pocketwatch extends HubrisRelic
+public class CrackedHourglass extends HubrisRelic
 {
-    public static final String ID = "hubris:Pocketwatch";
+    public static final String ID = "hubris:CrackedHourglass";
     private static final int TIME_LIMIT_M = 5; // minutes
     private static final int TIME_LIMIT_S = TIME_LIMIT_M * 60;
 
     private float timeCounter = -1;
     private float waitTimer = 0;
 
-    public Pocketwatch()
+    public CrackedHourglass()
     {
-        super(ID, "pocketwatch.png", RelicTier.BOSS, LandingSound.HEAVY);
+        super(ID, "crackedHourglass.png", RelicTier.BOSS, LandingSound.HEAVY);
     }
 
     @Override
@@ -82,6 +82,6 @@ public class Pocketwatch extends HubrisRelic
     @Override
     public AbstractRelic makeCopy()
     {
-        return new Pocketwatch();
+        return new CrackedHourglass();
     }
 }

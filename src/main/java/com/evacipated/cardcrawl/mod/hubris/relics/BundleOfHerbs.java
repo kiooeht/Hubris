@@ -24,7 +24,7 @@ public class BundleOfHerbs extends HubrisRelic implements ClickableRelic
     @Override
     public String getUpdatedDescription()
     {
-        return DESCRIPTIONS[0] + REGEN + DESCRIPTIONS[1] + PER_REST + DESCRIPTIONS[2];
+        return DESCRIPTIONS[0] + REGEN + DESCRIPTIONS[1] + PER_REST + DESCRIPTIONS[2] + PER_REST + DESCRIPTIONS[3];
     }
 
     @Override

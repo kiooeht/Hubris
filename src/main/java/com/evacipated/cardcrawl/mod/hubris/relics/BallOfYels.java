@@ -5,13 +5,13 @@ import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.OnChannelRelic;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-public class BallOfEels extends HubrisRelic implements OnChannelRelic
+public class BallOfYels extends HubrisRelic implements OnChannelRelic
 {
-    public static final String ID = "hubris:BallOfEels";
+    public static final String ID = "hubris:BallOfYels";
 
-    public BallOfEels()
+    public BallOfYels()
     {
-        super(ID, "ballOfEels.png", RelicTier.COMMON, LandingSound.CLINK);
+        super(ID, "ballOfYels.png", RelicTier.COMMON, LandingSound.CLINK);
     }
 
     @Override
@@ -29,6 +29,6 @@ public class BallOfEels extends HubrisRelic implements OnChannelRelic
     @Override
     public AbstractRelic makeCopy()
     {
-        return new BallOfEels();
+        return new BallOfYels();
     }
 }
