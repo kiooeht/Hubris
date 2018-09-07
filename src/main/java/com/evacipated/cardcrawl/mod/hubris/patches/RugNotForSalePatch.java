@@ -2,6 +2,7 @@ package com.evacipated.cardcrawl.mod.hubris.patches;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.mod.hubris.events.shrines.MerchantFight;
+import com.evacipated.cardcrawl.mod.hubris.fakes.FakeMerchant;
 import com.evacipated.cardcrawl.mod.hubris.monsters.MerchantMonster;
 import com.evacipated.cardcrawl.modthespire.lib.SpireField;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
@@ -100,7 +101,6 @@ public class RugNotForSalePatch
             AbstractDungeon.getCurrRoom().monsters = new MonsterGroup(new MerchantMonster(merchant));
             AbstractDungeon.getCurrRoom().event = new MerchantFight();
 
-            // TODO: Make rewards scrollable
             AbstractDungeon.getCurrRoom().rewards.clear();
             ArrayList<StoreRelic> shopRelics = new ArrayList<>();
             ArrayList<AbstractCard> coloredCards = new ArrayList<>();
@@ -151,7 +151,7 @@ public class RugNotForSalePatch
                 m.usePreBattleAction();
                 m.useUniversalPreBattleAction();
             }
-            ((ShopRoom)AbstractDungeon.getCurrRoom()).merchant = null;
+            ((ShopRoom)AbstractDungeon.getCurrRoom()).merchant = new FakeMerchant(merchant);
             AbstractRoom.waitTimer = 0.1f;
             AbstractDungeon.player.preBattlePrep();
         }

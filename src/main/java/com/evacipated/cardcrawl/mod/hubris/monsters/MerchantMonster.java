@@ -8,6 +8,7 @@ import com.evacipated.cardcrawl.mod.hubris.actions.AnimationTimeScaleAction;
 import com.evacipated.cardcrawl.mod.hubris.actions.StealGoldAction;
 import com.evacipated.cardcrawl.mod.hubris.actions.ThrowGoldAction;
 import com.evacipated.cardcrawl.mod.hubris.actions.utility.ForceWaitAction;
+import com.evacipated.cardcrawl.mod.hubris.relics.NiceRug;
 import com.megacrit.cardcrawl.actions.animations.TalkAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.*;
@@ -16,6 +17,7 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
+import com.megacrit.cardcrawl.helpers.RelicLibrary;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.potions.StrengthPotion;
@@ -109,8 +111,10 @@ public class MerchantMonster extends AbstractMonster
     @Override
     public void render(SpriteBatch sb)
     {
-        sb.setColor(Color.WHITE);
-        sb.draw(ImageMaster.MERCHANT_RUG_IMG, DRAW_X, DRAW_Y, 512.0F * Settings.scale, 512.0F * Settings.scale);
+        if (!isDeadOrEscaped()) {
+            sb.setColor(Color.WHITE);
+            sb.draw(ImageMaster.MERCHANT_RUG_IMG, DRAW_X, DRAW_Y, 512.0F * Settings.scale, 512.0F * Settings.scale);
+        }
 
         super.render(sb);
     }
@@ -180,6 +184,6 @@ public class MerchantMonster extends AbstractMonster
     public void die()
     {
         super.die();
-        ((ShopRoom)AbstractDungeon.getCurrRoom()).merchant = npc;
+        AbstractDungeon.getCurrRoom().spawnRelicAndObtain(npc.hb.cX, npc.hb.cY, RelicLibrary.getRelic(NiceRug.ID).makeCopy());
     }
 }
