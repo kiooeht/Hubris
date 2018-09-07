@@ -240,7 +240,7 @@ public class HubrisMod implements
         BaseMod.addRelic(new CuriousFeather(), RelicType.SHARED);
         BaseMod.addRelic(new Metronome(), RelicType.SHARED);
         BaseMod.addRelic(new FunFungus(), RelicType.SHARED);
-        BaseMod.addRelic(new Pocketwatch(), RelicType.SHARED);
+        BaseMod.addRelic(new CrackedHourglass(), RelicType.SHARED);
         BaseMod.addRelic(new ScarierMask(), RelicType.SHARED);
         BaseMod.addRelic(new DeadTorch(), RelicType.SHARED);
         BaseMod.addRelic(new BottledHeart(), RelicType.SHARED);
@@ -256,7 +256,7 @@ public class HubrisMod implements
         BaseMod.addRelic(new Test447(), RelicType.SHARED);
         BaseMod.addRelic(new BundleOfHerbs(), RelicType.SHARED);
         BaseMod.addRelic(new SphereOfDissonance(), RelicType.SHARED);
-        BaseMod.addRelic(new Pocketwatch2(), RelicType.SHARED);
+        BaseMod.addRelic(new Stopwatch(), RelicType.SHARED);
         BaseMod.addRelic(new HerbalPaste(), RelicType.SHARED);
         BaseMod.addRelic(new MedicalManual(), RelicType.SHARED);
         BaseMod.addRelic(new HollowSoul(), RelicType.SHARED);

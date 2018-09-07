@@ -11,20 +11,20 @@ import com.megacrit.cardcrawl.monsters.beyond.TimeEater;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
-public class Pocketwatch2 extends HubrisRelic implements ClickableRelic
+public class Stopwatch extends HubrisRelic implements ClickableRelic
 {
-    public static final String ID = "hubris:Pocketwatch2";
+    public static final String ID = "hubris:Stopwatch";
     private static final int AMT = 6;
 
-    public Pocketwatch2()
+    public Stopwatch()
     {
-        super(ID, "pocketwatch.png", RelicTier.BOSS, LandingSound.HEAVY);
+        super(ID, "stopwatch.png", RelicTier.BOSS, LandingSound.HEAVY);
     }
 
     @Override
     public String getUpdatedDescription()
     {
-        return DESCRIPTIONS[0];
+        return DESCRIPTIONS[0] + AMT + DESCRIPTIONS[1];
     }
 
     @Override
@@ -67,6 +67,6 @@ public class Pocketwatch2 extends HubrisRelic implements ClickableRelic
     @Override
     public AbstractRelic makeCopy()
     {
-        return new Pocketwatch2();
+        return new Stopwatch();
     }
 }

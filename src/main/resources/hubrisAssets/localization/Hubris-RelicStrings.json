@@ -63,9 +63,9 @@
       " HP at the start of your next turn."
     ]
   },
-  "hubris:Pocketwatch": {
-    "NAME": "Pocketwatch",
-    "FLAVOR": "Maybe time's just a construct of human perception, an illusion created by—",
+  "hubris:CrackedHourglass": {
+    "NAME": "Cracked Hourglass",
+    "FLAVOR": "Your time is running out...",
     "DESCRIPTIONS": [
       " If any battle takes longer than #b",
       " minutes, you #rdie.",
@@ -192,6 +192,7 @@
     "DESCRIPTIONS": [
       "[#2aecd7]Right [#2aecd7]click [#2aecd7]during [#2aecd7]combat [#2aecd7]to [#2aecd7]activate.[] NL Lose #b1 charge, gain #b",
       " #yRegen. NL Whenever you enter a Rest Site, add #b",
+      " charges. NL Starts with #b",
       " charges."
     ]
   },
@@ -206,11 +207,12 @@
       " HP."
     ]
   },
-  "hubris:Pocketwatch2": {
-    "NAME": "Pocketwatch",
+  "hubris:Stopwatch": {
+    "NAME": "Stopwatch",
     "FLAVOR": "Maybe time's just a construct of human perception, an illusion created by—",
     "DESCRIPTIONS": [
-      "[#2aecd7]Right [#2aecd7]click [#2aecd7]during [#2aecd7]combat [#2aecd7]to [#2aecd7]activate.[] NL Lose #b1 charge. At the end of your turn, immediately start another turn. Energy and #yBlock are maintained between these turns."
+      "[#2aecd7]Right [#2aecd7]click [#2aecd7]during [#2aecd7]combat [#2aecd7]to [#2aecd7]activate.[] NL Lose #b1 charge. At the end of your turn, immediately start another turn. Energy and #yBlock are maintained between these turns. NL Starts with #b",
+      " charges."
     ]
   },
   "hubris:HerbalPaste": {
