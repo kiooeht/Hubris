@@ -344,7 +344,8 @@
     "NAME": "Nice Rug",
     "FLAVOR": "You killed a nice, blue merchant for this. That wasn't very nice of you.",
     "DESCRIPTIONS": [
-      "TODO"
+      "Start each combat with #b1 #yPlated #yArmor for every #b",
+      " #yGold you have."
     ]
   }
 }
