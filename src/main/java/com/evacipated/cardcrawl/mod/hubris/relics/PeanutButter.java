@@ -9,7 +9,7 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 public class PeanutButter extends HubrisRelic
 {
     public static final String ID = "hubris:PeanutButter";
-    private static final int TEMP_HP_AMOUNT = 10;
+    private static final int TEMP_HP_AMOUNT = 8;
 
     public PeanutButter()
     {
