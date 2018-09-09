@@ -23,7 +23,7 @@ public class NiceRug extends HubrisRelic
 
     public NiceRug()
     {
-        super(ID, "test4.png", RelicTier.SPECIAL, LandingSound.FLAT);
+        super(ID, "niceRug.png", RelicTier.SPECIAL, LandingSound.FLAT);
     }
 
     @Override
