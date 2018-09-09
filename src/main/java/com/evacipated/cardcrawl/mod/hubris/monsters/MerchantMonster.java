@@ -9,6 +9,7 @@ import com.evacipated.cardcrawl.mod.hubris.actions.StealGoldAction;
 import com.evacipated.cardcrawl.mod.hubris.actions.ThrowGoldAction;
 import com.evacipated.cardcrawl.mod.hubris.actions.utility.ForceWaitAction;
 import com.evacipated.cardcrawl.mod.hubris.relics.NiceRug;
+import com.evacipated.cardcrawl.mod.hubris.vfx.combat.BlueSmokeBombEffect;
 import com.megacrit.cardcrawl.actions.animations.TalkAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.*;
@@ -32,7 +33,6 @@ import com.megacrit.cardcrawl.shop.Merchant;
 import com.megacrit.cardcrawl.vfx.cardManip.ExhaustCardEffect;
 import com.megacrit.cardcrawl.vfx.combat.InflameEffect;
 import com.megacrit.cardcrawl.vfx.combat.IntenseZoomEffect;
-import com.megacrit.cardcrawl.vfx.combat.SmokeBombEffect;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -121,7 +121,7 @@ public class MerchantMonster extends AbstractMonster
             AbstractDungeon.getCurrRoom().smoked = true;
             AbstractDungeon.getCurrRoom().rewards.clear();
             AbstractDungeon.actionManager.addToBottom(new CanLoseAction());
-            AbstractDungeon.actionManager.addToBottom(new VFXAction(new SmokeBombEffect(hb.cX, hb.cY)));
+            AbstractDungeon.actionManager.addToBottom(new VFXAction(new BlueSmokeBombEffect(hb.cX, hb.cY)));
             AbstractDungeon.actionManager.addToBottom(new EscapeAction(this));
             AbstractDungeon.actionManager.addToBottom(new SetMoveAction(this, ESCAPE, Intent.ESCAPE));
         } else if (nextMove == HALF_DEAD) {
