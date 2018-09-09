@@ -12,7 +12,10 @@ import com.evacipated.cardcrawl.mod.hubris.relics.NiceRug;
 import com.megacrit.cardcrawl.actions.animations.TalkAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.*;
+import com.megacrit.cardcrawl.actions.unique.CanLoseAction;
+import com.megacrit.cardcrawl.actions.unique.RemoveDebuffsAction;
 import com.megacrit.cardcrawl.actions.utility.ShakeScreenAction;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -21,39 +24,19 @@ import com.megacrit.cardcrawl.helpers.RelicLibrary;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.potions.StrengthPotion;
+import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.MetallicizePower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
-import com.megacrit.cardcrawl.rooms.ShopRoom;
+import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.shop.Merchant;
+import com.megacrit.cardcrawl.vfx.cardManip.ExhaustCardEffect;
+import com.megacrit.cardcrawl.vfx.combat.InflameEffect;
 import com.megacrit.cardcrawl.vfx.combat.IntenseZoomEffect;
+import com.megacrit.cardcrawl.vfx.combat.SmokeBombEffect;
 
 import java.util.HashMap;
 import java.util.Map;
 
-// Ideas
-// First turn
-//   Steal all money
-//   Power up based on money stolen (entering fight with loads of money = bad)
-//   OR Lose health equal to money stolen (entering fight with loads of money = good)
-// Moves
-//   Steal money and heal (incompatible with above)
-//   Activate relic
-//     Bronze Scales
-//     Lee's Waffle: Raise max hp by 7, heal all HP (use when low hp)
-//     Cauldron: Use 5 random potions
-//     Torii: When you would receive 5 or less unblocked Attack damage, reduce it to 1
-//     Thread and Needle: Gain 5 Plated Armor
-//     Red Skull: While HP <50%, gain 3 Strength
-//     Letter Opener: Every time player plays 3 Skills in a single turn, deal 5 damage to player
-//     Shuriken: Every time player plays 3 Attacks in a single turn, gain 1 Strength
-//   Use potion
-//     Block Potion
-//     Ancient Potion
-//     Fire Potion
-//     Poison Potion
-//     Regen Potion
-//     Strength Potion
-//     Weak Potion
 public class MerchantMonster extends AbstractMonster
 {
     public static final String ID = "hubris:Merchant";
@@ -61,24 +44,27 @@ public class MerchantMonster extends AbstractMonster
     public static final String[] MOVES = {};
     public static final String[] DIALOG = {
             "Hey! NL No stealing!",
-            "@Give@ @me@ @all@ @your@ @gold!@",
-            "@No@ @Refunds.@",
-            "Hey buddy, why'd you do that?",
-            "~Ow!~",
-            "Hey now, NL don't do that."
+            "@No@ @Refunds.@"
     };
     private static final float DRAW_X = Settings.WIDTH * 0.5F + 34.0F * Settings.scale;
     private static final float DRAW_Y = AbstractDungeon.floorY - 109.0F * Settings.scale;
-    public static final int HP = 100;
+    private static final int START_HP = 10;
+    public static final int REAL_HP = 100;
     private static final float TIME_SCALE = 4.0f;
+
+    // Move bytes
+    private static byte ESCAPE = 0;
+    private static byte ATTACK = 1;
+    private static byte STRENGTH_UP = 2;
+    private static byte HALF_DEAD = 7;
 
     private static final int METALLICIZE_AMT = 25;
     private static final Map<Integer, Integer> throwAmounts = new HashMap<>();
 
     private Merchant npc;
+    private boolean doEscape = true;
     private boolean firstTurn = true;
-
-    // Moves
+    private boolean thresholdReached = false;
 
     static
     {
@@ -87,7 +73,7 @@ public class MerchantMonster extends AbstractMonster
 
     public MerchantMonster(Merchant npc)
     {
-        super(NAME, ID, HP, -10.0F, -30.0F, 180.0F, 150.0F, null, 0.0F, 0.0F);
+        super(NAME, ID, START_HP, -10.0F, -30.0F, 180.0F, 150.0F, null, 0.0F, 0.0F);
 
         this.npc = npc;
 
@@ -104,6 +90,8 @@ public class MerchantMonster extends AbstractMonster
         dialogY = 10.0F * Settings.scale;
 
         gold = 300;
+        halfDead = false;
+        AbstractDungeon.getCurrRoom().cannotLose = true;
 
         damage.add(new DamageInfo(this, 1));
     }
@@ -111,7 +99,7 @@ public class MerchantMonster extends AbstractMonster
     @Override
     public void render(SpriteBatch sb)
     {
-        if (!isDeadOrEscaped()) {
+        if (!isDeadOrEscaped() || AbstractDungeon.getCurrRoom().cannotLose) {
             sb.setColor(Color.WHITE);
             sb.draw(ImageMaster.MERCHANT_RUG_IMG, DRAW_X, DRAW_Y, 512.0F * Settings.scale, 512.0F * Settings.scale);
         }
@@ -123,23 +111,39 @@ public class MerchantMonster extends AbstractMonster
     public void usePreBattleAction()
     {
         //UnlockTracker.markBossAsSeen("MERCHANT");
-        AbstractDungeon.actionManager.addToTop(new GainBlockAction(this, this, METALLICIZE_AMT));
-        AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(this, this, new MetallicizePower(this, METALLICIZE_AMT), METALLICIZE_AMT));
-        AbstractDungeon.actionManager.addToTop(new AnimationTimeScaleAction(this, TIME_SCALE));
-        AbstractDungeon.actionManager.addToTop(new StealGoldAction(this, this, gold, true));
         AbstractDungeon.actionManager.addToTop(new TalkAction(this, DIALOG[0], 0.5F, 3.0F));
     }
 
     @Override
     public void takeTurn()
     {
-        if (nextMove == 0) {
-            AbstractDungeon.actionManager.addToTop(new VFXAction(this, new IntenseZoomEffect(hb.cX, hb.cY, true), 1.3F, true));
-            AbstractDungeon.actionManager.addToTop(new ShakeScreenAction(1.3F, ScreenShake.ShakeDur.XLONG, ScreenShake.ShakeIntensity.HIGH));
-            AbstractDungeon.actionManager.addToBottom(new ChangeStateAction(this, "BUYOUT"));
-        } else if (nextMove == 2) {
+        if (nextMove == ESCAPE) {
+            AbstractDungeon.getCurrRoom().smoked = true;
+            AbstractDungeon.getCurrRoom().rewards.clear();
+            AbstractDungeon.actionManager.addToBottom(new CanLoseAction());
+            AbstractDungeon.actionManager.addToBottom(new VFXAction(new SmokeBombEffect(hb.cX, hb.cY)));
+            AbstractDungeon.actionManager.addToBottom(new EscapeAction(this));
+            AbstractDungeon.actionManager.addToBottom(new SetMoveAction(this, ESCAPE, Intent.ESCAPE));
+        } else if (nextMove == HALF_DEAD) {
+            doEscape = false;
+            halfDead = false;
+            AbstractDungeon.actionManager.addToBottom(new StealGoldAction(this, this, gold, true));
+            AbstractDungeon.actionManager.addToBottom(new ShakeScreenAction(1.3F, ScreenShake.ShakeDur.XLONG, ScreenShake.ShakeIntensity.HIGH));
+            AbstractDungeon.actionManager.addToBottom(new VFXAction(this, new IntenseZoomEffect(hb.cX, hb.cY, true), 1.3F, true));
+            AbstractDungeon.actionManager.addToBottom(new VFXAction(this, new InflameEffect(this), 0.25F));
+            AbstractDungeon.actionManager.addToBottom(new VFXAction(this, new InflameEffect(this), 0.25F));
+            AbstractDungeon.actionManager.addToBottom(new VFXAction(this, new InflameEffect(this), 0.25F));
+            AbstractDungeon.actionManager.addToBottom(new AnimationTimeScaleAction(this, TIME_SCALE));
+            maxHealth = REAL_HP;
+            AbstractDungeon.actionManager.addToBottom(new HealAction(this, this, maxHealth));
+            AbstractDungeon.actionManager.addToBottom(new RemoveDebuffsAction(this));
+            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new MetallicizePower(this, METALLICIZE_AMT), METALLICIZE_AMT));
+            AbstractDungeon.actionManager.addToBottom(new CanLoseAction());
+            AbstractDungeon.actionManager.addToBottom(new TalkAction(this, DIALOG[1], 0.5F, 3.0F));
+        } else if (nextMove == STRENGTH_UP) {
             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new StrengthPower(this, 1), 1));
         } else {
+            firstTurn = false;
             Integer throwAmount = throwAmounts.get((int)nextMove);
 
             if (throwAmount != null && throwAmount > 0) {
@@ -157,16 +161,23 @@ public class MerchantMonster extends AbstractMonster
     @Override
     protected void getMove(int num)
     {
+        if (doEscape) {
+            setMove(ESCAPE, Intent.ESCAPE);
+            return;
+        }
         if (firstTurn) {
-            firstTurn = false;
-            setMove((byte) 1, Intent.ATTACK, 1, throwAmounts.get(1), true);
+            setMove(ATTACK, Intent.ATTACK, 1, throwAmounts.get(1), true);
             return;
         }
         //setMove((byte)-1, Intent.UNKNOWN);
         if (num < 40) {
-            setMove(StrengthPotion.NAME, (byte)2, Intent.BUFF);
+            if (lastMove(STRENGTH_UP)) {
+                rollMove();
+                return;
+            }
+            setMove(StrengthPotion.NAME, STRENGTH_UP, Intent.BUFF);
         } else {
-            setMove((byte) 1, Intent.ATTACK, 1, throwAmounts.get(1), true);
+            setMove(ATTACK, Intent.ATTACK, 1, throwAmounts.get(1), true);
         }
 
         //getMove(AbstractDungeon.aiRng.random(20));
@@ -178,12 +189,36 @@ public class MerchantMonster extends AbstractMonster
         super.damage(info);
 
         state.setTimeScale(TIME_SCALE * ((float)currentHealth / (float)maxHealth));
+
+        if (currentHealth <= 0 && !halfDead) {
+            halfDead = true;
+            for (AbstractPower p : powers) {
+                p.onDeath();
+            }
+            for (AbstractRelic r : AbstractDungeon.player.relics) {
+                r.onMonsterDeath(this);
+            }
+            powers.removeIf(p -> p.type == AbstractPower.PowerType.DEBUFF);
+            setMove(HALF_DEAD, Intent.UNKNOWN);
+            createIntent();
+            applyPowers();
+            AbstractDungeon.actionManager.cardQueue.clear();
+            for (AbstractCard c : AbstractDungeon.player.limbo.group) {
+                AbstractDungeon.effectList.add(new ExhaustCardEffect(c));
+            }
+            AbstractDungeon.player.limbo.group.clear();
+            AbstractDungeon.player.releaseCard();
+            AbstractDungeon.overlayMenu.endTurnButton.disable(true);
+            //AbstractDungeon.actionManager.actions.clear();
+        }
     }
 
     @Override
     public void die()
     {
-        super.die();
-        AbstractDungeon.getCurrRoom().spawnRelicAndObtain(npc.hb.cX, npc.hb.cY, RelicLibrary.getRelic(NiceRug.ID).makeCopy());
+        if (!AbstractDungeon.getCurrRoom().cannotLose) {
+            super.die();
+            AbstractDungeon.getCurrRoom().spawnRelicAndObtain(npc.hb.cX, npc.hb.cY, RelicLibrary.getRelic(NiceRug.ID).makeCopy());
+        }
     }
 }
