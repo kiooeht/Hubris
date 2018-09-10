@@ -21,7 +21,6 @@ public class NiceRugRender
             public void edit(MethodCall m) throws CannotCompileException
             {
                 if (m.getClassName().equals(AbstractPlayer.class.getName()) && m.getMethodName().equals("render")) {
-                    System.out.println(m.getLineNumber());
                     m.replace("{" +
                             NiceRug.class.getName() + ".renderRug($1, $0);" +
                             "$_ = $proceed($$);" +
