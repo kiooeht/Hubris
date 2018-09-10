@@ -7,7 +7,6 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.events.AbstractImageEvent;
-import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.EventStrings;
 import com.megacrit.cardcrawl.relics.FrozenEgg2;
 import com.megacrit.cardcrawl.relics.MoltenEgg2;
@@ -18,6 +17,7 @@ import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardBrieflyEffect;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class UpdateBodyText extends AbstractImageEvent
 {
@@ -117,11 +117,11 @@ public class UpdateBodyText extends AbstractImageEvent
                         AbstractDungeon.gridSelectScreen.open(group, 1, OPTIONS[6], false);
                         break;
                 }
-                String tmp = DESCRIPTIONS[2] + " ";
+                StringBuilder tmp = new StringBuilder();
                 for (int i=0; i<200; ++i) {
-                    tmp += randColor(DESCRIPTIONS[2]).substring(2);
+                    tmp.append(randColor(DESCRIPTIONS[2]));
                 }
-                imageEventText.updateBodyText(tmp);
+                imageEventText.updateBodyText(tmp.toString());
                 imageEventText.clearAllDialogs();
                 imageEventText.setDialogOption(OPTIONS[4]);
                 curScreen = CurrentScreen.DONE;
@@ -132,9 +132,18 @@ public class UpdateBodyText extends AbstractImageEvent
         }
     }
 
-    private static String[] colors = {"y", "g", "r", "b", "p"};
-    private static String randColor(String str)
+    private static String[] colors = {"efc851", "7fff00", "ff6563", "87ceeb", Settings.PURPLE_COLOR.toString()};
+    private static String randColor(String input)
     {
-        return FontHelper.colorString(str, colors[new Random().nextInt(colors.length)]);
+        StringBuilder retVal = new StringBuilder();
+        Scanner s = new Scanner(input);
+
+        while (s.hasNext()) {
+            retVal.append("[#").append(colors[new Random().nextInt(colors.length)]).append("]").append(s.next());
+            retVal.append("[] ");
+        }
+
+        s.close();
+        return retVal.toString();
     }
 }
