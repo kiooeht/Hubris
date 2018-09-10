@@ -115,8 +115,7 @@ public class TeleporterPatch
             if (distance > 1) {
                 AbstractRelic teleporter = AbstractDungeon.player.getRelic(Teleporter.ID);
                 if (teleporter != null) {
-                    teleporter.setCounter(teleporter.counter - 1);
-                    teleporter.flash();
+                    teleporter.onTrigger();
                 }
             }
         }

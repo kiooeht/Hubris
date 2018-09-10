@@ -4,12 +4,14 @@ import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.MonsterRoomBoss;
 import com.megacrit.cardcrawl.rooms.MonsterRoomElite;
 
 public class Teleporter extends HubrisRelic
 {
     public static final String ID = "hubris:Teleporter";
+    private boolean justUsed = false;
 
     public Teleporter()
     {
@@ -50,6 +52,23 @@ public class Teleporter extends HubrisRelic
             flash();
             setCounter(counter + 1);
         }
+    }
+
+    @Override
+    public void onEnterRoom(AbstractRoom room)
+    {
+        if (justUsed) {
+            justUsed = false;
+            AbstractDungeon.floorNum += 1;
+        }
+    }
+
+    @Override
+    public void onTrigger()
+    {
+        flash();
+        setCounter(counter - 1);
+        justUsed = true;
     }
 
     @Override
