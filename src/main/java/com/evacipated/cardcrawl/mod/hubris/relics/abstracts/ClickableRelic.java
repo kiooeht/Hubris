@@ -1,29 +1,22 @@
 package com.evacipated.cardcrawl.mod.hubris.relics.abstracts;
 
-import com.megacrit.cardcrawl.helpers.input.InputHelper;
+import com.evacipated.cardcrawl.mod.hubris.patches.HitboxRightClick;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public interface ClickableRelic
 {
-    class Data
-    {
-        private boolean rightClickStart = false;
-    }
-
-    Data state = new Data();
-
     void onRightClick();
 
     default void clickUpdate()
     {
-        if (state.rightClickStart && InputHelper.justReleasedClickRight) {
-            state.rightClickStart = false;
-            if (hovered()) {
+        if (this instanceof AbstractRelic) {
+            AbstractRelic relic = (AbstractRelic) this;
+            if (HitboxRightClick.rightClicked.get(relic.hb)) {
                 onRightClick();
             }
-        } else if (InputHelper.justClickedRight && hovered()) {
-            state.rightClickStart = true;
+        } else {
+            throw new NotImplementedException();
         }
     }
 
