@@ -1,4 +1,4 @@
-package com.evacipated.cardcrawl.mod.hubris.patches;
+package com.evacipated.cardcrawl.mod.hubris.patches.relicInterfaces;
 
 import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.OnChannelRelic;
 import com.evacipated.cardcrawl.modthespire.lib.*;
