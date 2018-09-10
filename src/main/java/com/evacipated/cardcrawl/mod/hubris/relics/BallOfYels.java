@@ -23,6 +23,7 @@ public class BallOfYels extends HubrisRelic implements OnChannelRelic
     @Override
     public void onChannel(AbstractOrb orb)
     {
+        flash();
         orb.onEndOfTurn();
     }
 
