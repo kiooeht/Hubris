@@ -11,7 +11,7 @@
   },
   "hubris:BlackHole": {
     "NAME": "Black Hole",
-    "FLAVOR": "TODO",
+    "FLAVOR": "While consuming everything you put into it, it radiates a strange energy.",
     "DESCRIPTIONS": [
       "All cards cost #b0. NL Any card entering your discard pile is exhausted."
     ]
@@ -33,14 +33,14 @@
   },
   "hubris:CuriousFeather": {
     "NAME": "Curious Feather",
-    "FLAVOR": "TODO",
+    "FLAVOR": "You can't help but feel curious about the world while holding this feather.",
     "DESCRIPTIONS": [
       "Whenever you play a #yPower, gain #b1 #yStrength."
     ]
   },
   "hubris:Metronome": {
     "NAME": "Metronome",
-    "FLAVOR": "TODO",
+    "FLAVOR": "Stronger and Stronger.",
     "DESCRIPTIONS": [
       "Increases #yStrength for each sequential #yAttack played. Playing a #yNon-Attack card resets the bonus to #b0.",
       " NL You get #b",
@@ -57,7 +57,7 @@
   },
   "hubris:FunFungus": {
     "NAME": "Fun Fungus",
-    "FLAVOR": "TODO",
+    "FLAVOR": "If you remain still, this fungus will grow into your wounds and healing them.",
     "DESCRIPTIONS": [
       "If you do not play any #yAttacks during your turn, heal #b",
       " HP at the start of your next turn."
@@ -74,21 +74,21 @@
   },
   "hubris:ScarierMask": {
     "NAME": "Scarier Mask",
-    "FLAVOR": "TODO",
+    "FLAVOR": "Scary.",
     "DESCRIPTIONS": [
       "The weakest enemy flees at the beginning of multi-enemy fights."
     ]
   },
   "hubris:DeadTorch": {
     "NAME": "Dead Torch",
-    "FLAVOR": "TODO",
+    "FLAVOR": "Emits a soft, blue light that attracts the souls of the dead.",
     "DESCRIPTIONS": [
       "Whenever you #yExhaust a card, gain #b1 Max HP."
     ]
   },
   "hubris:BottledHeart": {
     "NAME": "Bottled Heart",
-    "FLAVOR": "TODO",
+    "FLAVOR": "Your own heart in a bottle. Still beating.",
     "DESCRIPTIONS": [
       "Upon pickup, this relic gains charge equal to half your Max HP and your Max HP is reduced to #b1. NL Start each combat with #yTemporary HP equal to this relic's charge. NL Any changes to Max HP affect this instead.",
       " NL #ySynergy: ",
@@ -99,7 +99,7 @@
   },
   "hubris:DisguiseKit": {
     "NAME": "Cunning Disguise",
-    "FLAVOR": "TODO",
+    "FLAVOR": "Absolutely no one could possibly recognize you while you're wearing this disguise.",
     "DESCRIPTIONS": [
       "Upon pickup, choose another character. On future Card Reward screens you have #y1 additional card to choose from that will be from ",
       "that character.",
@@ -108,7 +108,7 @@
   },
   "hubris:Teleporter": {
     "NAME": "Short Range Teleporter",
-    "FLAVOR": "TODO",
+    "FLAVOR": "A prototype teleporter from before the Spireblight. No one knows how it works anymore.",
     "DESCRIPTIONS": [
       "You may skip rooms, instead entering a room two floors away. NL Has #b",
       " charge",
@@ -118,7 +118,7 @@
   },
   "hubris:MysteriousPyramids": {
     "NAME": "Mysterious Pyramids",
-    "FLAVOR": "TODO",
+    "FLAVOR": "Usually they come in sets of four.",
     "DESCRIPTIONS": [
       "Upon pickup, choose two cards. Whenever you draw one of these cards, draw the other.",
       "Choose two cards for ",
@@ -160,7 +160,7 @@
   },
   "hubris:TinFlute": {
     "NAME": "Tin Flute",
-    "FLAVOR": "TODO",
+    "FLAVOR": "It feels like you've seen this before.",
     "DESCRIPTIONS": [
       "At the end of this run, choose one card in your deck. You start your next run with that card in your deck."
     ]
@@ -188,7 +188,7 @@
   },
   "hubris:BundleOfHerbs": {
     "NAME": "Bundle of Herbs",
-    "FLAVOR": "TODO",
+    "FLAVOR": "A collection of healing herbs: sage, thyme, greenwarish, rosemary.",
     "DESCRIPTIONS": [
       "[#2aecd7]Right [#2aecd7]click [#2aecd7]during [#2aecd7]combat [#2aecd7]to [#2aecd7]activate.[] NL Lose #b1 charge, gain #b",
       " #yRegen. NL Whenever you enter a Rest Site, add #b",
@@ -242,7 +242,7 @@
   },
   "hubris:HollowSoul": {
     "NAME": "Hollow Soul",
-    "FLAVOR": "TODO",
+    "FLAVOR": "An echo of a past life. Perhaps with this you may become whole.",
     "DESCRIPTIONS": [
       "When you would die in combat, immediately restart the fight with #b",
       "% Max HP. NL Regain your original Max HP and recharge this relic if you win the fight."
@@ -250,7 +250,7 @@
   },
   "hubris:CrystalStatue": {
     "NAME": "Crystal Statue",
-    "FLAVOR": "TODO",
+    "FLAVOR": "The slightest touch could shatter it.",
     "DESCRIPTIONS": [
       "Broken.",
       " Breaks after you take #b",
@@ -260,7 +260,7 @@
   },
   "hubris:RGBLights": {
     "NAME": "RGB Lights",
-    "FLAVOR": "TODO",
+    "FLAVOR": "More colors makes it run faster.",
     "DESCRIPTIONS": [
       "Every time you Evoke #b",
       " Orbs in a single turn, Evoke the third Orb #b",
@@ -286,7 +286,7 @@
   },
   "hubris:Zylophone": {
     "NAME": "Zylophone",
-    "FLAVOR": "TODO",
+    "FLAVOR": "[RED]C C [CYAN]G G [PURPLE]A A [CYAN]G [GREEN]F F [YELLOW]E E [ORANGE]D D [RED]C[]",
     "DESCRIPTIONS": [
       "Upon pickup, choose a #b0 or #b1 cost card. This card now costs #bX, applying its effect #bX times when played.",
       "Choose a card for ",
@@ -295,14 +295,14 @@
   },
   "hubris:EmptyBottle": {
     "NAME": "Empty Bottle",
-    "FLAVOR": "TODO",
+    "FLAVOR": "Just pour half the potion into this bottle and suddenly you have two potions!",
     "DESCRIPTIONS": [
       "Potions may be used twice."
     ]
   },
   "hubris:DuctTape": {
     "NAME": "Duct Tape",
-    "FLAVOR": "TODO",
+    "FLAVOR": "Fix anything.",
     "DESCRIPTIONS": [
       "Upon pickup, choose #b2 cards and combine them.",
       "Choose two cards for "
