@@ -207,8 +207,8 @@ public class HubrisMod implements
         BaseMod.addMonster(GrandSnecko.ID, GrandSnecko::new);
         BaseMod.addMonster(MusketHawk.ID, MusketHawk::new);
 
-        BaseMod.addBoss(TheBeyond.ID, GrandSnecko.ID, null, null);
-        BaseMod.addBoss(TheCity.ID, MusketHawk.ID, null, null);
+        BaseMod.addBoss(TheBeyond.ID, GrandSnecko.ID, assetPath("images/ui/map/boss/grandSnecko.png"), assetPath("images/ui/map/bossOutline/grandSnecko.png"));
+        BaseMod.addBoss(TheCity.ID, MusketHawk.ID, assetPath("images/ui/map/boss/musketHawk.png"), assetPath("images/ui/map/bossOutline/musketHawk.png"));
     }
 
     @Override
