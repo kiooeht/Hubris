@@ -18,6 +18,7 @@ import com.evacipated.cardcrawl.mod.hubris.CardIgnore;
 import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.hubris.actions.unique.DuctTapeUseNextAction;
 import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.AlwaysRetainField;
+import com.evacipated.cardcrawl.modthespire.lib.SpireOverride;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardSave;
 import com.megacrit.cardcrawl.cards.DescriptionLine;
@@ -168,70 +169,6 @@ public class DuctTapeCard extends CustomCard
         for (AbstractCard c : pCards) {
             cards.add(c.makeStatEquivalentCopy());
         }
-
-        // Construct the combined artwork
-        FrameBuffer fbo = new FrameBuffer(Pixmap.Format.RGBA8888, 250, 188, false);
-        TextureRegion region = new TextureRegion(fbo.getColorBufferTexture());
-
-        TextureAtlas.AtlasRegion portrait0 = null;
-        TextureAtlas.AtlasRegion portrait1 = null;
-        try {
-            Field f = AbstractCard.class.getDeclaredField("portrait");
-            f.setAccessible(true);
-
-            portrait0 = (TextureAtlas.AtlasRegion) f.get(cards.get(0));
-            portrait1 = (TextureAtlas.AtlasRegion) f.get(cards.get(1));
-        } catch (IllegalAccessException | NoSuchFieldException e) {
-            e.printStackTrace();
-        }
-
-        if (portrait0 != null && portrait1 != null) {
-            boolean sameCard = cards.get(0).cardID.equals(cards.get(1).cardID);
-
-            portrait0 = new TextureAtlas.AtlasRegion(portrait0);
-            if (!sameCard) {
-                portrait0.setRegion(
-                        portrait0.getRegionX(),
-                        portrait0.getRegionY(),
-                        portrait0.getRegionWidth() / 2,
-                        portrait0.getRegionHeight()
-                );
-            }
-
-            portrait1 = new TextureAtlas.AtlasRegion(portrait1);
-            if (!sameCard) {
-                portrait1.setRegion(
-                        portrait1.getRegionX() + portrait1.getRegionWidth() / 2,
-                        portrait1.getRegionY(),
-                        portrait1.getRegionWidth() / 2,
-                        portrait1.getRegionHeight()
-                );
-            }
-
-            fbo.begin();
-            SpriteBatch sb = new SpriteBatch();
-            sb.begin();
-
-            sb.draw(portrait0, 0.0f, 0.0f, Gdx.graphics.getWidth() / 2.0f, Gdx.graphics.getHeight());
-
-            sb.draw(portrait1, Gdx.graphics.getWidth() / 2.0f, 0.0f, Gdx.graphics.getWidth() / 2.0f, Gdx.graphics.getHeight());
-
-            sb.end();
-            fbo.end();
-
-            try {
-                Field f = AbstractCard.class.getDeclaredField("portrait");
-                f.setAccessible(true);
-
-                TextureAtlas.AtlasRegion atlasRegion = new TextureAtlas.AtlasRegion(region.getTexture(), 0, 0, region.getTexture().getWidth(), region.getTexture().getHeight());
-                atlasRegion.flip(false, true);
-                f.set(this, atlasRegion);
-            } catch (IllegalAccessException | NoSuchFieldException e) {
-                e.printStackTrace();
-            }
-        }
-
-        calculateLargePortrait();
 
         calculateCard();
     }
@@ -571,8 +508,65 @@ public class DuctTapeCard extends CustomCard
         }
     }
 
-    @SuppressWarnings("unused")
-    public void renderDuctTapeCardBg(SpriteBatch sb, float x, float y)
+    @SpireOverride
+    protected void renderPortrait(SpriteBatch sb)
+    {
+        float drawX = current_x - 125.0f;
+        float drawY = current_y - 95.0f;
+
+        TextureAtlas.AtlasRegion portrait0 = null;
+        TextureAtlas.AtlasRegion portrait1 = null;
+        try {
+            Field f = AbstractCard.class.getDeclaredField("portrait");
+            f.setAccessible(true);
+
+            portrait0 = (TextureAtlas.AtlasRegion) f.get(cards.get(0));
+            portrait1 = (TextureAtlas.AtlasRegion) f.get(cards.get(1));
+        } catch (IllegalAccessException | NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+
+        if (portrait0 != null && portrait1 != null) {
+            boolean sameCard = cards.get(0).cardID.equals(cards.get(1).cardID);
+
+            portrait0 = new TextureAtlas.AtlasRegion(portrait0);
+            if (!sameCard) {
+                portrait0.setRegion(
+                        portrait0.getRegionX(),
+                        portrait0.getRegionY(),
+                        portrait0.getRegionWidth() / 2,
+                        portrait0.getRegionHeight()
+                );
+            }
+            portrait1 = new TextureAtlas.AtlasRegion(portrait1);
+            if (!sameCard) {
+                portrait1.setRegion(
+                        portrait1.getRegionX() + portrait1.getRegionWidth() / 2,
+                        portrait1.getRegionY(),
+                        portrait1.getRegionWidth() / 2,
+                        portrait1.getRegionHeight()
+                );
+            }
+
+            sb.draw(portrait0,
+                    drawX, drawY + 72.0F,
+                    portrait0.packedWidth / 2.0F, portrait0.packedHeight / 2.0F - 72.0F,
+                    portrait0.packedWidth / 2.0f, portrait0.packedHeight,
+                    drawScale * Settings.scale, drawScale * Settings.scale,
+                    angle
+            );
+            sb.draw(portrait1,
+                    drawX + (portrait0.packedWidth / 2.0f), drawY + 72.0F,
+                    0, portrait0.packedHeight / 2.0F - 72.0F,
+                    portrait0.packedWidth / 2.0f, portrait0.packedHeight,
+                    drawScale * Settings.scale, drawScale * Settings.scale,
+                    angle
+            );
+        }
+    }
+
+    @SpireOverride
+    protected void renderCardBg(SpriteBatch sb, float x, float y)
     {
         sb.setColor(Color.WHITE);
         sb.draw(cardBgs.get(0),
@@ -607,8 +601,8 @@ public class DuctTapeCard extends CustomCard
         );
     }
 
-    @SuppressWarnings("unused")
-    public void renderDuctTapePortraitFrame(SpriteBatch sb, float x, float y)
+    @SpireOverride
+    protected void renderPortraitFrame(SpriteBatch sb, float x, float y)
     {
         sb.setColor(Color.WHITE);
         sb.draw(cardFrames.get(0),
