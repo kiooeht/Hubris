@@ -34,7 +34,6 @@ public class Wrath extends CustomCard
     {
         super(ID, NAME, IMG, COST, DESCRIPTION, CardType.ATTACK, CardColor.CURSE, CardRarity.SPECIAL, CardTarget.ALL_ENEMY);
 
-        SoulboundField.soulbound.set(this, true);
         AutoplayField.autoplay.set(this, true);
         baseDamage = ATTACK_DMG;
     }

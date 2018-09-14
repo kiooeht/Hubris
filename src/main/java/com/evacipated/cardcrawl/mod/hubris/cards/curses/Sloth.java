@@ -18,7 +18,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 public class Sloth extends CustomCard
 {
     public static final String ID = "hubris:Sloth";
-    public static final String IMG = HubrisMod.BETA_SKILL;
+    public static final String IMG = HubrisMod.BETA_POWER;
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -26,11 +26,9 @@ public class Sloth extends CustomCard
 
     public Sloth()
     {
-        super(ID, NAME, IMG, COST, DESCRIPTION, CardType.CURSE, CardColor.CURSE, CardRarity.SPECIAL, CardTarget.SELF);
+        super(ID, NAME, IMG, COST, DESCRIPTION, CardType.POWER, CardColor.CURSE, CardRarity.SPECIAL, CardTarget.SELF);
 
-        SoulboundField.soulbound.set(this, true);
         AutoplayField.autoplay.set(this, true);
-        exhaust = true;
     }
 
     @Override

@@ -27,8 +27,6 @@ public class Gluttony extends CustomCard
     public Gluttony()
     {
         super(ID, NAME, IMG, COST, DESCRIPTION, CardType.CURSE, CardColor.CURSE, CardRarity.SPECIAL, CardTarget.NONE);
-
-        SoulboundField.soulbound.set(this, true);
     }
 
     @Override

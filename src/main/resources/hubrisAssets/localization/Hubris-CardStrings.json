@@ -15,13 +15,9 @@
     "NAME": "Natural One",
     "DESCRIPTION": "Unplayable. NL When this card is drawn, lose 1 Energy. NL Soulbound."
   },
-  "hubris:PotOfGreed": {
-    "NAME": "Pot of Greed",
-    "DESCRIPTION": "Draw 2 cards. NL Permanently add a Greed to your deck."
-  },
   "hubris:Greed": {
     "NAME": "Greed",
-    "DESCRIPTION": "Add a copy of this card to your deck. Gain !M! extra gold at the end of combat for each Greed in your deck. Soulbound."
+    "DESCRIPTION": "Add a copy of this card to your deck. Gain !M! extra gold at the end of combat for each Greed in your deck. Ethereal."
   },
   "hubris:SlightOfHand": {
     "NAME": "Slight of Hand",
@@ -29,7 +25,7 @@
   },
   "hubris:Wrath": {
     "NAME": "Wrath",
-    "DESCRIPTION": "Autoplay. NL Deal !D! damage to a random enemy. NL Place a copy of this copy into your discard pile. Soulbound."
+    "DESCRIPTION": "Autoplay. NL Deal !D! damage to a random enemy. NL Place a copy of this copy into your discard pile."
   },
   "hubris:EnhanceAbility": {
     "NAME": "Enhance Ability",
@@ -53,7 +49,7 @@
   },
   "hubris:Sloth": {
     "NAME": "Sloth",
-    "DESCRIPTION": "Autoplay. NL Lose all max energy. Gain 1 max energy at the end of each turn. NL Exhaust. Soulbound."
+    "DESCRIPTION": "Autoplay. NL Lose all max energy. Gain 1 max energy at the end of each turn."
   },
   "hubris:StunningStrike": {
     "NAME": "Stunning Strike",
@@ -100,15 +96,15 @@
   },
   "hubris:Lust": {
     "NAME": "Lust",
-    "DESCRIPTION": "Autoplay. NL Choose a random enemy. This turn, anytime you attack that enemy, lose !M! HP. NL Soulbound."
+    "DESCRIPTION": "Autoplay. NL Choose a random enemy. This turn, anytime you attack that enemy, lose !M! HP."
   },
   "hubris:Gluttony": {
     "NAME": "Gluttony",
-    "DESCRIPTION": "Unplayable. NL While in hand, all cards Exhaust. NL Soulbound."
+    "DESCRIPTION": "Unplayable. NL While in hand, all cards Exhaust."
   },
   "hubris:Envy": {
     "NAME": "Envy",
-    "DESCRIPTION": "Autoplay. NL A random card in your hand becomes Unplayable for the turn. Soulbound."
+    "DESCRIPTION": "Autoplay. NL A random card in your hand becomes Unplayable for the turn."
   },
   "hubris:SpiceAddiction": {
     "NAME": "SPICE",

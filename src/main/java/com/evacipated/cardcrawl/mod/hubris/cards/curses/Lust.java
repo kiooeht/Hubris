@@ -27,7 +27,6 @@ public class Lust extends CustomCard
     {
         super(ID, NAME, IMG, COST, DESCRIPTION, CardType.SKILL, CardColor.CURSE, CardRarity.SPECIAL, CardTarget.ALL_ENEMY);
 
-        SoulboundField.soulbound.set(this, true);
         AutoplayField.autoplay.set(this, true);
         magicNumber = baseMagicNumber = HP_LOSS;
     }

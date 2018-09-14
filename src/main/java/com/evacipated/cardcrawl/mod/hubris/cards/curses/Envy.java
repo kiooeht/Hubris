@@ -25,7 +25,6 @@ public class Envy extends CustomCard
     {
         super(ID, NAME, IMG, COST, DESCRIPTION, CardType.SKILL, CardColor.CURSE, CardRarity.SPECIAL, CardTarget.NONE);
 
-        SoulboundField.soulbound.set(this, true);
         AutoplayField.autoplay.set(this, true);
     }
 
