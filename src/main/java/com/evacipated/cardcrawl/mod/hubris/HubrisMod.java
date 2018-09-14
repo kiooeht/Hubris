@@ -55,6 +55,11 @@ public class HubrisMod implements
 
     private static SpireConfig modConfig = null;
 
+    // Beta card asset paths
+    public static final String BETA_ATTACK = HubrisMod.assetPath("images/cards/betaAttack.png");
+    public static final String BETA_SKILL  = HubrisMod.assetPath("images/cards/betaSkill.png");
+    public static final String BETA_POWER  = HubrisMod.assetPath("images/cards/betaPower.png");
+
     // Crossover checks
     public static final boolean hasReplayTheSpire;
     public static final boolean hasConstructMod;

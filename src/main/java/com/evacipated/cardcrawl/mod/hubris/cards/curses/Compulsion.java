@@ -1,6 +1,7 @@
 package com.evacipated.cardcrawl.mod.hubris.cards.curses;
 
 import basemod.abstracts.CustomCard;
+import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.hubris.actions.unique.ChooseMustPlayCardAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -15,7 +16,7 @@ import com.megacrit.cardcrawl.vfx.ThoughtBubble;
 public class Compulsion extends CustomCard
 {
     public static final String ID = "hubris:Compulsion";
-    public static final String IMG = null;
+    public static final String IMG = HubrisMod.BETA_SKILL;
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;

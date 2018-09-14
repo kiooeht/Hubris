@@ -1,6 +1,7 @@
 package com.evacipated.cardcrawl.mod.hubris.cards.green;
 
 import basemod.abstracts.CustomCard;
+import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.hubris.actions.unique.CounterAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -12,6 +13,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 public class Counter extends CustomCard
 {
     public static final String ID = "hubris:Counter";
+    public static final String IMG = HubrisMod.BETA_ATTACK;
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -20,7 +22,7 @@ public class Counter extends CustomCard
 
     public Counter()
     {
-        super(ID, NAME, null,  COST, DESCRIPTION, AbstractCard.CardType.ATTACK, CardColor.GREEN, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardTarget.ENEMY);
+        super(ID, NAME, IMG,  COST, DESCRIPTION, AbstractCard.CardType.ATTACK, CardColor.GREEN, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardTarget.ENEMY);
     }
 
     @Override

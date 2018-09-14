@@ -1,6 +1,7 @@
 package com.evacipated.cardcrawl.mod.hubris.cards.blue;
 
 import basemod.abstracts.CustomCard;
+import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -17,6 +18,7 @@ import com.megacrit.cardcrawl.vfx.combat.LightningEffect;
 public class Ukulele extends CustomCard
 {
     public static final String ID = "hubris:Ukulele";
+    public static final String IMG = HubrisMod.BETA_ATTACK;
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -27,7 +29,7 @@ public class Ukulele extends CustomCard
 
     public Ukulele()
     {
-        super(ID, NAME, null,  COST, DESCRIPTION, CardType.ATTACK, CardColor.BLUE, CardRarity.UNCOMMON, CardTarget.ENEMY);
+        super(ID, NAME, IMG,  COST, DESCRIPTION, CardType.ATTACK, CardColor.BLUE, CardRarity.UNCOMMON, CardTarget.ENEMY);
 
         baseDamage = DAMAGE;
         magicNumber = baseMagicNumber = 0;

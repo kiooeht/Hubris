@@ -1,6 +1,7 @@
 package com.evacipated.cardcrawl.mod.hubris.cards.blue;
 
 import basemod.abstracts.CustomCard;
+import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.hubris.powers.DoWhilePower;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -13,6 +14,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 public class DoWhile extends CustomCard
 {
     public static final String ID = "hubris:DoWhile";
+    public static final String IMG = HubrisMod.BETA_SKILL;
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -21,7 +23,7 @@ public class DoWhile extends CustomCard
 
     public DoWhile()
     {
-        super(ID, NAME, null,  COST, DESCRIPTION, CardType.SKILL, CardColor.BLUE, CardRarity.RARE, CardTarget.SELF);
+        super(ID, NAME, IMG,  COST, DESCRIPTION, CardType.SKILL, CardColor.BLUE, CardRarity.RARE, CardTarget.SELF);
     }
 
     @Override

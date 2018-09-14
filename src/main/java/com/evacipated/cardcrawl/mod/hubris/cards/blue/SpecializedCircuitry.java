@@ -23,7 +23,7 @@ import java.util.List;
 public class SpecializedCircuitry extends CustomCard implements ModalChoice.Callback
 {
     public static final String ID = "hubris:SpecializedCircuitry";
-    public static final String IMG = null;
+    public static final String IMG = HubrisMod.BETA_POWER;
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;

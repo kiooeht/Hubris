@@ -3,6 +3,7 @@ package com.evacipated.cardcrawl.mod.hubris.cards.EnhanceAbility;
 import basemod.abstracts.CustomCard;
 import basemod.helpers.ModalChoice;
 import basemod.helpers.ModalChoiceBuilder;
+import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -12,7 +13,7 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 public class EnhanceAbility extends CustomCard
 {
     public static final String ID = "hubris:EnhanceAbility";
-    public static final String IMG = null;
+    public static final String IMG = HubrisMod.BETA_POWER;
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
