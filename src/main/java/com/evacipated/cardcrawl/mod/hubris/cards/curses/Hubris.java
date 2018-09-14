@@ -7,6 +7,7 @@ import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.AutoplayFie
 import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.SoulboundField;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.colorless.Madness;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -23,9 +24,7 @@ public class Hubris extends CustomCard
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     private static final int COST = 0;
-
-    private static String[] sins = new String[]{Envy.ID, Gluttony.ID, Greed.ID, Lust.ID, Sloth.ID, Wrath.ID};
-
+    
     public Hubris()
     {
         super(ID, NAME, IMG, COST, DESCRIPTION, CardType.CURSE, CardColor.CURSE, CardRarity.SPECIAL, CardTarget.SELF);
@@ -39,8 +38,11 @@ public class Hubris extends CustomCard
     @Override
     public void use(AbstractPlayer p, AbstractMonster m)
     {
-        String sin = sins[AbstractDungeon.cardRandomRng.random(sins.length-1)];
-        AbstractDungeon.actionManager.addToBottom(new MakeTempCardInDrawPileAction(CardLibrary.getCopy(sin), 1, true, true));
+        AbstractCard curse = CardLibrary.getCurse();
+        if (curse == null) {
+            curse = CardLibrary.getCard(Madness.ID);
+        }
+        AbstractDungeon.actionManager.addToBottom(new MakeTempCardInDrawPileAction(curse.makeCopy(), 1, true, true));
     }
 
     @Override
