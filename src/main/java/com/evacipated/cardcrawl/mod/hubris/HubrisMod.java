@@ -106,7 +106,6 @@ public class HubrisMod implements
 
     public static boolean startingHubris()
     {
-        System.out.println(modConfig);
         if (modConfig == null) {
             return true;
         }
