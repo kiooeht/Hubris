@@ -29,7 +29,7 @@ public class Greed extends CustomCard
 
     public Greed()
     {
-        super(ID, NAME, IMG, COST, DESCRIPTION, CardType.CURSE, CardColor.CURSE, CardRarity.SPECIAL, CardTarget.NONE);
+        super(ID, NAME, IMG, COST, DESCRIPTION, CardType.CURSE, CardColor.CURSE, CardRarity.CURSE, CardTarget.NONE);
 
         isEthereal = true;
         magicNumber = baseMagicNumber = GOLD_AMOUNT;

@@ -26,7 +26,7 @@ public class Sloth extends CustomCard
 
     public Sloth()
     {
-        super(ID, NAME, IMG, COST, DESCRIPTION, CardType.POWER, CardColor.CURSE, CardRarity.SPECIAL, CardTarget.SELF);
+        super(ID, NAME, IMG, COST, DESCRIPTION, CardType.POWER, CardColor.CURSE, CardRarity.CURSE, CardTarget.SELF);
 
         AutoplayField.autoplay.set(this, true);
     }

@@ -23,7 +23,7 @@ public class Envy extends CustomCard
 
     public Envy()
     {
-        super(ID, NAME, IMG, COST, DESCRIPTION, CardType.SKILL, CardColor.CURSE, CardRarity.SPECIAL, CardTarget.NONE);
+        super(ID, NAME, IMG, COST, DESCRIPTION, CardType.SKILL, CardColor.CURSE, CardRarity.CURSE, CardTarget.NONE);
 
         AutoplayField.autoplay.set(this, true);
     }
