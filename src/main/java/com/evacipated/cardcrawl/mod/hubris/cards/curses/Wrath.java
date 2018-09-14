@@ -23,7 +23,7 @@ import com.megacrit.cardcrawl.vfx.combat.VerticalAuraEffect;
 public class Wrath extends CustomCard
 {
     public static final String ID = "hubris:Wrath";
-    public static final String IMG = HubrisMod.BETA_SKILL;
+    public static final String IMG = HubrisMod.BETA_ATTACK;
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
