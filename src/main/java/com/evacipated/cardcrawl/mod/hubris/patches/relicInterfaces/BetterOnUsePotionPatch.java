@@ -31,6 +31,10 @@ public class BetterOnUsePotionPatch
 
     @SpirePatch(
             clz=PotionPopUp.class,
+            method="updateInput"
+    )
+    @SpirePatch(
+            clz=PotionPopUp.class,
             method="updateTargetMode"
     )
     public static class NormalPotions
