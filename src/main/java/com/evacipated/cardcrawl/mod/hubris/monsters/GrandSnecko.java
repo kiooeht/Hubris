@@ -8,6 +8,7 @@ import com.evacipated.cardcrawl.mod.hubris.orbs.monster.*;
 import com.evacipated.cardcrawl.mod.hubris.powers.UnfocusedPower;
 import com.megacrit.cardcrawl.actions.animations.TalkAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.EscapeAction;
 import com.megacrit.cardcrawl.actions.common.RollMoveAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -245,13 +246,20 @@ public class GrandSnecko extends OrbUsingMonster
     public void die()
     {
         if (!AbstractDungeon.getCurrRoom().cannotLose) {
-            AbstractPlayer p = AbstractDungeon.player;
-            AbstractDungeon.effectList.add(new SpeechBubble(p.dialogX, p.dialogY, 3.0f, DIALOG[0], p.isPlayer));
+            //AbstractPlayer p = AbstractDungeon.player;
+            //AbstractDungeon.effectList.add(new SpeechBubble(p.dialogX, p.dialogY, 3.0f, DIALOG[0], p.isPlayer));
 
             useFastShakeAnimation(5.0F);
             CardCrawlGame.screenShake.rumble(4.0F);
             this.deathTimer += 1.5F;
             super.die();
+
+            for (AbstractMonster m : AbstractDungeon.getCurrRoom().monsters.monsters) {
+                if (!m.isDying) {
+                    AbstractDungeon.actionManager.addToBottom(new EscapeAction(m));
+                }
+            }
+
             onBossVictoryLogic();
             onFinalBossVictoryLogic();
         }
