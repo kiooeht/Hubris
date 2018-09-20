@@ -46,7 +46,7 @@ public class LustTargetPower extends AbstractPower
     @Override
     public int onAttacked(DamageInfo info, int damageAmount)
     {
-        if (info.owner.isPlayer && info.type == DamageInfo.DamageType.NORMAL) {
+        if (info.owner != null && info.owner.isPlayer && info.type == DamageInfo.DamageType.NORMAL) {
             flash();
             AbstractDungeon.actionManager.addToBottom(new LoseHPAction(info.owner, owner, -amount));
         }
