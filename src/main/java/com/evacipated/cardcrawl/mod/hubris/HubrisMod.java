@@ -92,7 +92,7 @@ public class HubrisMod implements
 
         try {
             Properties defaults = new Properties();
-            defaults.put("startingHubris", Boolean.toString(true));
+            defaults.put("startingHubris", Boolean.toString(false));
             modConfig = new SpireConfig("Hubris", "Config", defaults);
         } catch (IOException e) {
             e.printStackTrace();
