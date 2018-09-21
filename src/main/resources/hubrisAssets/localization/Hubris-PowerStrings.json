@@ -100,5 +100,11 @@
       "On dealing unblocked, non-piercing damage, applies #b",
       " #yPoison."
     ]
+  },
+  "hubris:GoldShield": {
+    "NAME": "Gold Shield",
+    "DESCRIPTIONS": [
+      "All #yThorns damage is reduced to #b1."
+    ]
   }
 }
