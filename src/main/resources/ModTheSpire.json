@@ -2,9 +2,10 @@
   "modid": "${project.artifactId}",
   "name": "${project.name}",
   "author_list": ["kiooeht"],
-  "description": "???",
+  "description": "Content expansion mod. Adds new cards, relics, events, and monsters.",
   "version": "${project.version}",
   "sts_version": "${SlayTheSpire.version}",
   "mts_version": "${ModTheSpire.version}",
-  "dependencies": ["basemod", "stslib"]
+  "dependencies": ["basemod", "stslib"],
+  "update_json": "https://api.github.com/repos/kiooeht/Hubris/releases/latest"
 }

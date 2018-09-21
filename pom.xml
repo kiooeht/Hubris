@@ -10,16 +10,11 @@
     <version>0.1</version>
 
     <properties>
-        <SlayTheSpire.version>08-23-2018</SlayTheSpire.version>
-        <ModTheSpire.version>2.9.0</ModTheSpire.version>
+        <SlayTheSpire.version>09-20-2018</SlayTheSpire.version>
+        <ModTheSpire.version>3.2.0</ModTheSpire.version>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.javassist</groupId>
-            <artifactId>javassist</artifactId>
-            <version>3.22.0-GA</version>
-        </dependency>
         <dependency>
             <groupId>com.evacipated.cardcrawl</groupId>
             <artifactId>ModTheSpire</artifactId>
