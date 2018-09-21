@@ -79,6 +79,23 @@ public class Backtick extends HubrisRelic
                 relicSelected = true;
 
                 AbstractRelic relic = relicSelectScreen.getSelectedRelics().get(0).makeCopy();
+                switch (relic.tier) {
+                    case COMMON:
+                        AbstractDungeon.commonRelicPool.removeIf(id ->  id.equals(relic.relicId));
+                        break;
+                    case UNCOMMON:
+                        AbstractDungeon.uncommonRelicPool.removeIf(id ->  id.equals(relic.relicId));
+                        break;
+                    case RARE:
+                        AbstractDungeon.rareRelicPool.removeIf(id ->  id.equals(relic.relicId));
+                        break;
+                    case SHOP:
+                        AbstractDungeon.shopRelicPool.removeIf(id ->  id.equals(relic.relicId));
+                        break;
+                    case BOSS:
+                        AbstractDungeon.bossRelicPool.removeIf(id ->  id.equals(relic.relicId));
+                        break;
+                }
                 AbstractDungeon.effectsQueue.add(0, new ObtainRelicLater(relic));
 
                 AbstractDungeon.getCurrRoom().phase = AbstractRoom.RoomPhase.COMPLETE;
