@@ -33,7 +33,7 @@ public class NiceRug extends HubrisRelic
     }
 
     @Override
-    public void onEnterRoom(AbstractRoom room)
+    public void justEnteredRoom(AbstractRoom room)
     {
         if (room instanceof ShopRoom) {
             shopRoom = (ShopRoom) room;
