@@ -13,6 +13,7 @@ public class GoldShieldPower extends AbstractPower
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
+    private boolean thorns = false;
 
     public GoldShieldPower(AbstractCreature owner, int amount)
     {
@@ -33,9 +34,21 @@ public class GoldShieldPower extends AbstractPower
     }
 
     @Override
+    public void atStartOfTurn()
+    {
+        thorns = true;
+    }
+
+    @Override
+    public void atEndOfTurn(boolean isPlayer)
+    {
+        thorns = false;
+    }
+
+    @Override
     public int onAttacked(DamageInfo info, int damageAmount)
     {
-        if (info.type == DamageInfo.DamageType.THORNS && damageAmount > 1) {
+        if (thorns && info.type == DamageInfo.DamageType.THORNS && damageAmount > 1) {
             return 1;
         }
         return damageAmount;
