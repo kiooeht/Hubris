@@ -8,7 +8,10 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.ChemicalX;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
+import javassist.CannotCompileException;
 import javassist.CtBehavior;
+import javassist.expr.ExprEditor;
+import javassist.expr.MethodCall;
 
 public class ZylophonePatch
 {
@@ -18,20 +21,32 @@ public class ZylophonePatch
     )
     public static class MultiUse
     {
-        @SpireInsertPatch(
-                locator=Locator.class
-        )
-        public static void Insert(AbstractPlayer __instance, AbstractCard c, AbstractMonster monster, int energyOnUse)
+        public static ExprEditor Instrument()
+        {
+            return new ExprEditor() {
+                @Override
+                public void edit(MethodCall m) throws CannotCompileException
+                {
+                    if (m.getClassName().equals(AbstractCard.class.getName()) && m.getMethodName().equals("use")) {
+                        m.replace(MultiUse.class.getName() + ".use($0, $$, energyOnUse);");
+                    }
+                }
+            };
+        }
+
+        public static void use(AbstractCard c, AbstractPlayer player, AbstractMonster monster, int energyOnUse)
         {
             if (ZylophoneField.costsX.get(c)) {
-                for (int i = 0; i < energyOnUse - 1; ++i) {
-                    c.use(__instance, monster);
+                for (int i = 0; i < energyOnUse; ++i) {
+                    c.use(player, monster);
                 }
-                if (__instance.hasRelic(ChemicalX.ID)) {
-                    __instance.getRelic(ChemicalX.ID).flash();
-                    c.use(__instance, monster);
-                    c.use(__instance, monster);
+                if (player.hasRelic(ChemicalX.ID)) {
+                    player.getRelic(ChemicalX.ID).flash();
+                    c.use(player, monster);
+                    c.use(player, monster);
                 }
+            } else {
+                c.use(player, monster);
             }
         }
 
