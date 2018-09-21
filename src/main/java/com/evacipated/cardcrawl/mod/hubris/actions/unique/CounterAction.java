@@ -34,7 +34,13 @@ public class CounterAction extends AbstractGameAction
                 Field f = AbstractMonster.class.getDeclaredField("move");
                 f.setAccessible(true);
                 EnemyMoveInfo move = (EnemyMoveInfo)f.get(targetMonster);
-                AbstractDungeon.actionManager.addToTop(new DamageAction(targetMonster, new DamageInfo(AbstractDungeon.player, move.baseDamage, damageType), AttackEffect.FIRE));
+                int multiplier = 1;
+                if (move.isMultiDamage) {
+                    multiplier = move.multiplier;
+                }
+                for (int i=0; i<multiplier; ++i) {
+                    AbstractDungeon.actionManager.addToTop(new DamageAction(targetMonster, new DamageInfo(AbstractDungeon.player, move.baseDamage, damageType), AttackEffect.FIRE));
+                }
             } catch (IllegalAccessException | NoSuchFieldException e) {
                 e.printStackTrace();
             }
