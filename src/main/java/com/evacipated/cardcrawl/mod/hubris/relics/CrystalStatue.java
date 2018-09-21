@@ -1,5 +1,6 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
+import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -39,8 +40,8 @@ public class CrystalStatue extends HubrisRelic
             AbstractDungeon.player.energy.energyMaster -= 1;
             AbstractDungeon.player.energy.energy -= 1;
 
-            img = ImageMaster.loadImage("images/relics/crystalStatueBROKEN.png");
-            outlineImg = ImageMaster.loadImage("images/relics/outline/crystalStatueBROKEN.png");
+            img = ImageMaster.loadImage(HubrisMod.assetPath("images/relics/crystalStatueBROKEN.png"));
+            outlineImg = ImageMaster.loadImage(HubrisMod.assetPath("images/relics/outline/crystalStatueBROKEN.png"));
         }
 
         description = getUpdatedDescription();
