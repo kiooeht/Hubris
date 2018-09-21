@@ -7,7 +7,7 @@
     <name>Hubris</name>
     <groupId>com.evacipated.cardcrawl.mod</groupId>
     <artifactId>hubris</artifactId>
-    <version>0.1.1</version>
+    <version>0.2.0</version>
 
     <properties>
         <SlayTheSpire.version>09-20-2018</SlayTheSpire.version>
@@ -25,14 +25,14 @@
         <dependency>
             <groupId>basemod</groupId>
             <artifactId>basemod</artifactId>
-            <version>2.14.0</version>
+            <version>3.3.0</version>
             <scope>system</scope>
             <systemPath>${basedir}/../lib/BaseMod.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>com.evacipated.cardcrawl.mod</groupId>
             <artifactId>stslib</artifactId>
-            <version>0.1</version>
+            <version>1.0</version>
             <scope>system</scope>
             <systemPath>${basedir}/../lib/StSLib.jar</systemPath>
         </dependency>
