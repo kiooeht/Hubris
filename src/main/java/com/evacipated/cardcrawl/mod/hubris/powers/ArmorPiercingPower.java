@@ -22,7 +22,7 @@ public class ArmorPiercingPower extends AbstractPower
         amount = -1;
         priority = -10;
         updateDescription();
-        img = ImageMaster.loadImage("images/powers/32/envenom.png");
+        loadRegion("envenom");
     }
 
     @Override

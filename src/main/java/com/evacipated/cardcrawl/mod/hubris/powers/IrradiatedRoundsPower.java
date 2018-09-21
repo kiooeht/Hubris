@@ -27,7 +27,7 @@ public class IrradiatedRoundsPower extends AbstractPower
         type = PowerType.BUFF;
         priority = -9;
         updateDescription();
-        img = ImageMaster.loadImage("images/powers/32/envenom.png");
+        loadRegion("envenom");
     }
 
     @Override
