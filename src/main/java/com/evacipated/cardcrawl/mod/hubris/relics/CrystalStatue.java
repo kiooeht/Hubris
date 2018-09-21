@@ -2,6 +2,9 @@ package com.evacipated.cardcrawl.mod.hubris.relics;
 
 import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
+import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
@@ -37,8 +40,7 @@ public class CrystalStatue extends HubrisRelic
         }
         counter = c;
         if (counter == 0) {
-            AbstractDungeon.player.energy.energyMaster -= 1;
-            AbstractDungeon.player.energy.energy -= 1;
+            stopPulse();
 
             img = ImageMaster.loadImage(HubrisMod.assetPath("images/relics/crystalStatueBROKEN.png"));
             outlineImg = ImageMaster.loadImage(HubrisMod.assetPath("images/relics/outline/crystalStatueBROKEN.png"));
@@ -51,6 +53,34 @@ public class CrystalStatue extends HubrisRelic
     }
 
     @Override
+    public void atBattleStart()
+    {
+        if (counter > 0) {
+            beginLongPulse();
+        } else {
+            stopPulse();
+        }
+    }
+
+    @Override
+    public void atTurnStart()
+    {
+        AbstractDungeon.actionManager.addToBottom(new AbstractGameAction()
+        {
+            @Override
+            public void update()
+            {
+                if (CrystalStatue.this.counter > 0) {
+                    CrystalStatue.this.flash();
+                    AbstractDungeon.actionManager.addToBottom(new RelicAboveCreatureAction(AbstractDungeon.player, CrystalStatue.this));
+                    AbstractDungeon.actionManager.addToBottom(new GainEnergyAction(1));
+                }
+                isDone = true;
+            }
+        });
+    }
+
+    @Override
     public int onAttacked(DamageInfo info, int damageAmount)
     {
         if (info.owner != null && info.type != DamageInfo.DamageType.HP_LOSS && info.type != DamageInfo.DamageType.THORNS && damageAmount > 0) {
@@ -59,20 +89,6 @@ public class CrystalStatue extends HubrisRelic
         }
 
         return damageAmount;
-    }
-
-    @Override
-    public void onEquip()
-    {
-        AbstractDungeon.player.energy.energyMaster += 1;
-    }
-
-    @Override
-    public void onUnequip()
-    {
-        if (counter > 0) {
-            AbstractDungeon.player.energy.energyMaster -= 1;
-        }
     }
 
     @Override
