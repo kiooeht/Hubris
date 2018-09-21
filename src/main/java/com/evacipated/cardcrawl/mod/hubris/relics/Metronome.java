@@ -5,6 +5,7 @@ import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.powers.StrengthPower;
@@ -40,15 +41,10 @@ public class Metronome extends HubrisRelic
         initializeTips();
     }
 
-    @Override
-    public void onUseCard(AbstractCard card, UseCardAction action)
+    private void doMetronome(int newCounter)
     {
         int prevCounter = counter;
-        if (card.type == AbstractCard.CardType.ATTACK) {
-            setCounter(counter + AMT);
-        } else {
-            setCounter(0);
-        }
+        setCounter(newCounter);
 
         if (counter != prevCounter) {
             int change = counter - prevCounter;
@@ -56,6 +52,25 @@ public class Metronome extends HubrisRelic
             AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new StrengthPower(AbstractDungeon.player, change), change));
             AbstractDungeon.actionManager.addToBottom(new RelicAboveCreatureAction(AbstractDungeon.player, this));
         }
+    }
+
+    @Override
+    public void onUseCard(AbstractCard card, UseCardAction action)
+    {
+        if (card.type == AbstractCard.CardType.ATTACK) {
+            doMetronome(counter + AMT);
+        } else {
+            doMetronome(0);
+        }
+    }
+
+    @Override
+    public int onAttacked(DamageInfo info, int damageAmount)
+    {
+        if (damageAmount > 0) {
+            doMetronome(0);
+        }
+        return damageAmount;
     }
 
     @Override
