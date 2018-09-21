@@ -22,7 +22,7 @@ public class SlothPower extends AbstractPower
         type = PowerType.DEBUFF;
         amount = -1;
         updateDescription();
-        img = ImageMaster.loadImage("images/powers/32/slow.png");
+        loadRegion("slow");
     }
 
     @Override
