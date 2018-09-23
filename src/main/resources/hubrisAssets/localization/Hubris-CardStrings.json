@@ -96,7 +96,7 @@
   },
   "hubris:Lust": {
     "NAME": "Lust",
-    "DESCRIPTION": "Autoplay. NL Choose a random enemy. This turn, anytime you attack that enemy, lose !M! HP."
+    "DESCRIPTION": "Autoplay. NL Choose a random enemy. This turn, any time you attack that enemy, lose !M! HP."
   },
   "hubris:Gluttony": {
     "NAME": "Gluttony",
