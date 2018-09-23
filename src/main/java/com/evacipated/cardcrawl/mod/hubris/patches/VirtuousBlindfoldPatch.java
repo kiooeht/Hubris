@@ -58,6 +58,9 @@ public class VirtuousBlindfoldPatch
         if (AbstractDungeon.getCurrMapNode().isConnectedTo(node)) {
             return true;
         }
+        if (AbstractDungeon.getCurrMapNode().wingedIsConnectedTo(node)) {
+            return true;
+        }
         for (MapRoomNode parent : node.getParents()) {
             if (parent.taken) {
                 return true;
