@@ -1,6 +1,7 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
 import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
+import com.evacipated.cardcrawl.mod.hubris.monsters.MerchantMonster;
 import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
@@ -12,6 +13,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.MonsterHelper;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.monsters.MonsterGroup;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.vfx.combat.BattleStartEffect;
@@ -133,7 +135,12 @@ public class HollowSoul extends HubrisRelic
         AbstractDungeon.actionManager.clear();
 
         // Remake monsters
-        room.monsters = MonsterHelper.getEncounter(AbstractDungeon.lastCombatMetricKey);
+        if (AbstractDungeon.lastCombatMetricKey.equals(MerchantMonster.ID)) {
+            MerchantMonster merchantMonster = (MerchantMonster) room.monsters.monsters.get(0);
+            room.monsters = new MonsterGroup(new MerchantMonster(merchantMonster));
+        } else {
+            room.monsters = MonsterHelper.getEncounter(AbstractDungeon.lastCombatMetricKey);
+        }
         room.monsters.init();
 
         // Prepare monsters

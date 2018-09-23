@@ -10,9 +10,9 @@ import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import javassist.CtBehavior;
 
 @SpirePatch(
-        cls="com.megacrit.cardcrawl.characters.AbstractPlayer",
+        clz=AbstractPlayer.class,
         method="damage",
-        paramtypes={"com.megacrit.cardcrawl.cards.DamageInfo"}
+        paramtypez={DamageInfo.class}
 )
 public class HollowSoulPatch
 {
@@ -43,7 +43,7 @@ public class HollowSoulPatch
         @Override
         public int[] Locate(CtBehavior ctBehavior) throws Exception
         {
-            Matcher finalMatcher = new Matcher.FieldAccessMatcher("com.megacrit.cardcrawl.characters.AbstractPlayer", "isDead");
+            Matcher finalMatcher = new Matcher.FieldAccessMatcher(AbstractPlayer.class, "isDead");
 
             return LineFinder.findInOrder(ctBehavior, finalMatcher);
         }

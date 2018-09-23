@@ -70,6 +70,11 @@ public class MerchantMonster extends AbstractMonster
         throwAmounts.put(1, 20);
     }
 
+    public MerchantMonster(MerchantMonster merchantMonster)
+    {
+        this(merchantMonster.npc);
+    }
+
     public MerchantMonster(Merchant npc)
     {
         super(NAME, ID, START_HP, -10.0F, -30.0F, 180.0F, 150.0F, null, 0.0F, 0.0F);
