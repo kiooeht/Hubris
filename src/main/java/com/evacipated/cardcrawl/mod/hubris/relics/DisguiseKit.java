@@ -91,7 +91,9 @@ public class DisguiseKit extends HubrisRelic
         CardGroup group = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
         for (AbstractPlayer.PlayerClass pc : AbstractPlayer.PlayerClass.values()) {
             if (pc != AbstractDungeon.player.chosenClass) {
-                group.addToTop(new DisguiseKitOption(pc));
+                if (AbstractPlayer.getTitle(pc) != null) {
+                    group.addToTop(new DisguiseKitOption(pc));
+                }
             }
         }
 
