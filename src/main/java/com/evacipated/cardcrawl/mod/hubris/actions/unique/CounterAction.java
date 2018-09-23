@@ -38,6 +38,11 @@ public class CounterAction extends AbstractGameAction
                 if (move.isMultiDamage) {
                     multiplier = move.multiplier;
                 }
+
+                f = AbstractMonster.class.getDeclaredField("intentDmg");
+                f.setAccessible(true);
+                move.baseDamage = f.getInt(targetMonster);
+
                 for (int i=0; i<multiplier; ++i) {
                     AbstractDungeon.actionManager.addToTop(new DamageAction(targetMonster, new DamageInfo(AbstractDungeon.player, move.baseDamage, damageType), AttackEffect.FIRE));
                 }
