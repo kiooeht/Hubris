@@ -49,11 +49,13 @@ public class PureNailPatch
 
     private static float doubleDamage(DamageInfo info, float damage)
     {
-        AbstractRelic nail = AbstractDungeon.player.getRelic(OldNail.ID);
-        if (nail != null && nail.counter == -42 && info.type == DamageInfo.DamageType.NORMAL) {
-            damage *= 2;
-            if (info.base != damage) {
-                info.isModified = true;
+        if (info.owner == AbstractDungeon.player) {
+            AbstractRelic nail = AbstractDungeon.player.getRelic(OldNail.ID);
+            if (nail != null && nail.counter == -42 && info.type == DamageInfo.DamageType.NORMAL) {
+                damage *= 2;
+                if (info.base != damage) {
+                    info.isModified = true;
+                }
             }
         }
         return damage;
