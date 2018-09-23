@@ -710,15 +710,26 @@ public class DuctTapeCard extends CustomCard
         return tooltips;
     }
 
+    private boolean subCardCanUse(AbstractCard card, AbstractPlayer p, AbstractMonster m)
+    {
+        if (card.canUse(p, m)) {
+            return true;
+        }
+        if (card.cardPlayable(m)) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public boolean canUse(AbstractPlayer p, AbstractMonster m)
     {
         for (AbstractCard c : cards) {
-            if (!c.canUse(p, m)) {
+            if (!subCardCanUse(c, p, m)) {
                 return false;
             }
         }
-        return true;
+        return super.canUse(p, m);
     }
 
     @Override
