@@ -1,10 +1,12 @@
 package com.evacipated.cardcrawl.mod.hubris.patches;
 
+import com.evacipated.cardcrawl.mod.hubris.actions.unique.ZylophoneUseAction;
 import com.evacipated.cardcrawl.mod.hubris.patches.cards.AbstractCard.ZylophoneField;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.red.Corruption;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.ChemicalX;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
@@ -16,7 +18,7 @@ import javassist.expr.MethodCall;
 public class ZylophonePatch
 {
     @SpirePatch(
-            cls="com.megacrit.cardcrawl.characters.AbstractPlayer",
+            clz=AbstractPlayer.class,
             method="useCard"
     )
     public static class MultiUse
@@ -37,32 +39,19 @@ public class ZylophonePatch
         public static void use(AbstractCard c, AbstractPlayer player, AbstractMonster monster, int energyOnUse)
         {
             if (ZylophoneField.costsX.get(c)) {
-                for (int i = 0; i < energyOnUse; ++i) {
-                    c.use(player, monster);
-                }
                 if (player.hasRelic(ChemicalX.ID)) {
                     player.getRelic(ChemicalX.ID).flash();
-                    c.use(player, monster);
-                    c.use(player, monster);
+                    energyOnUse += 2;
                 }
+                AbstractDungeon.actionManager.addToBottom(new ZylophoneUseAction(c, player, monster, energyOnUse));
             } else {
                 c.use(player, monster);
-            }
-        }
-
-        private static class Locator extends SpireInsertLocator
-        {
-            @Override
-            public int[] Locate(CtBehavior ctMethodToPatch) throws Exception
-            {
-                Matcher finalMatcher = new Matcher.MethodCallMatcher("com.megacrit.cardcrawl.cards.AbstractCard", "use");
-                return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
             }
         }
     }
 
     @SpirePatch(
-            cls="com.megacrit.cardcrawl.characters.AbstractPlayer",
+            clz=AbstractPlayer.class,
             method="useCard"
     )
     public static class UseEnergy
@@ -83,7 +72,7 @@ public class ZylophonePatch
             @Override
             public int[] Locate(CtBehavior ctMethodToPatch) throws Exception
             {
-                Matcher finalMatcher = new Matcher.FieldAccessMatcher("com.megacrit.cardcrawl.cards.AbstractCard", "cost");
+                Matcher finalMatcher = new Matcher.FieldAccessMatcher(AbstractCard.class, "cost");
                 return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
             }
         }
