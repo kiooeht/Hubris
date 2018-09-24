@@ -1,8 +1,10 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
 import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
+import com.evacipated.cardcrawl.mod.hubris.actions.utility.ForceWaitAction;
 import com.evacipated.cardcrawl.mod.hubris.monsters.MerchantMonster;
 import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
 import com.megacrit.cardcrawl.actions.common.EnableEndTurnButtonAction;
@@ -68,7 +70,17 @@ public class HollowSoul extends HubrisRelic
     {
         if (counter != -2) {
             flash();
-            AbstractDungeon.actionManager.addToTop(new RelicAboveCreatureAction(AbstractDungeon.player, this));
+            AbstractDungeon.actionManager.addToTop(new HollowSoulReviveAction());
+            AbstractDungeon.actionManager.addToTop(new ForceWaitAction(2.0f));
+        }
+    }
+
+    private class HollowSoulReviveAction extends AbstractGameAction
+    {
+        @Override
+        public void update()
+        {
+            flash();
             originalMaxHP = AbstractDungeon.player.maxHealth;
 
             AbstractDungeon.player.maxHealth = Math.round(AbstractDungeon.player.maxHealth * 0.1f);
@@ -89,8 +101,12 @@ public class HollowSoul extends HubrisRelic
             use();
 
             restartCombat();
+
+            AbstractDungeon.actionManager.addToBottom(new RelicAboveCreatureAction(AbstractDungeon.player, HollowSoul.this));
+            isDone = true;
         }
     }
+
 
     private void restartCombat()
     {
