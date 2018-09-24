@@ -29,6 +29,12 @@ public class GlazedTorus extends HubrisRelic
     }
 
     @Override
+    public void onVictory()
+    {
+        stopPulse();
+    }
+
+    @Override
     public void atTurnStart()
     {
         ++turn;
