@@ -26,7 +26,7 @@ public class ZylophoneUseAction extends AbstractGameAction
     {
         isDone = true;
 
-        if (card.canUse(player, monster)) {
+        if (usesLeft > 0 && card.canUse(player, monster)) {
             card.use(player, monster);
             if (usesLeft > 1) {
                 AbstractDungeon.actionManager.addToBottom(new ZylophoneUseAction(card, player, monster, usesLeft - 1));
