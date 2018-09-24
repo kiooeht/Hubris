@@ -252,7 +252,7 @@ public class HubrisMod implements
         BaseMod.addRelic(new Teleporter(), RelicType.SHARED);
         BaseMod.addRelic(new MysteriousPyramids(), RelicType.SHARED);
         BaseMod.addRelic(new AstralHammer(), RelicType.SHARED);
-        BaseMod.addRelic(new PrototypeTalaria(), RelicType.SHARED);
+        //BaseMod.addRelic(new PrototypeTalaria(), RelicType.SHARED);
         BaseMod.addRelic(new Spice(), RelicType.SHARED);
         BaseMod.addRelic(new TinFlute(), RelicType.SHARED);
         BaseMod.addRelic(new GlazedTorus(), RelicType.SHARED);
