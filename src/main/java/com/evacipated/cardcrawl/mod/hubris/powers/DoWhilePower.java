@@ -16,6 +16,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.vfx.ThoughtBubble;
 
 public class DoWhilePower extends AbstractPower
 {
@@ -23,6 +24,7 @@ public class DoWhilePower extends AbstractPower
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
     public static final String NAME = powerStrings.NAME;
     public static final String[] DESCRIPTIONS = powerStrings.DESCRIPTIONS;
+    private static final int MAX_LOOPS = 100;
 
     private AbstractCard originalCard = null;
 
@@ -32,6 +34,7 @@ public class DoWhilePower extends AbstractPower
         ID = POWER_ID;
         this.owner = owner;
         type = PowerType.BUFF;
+        amount = 0;
         updateDescription();
         loadRegion("loop");
     }
@@ -81,6 +84,7 @@ public class DoWhilePower extends AbstractPower
             }
             tmp.purgeOnUse = true;
 
+            ++amount;
             AbstractDungeon.actionManager.cardQueue.add(new CardQueueItem(tmp, m, card.energyOnUse));
             if (tmp.cardID.equals(Rampage.ID)) {
                 AbstractDungeon.actionManager.addToBottom(new ModifyDamageAction(card, tmp.magicNumber));
@@ -88,7 +92,11 @@ public class DoWhilePower extends AbstractPower
                 AbstractDungeon.actionManager.addToBottom(new IncreaseMiscAction(card.cardID, card.misc + card.magicNumber, card.magicNumber));
             }
 
-            if (!tmp.canUse(AbstractDungeon.player, m)) {
+            if (amount >= MAX_LOOPS || !tmp.canUse(AbstractDungeon.player, m)) {
+                if (amount >= MAX_LOOPS) {
+                    AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 5.0f,
+                            "#rABORTING #rSOFTLOCK", true));
+                }
                 AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(owner, owner, ID));
             }
         }
