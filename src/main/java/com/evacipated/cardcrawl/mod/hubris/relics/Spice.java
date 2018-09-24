@@ -93,6 +93,10 @@ public class Spice extends HubrisRelic
     public void setCounter(int c)
     {
         super.setCounter(c);
+        description = getUpdatedDescription();
+        tips.clear();
+        tips.add(new PowerTip(name, description));
+        initializeTips();
     }
 
     private void updateOtherDescriptions()
