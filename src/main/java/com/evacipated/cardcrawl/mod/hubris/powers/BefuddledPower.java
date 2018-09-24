@@ -1,7 +1,6 @@
 package com.evacipated.cardcrawl.mod.hubris.powers;
 
 import com.evacipated.cardcrawl.mod.hubris.actions.unique.BefuddledAction;
-import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
