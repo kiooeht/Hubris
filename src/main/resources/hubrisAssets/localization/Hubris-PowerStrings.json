@@ -104,7 +104,7 @@
   "hubris:GoldShield": {
     "NAME": "Gold Shield",
     "DESCRIPTIONS": [
-      "All #yThorns damage is reduced to #b1."
+      " NL Immune to #yWeak. NL All #yThorns damage is reduced to #b1."
     ]
   }
 }

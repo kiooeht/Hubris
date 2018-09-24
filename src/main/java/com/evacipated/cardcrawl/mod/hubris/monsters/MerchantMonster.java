@@ -11,6 +11,7 @@ import com.evacipated.cardcrawl.mod.hubris.actions.utility.ForceWaitAction;
 import com.evacipated.cardcrawl.mod.hubris.powers.GoldShieldPower;
 import com.evacipated.cardcrawl.mod.hubris.relics.NiceRug;
 import com.evacipated.cardcrawl.mod.hubris.vfx.combat.BlueSmokeBombEffect;
+import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.megacrit.cardcrawl.actions.animations.TalkAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.*;
@@ -19,6 +20,7 @@ import com.megacrit.cardcrawl.actions.unique.RemoveDebuffsAction;
 import com.megacrit.cardcrawl.actions.utility.ShakeScreenAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
@@ -26,13 +28,15 @@ import com.megacrit.cardcrawl.helpers.RelicLibrary;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.potions.StrengthPotion;
-import com.megacrit.cardcrawl.powers.*;
+import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.StrengthPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.shop.Merchant;
 import com.megacrit.cardcrawl.vfx.cardManip.ExhaustCardEffect;
 import com.megacrit.cardcrawl.vfx.combat.InflameEffect;
 import com.megacrit.cardcrawl.vfx.combat.IntenseZoomEffect;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,31 +47,36 @@ public class MerchantMonster extends AbstractMonster
     public static final String[] MOVES = {};
     public static final String[] DIALOG = {
             "Hey! NL No stealing!",
-            "@No@ @Refunds.@"
+            "@No@ @Refunds.@",
+            new String(new byte[]{0x52, 0x65, 0x69, 0x6e, 0x61, 0x2c, 0x20, 0x70, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x20,
+                    0x73, 0x74, 0x6f, 0x70, 0x20, 0x68, 0x75, 0x72, 0x74, 0x69, 0x6e, 0x67, 0x20, 0x6d, 0x65, 0x2e})
     };
     private static final float DRAW_X = Settings.WIDTH * 0.5F + 34.0F * Settings.scale;
     private static final float DRAW_Y = AbstractDungeon.floorY - 109.0F * Settings.scale;
     private static final int START_HP = 10;
-    public static final int REAL_HP = 100;
+    public static final int REAL_HP = 200;
     private static final float TIME_SCALE = 4.0f;
 
     // Move bytes
     private static byte ESCAPE = 0;
     private static byte ATTACK = 1;
     private static byte STRENGTH_UP = 2;
+    private static byte ATTACK_STRENGTH_UP = 3;
     private static byte HALF_DEAD = 7;
 
-    private static final int METALLICIZE_AMT = 25;
-    private static final Map<Integer, Integer> throwAmounts = new HashMap<>();
+    private static final int METALLICIZE_AMT = 35;
+    private static final Map<Byte, Integer> throwAmounts = new HashMap<>();
 
     private Merchant npc;
     private boolean doEscape = true;
-    private boolean firstTurn = true;
+    private int turn = -1;
     private boolean thresholdReached = false;
+    private int abuse = 0;
 
     static
     {
-        throwAmounts.put(1, 20);
+        throwAmounts.put(ATTACK, 20);
+        throwAmounts.put(ATTACK_STRENGTH_UP, 15);
     }
 
     public MerchantMonster(MerchantMonster merchantMonster)
@@ -78,6 +87,16 @@ public class MerchantMonster extends AbstractMonster
     public MerchantMonster(Merchant npc)
     {
         super(NAME, ID, START_HP, -10.0F, -30.0F, 180.0F, 150.0F, null, 0.0F, 0.0F);
+
+        if (CardCrawlGame.playerName.equals(DIALOG[2].substring(0, 5))) {
+            try {
+                SpireConfig config = new SpireConfig("Hubris", "OtherSaveData");
+                if (config.has("abuse")) {
+                    abuse = config.getInt("abuse");
+                }
+            } catch (IOException ignored) {
+            }
+        }
 
         this.npc = npc;
 
@@ -115,7 +134,7 @@ public class MerchantMonster extends AbstractMonster
     public void usePreBattleAction()
     {
         //UnlockTracker.markBossAsSeen("MERCHANT");
-        AbstractDungeon.actionManager.addToTop(new TalkAction(this, DIALOG[0], 0.5F, 3.0F));
+        AbstractDungeon.actionManager.addToTop(new TalkAction(this, (abuse >= 3 ? DIALOG[2] : DIALOG[0]), 0.5F, 3.0F));
     }
 
     @Override
@@ -139,17 +158,18 @@ public class MerchantMonster extends AbstractMonster
             AbstractDungeon.actionManager.addToBottom(new VFXAction(this, new InflameEffect(this), 0.25F));
             AbstractDungeon.actionManager.addToBottom(new AnimationTimeScaleAction(this, TIME_SCALE));
             maxHealth = REAL_HP;
+            maxHealth *= (abuse >= 3 ? 1.5f : 1.0f);
             AbstractDungeon.actionManager.addToBottom(new HealAction(this, this, maxHealth));
             AbstractDungeon.actionManager.addToBottom(new RemoveDebuffsAction(this));
-            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new GoldShieldPower(this, 1)));
-            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new MetallicizePower(this, METALLICIZE_AMT), METALLICIZE_AMT));
+            int metal_amt = (abuse >= 3 ? 50 : METALLICIZE_AMT);
+            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new GoldShieldPower(this, metal_amt), metal_amt));
             AbstractDungeon.actionManager.addToBottom(new CanLoseAction());
             AbstractDungeon.actionManager.addToBottom(new TalkAction(this, DIALOG[1], 0.5F, 3.0F));
+            turn = 0;
         } else if (nextMove == STRENGTH_UP) {
-            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new StrengthPower(this, 1), 1));
+            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new StrengthPower(this, 2), 2));
         } else {
-            firstTurn = false;
-            Integer throwAmount = throwAmounts.get((int)nextMove);
+            Integer throwAmount = throwAmounts.get(nextMove);
 
             if (throwAmount != null && throwAmount > 0) {
                 AbstractDungeon.actionManager.addToBottom(new ThrowGoldAction(AbstractDungeon.player, this, throwAmount, false));
@@ -158,8 +178,15 @@ public class MerchantMonster extends AbstractMonster
                     AbstractDungeon.actionManager.addToBottom(new DamageAction(AbstractDungeon.player, damage.get(0), true));
                 }
             }
+
+            if (nextMove == ATTACK_STRENGTH_UP) {
+                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new StrengthPower(this, 1), 1));
+            }
         }
 
+        if (turn >= 0) {
+            ++turn;
+        }
         AbstractDungeon.actionManager.addToBottom(new RollMoveAction(this));
     }
 
@@ -170,8 +197,12 @@ public class MerchantMonster extends AbstractMonster
             setMove(ESCAPE, Intent.ESCAPE);
             return;
         }
-        if (firstTurn) {
-            setMove(ATTACK, Intent.ATTACK, 1, throwAmounts.get(1), true);
+        if (turn == 1) {
+            setMove(ATTACK, Intent.ATTACK, 1, throwAmounts.get(ATTACK), true);
+            return;
+        }
+        if (turn == 2) {
+            setMove(ATTACK_STRENGTH_UP, Intent.ATTACK_BUFF, 1, throwAmounts.get(ATTACK_STRENGTH_UP), true);
             return;
         }
         //setMove((byte)-1, Intent.UNKNOWN);
@@ -181,8 +212,10 @@ public class MerchantMonster extends AbstractMonster
                 return;
             }
             setMove(StrengthPotion.NAME, STRENGTH_UP, Intent.BUFF);
+        } else if (num < 60) {
+            setMove(ATTACK_STRENGTH_UP, Intent.ATTACK_BUFF, 1, throwAmounts.get(ATTACK_STRENGTH_UP), true);
         } else {
-            setMove(ATTACK, Intent.ATTACK, 1, throwAmounts.get(1), true);
+            setMove(ATTACK, Intent.ATTACK, 1, throwAmounts.get(ATTACK), true);
         }
 
         //getMove(AbstractDungeon.aiRng.random(20));
@@ -224,6 +257,16 @@ public class MerchantMonster extends AbstractMonster
         if (!AbstractDungeon.getCurrRoom().cannotLose) {
             super.die();
             AbstractDungeon.getCurrRoom().spawnRelicAndObtain(npc.hb.cX, npc.hb.cY, RelicLibrary.getRelic(NiceRug.ID).makeCopy());
+
+            if (CardCrawlGame.playerName.equals(new String(new byte[]{0x52, 0x65, 0x69, 0x6E, 0x61}))) {
+                ++abuse;
+                try {
+                    SpireConfig config = new SpireConfig("Hubris", "OtherSaveData");
+                    config.setInt("abuse", abuse);
+                    config.save();
+                } catch (IOException ignored) {
+                }
+            }
         }
     }
 }
