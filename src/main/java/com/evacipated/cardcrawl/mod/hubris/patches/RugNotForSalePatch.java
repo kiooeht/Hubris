@@ -2,6 +2,7 @@ package com.evacipated.cardcrawl.mod.hubris.patches;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.mod.hubris.events.shrines.MerchantFight;
+import com.evacipated.cardcrawl.mod.hubris.fakes.FakeCauldron;
 import com.evacipated.cardcrawl.mod.hubris.fakes.FakeMerchant;
 import com.evacipated.cardcrawl.mod.hubris.monsters.MerchantMonster;
 import com.evacipated.cardcrawl.modthespire.lib.SpireField;
@@ -11,10 +12,12 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.Hitbox;
 import com.megacrit.cardcrawl.helpers.HitboxListener;
+import com.megacrit.cardcrawl.helpers.RelicLibrary;
 import com.megacrit.cardcrawl.helpers.TipHelper;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.MonsterGroup;
+import com.megacrit.cardcrawl.relics.Cauldron;
 import com.megacrit.cardcrawl.rewards.RewardItem;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.rooms.ShopRoom;
@@ -127,7 +130,11 @@ public class RugNotForSalePatch
             }
 
             for (StoreRelic relic : shopRelics) {
-                AbstractDungeon.getCurrRoom().addRelicToRewards(relic.relic);
+                if (Cauldron.ID.equals(relic.relic.relicId)) {
+                    AbstractDungeon.getCurrRoom().addRelicToRewards(new FakeCauldron());
+                } else {
+                    AbstractDungeon.getCurrRoom().addRelicToRewards(relic.relic);
+                }
             }
             for (AbstractCard card : coloredCards) {
                 RewardItem rewardItem = new RewardItem();
