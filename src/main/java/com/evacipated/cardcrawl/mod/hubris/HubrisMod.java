@@ -5,6 +5,7 @@ import basemod.ModLabeledToggleButton;
 import basemod.ModPanel;
 import basemod.helpers.RelicType;
 import basemod.interfaces.*;
+import com.evacipated.cardcrawl.mod.hubris.cards.curses.Hubris;
 import com.evacipated.cardcrawl.mod.hubris.events.shrines.TheFatedDie;
 import com.evacipated.cardcrawl.mod.hubris.events.shrines.UpdateBodyText;
 import com.evacipated.cardcrawl.mod.hubris.events.thebeyond.TheBottler;
@@ -16,17 +17,16 @@ import com.evacipated.cardcrawl.modthespire.Loader;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
-import com.megacrit.cardcrawl.dungeons.Exordium;
 import com.megacrit.cardcrawl.dungeons.TheBeyond;
 import com.megacrit.cardcrawl.dungeons.TheCity;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.*;
+import com.megacrit.cardcrawl.screens.custom.CustomMod;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
-import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.clapper.util.classutil.*;
@@ -38,6 +38,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Properties;
 
 @SpireInitializer
@@ -49,7 +50,8 @@ public class HubrisMod implements
         EditStringsSubscriber,
         PostDeathSubscriber,
         StartGameSubscriber,
-        MaxHPChangeSubscriber
+        MaxHPChangeSubscriber,
+        AddCustomModeModsSubscriber
 {
     public static final Logger logger = LogManager.getLogger(HubrisMod.class.getSimpleName());
 
@@ -106,8 +108,12 @@ public class HubrisMod implements
 
     public static boolean startingHubris()
     {
-        if (modConfig == null) {
+        if (AbstractPlayer.customMods != null && AbstractPlayer.customMods.contains(Hubris.ID)) {
             return true;
+        }
+
+        if (modConfig == null) {
+            return false;
         }
 
         return modConfig.getBool("startingHubris");
@@ -301,6 +307,13 @@ public class HubrisMod implements
         BaseMod.loadCustomStringsFile(OrbStrings.class, assetPath("localization/Hubris-OrbStrings.json"));
         BaseMod.loadCustomStringsFile(PowerStrings.class, assetPath("localization/Hubris-PowerStrings.json"));
         BaseMod.loadCustomStringsFile(EventStrings.class, assetPath("localization/Hubris-EventStrings.json"));
+        BaseMod.loadCustomStringsFile(RunModStrings.class, assetPath("localization/Hubris-RunModStrings.json"));
+    }
+
+    @Override
+    public void receiveCustomModeMods(List<CustomMod> list)
+    {
+        list.add(new CustomMod(Hubris.ID, "r", true));
     }
 
     private static void autoAddCards() throws URISyntaxException, ClassNotFoundException, IllegalAccessException, InstantiationException
