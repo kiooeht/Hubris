@@ -2,12 +2,14 @@ package com.evacipated.cardcrawl.mod.hubris.relics;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.hubris.cards.DuctTapeCard;
 import com.evacipated.cardcrawl.mod.hubris.patches.cards.AbstractCard.ZylophoneField;
 import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.evacipated.cardcrawl.modthespire.lib.ConfigUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.cards.CardSave;
@@ -48,20 +50,25 @@ public class TinFlute extends HubrisRelic
 
     public static AbstractCard getSavedItem()
     {
-        if (Gdx.files.absolute(getSavePath()).exists()) {
-            Gson gson = new Gson();
-            String savestr = loadSaveString(getSavePath());
-            System.out.println(savestr);
-            Save save = gson.fromJson(savestr, Save.class);
-            if (save.tinFlute.size() == 2) {
-                // Duct Tape
-                List<AbstractCard> cards = new ArrayList<>();
-                cards.add(CardLibrary.getCopy(save.tinFlute.get(0).id, save.tinFlute.get(0).upgrades, save.tinFlute.get(0).misc));
-                cards.add(CardLibrary.getCopy(save.tinFlute.get(1).id, save.tinFlute.get(1).upgrades, save.tinFlute.get(1).misc));
-                return new DuctTapeCard(cards);
-            } else {
-                return CardLibrary.getCopy(save.tinFlute.get(0).id, save.tinFlute.get(0).upgrades, save.tinFlute.get(0).misc);
+        try {
+            if (Gdx.files.absolute(getSavePath()).exists()) {
+                Gson gson = new Gson();
+                String savestr = loadSaveString(getSavePath());
+                Save save = gson.fromJson(savestr, Save.class);
+                if (save.tinFlute.size() == 2) {
+                    // Duct Tape
+                    List<AbstractCard> cards = new ArrayList<>();
+                    cards.add(CardLibrary.getCopy(save.tinFlute.get(0).id, save.tinFlute.get(0).upgrades, save.tinFlute.get(0).misc));
+                    cards.add(CardLibrary.getCopy(save.tinFlute.get(1).id, save.tinFlute.get(1).upgrades, save.tinFlute.get(1).misc));
+                    return new DuctTapeCard(cards);
+                } else {
+                    return CardLibrary.getCopy(save.tinFlute.get(0).id, save.tinFlute.get(0).upgrades, save.tinFlute.get(0).misc);
+                }
             }
+        } catch (JsonSyntaxException e) {
+            HubrisMod.logger.error(e);
+            TinFlute.deleteSave();
+            return null;
         }
 
         return null;
@@ -115,8 +122,9 @@ public class TinFlute extends HubrisRelic
                 List<CardSave> cardSaves = ((DuctTapeCard) card).makeCardSaves();
                 params.put("tinFlute", cardSaves);
             } else {
-                CardSave cardSave = new CardSave(card.cardID, card.timesUpgraded, card.misc);
-                params.put("tinFlute", cardSave);
+                List<CardSave> cardSaves = new ArrayList<>(1);
+                cardSaves.add(new CardSave(card.cardID, card.timesUpgraded, card.misc));
+                params.put("tinFlute", cardSaves);
             }
 
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
