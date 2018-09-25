@@ -29,6 +29,7 @@ import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.potions.StrengthPotion;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.powers.ArtifactPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.shop.Merchant;
@@ -65,6 +66,7 @@ public class MerchantMonster extends AbstractMonster
     private static byte HALF_DEAD = 7;
 
     private static final int METALLICIZE_AMT = 35;
+    private static final int ARTIFACT_AMT = 5;
     private static final Map<Byte, Integer> throwAmounts = new HashMap<>();
 
     private Merchant npc;
@@ -163,6 +165,8 @@ public class MerchantMonster extends AbstractMonster
             AbstractDungeon.actionManager.addToBottom(new RemoveDebuffsAction(this));
             int metal_amt = (abuse >= 3 ? 50 : METALLICIZE_AMT);
             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new GoldShieldPower(this, metal_amt), metal_amt));
+            int artifact_amt = (abuse >= 3 ? (int)(ARTIFACT_AMT * 1.6) : ARTIFACT_AMT);
+            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new ArtifactPower(this, artifact_amt), artifact_amt));
             AbstractDungeon.actionManager.addToBottom(new CanLoseAction());
             AbstractDungeon.actionManager.addToBottom(new TalkAction(this, DIALOG[1], 0.5F, 3.0F));
             turn = 0;

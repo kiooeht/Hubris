@@ -1,8 +1,6 @@
 package com.evacipated.cardcrawl.mod.hubris.powers;
 
-import com.evacipated.cardcrawl.mod.hubris.powers.abstracts.OnReceivePowerPower;
 import com.megacrit.cardcrawl.actions.common.GainBlockAction;
-import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -11,9 +9,8 @@ import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.MetallicizePower;
-import com.megacrit.cardcrawl.powers.WeakPower;
 
-public class GoldShieldPower extends AbstractPower implements OnReceivePowerPower
+public class GoldShieldPower extends AbstractPower
 {
     public static final String POWER_ID = "hubris:GoldShield";
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
@@ -71,13 +68,5 @@ public class GoldShieldPower extends AbstractPower implements OnReceivePowerPowe
             return 1;
         }
         return damageAmount;
-    }
-
-    @Override
-    public void onReceivePower(AbstractPower power, AbstractCreature target, AbstractCreature source)
-    {
-        if (power.ID.equals(WeakPower.POWER_ID)) {
-            AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(owner, owner, power.ID));
-        }
     }
 }
