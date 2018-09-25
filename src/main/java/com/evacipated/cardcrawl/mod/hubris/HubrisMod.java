@@ -176,14 +176,6 @@ public class HubrisMod implements
     public void receiveStartGame()
     {
         loadData();
-
-        if (AbstractDungeon.floorNum <= 1 && CardCrawlGame.dungeon instanceof Exordium) {
-            AbstractCard savedCard = TinFlute.getSavedItem();
-            if (savedCard != null) {
-                AbstractDungeon.topLevelEffects.add(new ShowCardAndObtainEffect(savedCard, Settings.WIDTH / 2.0f, Settings.HEIGHT / 2.0f));
-                TinFlute.deleteSave();
-            }
-        }
     }
 
     @Override
