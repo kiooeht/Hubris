@@ -3,11 +3,13 @@ package com.evacipated.cardcrawl.mod.hubris.relics;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.evacipated.cardcrawl.mod.hubris.cards.DuctTapeCard;
+import com.evacipated.cardcrawl.mod.hubris.patches.cards.AbstractCard.ZylophoneField;
 import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.evacipated.cardcrawl.modthespire.lib.ConfigUtils;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.cards.CardSave;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -80,10 +82,23 @@ public class TinFlute extends HubrisRelic
         return data;
     }
 
+    private CardGroup getEligibleCards()
+    {
+        CardGroup ret = AbstractDungeon.player.masterDeck;
+        ret.group.removeIf(c -> {
+            if (c instanceof DuctTapeCard || ZylophoneField.costsX.get(c)) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+        return ret;
+    }
+
     public void onDeath()
     {
         chosen = false;
-        AbstractDungeon.gridSelectScreen.open(AbstractDungeon.player.masterDeck, 1, "Choose one to take to your next life.", false);
+        AbstractDungeon.gridSelectScreen.open(getEligibleCards(), 1, "Choose one to take to your next life.", false);
     }
 
     @Override
