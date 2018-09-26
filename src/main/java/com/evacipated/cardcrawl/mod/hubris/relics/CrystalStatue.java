@@ -84,8 +84,10 @@ public class CrystalStatue extends HubrisRelic
     public int onAttacked(DamageInfo info, int damageAmount)
     {
         if (info.owner != null && info.type != DamageInfo.DamageType.HP_LOSS && info.type != DamageInfo.DamageType.THORNS && damageAmount > 0) {
-            flash();
-            setCounter(counter - damageAmount);
+            if (counter > 0) {
+                flash();
+                setCounter(counter - damageAmount);
+            }
         }
 
         return damageAmount;
