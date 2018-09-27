@@ -15,6 +15,7 @@ public class Stopwatch extends HubrisRelic implements ClickableRelic
 {
     public static final String ID = "hubris:Stopwatch";
     private static final int AMT = 6;
+    private boolean usedThisCombat = false;
 
     public Stopwatch()
     {
@@ -36,15 +37,22 @@ public class Stopwatch extends HubrisRelic implements ClickableRelic
     @Override
     public void onRightClick()
     {
-        if (!isObtained || counter <= 0) {
+        if (!isObtained || counter <= 0 || usedThisCombat) {
             return;
         }
 
         if (AbstractDungeon.getCurrRoom() != null && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT) {
+            usedThisCombat = true;
             setCounter(counter - 1);
             AbstractPlayer p = AbstractDungeon.player;
             AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new TimeStopPower(p, 1), 1));
         }
+    }
+
+    @Override
+    public void atPreBattle()
+    {
+        usedThisCombat = false;
     }
 
     @Override
