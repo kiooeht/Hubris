@@ -14,7 +14,8 @@ public class BundleOfHerbs extends HubrisRelic implements ClickableRelic
 {
     public static final String ID = "hubris:BundleOfHerbs";
     private static final int REGEN = 3;
-    private static final int PER_REST = 2;
+    private static final int START_CHARGE = 2;
+    private static final int PER_REST = 1;
 
     public BundleOfHerbs()
     {
@@ -24,13 +25,13 @@ public class BundleOfHerbs extends HubrisRelic implements ClickableRelic
     @Override
     public String getUpdatedDescription()
     {
-        return DESCRIPTIONS[0] + REGEN + DESCRIPTIONS[1] + PER_REST + DESCRIPTIONS[2] + PER_REST + DESCRIPTIONS[3];
+        return DESCRIPTIONS[0] + REGEN + DESCRIPTIONS[1] + PER_REST + DESCRIPTIONS[2] + START_CHARGE + DESCRIPTIONS[3];
     }
 
     @Override
     public void onEquip()
     {
-        gainHerbs();
+        startingHerbs();
     }
 
     @Override
@@ -40,6 +41,11 @@ public class BundleOfHerbs extends HubrisRelic implements ClickableRelic
             flash();
             gainHerbs();
         }
+    }
+
+    private void startingHerbs()
+    {
+        setCounter(START_CHARGE);
     }
 
     private void gainHerbs()
