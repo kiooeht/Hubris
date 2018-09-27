@@ -3,7 +3,7 @@ package com.evacipated.cardcrawl.mod.hubris.vfx.combat;
 import basemod.abstracts.CustomCard;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.evacipated.cardcrawl.mod.hubris.cards.colorless.Icosahedron;
+import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -17,6 +17,8 @@ import java.util.List;
 
 public class ShowRollResult extends AbstractGameEffect
 {
+    public static final String ID = "hubris:Icosahedron";
+    public static final String IMG = HubrisMod.assetPath("images/cards/icosahedron.png");
     private static final float EFFECT_DUR = 2.0f;
     private int roll;
     private AbstractCard rollCard;
@@ -68,23 +70,23 @@ public class ShowRollResult extends AbstractGameEffect
         }
     }
 
-    static class Roll extends CustomCard
+    public static class Roll extends CustomCard
     {
         private int roll;
 
         Roll(int roll)
         {
-            super(makeID(roll), String.valueOf(roll), Icosahedron.IMG, -2, getDescription(roll), CardType.SKILL, CardColor.COLORLESS, CardRarity.SPECIAL, CardTarget.NONE);
+            super(makeID(roll), String.valueOf(roll), IMG, -2, getDescription(roll), CardType.SKILL, CardColor.COLORLESS, CardRarity.SPECIAL, CardTarget.NONE);
 
             this.roll = roll;
         }
 
-        public static String makeID(int roll)
+        static String makeID(int roll)
         {
-            return Icosahedron.ID + "_" + String.valueOf(roll);
+            return ID + "_" + String.valueOf(roll);
         }
 
-        private static String getDescription(int roll)
+        public static String getDescription(int roll)
         {
             return CardCrawlGame.languagePack.getCardStrings(makeID(roll)).DESCRIPTION;
         }
