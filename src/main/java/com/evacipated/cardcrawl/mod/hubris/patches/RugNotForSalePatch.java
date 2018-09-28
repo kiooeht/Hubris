@@ -5,8 +5,7 @@ import com.evacipated.cardcrawl.mod.hubris.events.shrines.MerchantFight;
 import com.evacipated.cardcrawl.mod.hubris.fakes.FakeCauldron;
 import com.evacipated.cardcrawl.mod.hubris.fakes.FakeMerchant;
 import com.evacipated.cardcrawl.mod.hubris.monsters.MerchantMonster;
-import com.evacipated.cardcrawl.modthespire.lib.SpireField;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -25,6 +24,7 @@ import com.megacrit.cardcrawl.shop.Merchant;
 import com.megacrit.cardcrawl.shop.ShopScreen;
 import com.megacrit.cardcrawl.shop.StorePotion;
 import com.megacrit.cardcrawl.shop.StoreRelic;
+import javassist.CtBehavior;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ import java.util.ArrayList;
 public class RugNotForSalePatch
 {
     @SpirePatch(
-            cls="com.megacrit.cardcrawl.shop.ShopScreen",
+            clz=ShopScreen.class,
             method=SpirePatch.CLASS
     )
     public static class RugHitbox
@@ -41,7 +41,7 @@ public class RugNotForSalePatch
     }
 
     @SpirePatch(
-            cls="com.megacrit.cardcrawl.shop.ShopScreen",
+            clz=ShopScreen.class,
             method="init"
     )
     public static class Init
@@ -53,7 +53,7 @@ public class RugNotForSalePatch
     }
 
     @SpirePatch(
-            cls="com.megacrit.cardcrawl.shop.ShopScreen",
+            clz=ShopScreen.class,
             method="update"
     )
     public static class Update
@@ -165,7 +165,7 @@ public class RugNotForSalePatch
     }
 
     @SpirePatch(
-            cls="com.megacrit.cardcrawl.shop.ShopScreen",
+            clz=ShopScreen.class,
             method="render"
     )
     public static class Render
@@ -177,6 +177,61 @@ public class RugNotForSalePatch
                 // Render tip
                 TipHelper.renderGenericTip(InputHelper.mX - 360.0f * Settings.scale, InputHelper.mY - 70.0f * Settings.scale,
                         "Steal Rug", "It's not for sale, but perhaps you can steal it?");
+            }
+        }
+    }
+
+    @SpirePatch(
+            cls="shopmod.patches.ShopScreenPatch$Update",
+            method="Postfix",
+            optional=true
+    )
+    public static class ShopModCompatUpdate
+    {
+        @SpireInsertPatch(
+                locator=Locator.class,
+                localvars={"shopmod.relics.MerchantsRug.rugHb", "currentY"}
+        )
+        public static void Insert(ShopScreen self, Hitbox rugHb, float currentY)
+        {
+            rugHb.y -= 280.0f * Settings.scale;
+            rugHb.cY -= 280.0f * Settings.scale;
+        }
+
+        private static class Locator extends SpireInsertLocator
+        {
+            @Override
+            public int[] Locate(CtBehavior ctMethodToPatch) throws Exception
+            {
+                Matcher finalMatcher = new Matcher.MethodCallMatcher(Hitbox.class, "update");
+                return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
+            }
+        }
+    }
+
+    @SpirePatch(
+            cls="shopmod.patches.ShopScreenPatch$RenderRelics",
+            method="Postfix",
+            optional=true
+    )
+    public static class ShopModCompatRender
+    {
+        @SpireInsertPatch(
+                locator=Locator.class,
+                localvars={"rugY"}
+        )
+        public static void Insert(ShopScreen self, SpriteBatch sb, @ByRef float[] rugY)
+        {
+            rugY[0] -= 280.0f * Settings.scale;
+        }
+
+        private static class Locator extends SpireInsertLocator
+        {
+            @Override
+            public int[] Locate(CtBehavior ctMethodToPatch) throws Exception
+            {
+                Matcher finalMatcher = new Matcher.MethodCallMatcher(SpriteBatch.class, "draw");
+                return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
             }
         }
     }
