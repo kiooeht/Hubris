@@ -15,6 +15,7 @@ public class Metronome extends HubrisRelic
 {
     public static final String ID = "hubris:Metronome";
     private static final int AMT = 1;
+    private static final int MAX = 10;
 
     public Metronome()
     {
@@ -25,9 +26,9 @@ public class Metronome extends HubrisRelic
     public String getUpdatedDescription()
     {
         if (counter >= 0) {
-            return DESCRIPTIONS[0] + DESCRIPTIONS[1] + counter + DESCRIPTIONS[2];
+            return DESCRIPTIONS[0] + MAX + DESCRIPTIONS[1] + DESCRIPTIONS[2] + counter + DESCRIPTIONS[3];
         } else {
-            return DESCRIPTIONS[0];
+            return DESCRIPTIONS[0] + MAX + DESCRIPTIONS[1];
         }
     }
 
@@ -43,14 +44,16 @@ public class Metronome extends HubrisRelic
 
     private void doMetronome(int newCounter)
     {
-        int prevCounter = counter;
-        setCounter(newCounter);
+        if (newCounter <= MAX) {
+            int prevCounter = counter;
+            setCounter(newCounter);
 
-        if (counter != prevCounter) {
-            int change = counter - prevCounter;
-            flash();
-            AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new StrengthPower(AbstractDungeon.player, change), change));
-            AbstractDungeon.actionManager.addToBottom(new RelicAboveCreatureAction(AbstractDungeon.player, this));
+            if (counter != prevCounter) {
+                int change = counter - prevCounter;
+                flash();
+                AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new StrengthPower(AbstractDungeon.player, change), change));
+                AbstractDungeon.actionManager.addToBottom(new RelicAboveCreatureAction(AbstractDungeon.player, this));
+            }
         }
     }
 
