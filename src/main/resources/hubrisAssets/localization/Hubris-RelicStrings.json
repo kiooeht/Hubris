@@ -353,7 +353,7 @@
   },
   "hubris:64BitClover": {
     "NAME": "64-Bit Clover",
-    "FLAVOR": "TODO",
+    "FLAVOR": "18,446,744,073,709,551,615 leaves.",
     "DESCRIPTIONS": [
       "Every #b",
       " normal enemy combat drops a #yRelic."

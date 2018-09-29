@@ -13,7 +13,6 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.MonsterRoom;
 import com.megacrit.cardcrawl.screens.SingleRelicViewPopup;
 import com.megacrit.cardcrawl.ui.panels.TopPanel;
-import javassist.CtBehavior;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
