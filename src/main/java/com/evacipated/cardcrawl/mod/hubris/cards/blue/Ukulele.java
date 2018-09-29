@@ -24,8 +24,8 @@ public class Ukulele extends CustomCard
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String[] EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
     private static final int COST = 1;
-    private static final int DAMAGE = 5;
-    private static final int UPGRADE_DAMAGE = 1;
+    private static final int DAMAGE = 10;
+    private static final int UPGRADE_DAMAGE = 2;
 
     public Ukulele()
     {
