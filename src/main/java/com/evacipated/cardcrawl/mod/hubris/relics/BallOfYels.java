@@ -3,6 +3,7 @@ package com.evacipated.cardcrawl.mod.hubris.relics;
 import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.OnChannelRelic;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
+import com.megacrit.cardcrawl.orbs.Lightning;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
 public class BallOfYels extends HubrisRelic implements OnChannelRelic
@@ -23,8 +24,10 @@ public class BallOfYels extends HubrisRelic implements OnChannelRelic
     @Override
     public void onChannel(AbstractOrb orb)
     {
-        flash();
-        orb.onEndOfTurn();
+        if (orb instanceof Lightning) {
+            flash();
+            orb.onEndOfTurn();
+        }
     }
 
     @Override
