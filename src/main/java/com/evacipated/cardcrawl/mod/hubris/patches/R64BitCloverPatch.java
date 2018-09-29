@@ -18,7 +18,9 @@ public class R64BitCloverPatch
     {
         if (!ModHelper.isModEnabled(Vintage.ID)) {
             AbstractRelic relic = AbstractDungeon.player.getRelic(R64BitClover.ID);
-            relic.onTrigger();
+            if (relic != null) {
+                relic.onTrigger();
+            }
         }
     }
 }
