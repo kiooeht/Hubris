@@ -1,6 +1,8 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
 import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
+import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.BetterOnLoseHpRelic;
+import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.BetterOnUsePotionRelic;
 import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
@@ -9,9 +11,10 @@ import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.PowerTip;
+import com.megacrit.cardcrawl.potions.AbstractPotion;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-public class CrystalStatue extends HubrisRelic
+public class CrystalStatue extends HubrisRelic implements BetterOnLoseHpRelic
 {
     public static final String ID = "hubris:CrystalStatue";
     private static final int AMT = 20;
@@ -81,7 +84,7 @@ public class CrystalStatue extends HubrisRelic
     }
 
     @Override
-    public int onAttacked(DamageInfo info, int damageAmount)
+    public int betterOnLoseHp(DamageInfo info, int damageAmount)
     {
         if (info.owner != null && info.type != DamageInfo.DamageType.HP_LOSS && info.type != DamageInfo.DamageType.THORNS && damageAmount > 0) {
             if (counter > 0) {
