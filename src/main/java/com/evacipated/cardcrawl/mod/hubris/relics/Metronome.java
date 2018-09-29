@@ -10,6 +10,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
 public class Metronome extends HubrisRelic
 {
@@ -70,7 +71,7 @@ public class Metronome extends HubrisRelic
     @Override
     public int onAttacked(DamageInfo info, int damageAmount)
     {
-        if (damageAmount > 0) {
+        if (damageAmount > 0 && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT) {
             doMetronome(0);
         }
         return damageAmount;
