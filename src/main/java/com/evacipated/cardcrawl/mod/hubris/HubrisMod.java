@@ -98,6 +98,7 @@ public class HubrisMod implements
         try {
             Properties defaults = new Properties();
             defaults.put("startingHubris", Boolean.toString(false));
+            defaults.put("crackedHourglass", Boolean.toString(true));
             modConfig = new SpireConfig("Hubris", "Config", defaults);
         } catch (IOException e) {
             e.printStackTrace();
@@ -120,6 +121,14 @@ public class HubrisMod implements
         }
 
         return modConfig.getBool("startingHubris");
+    }
+
+    public static boolean crackedHourglassEnabled()
+    {
+        if (modConfig == null) {
+            return true;
+        }
+        return modConfig.getBool("crackedHourglass");
     }
 
     public static void loadData()
@@ -200,6 +209,21 @@ public class HubrisMod implements
                     }
                 });
         settingsPanel.addUIElement(hubrisBtn);
+        ModLabeledToggleButton hourglassBtn = new ModLabeledToggleButton("Enable Cracked Hourglass relic",
+                350, 550, Settings.CREAM_COLOR, FontHelper.charDescFont,
+                crackedHourglassEnabled(), settingsPanel, l -> {},
+                button ->
+                {
+                    if (modConfig != null) {
+                        modConfig.setBool("crackedHourglass", button.enabled);
+                        try {
+                            modConfig.save();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+        settingsPanel.addUIElement(hourglassBtn);
 
         BaseMod.registerModBadge(ImageMaster.loadImage(assetPath("images/hubris/modBadge.png")), "Hubris", "kiooeht", "TODO", settingsPanel);
 
@@ -375,6 +399,12 @@ public class HubrisMod implements
         if (ModHelper.isModEnabled(Vintage.ID)) {
             if (AbstractDungeon.rareRelicPool.removeIf(r -> r.equals(R64BitClover.ID))) {
                 logger.info(R64BitClover.ID + " removed.");
+            }
+        }
+
+        if (!crackedHourglassEnabled()) {
+            if (AbstractDungeon.bossRelicPool.removeIf(r -> r.equals(CrackedHourglass.ID))) {
+                logger.info(CrackedHourglass.ID + " removed.");
             }
         }
     }
