@@ -19,11 +19,13 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.daily.mods.Vintage;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.dungeons.TheBeyond;
 import com.megacrit.cardcrawl.dungeons.TheCity;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
+import com.megacrit.cardcrawl.helpers.ModHelper;
 import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.screens.custom.CustomMod;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
@@ -51,7 +53,8 @@ public class HubrisMod implements
         PostDeathSubscriber,
         StartGameSubscriber,
         MaxHPChangeSubscriber,
-        AddCustomModeModsSubscriber
+        AddCustomModeModsSubscriber,
+        PostDungeonInitializeSubscriber
 {
     public static final Logger logger = LogManager.getLogger(HubrisMod.class.getSimpleName());
 
@@ -364,5 +367,15 @@ public class HubrisMod implements
             return relic.onMaxHPChange(amount);
         }
         return amount;
+    }
+
+    @Override
+    public void receivePostDungeonInitialize()
+    {
+        if (ModHelper.isModEnabled(Vintage.ID)) {
+            if (AbstractDungeon.rareRelicPool.removeIf(r -> r.equals(R64BitClover.ID))) {
+                logger.info(R64BitClover.ID + " removed.");
+            }
+        }
     }
 }
