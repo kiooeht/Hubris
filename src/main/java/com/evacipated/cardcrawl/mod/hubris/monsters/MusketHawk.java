@@ -79,9 +79,10 @@ public class MusketHawk extends AbstractMonster
 
     private void queueDamageAction(DamageInfo damageInfo)
     {
-        if (hasPower(ArmorPiercingPower.POWER_ID)) {
-            int basePureDamage = damageInfo.output / 2;
-            AbstractDungeon.actionManager.addToBottom(new DamageAction(AbstractDungeon.player, new DamageInfo(this, damageInfo.output - basePureDamage, DamageInfo.DamageType.NORMAL)));
+        int basePureDamage = damageInfo.output / 2;
+        int baseNormalDamage = damageInfo.output - basePureDamage;
+        if (hasPower(ArmorPiercingPower.POWER_ID) && AbstractDungeon.player.currentBlock >= baseNormalDamage) {
+            AbstractDungeon.actionManager.addToBottom(new DamageAction(AbstractDungeon.player, new DamageInfo(this, baseNormalDamage, DamageInfo.DamageType.NORMAL)));
             AbstractDungeon.actionManager.addToBottom(new PureDamageAction(AbstractDungeon.player, new DamageInfo(null, basePureDamage, DamageInfo.DamageType.HP_LOSS)));
         } else {
             AbstractDungeon.actionManager.addToBottom(new DamageAction(AbstractDungeon.player, damageInfo));
