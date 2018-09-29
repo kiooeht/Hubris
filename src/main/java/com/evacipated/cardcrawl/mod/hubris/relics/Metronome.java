@@ -1,5 +1,6 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
+import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.BetterOnLoseHpRelic;
 import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
@@ -12,7 +13,7 @@ import com.megacrit.cardcrawl.powers.StrengthPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
-public class Metronome extends HubrisRelic
+public class Metronome extends HubrisRelic implements BetterOnLoseHpRelic
 {
     public static final String ID = "hubris:Metronome";
     private static final int AMT = 1;
@@ -69,7 +70,7 @@ public class Metronome extends HubrisRelic
     }
 
     @Override
-    public int onAttacked(DamageInfo info, int damageAmount)
+    public int betterOnLoseHp(DamageInfo info, int damageAmount)
     {
         if (damageAmount > 0 && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT) {
             doMetronome(0);
