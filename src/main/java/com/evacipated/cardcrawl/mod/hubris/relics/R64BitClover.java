@@ -118,8 +118,8 @@ public class R64BitClover extends HubrisRelic
     )
     public static class RenderOutlineNotSeenSingle
     {
-        private static Texture saveImg;
-        private static R64BitClover clover;
+        private static Texture saveImg = null;
+        private static R64BitClover clover = null;
 
         @SpireInsertPatch(
                 rloc=0,
@@ -138,8 +138,10 @@ public class R64BitClover extends HubrisRelic
 
         public static void Postfix(SingleRelicViewPopup __instance, SpriteBatch sb)
         {
-            clover.img = saveImg;
-            clover = null;
+            if (clover != null && saveImg != null) {
+                clover.img = saveImg;
+                clover = null;
+            }
         }
     }
 }
