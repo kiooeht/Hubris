@@ -349,5 +349,13 @@
       "Start each combat with #b1 #yPlated #yArmor for every #b",
       " #yGold you have."
     ]
+  },
+  "hubris:64BitClover": {
+    "NAME": "64-Bit Clover",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "Every #b",
+      " normal enemy combat drops a #yRelic."
+    ]
   }
 }
