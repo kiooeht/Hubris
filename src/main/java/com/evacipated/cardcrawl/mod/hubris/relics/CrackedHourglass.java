@@ -11,7 +11,7 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 public class CrackedHourglass extends HubrisRelic
 {
     public static final String ID = "hubris:CrackedHourglass";
-    private static final int TIME_LIMIT_M = 5; // minutes
+    private static final int TIME_LIMIT_M = 3; // minutes
     private static final int TIME_LIMIT_S = TIME_LIMIT_M * 60;
 
     private float timeCounter = -1;
