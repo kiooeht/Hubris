@@ -3,6 +3,8 @@ package com.evacipated.cardcrawl.mod.hubris.relics;
 import basemod.abstracts.CustomBottleRelic;
 import com.evacipated.cardcrawl.mod.hubris.patches.cards.AbstractCard.PyramidsField;
 import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
+import com.evacipated.cardcrawl.mod.stslib.actions.common.AutoplayCardAction;
+import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.AutoplayField;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
@@ -108,6 +110,9 @@ public class MysteriousPyramids extends HubrisRelic implements CustomBottleRelic
                     it.remove();
                     if (AbstractDungeon.player.hand.size() < 10) {
                         AbstractDungeon.player.drawPile.moveToHand(card, AbstractDungeon.player.drawPile);
+                        if (AutoplayField.autoplay.get(card)) {
+                            AbstractDungeon.actionManager.addToBottom(new AutoplayCardAction(card, AbstractDungeon.player.hand));
+                        }
                     } else {
                         if (!fullHandDialog) {
                             AbstractDungeon.player.createHandIsFullDialog();
