@@ -100,12 +100,21 @@ public class MysteriousPyramids extends HubrisRelic implements CustomBottleRelic
     public void onCardDraw(AbstractCard c)
     {
         if (PyramidsField.inPyramids.get(c)) {
+            boolean fullHandDialog = false;
             for (Iterator<AbstractCard> it = AbstractDungeon.player.drawPile.group.iterator(); it.hasNext();) {
                 AbstractCard card = it.next();
                 if (PyramidsField.inPyramids.get(card)) {
                     flash();
                     it.remove();
-                    AbstractDungeon.player.hand.addToTop(card);
+                    if (AbstractDungeon.player.hand.size() < 10) {
+                        AbstractDungeon.player.drawPile.moveToHand(card, AbstractDungeon.player.drawPile);
+                    } else {
+                        if (!fullHandDialog) {
+                            AbstractDungeon.player.createHandIsFullDialog();
+                            fullHandDialog = true;
+                        }
+                        AbstractDungeon.player.drawPile.moveToDiscardPile(card);
+                    }
                 }
             }
 
