@@ -10,6 +10,10 @@ public abstract class HubrisRelic extends AbstractRelic
     {
         super(setId, "", tier, sfx);
 
+        if (this instanceof SuperRareRelic) {
+            this.tier = tier = RelicTier.RARE;
+        }
+
         if (imgName.startsWith("test")) {
             img = ImageMaster.loadImage("images/relics/" + imgName);
             largeImg = ImageMaster.loadImage("images/largeRelics/" + imgName);

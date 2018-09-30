@@ -25,11 +25,13 @@ public class NeowRewardPatch
 
     public static String Postfix(String __result, AbstractRelic.RelicTier tier)
     {
-        AbstractRoom room = AbstractDungeon.getCurrRoom();
-        if (room != null) {
-            if (room instanceof NeowRoom) {
-                if (startingRelicBlacklist.contains(__result)) {
-                    return AbstractDungeon.returnRandomRelicKey(tier);
+        if (AbstractDungeon.currMapNode != null) {
+            AbstractRoom room = AbstractDungeon.getCurrRoom();
+            if (room != null) {
+                if (room instanceof NeowRoom) {
+                    if (startingRelicBlacklist.contains(__result)) {
+                        return AbstractDungeon.returnRandomRelicKey(tier);
+                    }
                 }
             }
         }
