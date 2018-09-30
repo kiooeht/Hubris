@@ -1,13 +1,16 @@
 package com.evacipated.cardcrawl.mod.hubris.patches;
 
+import com.evacipated.cardcrawl.mod.hubris.RelicTools;
 import com.evacipated.cardcrawl.mod.hubris.actions.unique.ZylophoneUseAction;
 import com.evacipated.cardcrawl.mod.hubris.patches.cards.AbstractCard.ZylophoneField;
+import com.evacipated.cardcrawl.mod.hubris.relics.Zylophone;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.red.Corruption;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.relics.ChemicalX;
 import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 import javassist.CannotCompileException;
@@ -75,6 +78,36 @@ public class ZylophonePatch
                 Matcher finalMatcher = new Matcher.FieldAccessMatcher(AbstractCard.class, "cost");
                 return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
             }
+        }
+    }
+
+    private static boolean has01CostCard()
+    {
+        for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
+            if (c.cost == 0 || c.cost == 1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @SpirePatch(
+            clz=AbstractDungeon.class,
+            method="returnRandomRelicKey"
+    )
+    @SpirePatch(
+            clz=AbstractDungeon.class,
+            method="returnEndRandomRelicKey"
+    )
+    public static class AvoidIfNoAppropriateCards
+    {
+        public static String Postfix(String __result, AbstractRelic.RelicTier tier)
+        {
+            if (__result.equals(Zylophone.ID) && !has01CostCard()) {
+                RelicTools.returnRelicToPool(tier, __result);
+                return AbstractDungeon.returnRandomRelicKey(tier);
+            }
+            return __result;
         }
     }
 }
