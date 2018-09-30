@@ -51,7 +51,6 @@ public class CrackedHourglass extends HubrisRelic
     {
         if (counter != this.counter) {
             if (counter == 60) {
-                System.out.println("BEGIN PULSE");
                 beginLongPulse();
             }
             if (counter <= 30) {
