@@ -301,6 +301,7 @@ public class HubrisMod implements
         BaseMod.addRelic(new TerracottaHorce(), RelicType.SHARED);
 
         // Ironclad only
+        BaseMod.addRelic(new IronBody(), RelicType.RED);
 
         // Silent only
         BaseMod.addRelic(new AncientText(), RelicType.GREEN);

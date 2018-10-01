@@ -381,5 +381,12 @@
     "DESCRIPTIONS": [
       "At the start of each combat, draw #b1 additional card, then place #b1 card from your hand on top of your draw pile."
     ]
+  },
+  "hubris:IronBody": {
+    "NAME": "Iron Body",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "At the end of your turn, gain #yBlock equal to your #yStrength."
+    ]
   }
 }
