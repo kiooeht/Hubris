@@ -366,5 +366,13 @@
       "Gain [E] at the start of each turn. Raise your Ascension level by #b",
       "."
     ]
+  },
+  "hubris:SoftwareUpdate": {
+    "NAME": "Software Update",
+    "FLAVOR": "Upgrading from 32-bit to 64-bit gives you access to a lot more RAM.",
+    "DESCRIPTIONS": [
+      "Increase your maximum number of orb slots to #b",
+      "."
+    ]
   }
 }
