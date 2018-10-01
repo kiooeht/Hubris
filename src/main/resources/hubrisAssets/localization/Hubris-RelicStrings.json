@@ -374,5 +374,12 @@
       "Increase your maximum number of orb slots to #b",
       "."
     ]
+  },
+  "hubris:AncientText": {
+    "NAME": "Ancient Text",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "At the start of each combat, draw #b1 additional card, then place #b1 card from your hand on top of your draw pile."
+    ]
   }
 }
