@@ -298,6 +298,7 @@ public class HubrisMod implements
         BaseMod.addRelic(new OldNail(), RelicType.SHARED);
         BaseMod.addRelic(new NiceRug(), RelicType.SHARED);
         BaseMod.addRelic(new R64BitClover(), RelicType.SHARED);
+        BaseMod.addRelic(new TerracottaHorce(), RelicType.SHARED);
 
         BaseMod.addRelic(new RGBLights(), RelicType.BLUE);
         BaseMod.addRelic(new BallOfYels(), RelicType.BLUE);
@@ -405,6 +406,12 @@ public class HubrisMod implements
         if (!crackedHourglassEnabled()) {
             if (AbstractDungeon.bossRelicPool.removeIf(r -> r.equals(CrackedHourglass.ID))) {
                 logger.info(CrackedHourglass.ID + " removed.");
+            }
+        }
+
+        if (!TerracottaHorce.allowedInPool()) {
+            if (AbstractDungeon.bossRelicPool.removeIf(r -> r.equals(TerracottaHorce.ID))) {
+                logger.info(TerracottaHorce.ID + " removed.");
             }
         }
     }

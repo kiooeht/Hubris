@@ -358,5 +358,13 @@
       "Every #b",
       " normal enemy combat drops a #yRelic."
     ]
+  },
+  "hubris:TerracottaHorce": {
+    "NAME": "Terracotta Horce",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "Gain [E] at the start of each turn. Raise your Ascension level by #b",
+      "."
+    ]
   }
 }
