@@ -27,6 +27,7 @@ public class TheBottler extends AbstractImageEvent
 
     private static List<String> bottleIDs;
 
+    private List<String> options;
     private int bottleToReBottle = -1;
 
     static
@@ -56,6 +57,7 @@ public class TheBottler extends AbstractImageEvent
     public TheBottler()
     {
         super(NAME, DESCRIPTIONS[0], null);
+        options = new ArrayList<>();
         for (String id : bottleIDs) {
             addBottleOption(id);
         }
@@ -65,9 +67,10 @@ public class TheBottler extends AbstractImageEvent
     private void addBottleOption(String id)
     {
         if (AbstractDungeon.player.hasRelic(id)) {
+            options.add(id);
             imageEventText.setDialogOption(FontHelper.colorString(OPTIONS[0] + RelicLibrary.getRelic(id).name + OPTIONS[1], "g"));
         } else {
-            imageEventText.setDialogOption(OPTIONS[2] + RelicLibrary.getRelic(id).name + OPTIONS[3], true);
+            //imageEventText.setDialogOption(OPTIONS[2] + RelicLibrary.getRelic(id).name + OPTIONS[3], true);
         }
     }
 
@@ -87,10 +90,10 @@ public class TheBottler extends AbstractImageEvent
                 }
                 break;
             case 1:
-                AbstractRelic oldBottle = AbstractDungeon.player.getRelic(bottleIDs.get(bottleToReBottle));
+                AbstractRelic oldBottle = AbstractDungeon.player.getRelic(options.get(bottleToReBottle));
                 int relicIndex = AbstractDungeon.player.relics.indexOf(oldBottle);
                 oldBottle.onUnequip();
-                AbstractRelic newBottle = RelicLibrary.getRelic(bottleIDs.get(bottleToReBottle)).makeCopy();
+                AbstractRelic newBottle = RelicLibrary.getRelic(options.get(bottleToReBottle)).makeCopy();
                 newBottle.instantObtain(AbstractDungeon.player, relicIndex, true);
 
                 screenNum = 2;
