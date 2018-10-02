@@ -28,10 +28,11 @@ public class AstralHammer extends HubrisRelic
     {
         if (card.type == AbstractCard.CardType.ATTACK) {
             flash();
+            if (card.costForTurn == 0) {
+                action.exhaustCard = true;
+            }
             if (card.cost > 0) {
                 AbstractDungeon.actionManager.addToBottom(new ReduceCostAction(card, COST_DECREASE));
-            } else {
-                action.exhaustCard = true;
             }
         }
     }
