@@ -11,7 +11,6 @@ import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.EscapeAction;
 import com.megacrit.cardcrawl.actions.common.RollMoveAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -22,7 +21,6 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.FrailPower;
 import com.megacrit.cardcrawl.powers.VulnerablePower;
 import com.megacrit.cardcrawl.powers.WeakPower;
-import com.megacrit.cardcrawl.vfx.SpeechBubble;
 import javafx.util.Pair;
 
 import java.lang.reflect.Constructor;
@@ -48,6 +46,7 @@ public class GrandSnecko extends OrbUsingMonster
 
     private static final List<String> summons = Arrays.asList(
             MonsterHelper.SNECKO_ENC,
+            GrandMystic.ID,
             MonsterHelper.CULTIST_ENC,
             MonsterHelper.THREE_SENTRY_ENC,
             MonsterHelper.SPHERE_GUARDIAN_ENC
@@ -67,7 +66,7 @@ public class GrandSnecko extends OrbUsingMonster
         maxPercent = sum;
     }
 
-    private boolean firstSummon = true;
+    private int summonCount = 0;
 
     public GrandSnecko()
     {
@@ -182,18 +181,26 @@ public class GrandSnecko extends OrbUsingMonster
             orbTypesBeingChannelled.add(orb.ID);
             if (orb instanceof MonsterWarp) {
                 String summonId;
-                if (firstSummon) {
+                if (summonCount == 0) {
                     summonId = summons.get(0);
+                } else if (summonCount == 1) {
+                    summonId = summons.get(1);
                 } else {
                     summonId = summons.get(AbstractDungeon.aiRng.random(summons.size()-1));
                 }
-                AbstractMonster monster = MonsterHelper.getEncounter(summonId).monsters.get(0);
-                if (firstSummon) {
+                AbstractMonster monster;
+                if (summonId.equals(GrandMystic.ID)) {
+                    monster = new GrandMystic();
+                } else {
+                    monster = MonsterHelper.getEncounter(summonId).monsters.get(0);
+                }
+                if (summonCount == 0) {
                     // Decrease Snecko's HP to 75%
                     monster.decreaseMaxHealth((int) (monster.maxHealth * 0.25f));
-                    firstSummon = false;
+                    monster.name = "Baby " + monster.name;
                 }
                 ((MonsterWarp)orb).summon = monster;
+                ++summonCount;
             }
             AbstractDungeon.actionManager.addToBottom(new MonsterChannelAction(this, orb));
         }
@@ -238,6 +245,7 @@ public class GrandSnecko extends OrbUsingMonster
 
         if (info.owner != null && info.type != DamageInfo.DamageType.THORNS && info.output > 0) {
             state.setAnimation(0, "Hit", false);
+            state.setTimeScale(0.4f);
             state.addAnimation(0, "Idle", true, 0.0F);
         }
     }

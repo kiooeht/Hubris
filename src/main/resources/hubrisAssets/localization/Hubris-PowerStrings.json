@@ -106,5 +106,12 @@
     "DESCRIPTIONS": [
       " NL All #yThorns damage is reduced to #b1."
     ]
+  },
+  "hubris:GainFocus": {
+    "NAME": "Gain Focus",
+    "DESCRIPTIONS": [
+      "Gains #b",
+      " #yFocus at the end of its turn."
+    ]
   }
 }
