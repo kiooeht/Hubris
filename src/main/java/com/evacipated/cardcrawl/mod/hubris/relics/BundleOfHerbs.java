@@ -1,7 +1,7 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
-import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.ClickableRelic;
 import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
+import com.evacipated.cardcrawl.mod.stslib.relics.ClickableRelic;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -25,7 +25,7 @@ public class BundleOfHerbs extends HubrisRelic implements ClickableRelic
     @Override
     public String getUpdatedDescription()
     {
-        return DESCRIPTIONS[0] + REGEN + DESCRIPTIONS[1] + PER_REST + DESCRIPTIONS[2] + START_CHARGE + DESCRIPTIONS[3];
+        return CLICKABLE_DESCRIPTIONS()[0] + DESCRIPTIONS[0] + REGEN + DESCRIPTIONS[1] + PER_REST + DESCRIPTIONS[2] + START_CHARGE + DESCRIPTIONS[3];
     }
 
     @Override

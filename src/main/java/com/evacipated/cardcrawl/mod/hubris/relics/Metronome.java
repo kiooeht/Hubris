@@ -1,7 +1,7 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
-import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.BetterOnLoseHpRelic;
 import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
+import com.evacipated.cardcrawl.mod.stslib.relics.BetterOnLoseHpRelic;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;

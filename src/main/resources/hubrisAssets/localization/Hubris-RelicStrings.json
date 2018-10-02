@@ -3,7 +3,7 @@
     "NAME": "Runic Icosahedron",
     "FLAVOR": "Twisting fate, 1d20 at a time.",
     "DESCRIPTIONS": [
-      "[#2aecd7]Right [#2aecd7]click [#2aecd7]during [#2aecd7]combat [#2aecd7]to [#2aecd7]activate.[] NL ",
+      " NL ",
       "Once per combat, you may roll the Icosahedron.",
       " NL You may no longer roll the Icosahedron.",
       "You are #rCursed.",
@@ -193,7 +193,7 @@
     "NAME": "Bundle of Herbs",
     "FLAVOR": "A collection of healing herbs: sage, thyme, greenwarish, rosemary.",
     "DESCRIPTIONS": [
-      "[#2aecd7]Right [#2aecd7]click [#2aecd7]during [#2aecd7]combat [#2aecd7]to [#2aecd7]activate.[] NL Lose #b1 charge, gain #b",
+      " NL Lose #b1 charge, gain #b",
       " #yRegen. NL Whenever you enter a Rest Site, add #b",
       " charge. NL Starts with #b",
       " charges."
@@ -214,7 +214,7 @@
     "NAME": "Stopwatch",
     "FLAVOR": "Maybe time's just a construct of human perception, an illusion created by—",
     "DESCRIPTIONS": [
-      "[#2aecd7]Right [#2aecd7]click [#2aecd7]during [#2aecd7]combat [#2aecd7]to [#2aecd7]activate.[] NL Lose #b1 charge. At the end of your turn, immediately start another turn. Energy and #yBlock are maintained between these turns. NL Starts with #b",
+      " NL Lose #b1 charge. At the end of your turn, immediately start another turn. Energy and #yBlock are maintained between these turns. NL Starts with #b",
       " charges. NL Only usable once per combat."
     ]
   },

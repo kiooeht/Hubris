@@ -1,6 +1,7 @@
 package com.evacipated.cardcrawl.mod.hubris.relics.abstracts;
 
 import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
+import com.evacipated.cardcrawl.mod.stslib.relics.SuperRareRelic;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 

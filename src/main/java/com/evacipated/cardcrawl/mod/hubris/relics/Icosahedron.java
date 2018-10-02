@@ -6,9 +6,9 @@ import com.evacipated.cardcrawl.mod.hubris.cards.colorless.Mulligan;
 import com.evacipated.cardcrawl.mod.hubris.cards.curses.NaturalOne;
 import com.evacipated.cardcrawl.mod.hubris.powers.EnergyGainPower;
 import com.evacipated.cardcrawl.mod.hubris.powers.FixedDrawPower;
-import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.ClickableRelic;
 import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.evacipated.cardcrawl.mod.hubris.vfx.combat.ShowRollResult;
+import com.evacipated.cardcrawl.mod.stslib.relics.ClickableRelic;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.*;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -56,7 +56,7 @@ public class Icosahedron extends HubrisRelic implements ClickableRelic
     {
         switch (counter) {
             case -1:
-                return DESCRIPTIONS[0] + DESCRIPTIONS[1];
+                return CLICKABLE_DESCRIPTIONS()[0] + DESCRIPTIONS[0] + DESCRIPTIONS[1];
             case 1:
                 return DESCRIPTIONS[3] + DESCRIPTIONS[2];
             case 20: {
