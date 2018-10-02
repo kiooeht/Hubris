@@ -1,6 +1,7 @@
 package com.evacipated.cardcrawl.mod.hubris.powers;
 
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -45,5 +46,14 @@ public class UnfocusedPower extends AbstractPower
             }
         }
         return damageAmount;
+    }
+
+    @Override
+    public void atStartOfTurn()
+    {
+        AbstractPower focus = owner.getPower(FocusPower.POWER_ID);
+        if (focus != null && focus.amount < 0) {
+            AbstractDungeon.actionManager.addToTop(new RemoveSpecificPowerAction(owner, owner, focus));
+        }
     }
 }
