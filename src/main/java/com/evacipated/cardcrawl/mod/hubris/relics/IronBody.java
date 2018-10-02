@@ -14,7 +14,7 @@ public class IronBody extends HubrisRelic
 
     public IronBody()
     {
-        super(ID, "test5.png", RelicTier.UNCOMMON, LandingSound.HEAVY);
+        super(ID, "ironBody.png", RelicTier.UNCOMMON, LandingSound.HEAVY);
     }
 
     @Override
