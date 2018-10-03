@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.mod.hubris.actions.unique.SuicidePlayerAction;
+import com.evacipated.cardcrawl.mod.hubris.powers.TimeStopPower;
 import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -75,7 +76,7 @@ public class CrackedHourglass extends HubrisRelic
     {
         super.update();
         if (counter > 0) {
-            if (!CardCrawlGame.stopClock) {
+            if (!isStopped()) {
                 if (waitTimer <= 0) {
                     timeCounter -= Gdx.graphics.getDeltaTime();
                 } else {
@@ -95,6 +96,17 @@ public class CrackedHourglass extends HubrisRelic
                 waitTimer -= Gdx.graphics.getDeltaTime();
             }
         }
+    }
+
+    private boolean isStopped()
+    {
+        if (CardCrawlGame.stopClock) {
+            return true;
+        }
+        if (AbstractDungeon.player.hasPower(TimeStopPower.POWER_ID)) {
+            return true;
+        }
+        return false;
     }
 
     @Override
