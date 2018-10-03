@@ -388,5 +388,17 @@
     "DESCRIPTIONS": [
       "At the end of your turn, gain #yBlock equal to your #yStrength."
     ]
+  },
+  "hubris:Reverence": {
+    "NAME": "Reverence",
+    "FLAVOR": "An inscription on the gun reads: \"Property of Crowbot\"",
+    "DESCRIPTIONS": [
+      " NL #b",
+      " #yBullet loaded.",
+      " #yBullets loaded.",
+      " NL Deal #b",
+      " damage to a random enemy for each #yBullet loaded.",
+      " NL At the start of each combat, shuffle #b1 #yBullet into your draw pile."
+    ]
   }
 }

@@ -126,5 +126,10 @@
     "NAME": "Trick Cloak",
     "DESCRIPTION": "Fetch a random card from your discard pile. NL Draw !M! card.",
     "UPGRADE_DESCRIPTION": "Fetch a card from your discard pile. NL Draw !M! card."
+  },
+  "hubris:Bullet": {
+    "NAME": "Bullet",
+    "DESCRIPTION": "Load !M! bullet into Reverence. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Load !M! bullets into Reverence. NL Exhaust."
   }
 }
