@@ -371,7 +371,7 @@
     "NAME": "Software Update",
     "FLAVOR": "Upgrading from 32-bit to 64-bit gives you access to a lot more RAM.",
     "DESCRIPTIONS": [
-      "Increase your maximum number of orb slots to #b",
+      "Increase your maximum Orb capacity to #b",
       "."
     ]
   },

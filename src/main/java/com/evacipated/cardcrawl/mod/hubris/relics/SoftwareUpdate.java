@@ -10,7 +10,7 @@ public class SoftwareUpdate extends HubrisRelic
 
     public SoftwareUpdate()
     {
-        super(ID, "test5.png", RelicTier.UNCOMMON, LandingSound.FLAT);
+        super(ID, "softwareUpdate.png", RelicTier.UNCOMMON, LandingSound.FLAT);
     }
 
     @Override
