@@ -40,7 +40,7 @@ public class GrandSnecko extends OrbUsingMonster
     };
     public static final int HP = 600;
 
-    private static final int ORB_SLOTS = 4;
+    private static final int BASE_ORB_SLOTS = 4;
     private static final ArrayList<Pair<Integer, Class<? extends AbstractOrb>>> orbPercents;
     private static int maxPercent;
 
@@ -66,11 +66,12 @@ public class GrandSnecko extends OrbUsingMonster
         maxPercent = sum;
     }
 
+    private int ORB_SLOTS = BASE_ORB_SLOTS;
     private int summonCount = 0;
 
     public GrandSnecko()
     {
-        super(NAME, ID, HP, -30.0f, -20.0f, 434, 427, null, -50.0f, 30.0f);
+        super(NAME, ID, HP, -30.0f, -20.0f, 434, 477, null, -50.0f, 30.0f);
         maxOrbsCap = 12;
         loadAnimation("images/monsters/theCity/reptile/skeleton.atlas", "images/monsters/theCity/reptile/skeleton.json", 0.25F);
 
@@ -215,11 +216,11 @@ public class GrandSnecko extends OrbUsingMonster
             getMove(AbstractDungeon.aiRng.random(1, 99));
             return;
         } else if (i <= 33) {
-            numberToChannel = 2;
+            numberToChannel = ORB_SLOTS - 2;
         } else if (i <= 66) {
-            numberToChannel = 3;
+            numberToChannel = ORB_SLOTS - 1;
         } else if (i <= 99) {
-            numberToChannel = 4;
+            numberToChannel = ORB_SLOTS;
         }
 
         setMove((byte)0, OrbUsingMonster.Enums.CHANNEL_ORBS, numberToChannel);

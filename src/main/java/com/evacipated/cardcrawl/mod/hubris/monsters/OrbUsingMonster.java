@@ -184,6 +184,7 @@ public abstract class OrbUsingMonster extends AbstractMonster
             orb.tX = drawX;
             orb.tY = (160.0F * Settings.scale + drawY + hb_h / 2.0F);
         }
+        orb.tX -= 30.0f * Settings.scale;
         try {
             Field f = AbstractOrb.class.getDeclaredField("hb");
             f.setAccessible(true);
