@@ -2,7 +2,7 @@ package com.evacipated.cardcrawl.mod.hubris.relics;
 
 import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
-import com.megacrit.cardcrawl.actions.common.PutOnDeckAction;
+import com.megacrit.cardcrawl.actions.common.PutOnBottomOfDeckAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
@@ -27,7 +27,7 @@ public class AncientText extends HubrisRelic
     {
         AbstractDungeon.actionManager.addToBottom(new RelicAboveCreatureAction(AbstractDungeon.player, this));
         AbstractDungeon.actionManager.addToBottom(new DrawCardAction(AbstractDungeon.player, 1));
-        AbstractDungeon.actionManager.addToBottom(new PutOnDeckAction(AbstractDungeon.player, AbstractDungeon.player, 1, false));
+        AbstractDungeon.actionManager.addToBottom(new PutOnBottomOfDeckAction(AbstractDungeon.player, AbstractDungeon.player, 1, false));
     }
 
     @Override
