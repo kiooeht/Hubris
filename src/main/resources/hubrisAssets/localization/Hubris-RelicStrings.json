@@ -391,14 +391,9 @@
   },
   "hubris:Reverence": {
     "NAME": "Reverence",
-    "FLAVOR": "An inscription on the gun reads: \"Property of Crowbot\"",
+    "FLAVOR": "An inscription on the gun reads: \"Reverence - Property of Crowbot\"",
     "DESCRIPTIONS": [
-      " NL #b",
-      " #yBullet loaded.",
-      " #yBullets loaded.",
-      " NL Deal #b",
-      " damage to a random enemy for each #yBullet loaded.",
-      " NL At the start of each combat, shuffle #b1 #yBullet into your draw pile."
+      " [#2aecd7]Usable [#2aecd7]once [#2aecd7]per [#2aecd7]turn.[] NL Play an #yAttack card from your hand at no cost and #yExhaust it."
     ]
   }
 }
