@@ -3,8 +3,8 @@ package com.evacipated.cardcrawl.mod.hubris.relics;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.evacipated.cardcrawl.mod.hubris.actions.unique.SuicidePlayerAction;
 import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
-import com.megacrit.cardcrawl.actions.common.LoseHPAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
@@ -87,7 +87,7 @@ public class CrackedHourglass extends HubrisRelic
             if (waitTimer <= 0) {
                 if (!AbstractDungeon.player.isDead) {
                     flash();
-                    AbstractDungeon.actionManager.addToTop(new LoseHPAction(AbstractDungeon.player, AbstractDungeon.player, 999));
+                    AbstractDungeon.actionManager.addToTop(new SuicidePlayerAction());
                     AbstractDungeon.actionManager.addToTop(new RelicAboveCreatureAction(AbstractDungeon.player, this));
                     waitTimer = 1.0f;
                 }
