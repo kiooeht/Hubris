@@ -384,7 +384,7 @@
   },
   "hubris:IronBody": {
     "NAME": "Iron Body",
-    "FLAVOR": "TODO",
+    "FLAVOR": "Flex the pain away.",
     "DESCRIPTIONS": [
       "At the end of your turn, gain #yBlock equal to your #yStrength."
     ]
