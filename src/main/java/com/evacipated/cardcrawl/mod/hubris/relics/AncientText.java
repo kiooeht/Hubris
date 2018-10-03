@@ -13,7 +13,7 @@ public class AncientText extends HubrisRelic
 
     public AncientText()
     {
-        super(ID, "test5.png", RelicTier.COMMON, LandingSound.FLAT);
+        super(ID, "ancientText.png", RelicTier.COMMON, LandingSound.FLAT);
     }
 
     @Override

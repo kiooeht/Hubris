@@ -377,7 +377,7 @@
   },
   "hubris:AncientText": {
     "NAME": "Ancient Text",
-    "FLAVOR": "TODO",
+    "FLAVOR": "Crumbles into dust at the slightest touch.",
     "DESCRIPTIONS": [
       "At the start of each combat, draw #b1 additional card, then place #b1 card from your hand on top of your draw pile."
     ]
