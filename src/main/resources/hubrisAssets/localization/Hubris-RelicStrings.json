@@ -220,7 +220,7 @@
   },
   "hubris:HerbalPaste": {
     "NAME": "Herbal Paste",
-    "FLAVOR": "A fowl smelling substance. Perhaps slathering it on your skin will heal your wounds.",
+    "FLAVOR": "A foul smelling substance. Perhaps slathering it on your skin will heal your wounds.",
     "DESCRIPTIONS": [
       "Start each combat with #b",
       " #yRegen. NL #yRegen can go negative."
