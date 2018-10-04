@@ -21,6 +21,7 @@ public class Backtick extends HubrisRelic
     public static final String ID = "hubris:Backtick";
     private boolean relicSelected = true;
     private RelicSelectScreen relicSelectScreen;
+    private boolean fakeHover = false;
 
     public Backtick()
     {
@@ -101,16 +102,34 @@ public class Backtick extends HubrisRelic
                 AbstractDungeon.getCurrRoom().phase = AbstractRoom.RoomPhase.COMPLETE;
             } else {
                 relicSelectScreen.update();
+                if (!hb.hovered) {
+                    fakeHover = true;
+                }
+                hb.hovered = true;
             }
+        }
+    }
+
+    @Override
+    public void renderTip(SpriteBatch sb)
+    {
+        if (!relicSelected && fakeHover) {
+            relicSelectScreen.render(sb);
+        }
+        if (fakeHover) {
+            fakeHover = false;
+            hb.hovered = false;
+        } else {
+            super.renderTip(sb);
         }
     }
 
     @Override
     public void renderInTopPanel(SpriteBatch sb)
     {
-        super.render(sb);
+        super.renderInTopPanel(sb);
 
-        if (!relicSelected) {
+        if (!relicSelected && !fakeHover) {
             relicSelectScreen.render(sb);
         }
     }
