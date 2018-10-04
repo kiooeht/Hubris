@@ -52,6 +52,9 @@ public class DoWhilePower extends AbstractPower
             if (originalCard == null) {
                 originalCard = card;
             }
+            if (!originalCard.cardID.equals(card.cardID)) {
+                return;
+            }
 
             flash();
             AbstractMonster m = null;
