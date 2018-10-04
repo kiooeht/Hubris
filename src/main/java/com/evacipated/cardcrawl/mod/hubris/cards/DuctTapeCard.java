@@ -18,6 +18,7 @@ import com.evacipated.cardcrawl.mod.hubris.CardIgnore;
 import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.hubris.actions.unique.DuctTapeUseNextAction;
 import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.AlwaysRetainField;
+import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.AutoplayField;
 import com.evacipated.cardcrawl.modthespire.lib.SpireOverride;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardSave;
@@ -477,6 +478,14 @@ public class DuctTapeCard extends CustomCard
         for (AbstractCard c : cards) {
             if (AlwaysRetainField.alwaysRetain.get(c)) {
                 AlwaysRetainField.alwaysRetain.set(this, true);
+                break;
+            }
+        }
+        // Autoplay
+        AutoplayField.autoplay.set(this, false);
+        for (AbstractCard c : cards) {
+            if (AutoplayField.autoplay.get(c)) {
+                AutoplayField.autoplay.set(this, true);
                 break;
             }
         }
