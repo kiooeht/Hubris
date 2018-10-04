@@ -113,5 +113,11 @@
       "Gains #b",
       " #yFocus at the end of its turn."
     ]
+  },
+  "hubris:ChampionShieldPower": {
+    "NAME": "Champion Shield",
+    "DESCRIPTIONS": [
+      "Negates all debuffs."
+    ]
   }
 }

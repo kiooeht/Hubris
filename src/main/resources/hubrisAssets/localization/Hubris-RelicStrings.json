@@ -395,5 +395,12 @@
     "DESCRIPTIONS": [
       " [#2aecd7]Usable [#2aecd7]once [#2aecd7]per [#2aecd7]turn.[] NL Play an #yAttack card from your hand at no cost and #yExhaust it."
     ]
+  },
+  "hubris:ChampionShield": {
+    "NAME": "Champion Shield",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "While your HP is at or below #b50%, you are immune to debuffs."
+    ]
   }
 }
