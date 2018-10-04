@@ -69,6 +69,8 @@ public class DuctTapeCard extends CustomCard
         cardBgMap.put(CardColor.BLUE, blue);
         Map<CardType, Texture> colorless = new HashMap<>();
         cardBgMap.put(CardColor.COLORLESS, colorless);
+        Map<CardType, Texture> curse = new HashMap<>();
+        cardBgMap.put(CardColor.CURSE, curse);
         
         red.put(CardType.ATTACK, ImageMaster.CARD_ATTACK_BG_RED);
         red.put(CardType.SKILL, ImageMaster.CARD_SKILL_BG_RED);
@@ -85,6 +87,10 @@ public class DuctTapeCard extends CustomCard
         colorless.put(CardType.ATTACK, ImageMaster.CARD_ATTACK_BG_GRAY);
         colorless.put(CardType.SKILL, ImageMaster.CARD_SKILL_BG_GRAY);
         colorless.put(CardType.POWER, ImageMaster.CARD_POWER_BG_GRAY);
+
+        curse.put(CardType.ATTACK, ImageMaster.CARD_SKILL_BG_BLACK);
+        curse.put(CardType.SKILL, ImageMaster.CARD_SKILL_BG_BLACK);
+        curse.put(CardType.POWER, ImageMaster.CARD_SKILL_BG_BLACK);
         
         cardLargeBgMap = new HashMap<>();
         red = new HashMap<>();
@@ -95,6 +101,8 @@ public class DuctTapeCard extends CustomCard
         cardLargeBgMap.put(CardColor.BLUE, blue);
         colorless = new HashMap<>();
         cardLargeBgMap.put(CardColor.COLORLESS, colorless);
+        curse = new HashMap<>();
+        cardLargeBgMap.put(CardColor.CURSE, curse);
 
         red.put(CardType.ATTACK, ImageMaster.CARD_ATTACK_BG_RED_L);
         red.put(CardType.SKILL, ImageMaster.CARD_SKILL_BG_RED_L);
@@ -111,6 +119,10 @@ public class DuctTapeCard extends CustomCard
         colorless.put(CardType.ATTACK, ImageMaster.CARD_ATTACK_BG_GRAY_L);
         colorless.put(CardType.SKILL, ImageMaster.CARD_SKILL_BG_GRAY_L);
         colorless.put(CardType.POWER, ImageMaster.CARD_POWER_BG_GRAY_L);
+
+        curse.put(CardType.ATTACK, ImageMaster.CARD_SKILL_BG_BLACK_L);
+        curse.put(CardType.SKILL, ImageMaster.CARD_SKILL_BG_BLACK_L);
+        curse.put(CardType.POWER, ImageMaster.CARD_SKILL_BG_BLACK_L);
         
         // Base game card frames
         cardFrameMap = new HashMap<>();
