@@ -1,0 +1,20 @@
+
+powers.png
+size: 128,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+128/championShield
+  rotate: false
+  xy: 2, 36
+  size: 85, 82
+  orig: 128, 128
+  offset: 22, 23
+  index: -1
+48/championShield
+  rotate: false
+  xy: 2, 2
+  size: 32, 32
+  orig: 48, 48
+  offset: 8, 8
+  index: -1

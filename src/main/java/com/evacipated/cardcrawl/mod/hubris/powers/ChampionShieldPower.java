@@ -1,5 +1,6 @@
 package com.evacipated.cardcrawl.mod.hubris.powers;
 
+import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.hubris.powers.abstracts.OnReceivePowerPower;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.actions.unique.RemoveDebuffsAction;
@@ -24,7 +25,9 @@ public class ChampionShieldPower extends AbstractPower implements OnReceivePower
         type = PowerType.BUFF;
         amount = -1;
         updateDescription();
-        loadRegion("artifact");
+        priority = 6;
+        region48 = HubrisMod.powerAtlas.findRegion("48/" + "championShield");
+        region128 = HubrisMod.powerAtlas.findRegion("128/" + "championShield");
     }
 
     @Override
@@ -43,6 +46,7 @@ public class ChampionShieldPower extends AbstractPower implements OnReceivePower
     public void onReceivePower(AbstractPower power, AbstractCreature target, AbstractCreature source)
     {
         if (power.type == PowerType.DEBUFF) {
+            flash();
             AbstractDungeon.actionManager.addToTop(new RemoveSpecificPowerAction(owner, owner, power));
         }
     }

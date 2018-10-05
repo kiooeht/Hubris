@@ -5,6 +5,8 @@ import basemod.ModLabeledToggleButton;
 import basemod.ModPanel;
 import basemod.helpers.RelicType;
 import basemod.interfaces.*;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.evacipated.cardcrawl.mod.hubris.cards.curses.Hubris;
 import com.evacipated.cardcrawl.mod.hubris.events.shrines.TheFatedDie;
 import com.evacipated.cardcrawl.mod.hubris.events.shrines.UpdateBodyText;
@@ -64,6 +66,9 @@ public class HubrisMod implements
     public static final String BETA_ATTACK = HubrisMod.assetPath("images/cards/betaAttack.png");
     public static final String BETA_SKILL  = HubrisMod.assetPath("images/cards/betaSkill.png");
     public static final String BETA_POWER  = HubrisMod.assetPath("images/cards/betaPower.png");
+
+    // Power asset texture atlas
+    public static TextureAtlas powerAtlas;
 
     // Crossover checks
     public static final boolean hasReplayTheSpire;
@@ -238,6 +243,8 @@ public class HubrisMod implements
 
         BaseMod.addBoss(TheBeyond.ID, GrandSnecko.ID, assetPath("images/ui/map/boss/grandSnecko.png"), assetPath("images/ui/map/bossOutline/grandSnecko.png"));
         BaseMod.addBoss(TheCity.ID, MusketHawk.ID, assetPath("images/ui/map/boss/musketHawk.png"), assetPath("images/ui/map/bossOutline/musketHawk.png"));
+
+        powerAtlas = new TextureAtlas(Gdx.files.internal(assetPath("images/powers/powers.atlas")));
     }
 
     @Override
@@ -300,7 +307,7 @@ public class HubrisMod implements
         BaseMod.addRelic(new R64BitClover(), RelicType.SHARED);
         BaseMod.addRelic(new TerracottaHorce(), RelicType.SHARED);
         BaseMod.addRelic(new Reverence(), RelicType.SHARED);
-        //BaseMod.addRelic(new ChampionShield(), RelicType.SHARED);
+        BaseMod.addRelic(new ChampionShield(), RelicType.SHARED);
 
         // Ironclad only
         BaseMod.addRelic(new IronBody(), RelicType.RED);
