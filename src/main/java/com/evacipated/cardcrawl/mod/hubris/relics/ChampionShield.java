@@ -18,7 +18,7 @@ public class ChampionShield extends HubrisRelic
 
     public ChampionShield()
     {
-        super(ID, "test5.png", RelicTier.COMMON, LandingSound.SOLID);
+        super(ID, "championShield.png", RelicTier.COMMON, LandingSound.SOLID);
     }
 
     @Override
