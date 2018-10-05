@@ -5,5 +5,7 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public interface OnReceivePowerPower
 {
-    void onReceivePower(AbstractPower power, AbstractCreature target, AbstractCreature source);
+    // return: true to continue
+    //         false to negate the power, stopping it from applying
+    boolean onReceivePower(AbstractPower power, AbstractCreature target, AbstractCreature source);
 }

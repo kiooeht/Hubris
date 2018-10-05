@@ -3,7 +3,10 @@ package com.evacipated.cardcrawl.mod.hubris.patches.powerInterfaces;
 import com.evacipated.cardcrawl.mod.hubris.powers.abstracts.OnReceivePowerPower;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.utility.TextAboveCreatureAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import javassist.CtBehavior;
 
@@ -17,15 +20,22 @@ public class OnReceivePowerPatch
             locator=Locator.class,
             localvars={"powerToApply"}
     )
-    public static void Insert(ApplyPowerAction __instance, AbstractPower powerToApply)
+    public static SpireReturn<Void> Insert(ApplyPowerAction __instance, AbstractPower powerToApply)
     {
         if (__instance.target != null) {
             for (AbstractPower power : __instance.target.powers) {
                 if (power instanceof OnReceivePowerPower) {
-                    ((OnReceivePowerPower)power).onReceivePower(powerToApply, __instance.target, __instance.source);
+                    boolean apply = ((OnReceivePowerPower)power).onReceivePower(powerToApply, __instance.target, __instance.source);
+                    if (!apply) {
+                        AbstractDungeon.actionManager.addToTop(new TextAboveCreatureAction(__instance.target, ApplyPowerAction.TEXT[0]));
+                        __instance.isDone = true;
+                        CardCrawlGame.sound.play("NULLIFY_SFX");
+                        return SpireReturn.Return(null);
+                    }
                 }
             }
         }
+        return SpireReturn.Continue();
     }
 
     private static class Locator extends SpireInsertLocator
