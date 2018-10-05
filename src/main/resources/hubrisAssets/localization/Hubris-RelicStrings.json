@@ -398,7 +398,7 @@
   },
   "hubris:ChampionShield": {
     "NAME": "Champion Shield",
-    "FLAVOR": "TODO",
+    "FLAVOR": "The Champ's shield... maybe?",
     "DESCRIPTIONS": [
       "While your HP is at or below #b50%, you are immune to debuffs."
     ]
