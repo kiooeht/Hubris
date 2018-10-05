@@ -3,8 +3,7 @@ package com.evacipated.cardcrawl.mod.hubris.cards;
 import basemod.BaseMod;
 import basemod.abstracts.CustomCard;
 import basemod.abstracts.DynamicVariable;
-import basemod.helpers.BaseModTags;
-import basemod.helpers.CardTags;
+import basemod.helpers.BaseModCardTags;
 import basemod.helpers.TooltipInfo;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -244,13 +243,14 @@ public class DuctTapeCard extends CustomCard
 
     private void calculateCardTags()
     {
-        Set<CardTags.Tag> tags = new HashSet<>();
+        Set<CardTags> tags = new HashSet<>();
         for (AbstractCard c : cards) {
-            tags.addAll(CardTags.getAllTags(c));
+            tags.addAll(c.tags);
         }
-        tags.remove(BaseModTags.BASIC_STRIKE);
-        tags.remove(BaseModTags.BASIC_DEFEND);
-        CardTags.addTags(this, tags.toArray(new CardTags.Tag[0]));
+        tags.remove(BaseModCardTags.BASIC_STRIKE);
+        tags.remove(BaseModCardTags.BASIC_DEFEND);
+        this.tags.clear();
+        this.tags.addAll(tags);
     }
 
     public Texture calculateLargePortrait()
