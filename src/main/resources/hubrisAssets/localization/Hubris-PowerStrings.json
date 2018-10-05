@@ -117,7 +117,7 @@
   "hubris:ChampionShieldPower": {
     "NAME": "Champion Shield",
     "DESCRIPTIONS": [
-      "Negates all debuffs."
+      "Negates all debuffs from enemies."
     ]
   }
 }

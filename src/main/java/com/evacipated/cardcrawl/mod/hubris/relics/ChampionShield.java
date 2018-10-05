@@ -2,19 +2,28 @@ package com.evacipated.cardcrawl.mod.hubris.relics;
 
 import com.evacipated.cardcrawl.mod.hubris.powers.ChampionShieldPower;
 import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
+import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.OnReceivePowerRelic;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
-public class ChampionShield extends HubrisRelic
+import java.util.HashSet;
+import java.util.Set;
+
+public class ChampionShield extends HubrisRelic implements OnReceivePowerRelic
 {
     public static final String ID = "hubris:ChampionShield";
     private boolean isActive = false;
+
+    public static Set<AbstractPower> debuffsFromMonsters = new HashSet<>();
 
     public ChampionShield()
     {
@@ -28,8 +37,16 @@ public class ChampionShield extends HubrisRelic
     }
 
     @Override
+    public void onUnequip()
+    {
+        debuffsFromMonsters.clear();
+    }
+
+    @Override
     public void atBattleStart()
     {
+        debuffsFromMonsters.clear();
+
         isActive = false;
         AbstractDungeon.actionManager.addToBottom(new AbstractGameAction()
         {
@@ -78,6 +95,16 @@ public class ChampionShield extends HubrisRelic
     {
         pulse = false;
         isActive = false;
+    }
+
+    @Override
+    public boolean onReceivePower(AbstractPower power, AbstractCreature source)
+    {
+        if (power.type == AbstractPower.PowerType.DEBUFF && source instanceof AbstractMonster) {
+            debuffsFromMonsters.removeIf(p -> !AbstractDungeon.player.powers.contains(p));
+            debuffsFromMonsters.add(power);
+        }
+        return true;
     }
 
     @Override

@@ -2,11 +2,13 @@ package com.evacipated.cardcrawl.mod.hubris.powers;
 
 import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.hubris.powers.abstracts.OnReceivePowerPower;
-import com.megacrit.cardcrawl.actions.unique.RemoveDebuffsAction;
+import com.evacipated.cardcrawl.mod.hubris.relics.ChampionShield;
+import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
 public class ChampionShieldPower extends AbstractPower implements OnReceivePowerPower
@@ -38,13 +40,17 @@ public class ChampionShieldPower extends AbstractPower implements OnReceivePower
     @Override
     public void onInitialApplication()
     {
-        AbstractDungeon.actionManager.addToTop(new RemoveDebuffsAction(owner));
+        for (AbstractPower power : owner.powers) {
+            if (ChampionShield.debuffsFromMonsters.contains(power)) {
+                AbstractDungeon.actionManager.addToTop(new RemoveSpecificPowerAction(owner, owner, power));
+            }
+        }
     }
 
     @Override
     public boolean onReceivePower(AbstractPower power, AbstractCreature target, AbstractCreature source)
     {
-        if (power.type == PowerType.DEBUFF) {
+        if (power.type == PowerType.DEBUFF && source instanceof AbstractMonster) {
             flashWithoutSound();
             return false;
         }

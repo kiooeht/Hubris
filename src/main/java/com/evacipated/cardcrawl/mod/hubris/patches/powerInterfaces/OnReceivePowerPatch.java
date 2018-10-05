@@ -1,6 +1,7 @@
 package com.evacipated.cardcrawl.mod.hubris.patches.powerInterfaces;
 
 import com.evacipated.cardcrawl.mod.hubris.powers.abstracts.OnReceivePowerPower;
+import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.OnReceivePowerRelic;
 import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.utility.TextAboveCreatureAction;
@@ -8,6 +9,7 @@ import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+import com.megacrit.cardcrawl.relics.AbstractRelic;
 import javassist.CtBehavior;
 
 @SpirePatch(
@@ -31,6 +33,19 @@ public class OnReceivePowerPatch
                         __instance.isDone = true;
                         CardCrawlGame.sound.play("NULLIFY_SFX");
                         return SpireReturn.Return(null);
+                    }
+                }
+            }
+            if (__instance.target.isPlayer) {
+                for (AbstractRelic relic : AbstractDungeon.player.relics) {
+                    if (relic instanceof OnReceivePowerRelic) {
+                        boolean apply = ((OnReceivePowerRelic) relic).onReceivePower(powerToApply, __instance.source);
+                        if (!apply) {
+                            AbstractDungeon.actionManager.addToTop(new TextAboveCreatureAction(__instance.target, ApplyPowerAction.TEXT[0]));
+                            __instance.isDone = true;
+                            CardCrawlGame.sound.play("NULLIFY_SFX");
+                            return SpireReturn.Return(null);
+                        }
                     }
                 }
             }
