@@ -307,10 +307,10 @@ public class HubrisMod implements
         BaseMod.addRelic(new R64BitClover(), RelicType.SHARED);
         BaseMod.addRelic(new TerracottaHorce(), RelicType.SHARED);
         BaseMod.addRelic(new Reverence(), RelicType.SHARED);
-        BaseMod.addRelic(new ChampionShield(), RelicType.SHARED);
 
         // Ironclad only
         BaseMod.addRelic(new IronBody(), RelicType.RED);
+        BaseMod.addRelic(new ChampionShield(), RelicType.RED);
 
         // Silent only
         BaseMod.addRelic(new AncientText(), RelicType.GREEN);
