@@ -1,8 +1,8 @@
 package com.evacipated.cardcrawl.mod.hubris.powers;
 
 import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
-import com.evacipated.cardcrawl.mod.hubris.powers.abstracts.OnReceivePowerPower;
 import com.evacipated.cardcrawl.mod.hubris.relics.ChampionShield;
+import com.evacipated.cardcrawl.mod.stslib.powers.interfaces.OnReceivePowerPower;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;

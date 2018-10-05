@@ -2,7 +2,7 @@ package com.evacipated.cardcrawl.mod.hubris.relics;
 
 import com.evacipated.cardcrawl.mod.hubris.powers.ChampionShieldPower;
 import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
-import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.OnReceivePowerRelic;
+import com.evacipated.cardcrawl.mod.stslib.relics.OnReceivePowerRelic;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
