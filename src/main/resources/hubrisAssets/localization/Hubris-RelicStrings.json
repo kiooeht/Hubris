@@ -361,7 +361,7 @@
   },
   "hubris:TerracottaHorce": {
     "NAME": "Terracotta Horce",
-    "FLAVOR": "TODO",
+    "FLAVOR": "\"A facsinating example of pre-Spireblight civilization.\" - Ranwid",
     "DESCRIPTIONS": [
       "Gain [E] at the start of each turn. Raise your Ascension level by #b",
       "."
