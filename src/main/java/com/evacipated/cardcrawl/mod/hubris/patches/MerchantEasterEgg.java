@@ -1,14 +1,20 @@
 package com.evacipated.cardcrawl.mod.hubris.patches;
 
+import basemod.abstracts.CustomPlayer;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;
+import com.esotericsoftware.spine.Skeleton;
 import com.evacipated.cardcrawl.mod.hubris.relics.NiceRug;
 import com.evacipated.cardcrawl.modthespire.lib.SpireField;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.SmilingMask;
 
 import java.lang.reflect.Field;
@@ -30,9 +36,13 @@ public class MerchantEasterEgg
             clz=AbstractPlayer.class,
             method="renderPlayerImage"
     )
+    @SpirePatch(
+            clz=basemod.abstracts.CustomPlayer.class,
+            method="renderPlayerImage"
+    )
     public static class RenderPlayImage
     {
-        public static void Prefix(AbstractPlayer __instance, SpriteBatch sb)
+        public static SpireReturn<Void> Prefix(AbstractPlayer __instance, SpriteBatch sb)
         {
             if (__instance.hasRelic(NiceRug.ID) && __instance.hasRelic(SmilingMask.ID)) {
                 if (!IsMerchantField.isMerchant.get(__instance)) {
@@ -56,7 +66,31 @@ public class MerchantEasterEgg
                         e.printStackTrace();
                     }
                 }
+                if (__instance instanceof CustomPlayer) {
+                    try {
+                        Field f = AbstractCreature.class.getDeclaredField("skeleton");
+                        f.setAccessible(true);
+                        Skeleton skeleton = (Skeleton) f.get(__instance);
+
+                        __instance.state.update(Gdx.graphics.getDeltaTime());
+                        __instance.state.apply(skeleton);
+                        skeleton.updateWorldTransform();
+                        skeleton.setPosition(__instance.drawX + __instance.animX, __instance.drawY + __instance.animY + AbstractDungeon.sceneOffsetY);
+
+                        skeleton.setColor(__instance.tint.color);
+                        skeleton.setFlip(__instance.flipHorizontal, false);
+                        sb.end();
+                        CardCrawlGame.psb.begin();
+                        AbstractPlayer.sr.draw(CardCrawlGame.psb, skeleton);
+                        CardCrawlGame.psb.end();
+                        sb.begin();
+                    } catch (IllegalAccessException | NoSuchFieldException e) {
+                        e.printStackTrace();
+                    }
+                    return SpireReturn.Return(null);
+                }
             }
+            return SpireReturn.Continue();
         }
     }
 
