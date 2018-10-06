@@ -32,6 +32,12 @@ public class Reverence extends HubrisRelic implements ClickableRelic
     }
 
     @Override
+    public void onVictory()
+    {
+        stopPulse();
+    }
+
+    @Override
     public void onRightClick()
     {
         if (!isObtained || usedThisTurn) {
