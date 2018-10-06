@@ -54,6 +54,7 @@ public class FireCardAction extends AbstractGameAction
                     fireCard(AbstractDungeon.player.hand.getTopCard());
                     returnCards();
                     isDone = true;
+                    return;
                 }
 
                 AbstractDungeon.handCardSelectScreen.open(TEXT[0], 1, false, false, false, false);
