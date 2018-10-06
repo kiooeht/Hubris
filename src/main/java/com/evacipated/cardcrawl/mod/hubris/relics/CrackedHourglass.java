@@ -1,8 +1,10 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
+import basemod.ReflectionHacks;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.evacipated.cardcrawl.mod.hubris.actions.unique.SuicidePlayerAction;
 import com.evacipated.cardcrawl.mod.hubris.powers.TimeStopPower;
 import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
@@ -12,6 +14,7 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.vfx.combat.TimeWarpTurnEndEffect;
 
 import java.lang.reflect.Field;
 
@@ -88,6 +91,10 @@ public class CrackedHourglass extends HubrisRelic
             if (waitTimer <= 0) {
                 if (!AbstractDungeon.player.isDead) {
                     flash();
+                    TimeWarpTurnEndEffect effect = new TimeWarpTurnEndEffect();
+                    TextureAtlas.AtlasRegion region = new TextureAtlas.AtlasRegion(img, 0, 0, img.getWidth(), img.getHeight());
+                    ReflectionHacks.setPrivate(effect, TimeWarpTurnEndEffect.class, "img", region);
+                    AbstractDungeon.topLevelEffectsQueue.add(effect);
                     AbstractDungeon.actionManager.addToTop(new SuicidePlayerAction());
                     AbstractDungeon.actionManager.addToTop(new RelicAboveCreatureAction(AbstractDungeon.player, this));
                     waitTimer = 1.0f;
