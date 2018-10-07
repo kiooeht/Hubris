@@ -47,10 +47,12 @@ public class TimeStopPower extends AbstractPower
     {
         timeScales = new HashMap<>();
         for (AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
-            AnimationState.TrackEntry e = m.state.getCurrent(0);
-            if (e != null) {
-                timeScales.put(m, e.getTimeScale());
-                e.setTimeScale(0);
+            if (m.state != null) {
+                AnimationState.TrackEntry e = m.state.getCurrent(0);
+                if (e != null) {
+                    timeScales.put(m, e.getTimeScale());
+                    e.setTimeScale(0);
+                }
             }
         }
     }
@@ -59,10 +61,12 @@ public class TimeStopPower extends AbstractPower
     public void onRemove()
     {
         for (AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
-            AnimationState.TrackEntry e = m.state.getCurrent(0);
-            if (e != null) {
-                if (timeScales.containsKey(m)) {
-                    e.setTimeScale(timeScales.get(m));
+            if (m.state != null) {
+                AnimationState.TrackEntry e = m.state.getCurrent(0);
+                if (e != null) {
+                    if (timeScales.containsKey(m)) {
+                        e.setTimeScale(timeScales.get(m));
+                    }
                 }
             }
         }
@@ -100,12 +104,14 @@ public class TimeStopPower extends AbstractPower
         super.update(slot);
 
         for (AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
-            AnimationState.TrackEntry e = m.state.getCurrent(0);
-            if (e != null) {
-                if (!timeScales.containsKey(m)) {
-                    timeScales.put(m, e.getTimeScale());
+            if (m.state != null) {
+                AnimationState.TrackEntry e = m.state.getCurrent(0);
+                if (e != null) {
+                    if (!timeScales.containsKey(m)) {
+                        timeScales.put(m, e.getTimeScale());
+                    }
+                    e.setTimeScale(0);
                 }
-                e.setTimeScale(0);
             }
         }
     }
