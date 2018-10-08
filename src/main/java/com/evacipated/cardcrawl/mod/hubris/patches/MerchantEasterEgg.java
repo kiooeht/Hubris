@@ -34,15 +34,11 @@ public class MerchantEasterEgg
 
     @SpirePatch(
             clz=AbstractPlayer.class,
-            method="renderPlayerImage"
+            method="render"
     )
-    @SpirePatch(
-            clz=basemod.abstracts.CustomPlayer.class,
-            method="renderPlayerImage"
-    )
-    public static class RenderPlayImage
+    public static class Render
     {
-        public static SpireReturn<Void> Prefix(AbstractPlayer __instance, SpriteBatch sb)
+        public static void Prefix(AbstractPlayer __instance, SpriteBatch sb)
         {
             if (__instance.hasRelic(NiceRug.ID) && __instance.hasRelic(SmilingMask.ID)) {
                 if (!IsMerchantField.isMerchant.get(__instance)) {
@@ -66,6 +62,23 @@ public class MerchantEasterEgg
                         e.printStackTrace();
                     }
                 }
+            }
+        }
+    }
+
+    @SpirePatch(
+            clz=AbstractPlayer.class,
+            method="renderPlayerImage"
+    )
+    @SpirePatch(
+            clz=basemod.abstracts.CustomPlayer.class,
+            method="renderPlayerImage"
+    )
+    public static class RenderPlayImage
+    {
+        public static SpireReturn<Void> Prefix(AbstractPlayer __instance, SpriteBatch sb)
+        {
+            if (__instance.hasRelic(NiceRug.ID) && __instance.hasRelic(SmilingMask.ID)) {
                 if (__instance instanceof CustomPlayer) {
                     try {
                         Field f = AbstractCreature.class.getDeclaredField("skeleton");
