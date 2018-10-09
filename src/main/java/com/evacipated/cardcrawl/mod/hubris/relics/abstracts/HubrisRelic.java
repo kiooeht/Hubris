@@ -15,6 +15,8 @@ public abstract class HubrisRelic extends AbstractRelic
             this.tier = tier = RelicTier.RARE;
         }
 
+        imgUrl = imgName;
+
         if (imgName.startsWith("test")) {
             img = ImageMaster.loadImage("images/relics/" + imgName);
             largeImg = ImageMaster.loadImage("images/largeRelics/" + imgName);
@@ -24,6 +26,19 @@ public abstract class HubrisRelic extends AbstractRelic
             img = ImageMaster.loadImage(HubrisMod.assetPath("images/relics/" + imgName));
             largeImg = ImageMaster.loadImage(HubrisMod.assetPath("images/largeRelics/" + imgName));
             outlineImg = ImageMaster.loadImage(HubrisMod.assetPath("images/relics/outline/" + imgName));
+        }
+    }
+
+    @Override
+    public void loadLargeImg()
+    {
+        if (largeImg == null) {
+            if (imgUrl.startsWith("test")) {
+                largeImg = ImageMaster.loadImage("images/largeRelics/" + imgUrl);
+            }
+            if (largeImg == null) {
+                largeImg = ImageMaster.loadImage(HubrisMod.assetPath("images/largeRelics/" + imgUrl));
+            }
         }
     }
 }
