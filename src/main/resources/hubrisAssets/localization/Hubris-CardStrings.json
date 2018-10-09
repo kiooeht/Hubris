@@ -17,7 +17,7 @@
   },
   "hubris:Greed": {
     "NAME": "Greed",
-    "DESCRIPTION": "Add a copy of this card to your deck. Gain !M! extra gold at the end of combat for each Greed in your deck. Ethereal."
+    "DESCRIPTION": "Ethereal. NL Permanently add a copy of this card to your deck. Gain !M! extra gold at the end of combat for each Greed in your deck."
   },
   "hubris:SlightOfHand": {
     "NAME": "Sleight of Hand",
