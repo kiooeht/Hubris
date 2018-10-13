@@ -11,6 +11,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
+import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
@@ -79,7 +80,8 @@ public class DisguiseKit extends HubrisRelic
 
     private String chosenClassName()
     {
-        return "#b" + String.join(" #b", AbstractPlayer.getTitle(chosenClass).split(" "));
+        AbstractPlayer character = BaseMod.findCharacter(chosenClass);
+        return BaseMod.colorString(character.getLocalizedCharacterName(), "#" + character.getCardColor().toString());
     }
 
     @Override
@@ -89,11 +91,9 @@ public class DisguiseKit extends HubrisRelic
 
         pickCard = true;
         CardGroup group = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
-        for (AbstractPlayer.PlayerClass pc : AbstractPlayer.PlayerClass.values()) {
-            if (pc != AbstractDungeon.player.chosenClass) {
-                if (AbstractPlayer.getTitle(pc) != null) {
-                    group.addToTop(new DisguiseKitOption(pc));
-                }
+        for (AbstractPlayer character : CardCrawlGame.characterManager.getAllCharacters()) {
+            if (character.chosenClass != AbstractDungeon.player.chosenClass) {
+                group.addToTop(new DisguiseKitOption(character.chosenClass));
             }
         }
 
@@ -126,38 +126,27 @@ public class DisguiseKit extends HubrisRelic
         initializeTips();
 
         ArrayList<AbstractCard> tmpPool = new ArrayList<>();
-        try {
-            Method addRedCards = AbstractDungeon.class.getDeclaredMethod("addRedCards", ArrayList.class);
-            addRedCards.setAccessible(true);
-            Method addGreenCards = AbstractDungeon.class.getDeclaredMethod("addGreenCards", ArrayList.class);
-            addGreenCards.setAccessible(true);
-            Method addBlueCards = AbstractDungeon.class.getDeclaredMethod("addBlueCards", ArrayList.class);
-            addBlueCards.setAccessible(true);
-
-            switch (chosenClass) {
-                case IRONCLAD:
-                    addRedCards.invoke(CardCrawlGame.dungeon, tmpPool);
-                    break;
-                case THE_SILENT:
-                    addGreenCards.invoke(CardCrawlGame.dungeon, tmpPool);
-                    break;
-                case DEFECT:
-                    addBlueCards.invoke(CardCrawlGame.dungeon, tmpPool);
-                    break;
-                default:
-                    AbstractCard.CardColor color = BaseMod.getColor(chosenClass);
-                    AbstractCard card;
-                    for (Map.Entry<String, AbstractCard> c : CardLibrary.cards.entrySet()) {
-                        card = c.getValue();
-                        if (card.color.equals(color) && card.rarity != AbstractCard.CardRarity.BASIC
-                                && (!UnlockTracker.isCardLocked(c.getKey()) || Settings.isDailyRun)) {
-                            tmpPool.add(card);
-                        }
+        switch (chosenClass) {
+            case IRONCLAD:
+                CardLibrary.addRedCards(tmpPool);
+                break;
+            case THE_SILENT:
+                CardLibrary.addGreenCards(tmpPool);
+                break;
+            case DEFECT:
+                CardLibrary.addBlueCards(tmpPool);
+                break;
+            default:
+                AbstractCard.CardColor color = BaseMod.getColor(chosenClass);
+                AbstractCard card;
+                for (Map.Entry<String, AbstractCard> c : CardLibrary.cards.entrySet()) {
+                    card = c.getValue();
+                    if (card.color.equals(color) && card.rarity != AbstractCard.CardRarity.BASIC
+                            && (!UnlockTracker.isCardLocked(c.getKey()) || Settings.isDailyRun)) {
+                        tmpPool.add(card);
                     }
-                    break;
-            }
-        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            e.printStackTrace();
+                }
+                break;
         }
 
         chosenPools = new HashMap<>();

@@ -75,7 +75,7 @@ public class ZylophonePatch
             @Override
             public int[] Locate(CtBehavior ctMethodToPatch) throws Exception
             {
-                Matcher finalMatcher = new Matcher.FieldAccessMatcher(AbstractCard.class, "cost");
+                Matcher finalMatcher = new Matcher.FieldAccessMatcher(AbstractCard.class, "costForTurn");
                 return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
             }
         }

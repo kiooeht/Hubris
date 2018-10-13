@@ -1,5 +1,6 @@
 package com.evacipated.cardcrawl.mod.hubris.cards;
 
+import basemod.BaseMod;
 import com.evacipated.cardcrawl.mod.hubris.CardIgnore;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -14,18 +15,11 @@ public class DisguiseKitOption extends AbstractCard
 
     public DisguiseKitOption(AbstractPlayer.PlayerClass chosenClass)
     {
-        super(ID, capitalizeFirstLetter(AbstractPlayer.getTitle(chosenClass)),
+        super(ID, BaseMod.findCharacter(chosenClass).getLocalizedCharacterName(),
                 null, null, -2, "", CardType.SKILL, CardColor.COLORLESS, CardRarity.SPECIAL, CardTarget.NONE);
 
         this.chosenClass = chosenClass;
     }
-
-    private static String capitalizeFirstLetter(String original) {
-    if (original == null || original.length() == 0) {
-        return original;
-    }
-    return original.substring(0, 1).toUpperCase() + original.substring(1);
-}
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m)
