@@ -88,7 +88,7 @@ public class DoWhilePower extends AbstractPower
             tmp.purgeOnUse = true;
 
             ++amount;
-            AbstractDungeon.actionManager.cardQueue.add(new CardQueueItem(tmp, m, card.energyOnUse));
+            AbstractDungeon.actionManager.cardQueue.add(0, new CardQueueItem(tmp, m, card.energyOnUse));
             if (tmp.cardID.equals(Rampage.ID)) {
                 AbstractDungeon.actionManager.addToBottom(new ModifyDamageAction(card, tmp.magicNumber));
             } else if (tmp.cardID.equals(GeneticAlgorithm.ID)) {
