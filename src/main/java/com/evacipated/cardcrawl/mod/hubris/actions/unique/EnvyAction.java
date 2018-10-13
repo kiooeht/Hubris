@@ -26,9 +26,11 @@ public class EnvyAction extends AbstractGameAction
                     tmp.addToTop(c);
                 }
             }
-            AbstractCard card = tmp.getRandomCard(AbstractDungeon.cardRng);
-            card.color = AbstractCard.CardColor.CURSE;
-            CurseForTurnPatch.Field.curseForTurn.set(card, true);
+            if (!tmp.isEmpty()) {
+                AbstractCard card = tmp.getRandomCard(AbstractDungeon.cardRng);
+                card.color = AbstractCard.CardColor.CURSE;
+                CurseForTurnPatch.Field.curseForTurn.set(card, true);
+            }
         }
         tickDuration();
     }
