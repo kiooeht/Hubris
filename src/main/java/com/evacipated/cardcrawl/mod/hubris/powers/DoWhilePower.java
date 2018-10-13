@@ -51,6 +51,7 @@ public class DoWhilePower extends AbstractPower
         if (!card.cardID.equals(DoWhile.ID)) {
             if (originalCard == null) {
                 originalCard = card;
+                amount = MAX_LOOPS;
             }
             if (!originalCard.cardID.equals(card.cardID)) {
                 return;
@@ -87,7 +88,7 @@ public class DoWhilePower extends AbstractPower
             }
             tmp.purgeOnUse = true;
 
-            ++amount;
+            --amount;
             AbstractDungeon.actionManager.cardQueue.add(0, new CardQueueItem(tmp, m, card.energyOnUse));
             if (tmp.cardID.equals(Rampage.ID)) {
                 AbstractDungeon.actionManager.addToBottom(new ModifyDamageAction(card, tmp.magicNumber));
@@ -95,8 +96,8 @@ public class DoWhilePower extends AbstractPower
                 AbstractDungeon.actionManager.addToBottom(new IncreaseMiscAction(card.cardID, card.misc + card.magicNumber, card.magicNumber));
             }
 
-            if (amount >= MAX_LOOPS || !tmp.canUse(AbstractDungeon.player, m)) {
-                if (amount >= MAX_LOOPS) {
+            if (amount == 0 || !tmp.canUse(AbstractDungeon.player, m)) {
+                if (amount == 0) {
                     AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 5.0f,
                             "#rABORTING #rSOFTLOCK", true));
                 }
