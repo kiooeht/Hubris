@@ -85,7 +85,9 @@
   "hubris:DoWhilePower": {
     "NAME": "Do While",
     "DESCRIPTIONS": [
-      "This turn, play your next card at +1 [E] until you run out of [E]."
+      "This turn, play your next card at +1 [E] until you run out of [E].",
+      "This turn, play your next #b",
+      " cards at +1 [E] until you run out of [E]."
     ]
   },
   "hubris:ArmorPiercing": {

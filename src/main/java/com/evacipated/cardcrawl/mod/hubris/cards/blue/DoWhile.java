@@ -29,7 +29,7 @@ public class DoWhile extends CustomCard
     @Override
     public void use(AbstractPlayer p, AbstractMonster m)
     {
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new DoWhilePower(p)));
+        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new DoWhilePower(p), 1));
     }
 
     @Override

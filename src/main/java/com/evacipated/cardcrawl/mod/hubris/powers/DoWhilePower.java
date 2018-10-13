@@ -2,6 +2,7 @@ package com.evacipated.cardcrawl.mod.hubris.powers;
 
 import com.evacipated.cardcrawl.mod.hubris.cards.blue.DoWhile;
 import com.megacrit.cardcrawl.actions.common.ModifyDamageAction;
+import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.actions.defect.IncreaseMiscAction;
 import com.megacrit.cardcrawl.actions.utility.UseCardAction;
@@ -27,6 +28,7 @@ public class DoWhilePower extends AbstractPower
     private static final int MAX_LOOPS = 100;
 
     private AbstractCard originalCard = null;
+    private int stacks;
 
     public DoWhilePower(AbstractCreature owner)
     {
@@ -34,7 +36,7 @@ public class DoWhilePower extends AbstractPower
         ID = POWER_ID;
         this.owner = owner;
         type = PowerType.BUFF;
-        amount = 0;
+        amount = stacks = 1;
         updateDescription();
         loadRegion("loop");
     }
@@ -42,7 +44,11 @@ public class DoWhilePower extends AbstractPower
     @Override
     public void updateDescription()
     {
-        description = DESCRIPTIONS[0];
+        if (stacks > 1) {
+            description = DESCRIPTIONS[1] + stacks + DESCRIPTIONS[2];
+        } else {
+            description = DESCRIPTIONS[0];
+        }
     }
 
     @Override
@@ -51,6 +57,7 @@ public class DoWhilePower extends AbstractPower
         if (!card.cardID.equals(DoWhile.ID)) {
             if (originalCard == null) {
                 originalCard = card;
+                stacks = amount;
                 amount = MAX_LOOPS;
             }
             if (!originalCard.cardID.equals(card.cardID)) {
@@ -101,7 +108,10 @@ public class DoWhilePower extends AbstractPower
                     AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 5.0f,
                             "#rABORTING #rSOFTLOCK", true));
                 }
-                AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(owner, owner, ID));
+                amount = stacks;
+                originalCard = null;
+                AbstractDungeon.actionManager.addToBottom(new ReducePowerAction(owner, owner, ID, 1));
+                //AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(owner, owner, ID));
             }
         }
     }
@@ -112,5 +122,19 @@ public class DoWhilePower extends AbstractPower
         if (isPlayer) {
             AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(owner, owner, ID));
         }
+    }
+
+    @Override
+    public void stackPower(int stackAmount)
+    {
+        super.stackPower(stackAmount);
+        stacks = amount;
+    }
+
+    @Override
+    public void reducePower(int reduceAmount)
+    {
+        super.reducePower(reduceAmount);
+        stacks = amount;
     }
 }
