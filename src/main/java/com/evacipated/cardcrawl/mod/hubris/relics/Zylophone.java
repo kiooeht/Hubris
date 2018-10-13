@@ -1,5 +1,6 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
+import com.evacipated.cardcrawl.mod.hubris.cards.DuctTapeCard;
 import com.evacipated.cardcrawl.mod.hubris.patches.cards.AbstractCard.ZylophoneField;
 import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
@@ -87,6 +88,9 @@ public class Zylophone extends HubrisRelic
 
         CardGroup tmp = new CardGroup(CardGroup.CardGroupType.UNSPECIFIED);
         for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
+            if (c instanceof DuctTapeCard) {
+                continue;
+            }
             if (c.cost == 0 || c.cost == 1) {
                 tmp.addToTop(c);
             }
