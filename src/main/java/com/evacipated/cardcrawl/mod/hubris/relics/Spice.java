@@ -171,8 +171,12 @@ public class Spice extends HubrisRelic
     {
         flash();
         Pair<Integer, Integer> strDex = getStartingStrDex();
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new StrengthPower(AbstractDungeon.player, strDex.getKey()), strDex.getKey()));
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new DexterityPower(AbstractDungeon.player, strDex.getValue()), strDex.getValue()));
+        if (strDex.getKey() > 0) {
+            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new StrengthPower(AbstractDungeon.player, strDex.getKey()), strDex.getKey()));
+        }
+        if (strDex.getValue() > 0) {
+            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new DexterityPower(AbstractDungeon.player, strDex.getValue()), strDex.getValue()));
+        }
     }
 
     public void increment()
