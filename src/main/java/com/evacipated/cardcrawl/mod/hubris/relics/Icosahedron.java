@@ -1,5 +1,6 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
+import com.badlogic.gdx.Gdx;
 import com.evacipated.cardcrawl.mod.hubris.actions.unique.RareCodexAction;
 import com.evacipated.cardcrawl.mod.hubris.actions.unique.ReverseEnlightenmentAction;
 import com.evacipated.cardcrawl.mod.hubris.cards.colorless.Mulligan;
@@ -23,6 +24,7 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,6 +80,27 @@ public class Icosahedron extends HubrisRelic implements ClickableRelic
     }
 
     @Override
+    public void update()
+    {
+        super.update();
+
+        try {
+            Field f = AbstractRelic.class.getDeclaredField("rotation");
+            f.setAccessible(true);
+
+            float rotation = f.getFloat(this);
+            if (rotation > 0.0f) {
+                rotation -= Gdx.graphics.getDeltaTime() * 540.0f;
+                f.setFloat(this, rotation);
+            } else if (rotation < 0) {
+                f.setFloat(this, 0.0f);
+            }
+        } catch (IllegalAccessException | NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public void onRightClick()
     {
         if (!isObtained || counter > 0) {
@@ -85,6 +108,14 @@ public class Icosahedron extends HubrisRelic implements ClickableRelic
         }
 
         if (AbstractDungeon.getCurrRoom() != null && AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT) {
+            try {
+                Field f = AbstractRelic.class.getDeclaredField("rotation");
+                f.setAccessible(true);
+                f.set(this, 359.0f);
+            } catch (IllegalAccessException | NoSuchFieldException e) {
+                e.printStackTrace();
+            }
+
             int roll = new Random().random(1, 20);
             doRoll(roll);
         }
