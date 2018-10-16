@@ -405,7 +405,7 @@
   },
   "hubris:RunicObelisk": {
     "NAME": "Runic Obelisk",
-    "FLAVOR": "TODO",
+    "FLAVOR": "Extremely heavy, but the runes gives you power.",
     "DESCRIPTIONS": [
       "Gain [E] at the start of each turn. Lower your maximum hand size by #b",
       "."
@@ -413,7 +413,7 @@
   },
   "hubris:SlimyHat": {
     "NAME": "Slimy Hat",
-    "FLAVOR": "TODO",
+    "FLAVOR": "This would be a really nice hat if it wasn't covered in slime.",
     "DESCRIPTIONS": [
       "Raise your maximum hand size by #b",
       "."

@@ -96,14 +96,21 @@ public class DoWhilePower extends AbstractPower
             tmp.purgeOnUse = true;
 
             --amount;
-            AbstractDungeon.actionManager.cardQueue.add(0, new CardQueueItem(tmp, m, card.energyOnUse));
+            int energyOnUse = card.energyOnUse;
+            if (card.costForTurn == -1) {
+                --energyOnUse;
+                if (energyOnUse == 0) {
+                    amount = -1;
+                }
+            }
+            AbstractDungeon.actionManager.cardQueue.add(0, new CardQueueItem(tmp, m, energyOnUse));
             if (tmp.cardID.equals(Rampage.ID)) {
                 AbstractDungeon.actionManager.addToBottom(new ModifyDamageAction(card, tmp.magicNumber));
             } else if (tmp.cardID.equals(GeneticAlgorithm.ID)) {
                 AbstractDungeon.actionManager.addToBottom(new IncreaseMiscAction(card.cardID, card.misc + card.magicNumber, card.magicNumber));
             }
 
-            if (amount == 0 || !tmp.canUse(AbstractDungeon.player, m)) {
+            if (amount <= 0 || !tmp.canUse(AbstractDungeon.player, m)) {
                 if (amount == 0) {
                     AbstractDungeon.effectList.add(new ThoughtBubble(AbstractDungeon.player.dialogX, AbstractDungeon.player.dialogY, 5.0f,
                             "#rABORTING #rSOFTLOCK", true));

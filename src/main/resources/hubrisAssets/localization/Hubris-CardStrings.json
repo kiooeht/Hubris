@@ -126,5 +126,13 @@
     "NAME": "Trick Cloak",
     "DESCRIPTION": "Fetch a random card from your discard pile. NL Draw !M! card.",
     "UPGRADE_DESCRIPTION": "Fetch a card from your discard pile. NL Draw !M! card."
+  },
+  "hubris:Fate": {
+    "NAME": "Fate",
+    "DESCRIPTION": "Choose 1 of !M! random [#ff2626]Upgraded[] [#ff2626]Black[] cards to add to your hand. NL Exhaust."
+  },
+  "hubris:InfiniteBlow": {
+    "NAME": "Infinite Blow",
+    "DESCRIPTION": "Deal !D! damage. NL Can be upgraded any number of times. NL Maintains [#efc851]upgrades[] between runs."
   }
 }
