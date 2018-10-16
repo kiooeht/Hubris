@@ -47,9 +47,12 @@ public class Nailsmith extends AbstractImageEvent
     {
         super(NAME, DESCRIPTIONS[0], "images/events/blacksmith.jpg");
 
-        upgradedCards = getUpgradedCards(AbstractDungeon.player.masterDeck);
+        upgradedCards = CardGroup.getGroupWithoutBottledCards(getUpgradedCards(AbstractDungeon.player.masterDeck));
         String oldNailName = new OldNail().name;
-        if (AbstractDungeon.player.hasRelic(OldNail.ID) && AbstractDungeon.player.gold >= GOLD_COST && upgradedCards.size() >= 2) {
+        AbstractRelic nail = AbstractDungeon.player.getRelic(OldNail.ID);
+        if (nail != null && nail.counter == -42) {
+            imageEventText.setDialogOption(OPTIONS[10] + nail.name + ".", true);
+        } else if (nail != null && AbstractDungeon.player.gold >= GOLD_COST && upgradedCards.size() >= 2) {
             imageEventText.setDialogOption(OPTIONS[4] + GOLD_COST + OPTIONS[5] + FontHelper.colorString(oldNailName, "g") + OPTIONS[6]);
         } else {
             imageEventText.setDialogOption(OPTIONS[7] + GOLD_COST + OPTIONS[8], true);
