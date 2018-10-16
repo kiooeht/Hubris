@@ -405,7 +405,7 @@
   },
   "hubris:RunicObelisk": {
     "NAME": "Runic Obelisk",
-    "FLAVOR": "TODO",
+    "FLAVOR": "Extremely heavy, but the runes gives you power.",
     "DESCRIPTIONS": [
       "Gain [E] at the start of each turn. Lower your maximum hand size by #b",
       "."
