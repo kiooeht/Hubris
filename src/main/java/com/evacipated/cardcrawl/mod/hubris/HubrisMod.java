@@ -8,6 +8,7 @@ import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.evacipated.cardcrawl.mod.hubris.cards.black.InfiniteBlow;
 import com.evacipated.cardcrawl.mod.hubris.cards.curses.Hubris;
 import com.evacipated.cardcrawl.mod.hubris.crossover.InfiniteCrossover;
 import com.evacipated.cardcrawl.mod.hubris.events.shrines.TheFatedDie;
@@ -154,6 +155,9 @@ public class HubrisMod implements
             Zylophone.load(config);
             EmptyBottle.load(config);
             DuctTape.load(config);
+            if (hasInfiniteSpire) {
+                InfiniteBlow.load();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -171,6 +175,9 @@ public class HubrisMod implements
             Zylophone.save(config);
             EmptyBottle.save(config);
             // Duct Tape saving is handled separately
+            if (hasInfiniteSpire) {
+                InfiniteBlow.save();
+            }
             config.save();
         } catch (IOException e) {
             e.printStackTrace();
