@@ -413,7 +413,7 @@
   },
   "hubris:SlimyHat": {
     "NAME": "Slimy Hat",
-    "FLAVOR": "TODO",
+    "FLAVOR": "This would be a really nice hat if it wasn't covered in slime.",
     "DESCRIPTIONS": [
       "Raise your maximum hand size by #b",
       "."
