@@ -2,11 +2,15 @@ package com.evacipated.cardcrawl.mod.hubris.patches;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
+import com.evacipated.cardcrawl.mod.hubris.rooms.BloodShopRoom;
 import com.evacipated.cardcrawl.mod.hubris.shop.BloodShopScreen;
 import com.evacipated.cardcrawl.modthespire.lib.*;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.EventHelper;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
+import com.megacrit.cardcrawl.rooms.ShopRoom;
 import com.megacrit.cardcrawl.shop.Merchant;
 import com.megacrit.cardcrawl.shop.ShopScreen;
 import javassist.CannotCompileException;
@@ -18,6 +22,7 @@ import java.util.ArrayList;
 
 public class BloodShopPatch
 {
+    //*
     @SpirePatch(
             clz= Merchant.class,
             method=SpirePatch.CONSTRUCTOR,
@@ -27,7 +32,7 @@ public class BloodShopPatch
                     int.class
             }
     )
-    public static class Open1
+    public static class ScreenInit
     {
         public static ExprEditor Instrument()
         {
@@ -36,17 +41,28 @@ public class BloodShopPatch
                 public void edit(MethodCall m) throws CannotCompileException
                 {
                     if (m.getClassName().equals(ShopScreen.class.getName()) && m.getMethodName().equals("init")) {
-                        m.replace(HubrisMod.class.getName() + ".bloodShopScreen.init();");
+                        m.replace(ScreenInit.class.getName() + ".init($$);");
                     }
                 }
             };
+        }
+
+        @SuppressWarnings("unused")
+        public static void init(ArrayList<AbstractCard> coloredCards, ArrayList<AbstractCard> colorlessCards)
+        {
+            if (AbstractDungeon.getCurrRoom() instanceof BloodShopRoom) {
+                HubrisMod.bloodShopScreen.init();
+            } else {
+                HubrisMod.bloodShopScreen.init();
+                //AbstractDungeon.shopScreen.init(coloredCards, colorlessCards);
+            }
         }
     }
     @SpirePatch(
             clz= Merchant.class,
             method="update"
     )
-    public static class Open2
+    public static class ScreenOpen
     {
         public static ExprEditor Instrument()
         {
@@ -55,10 +71,39 @@ public class BloodShopPatch
                 public void edit(MethodCall m) throws CannotCompileException
                 {
                     if (m.getClassName().equals(ShopScreen.class.getName()) && m.getMethodName().equals("open")) {
-                        m.replace(HubrisMod.class.getName() + ".bloodShopScreen.open();");
+                        m.replace(ScreenOpen.class.getName() + ".open();");
                     }
                 }
             };
+        }
+
+        @SuppressWarnings("unused")
+        public static void open()
+        {
+            if (AbstractDungeon.getCurrRoom() instanceof BloodShopRoom) {
+                HubrisMod.bloodShopScreen.open();
+            } else {
+                HubrisMod.bloodShopScreen.open();
+                //AbstractDungeon.shopScreen.open();
+            }
+        }
+    }
+    //*/
+
+    @SpirePatch(
+            clz=AbstractDungeon.class,
+            method="generateRoom"
+    )
+    public static class GenerateRoom
+    {
+        public static AbstractRoom Postfix(AbstractRoom __result, AbstractDungeon __instance, EventHelper.RoomResult roomType)
+        {
+            if (__result instanceof ShopRoom) {
+                if (AbstractDungeon.eventRng.random() < BloodShopRoom.BLOOD_SHOP_CHANCE) {
+                    return new BloodShopRoom();
+                }
+            }
+            return __result;
         }
     }
 
