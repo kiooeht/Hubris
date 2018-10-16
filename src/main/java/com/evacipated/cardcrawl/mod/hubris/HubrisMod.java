@@ -15,6 +15,7 @@ import com.evacipated.cardcrawl.mod.hubris.events.thecity.Experiment;
 import com.evacipated.cardcrawl.mod.hubris.monsters.GrandSnecko;
 import com.evacipated.cardcrawl.mod.hubris.monsters.MusketHawk;
 import com.evacipated.cardcrawl.mod.hubris.relics.*;
+import com.evacipated.cardcrawl.mod.hubris.shop.BloodShopScreen;
 import com.evacipated.cardcrawl.modthespire.Loader;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
@@ -69,6 +70,8 @@ public class HubrisMod implements
 
     // Power asset texture atlas
     public static TextureAtlas powerAtlas;
+
+    public static BloodShopScreen bloodShopScreen;
 
     // Crossover checks
     public static final boolean hasReplayTheSpire;
@@ -245,6 +248,8 @@ public class HubrisMod implements
         BaseMod.addBoss(TheCity.ID, MusketHawk.ID, assetPath("images/ui/map/boss/musketHawk.png"), assetPath("images/ui/map/bossOutline/musketHawk.png"));
 
         powerAtlas = new TextureAtlas(Gdx.files.internal(assetPath("images/powers/powers.atlas")));
+
+        bloodShopScreen = new BloodShopScreen();
     }
 
     @Override
