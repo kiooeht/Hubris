@@ -6,8 +6,10 @@ import basemod.ModPanel;
 import basemod.helpers.RelicType;
 import basemod.interfaces.*;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.evacipated.cardcrawl.mod.hubris.cards.curses.Hubris;
+import com.evacipated.cardcrawl.mod.hubris.crossover.InfiniteCrossover;
 import com.evacipated.cardcrawl.mod.hubris.events.shrines.TheFatedDie;
 import com.evacipated.cardcrawl.mod.hubris.events.shrines.UpdateBodyText;
 import com.evacipated.cardcrawl.mod.hubris.events.thebeyond.TheBottler;
@@ -31,6 +33,10 @@ import com.megacrit.cardcrawl.helpers.ModHelper;
 import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.screens.custom.CustomMod;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
+import infinitespire.InfiniteSpire;
+import javassist.CannotCompileException;
+import javassist.CtClass;
+import javassist.NotFoundException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.clapper.util.classutil.*;
@@ -261,8 +267,29 @@ public class HubrisMod implements
     {
         try {
             autoAddCards();
-        } catch (URISyntaxException | IllegalAccessException | ClassNotFoundException | InstantiationException e) {
+        } catch (URISyntaxException | IllegalAccessException | InstantiationException | NotFoundException | CannotCompileException e) {
             e.printStackTrace();
+        }
+        if (hasInfiniteSpire) {
+            BaseMod.addColor(
+                    infinitespire.patches.CardColorEnumPatch.CardColorPatch.INFINITE_BLACK,
+                    InfiniteSpire.CARD_COLOR,
+                    InfiniteSpire.CARD_COLOR,
+                    InfiniteSpire.CARD_COLOR,
+                    InfiniteSpire.CARD_COLOR,
+                    InfiniteSpire.CARD_COLOR,
+                    Color.BLACK.cpy(),
+                    InfiniteSpire.CARD_COLOR,
+                    "img/infinitespire/cards/ui/512/boss-attack.png",
+                    "img/infinitespire/cards/ui/512/boss-skill.png",
+                    "img/infinitespire/cards/ui/512/boss-power.png",
+                    "img/infinitespire/cards/ui/512/boss-orb.png",
+                    "img/infinitespire/cards/ui/1024/boss-attack.png",
+                    "img/infinitespire/cards/ui/1024/boss-skill.png",
+                    "img/infinitespire/cards/ui/1024/boss-power.png",
+                    "img/infinitespire/cards/ui/1024/boss-orb.png"
+            );
+            InfiniteCrossover.Cards();
         }
     }
 
@@ -357,7 +384,7 @@ public class HubrisMod implements
         list.add(new CustomMod(Hubris.ID, "r", true));
     }
 
-    private static void autoAddCards() throws URISyntaxException, ClassNotFoundException, IllegalAccessException, InstantiationException
+    private static void autoAddCards() throws URISyntaxException, IllegalAccessException, InstantiationException, NotFoundException, CannotCompileException
     {
         ClassFinder finder = new ClassFinder();
         URL url = HubrisMod.class.getProtectionDomain().getCodeSource().getLocation();
@@ -374,18 +401,18 @@ public class HubrisMod implements
         finder.findClasses(foundClasses, filter);
 
         for (ClassInfo classInfo : foundClasses) {
-            Class<?> cls = HubrisMod.class.getClassLoader().loadClass(classInfo.getClassName());
-            if (cls.isAnnotationPresent(CardIgnore.class)) {
+            CtClass cls = Loader.getClassPool().get(classInfo.getClassName());
+            if (cls.hasAnnotation(CardIgnore.class)) {
                 continue;
             }
             boolean isCard = false;
-            Class<?> superCls = cls;
+            CtClass superCls = cls;
             while (superCls != null) {
                 superCls = superCls.getSuperclass();
                 if (superCls == null) {
                     break;
                 }
-                if (superCls.equals(AbstractCard.class)) {
+                if (superCls.getName().equals(AbstractCard.class.getName())) {
                     isCard = true;
                     break;
                 }
@@ -394,9 +421,9 @@ public class HubrisMod implements
                 continue;
             }
             System.out.println(classInfo.getClassName());
-            AbstractCard card = (AbstractCard) cls.newInstance();
+            AbstractCard card = (AbstractCard) Loader.getClassPool().toClass(cls).newInstance();
             BaseMod.addCard(card);
-            if (cls.isAnnotationPresent(CardNoSeen.class)) {
+            if (cls.hasAnnotation(CardNoSeen.class)) {
                 UnlockTracker.hardUnlockOverride(card.cardID);
             } else {
                 UnlockTracker.unlockCard(card.cardID);
