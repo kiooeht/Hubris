@@ -121,5 +121,11 @@
     "DESCRIPTIONS": [
       "Negates all debuffs from enemies."
     ]
+  },
+  "hubris:Bodyguard": {
+    "NAME": "Bodyguard",
+    "DESCRIPTIONS": [
+      "Immune to damage until all other monsters are dead."
+    ]
   }
 }
