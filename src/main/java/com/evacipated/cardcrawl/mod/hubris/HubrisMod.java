@@ -68,6 +68,7 @@ public class HubrisMod implements
     public static final Logger logger = LogManager.getLogger(HubrisMod.class.getSimpleName());
 
     private static SpireConfig modConfig = null;
+    public static SpireConfig otherSaveData = null;
 
     // Beta card asset paths
     public static final String BETA_ATTACK = HubrisMod.assetPath("images/cards/betaAttack.png");
@@ -155,6 +156,8 @@ public class HubrisMod implements
             Zylophone.load(config);
             EmptyBottle.load(config);
             DuctTape.load(config);
+
+            otherSaveData = new SpireConfig("Hubris", "OtherSaveData");
             if (hasInfiniteSpire) {
                 InfiniteBlow.load();
             }
@@ -175,6 +178,10 @@ public class HubrisMod implements
             Zylophone.save(config);
             EmptyBottle.save(config);
             // Duct Tape saving is handled separately
+
+            if (otherSaveData == null) {
+                otherSaveData = new SpireConfig("Hubris", "OtherSaveData");
+            }
             if (hasInfiniteSpire) {
                 InfiniteBlow.save();
             }

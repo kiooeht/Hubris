@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;
+import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.hubris.actions.AnimationTimeScaleAction;
 import com.evacipated.cardcrawl.mod.hubris.actions.StealGoldAction;
 import com.evacipated.cardcrawl.mod.hubris.actions.ThrowGoldAction;
@@ -12,7 +13,6 @@ import com.evacipated.cardcrawl.mod.hubris.powers.GoldShieldPower;
 import com.evacipated.cardcrawl.mod.hubris.powers.BodyguardPower;
 import com.evacipated.cardcrawl.mod.hubris.relics.NiceRug;
 import com.evacipated.cardcrawl.mod.hubris.vfx.combat.BlueSmokeBombEffect;
-import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.megacrit.cardcrawl.actions.animations.TalkAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.*;
@@ -107,12 +107,8 @@ public class MerchantMonster extends AbstractMonster
         super(NAME, ID, START_HP, -10.0F, -30.0F, 180.0F, 150.0F, null, 0.0F, 0.0F);
 
         if (CardCrawlGame.playerName.equals(DIALOG[2].substring(0, 5))) {
-            try {
-                SpireConfig config = new SpireConfig("Hubris", "OtherSaveData");
-                if (config.has("abuse")) {
-                    abuse = config.getInt("abuse");
-                }
-            } catch (IOException ignored) {
+            if (HubrisMod.otherSaveData != null && HubrisMod.otherSaveData.has("abuse")) {
+                abuse = HubrisMod.otherSaveData.getInt("abuse");
             }
         }
 
@@ -298,9 +294,8 @@ public class MerchantMonster extends AbstractMonster
             if (CardCrawlGame.playerName.equals(new String(new byte[]{0x52, 0x65, 0x69, 0x6E, 0x61}))) {
                 ++abuse;
                 try {
-                    SpireConfig config = new SpireConfig("Hubris", "OtherSaveData");
-                    config.setInt("abuse", abuse);
-                    config.save();
+                    HubrisMod.otherSaveData.setInt("abuse", abuse);
+                    HubrisMod.otherSaveData.save();
                 } catch (IOException ignored) {
                 }
             }
