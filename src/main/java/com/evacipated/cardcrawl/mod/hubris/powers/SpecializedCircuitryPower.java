@@ -1,11 +1,17 @@
 package com.evacipated.cardcrawl.mod.hubris.powers;
 
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.TextureData;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
+import com.megacrit.cardcrawl.orbs.Frost;
 import com.megacrit.cardcrawl.powers.AbstractPower;
+
+import java.lang.reflect.Field;
 
 public class SpecializedCircuitryPower extends AbstractPower
 {
@@ -23,9 +29,26 @@ public class SpecializedCircuitryPower extends AbstractPower
         this.owner = owner;
         type = PowerType.BUFF;
         amount = -1;
-        this.orbType = orbType;
+        setOrbType(orbType);
         updateDescription();
-        img = ImageMaster.ORB_PLASMA;
+    }
+
+    private static Texture resize(Texture tex)
+    {
+        TextureData textureData = tex.getTextureData();
+        if (!textureData.isPrepared()) {
+            textureData.prepare();
+        }
+        Pixmap pixmap = textureData.consumePixmap();
+        Pixmap small = new Pixmap(32, 32, pixmap.getFormat());
+        small.drawPixmap(pixmap,
+                0, 0, pixmap.getWidth(), pixmap.getHeight(),
+                0, 0, small.getWidth(), small.getHeight());
+        Texture ret = new Texture(small);
+        ret.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        pixmap.dispose();
+        small.dispose();
+        return ret;
     }
 
     @Override
@@ -37,6 +60,24 @@ public class SpecializedCircuitryPower extends AbstractPower
     public void setOrbType(AbstractOrb orbType)
     {
         this.orbType = orbType;
+        Texture tex = null;
+        try {
+            if (orbType instanceof Frost) {
+                Field f = Frost.class.getDeclaredField("img3");
+                f.setAccessible(true);
+                tex = (Texture) f.get(orbType);
+            } else {
+                Field f = AbstractOrb.class.getDeclaredField("img");
+                f.setAccessible(true);
+                tex = (Texture) f.get(orbType);
+            }
+        } catch (IllegalAccessException | NoSuchFieldException e) {
+            e.printStackTrace();
+        }
+        if (tex == null) {
+            tex = ImageMaster.ORB_PLASMA;
+        }
+        img = resize(tex);
     }
 
     public AbstractOrb getOrb()
