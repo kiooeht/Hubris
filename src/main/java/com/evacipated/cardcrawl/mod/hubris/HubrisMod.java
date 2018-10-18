@@ -218,6 +218,12 @@ public class HubrisMod implements
     @Override
     public void receivePostInitialize()
     {
+        try {
+            otherSaveData = new SpireConfig("Hubris", "OtherSaveData");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         ModPanel settingsPanel = new ModPanel();
         ModLabeledToggleButton hubrisBtn = new ModLabeledToggleButton("Add Hubris curse to starting deck",
                 350, 600, Settings.CREAM_COLOR, FontHelper.charDescFont,
