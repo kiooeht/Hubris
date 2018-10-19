@@ -108,11 +108,20 @@ public class CursedTotem extends AbstractMonster
     {
         int count = 0;
         for (AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
-            if (m != null && m != this && !m.isDeadOrEscaped()) {
+            if (m != null && m != this && !m.isDeadOrEscaped() && !willBeDeadFromPoison(m)) {
                 ++count;
             }
         }
         return count;
+    }
+
+    private boolean willBeDeadFromPoison(AbstractMonster m)
+    {
+        AbstractPower poison = m.getPower(PoisonPower.POWER_ID);
+        if (poison != null && poison.amount >= m.currentHealth) {
+            return true;
+        }
+        return false;
     }
 
     @Override
