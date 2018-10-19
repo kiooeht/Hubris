@@ -66,7 +66,7 @@ public class TheLibraryNewOption
                             playerCardColor = null;
                     }
                 } else {
-                    playerCardColor = BaseMod.getColor(AbstractDungeon.player.chosenClass);
+                    playerCardColor = AbstractDungeon.player.getCardColor();
                 }
 
                 AbstractCard card;
@@ -125,7 +125,7 @@ public class TheLibraryNewOption
                 for (int i = 0; i < 20; ++i) {
                     final AbstractCard card = getCard(AbstractDungeon.rollRarity());
                     if (card != null
-                            && card.color != BaseMod.getColor(AbstractDungeon.player.chosenClass)
+                            && card.color != AbstractDungeon.player.getCardColor()
                             && !any(group.group, c -> c.cardID.equals(card.cardID))) {
                         AbstractCard copy = card.makeCopy();
                         if ((copy.type == AbstractCard.CardType.ATTACK && AbstractDungeon.player.hasRelic(MoltenEgg2.ID))
