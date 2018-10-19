@@ -1,6 +1,6 @@
 package com.evacipated.cardcrawl.mod.hubris.powers;
 
-import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
+import com.evacipated.cardcrawl.mod.hubris.vfx.cardManip.BetterShowCardAndObtainEffect;
 import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -9,7 +9,6 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 
 public class CursedLifePower extends AbstractPower
 {
@@ -28,8 +27,6 @@ public class CursedLifePower extends AbstractPower
         updateDescription();
         priority = -99;
         loadRegion("brutality");
-        //region48 = HubrisMod.powerAtlas.findRegion("48/championShield");
-        //region128 = HubrisMod.powerAtlas.findRegion("128/championShield");
     }
 
     @Override
@@ -50,10 +47,11 @@ public class CursedLifePower extends AbstractPower
     {
         flash();
         for (int i=0; i<amount; ++i) {
-            AbstractDungeon.effectList.add(new ShowCardAndObtainEffect(
+            AbstractDungeon.effectList.add(new BetterShowCardAndObtainEffect(
                     AbstractDungeon.returnRandomCurse(),
-                    Settings.WIDTH / 2.0f, Settings.HEIGHT / 2.0f,
-                    true));
+                    Settings.WIDTH / 2.0f,
+                    Settings.HEIGHT / 2.0f
+            ));
         }
     }
 
