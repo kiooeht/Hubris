@@ -69,7 +69,7 @@ public class DoWhilePower extends AbstractPower
             if (action.target != null) {
                 m = (AbstractMonster) action.target;
             }
-            AbstractCard tmp = card.makeStatEquivalentCopy();
+            AbstractCard tmp = card.makeSameInstanceOf();
             AbstractDungeon.player.limbo.addToBottom(tmp);
             tmp.current_x = card.current_x;
             tmp.current_y = card.current_y;
@@ -104,11 +104,6 @@ public class DoWhilePower extends AbstractPower
                 }
             }
             AbstractDungeon.actionManager.cardQueue.add(0, new CardQueueItem(tmp, m, energyOnUse));
-            if (tmp.cardID.equals(Rampage.ID)) {
-                AbstractDungeon.actionManager.addToBottom(new ModifyDamageAction(card, tmp.magicNumber));
-            } else if (tmp.cardID.equals(GeneticAlgorithm.ID)) {
-                AbstractDungeon.actionManager.addToBottom(new IncreaseMiscAction(card.cardID, card.misc + card.magicNumber, card.magicNumber));
-            }
 
             if (amount <= 0 || !tmp.canUse(AbstractDungeon.player, m)) {
                 if (amount == 0) {

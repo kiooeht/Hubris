@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.helpers.Prefs;
@@ -45,7 +47,13 @@ public class FakePlayer extends AbstractPlayer
     }
 
     @Override
-    public Color getCardColor()
+    public AbstractCard.CardColor getCardColor()
+    {
+        return null;
+    }
+
+    @Override
+    public Color getCardRenderColor()
     {
         return null;
     }
@@ -105,7 +113,7 @@ public class FakePlayer extends AbstractPlayer
     }
 
     @Override
-    public void updateOrb()
+    public void updateOrb(int energyCount)
     {
 
     }
@@ -214,6 +222,36 @@ public class FakePlayer extends AbstractPlayer
 
     @Override
     public AbstractPlayer newInstance()
+    {
+        return null;
+    }
+
+    @Override
+    public TextureAtlas.AtlasRegion getOrb()
+    {
+        return null;
+    }
+
+    @Override
+    public String getSpireHeartText()
+    {
+        return null;
+    }
+
+    @Override
+    public Color getSlashAttackColor()
+    {
+        return null;
+    }
+
+    @Override
+    public AbstractGameAction.AttackEffect[] getSpireHeartSlashEffect()
+    {
+        return new AbstractGameAction.AttackEffect[0];
+    }
+
+    @Override
+    public String getVampireText()
     {
         return null;
     }

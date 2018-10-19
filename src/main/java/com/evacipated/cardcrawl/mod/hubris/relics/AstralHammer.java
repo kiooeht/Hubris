@@ -33,7 +33,7 @@ public class AstralHammer extends HubrisRelic implements OnAfterUseCardRelic
                 action.exhaustCard = true;
             }
             if (card.cost > 0) {
-                AbstractDungeon.actionManager.addToBottom(new ReduceCostAction(card, COST_DECREASE));
+                AbstractDungeon.actionManager.addToBottom(new ReduceCostAction(card.uuid, COST_DECREASE));
             }
         }
     }
