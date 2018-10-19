@@ -1,8 +1,10 @@
 package com.evacipated.cardcrawl.mod.hubris.monsters;
 
+import com.badlogic.gdx.Gdx;
 import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.hubris.actions.unique.RaiseDeadAction;
 import com.evacipated.cardcrawl.mod.hubris.powers.CursedLifePower;
+import com.evacipated.cardcrawl.mod.hubris.vfx.scene.CursedTotemParticleEffect;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.RollMoveAction;
 import com.megacrit.cardcrawl.actions.unique.SummonGremlinAction;
@@ -26,6 +28,10 @@ public class CursedTotem extends AbstractMonster
     private static final byte BUFF1 = 1;
     private static final byte BUFF2 = 2;
     private static final byte DEBUFF1 = 3;
+
+    private static final float PARTICAL_EMIT_INTERVAL = 0.15f;
+
+    private float particleTimer = 0.0f;
 
     private AbstractMonster[] minions = new AbstractMonster[3];
 
@@ -115,6 +121,12 @@ public class CursedTotem extends AbstractMonster
         super.update();
 
         // TODO black particles
+        particleTimer -= Gdx.graphics.getDeltaTime();
+        if (particleTimer < 0) {
+            particleTimer = PARTICAL_EMIT_INTERVAL;
+            AbstractDungeon.topLevelEffectsQueue.add(new CursedTotemParticleEffect(hb.x + 50.0f * Settings.scale, hb.y + 240.0f * Settings.scale));
+            AbstractDungeon.topLevelEffectsQueue.add(new CursedTotemParticleEffect(hb.x + hb.width - 22.0f * Settings.scale, hb.y + 230.0f * Settings.scale));
+        }
     }
 
     @Override
