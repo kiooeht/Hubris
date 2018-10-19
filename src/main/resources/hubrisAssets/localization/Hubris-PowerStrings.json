@@ -127,5 +127,15 @@
     "DESCRIPTIONS": [
       "Immune to damage until all other monsters are dead."
     ]
+  },
+  "hubris:CursedLife": {
+    "NAME": "Cursed Life",
+    "DESCRIPTIONS": [
+      "If ",
+      " dies, permanently add #r",
+      " #rCurses",
+      " #rCurse",
+      " to your deck. NL Decreases by #b1 each turn."
+    ]
   }
 }

@@ -15,6 +15,7 @@ import com.evacipated.cardcrawl.mod.hubris.events.shrines.TheFatedDie;
 import com.evacipated.cardcrawl.mod.hubris.events.shrines.UpdateBodyText;
 import com.evacipated.cardcrawl.mod.hubris.events.thebeyond.TheBottler;
 import com.evacipated.cardcrawl.mod.hubris.events.thecity.Experiment;
+import com.evacipated.cardcrawl.mod.hubris.monsters.CursedTotem;
 import com.evacipated.cardcrawl.mod.hubris.monsters.GrandSnecko;
 import com.evacipated.cardcrawl.mod.hubris.monsters.MusketHawk;
 import com.evacipated.cardcrawl.mod.hubris.relics.*;
@@ -266,6 +267,7 @@ public class HubrisMod implements
 
         BaseMod.addMonster(GrandSnecko.ID, GrandSnecko::new);
         BaseMod.addMonster(MusketHawk.ID, MusketHawk::new);
+        BaseMod.addMonster(CursedTotem.ID, CursedTotem::new);
 
         BaseMod.addBoss(TheBeyond.ID, GrandSnecko.ID, assetPath("images/ui/map/boss/grandSnecko.png"), assetPath("images/ui/map/bossOutline/grandSnecko.png"));
         BaseMod.addBoss(TheCity.ID, MusketHawk.ID, assetPath("images/ui/map/boss/musketHawk.png"), assetPath("images/ui/map/bossOutline/musketHawk.png"));
