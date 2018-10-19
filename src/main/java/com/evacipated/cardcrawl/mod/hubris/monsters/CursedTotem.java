@@ -1,6 +1,7 @@
 package com.evacipated.cardcrawl.mod.hubris.monsters;
 
 import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
+import com.evacipated.cardcrawl.mod.hubris.actions.unique.RaiseDeadAction;
 import com.evacipated.cardcrawl.mod.hubris.powers.CursedLifePower;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.RollMoveAction;
@@ -10,16 +11,21 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.powers.StrengthPower;
 
 public class CursedTotem extends AbstractMonster
 {
     public static final String ID = "hubris:CursedTotem";
     public static final String NAME = "Cursed Totem";
     public static final String[] MOVES = {};
-    public static final int HP = 200;
+    public static final int HP = 40;
     private static final int CURSE_AMT = 7;
+    private static final int STRENGTH_AMT = 3;
 
     private static final byte SUMMON = 0;
+    private static final byte BUFF1 = 1;
+    private static final byte BUFF2 = 2;
+    private static final byte DEBUFF1 = 3;
 
     private AbstractMonster[] minions = new AbstractMonster[3];
 
@@ -58,8 +64,22 @@ public class CursedTotem extends AbstractMonster
     {
         switch (nextMove) {
             case SUMMON:
-                AbstractDungeon.actionManager.addToBottom(new SummonGremlinAction(minions));
-                AbstractDungeon.actionManager.addToBottom(new SummonGremlinAction(minions));
+                AbstractDungeon.actionManager.addToBottom(new RaiseDeadAction(minions));
+                AbstractDungeon.actionManager.addToBottom(new RaiseDeadAction(minions));
+                break;
+            case BUFF1:
+                for (AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
+                    if (m != this && !m.isDeadOrEscaped()) {
+                        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(m, this, new StrengthPower(m, STRENGTH_AMT), STRENGTH_AMT));
+                    }
+                }
+                break;
+            case BUFF2:
+                for (AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
+                    if (m != this && !m.isDeadOrEscaped()) {
+                        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(m, this, new StrengthPower(m, STRENGTH_AMT), STRENGTH_AMT));
+                    }
+                }
                 break;
         }
 
@@ -72,7 +92,7 @@ public class CursedTotem extends AbstractMonster
         if (numAliveMinions() == 0) {
             setMove("Raise Dead", SUMMON, Intent.UNKNOWN);
         } else {
-            setMove((byte) 1, Intent.BUFF);
+            setMove(BUFF1, Intent.BUFF);
         }
 
         ++numTurns;

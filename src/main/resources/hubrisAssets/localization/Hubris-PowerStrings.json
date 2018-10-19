@@ -137,5 +137,12 @@
       " #rCurse",
       " to your deck. NL Decreases by #b1 each turn."
     ]
+  },
+  "hubris:Undead": {
+    "NAME": "Undead",
+    "DESCRIPTIONS": [
+      "Applies #b",
+      " Poison when attacked."
+    ]
   }
 }
