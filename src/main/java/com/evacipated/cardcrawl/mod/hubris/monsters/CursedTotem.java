@@ -5,15 +5,16 @@ import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.hubris.actions.unique.RaiseDeadAction;
 import com.evacipated.cardcrawl.mod.hubris.powers.CursedLifePower;
 import com.evacipated.cardcrawl.mod.hubris.vfx.scene.CursedTotemParticleEffect;
+import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.RollMoveAction;
-import com.megacrit.cardcrawl.actions.unique.SummonGremlinAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.StrengthPower;
+import com.megacrit.cardcrawl.powers.*;
+import com.megacrit.cardcrawl.vfx.CollectorCurseEffect;
 
 public class CursedTotem extends AbstractMonster
 {
@@ -23,6 +24,7 @@ public class CursedTotem extends AbstractMonster
     public static final int HP = 40;
     private static final int CURSE_AMT = 7;
     private static final int STRENGTH_AMT = 3;
+    private static final int MEGA_DEBUFF_AMT = 3;
 
     private static final byte SUMMON = 0;
     private static final byte BUFF1 = 1;
@@ -87,6 +89,12 @@ public class CursedTotem extends AbstractMonster
                     }
                 }
                 break;
+            case DEBUFF1:
+                AbstractDungeon.actionManager.addToBottom(new VFXAction(new CollectorCurseEffect(hb.cX, hb.cY), 2.0F));
+                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, this, new WeakPower(AbstractDungeon.player, MEGA_DEBUFF_AMT, true), MEGA_DEBUFF_AMT));
+                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, this, new VulnerablePower(AbstractDungeon.player, MEGA_DEBUFF_AMT, true), MEGA_DEBUFF_AMT));
+                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, this, new FrailPower(AbstractDungeon.player, MEGA_DEBUFF_AMT, true), MEGA_DEBUFF_AMT));
+                break;
         }
 
         AbstractDungeon.actionManager.addToBottom(new RollMoveAction(this));
@@ -97,8 +105,10 @@ public class CursedTotem extends AbstractMonster
     {
         if (numAliveMinions() == 0) {
             setMove("Raise Dead", SUMMON, Intent.UNKNOWN);
-        } else {
+        } else if (num < 50) {
             setMove(BUFF1, Intent.BUFF);
+        } else {
+            setMove(DEBUFF1, Intent.STRONG_DEBUFF);
         }
 
         ++numTurns;
