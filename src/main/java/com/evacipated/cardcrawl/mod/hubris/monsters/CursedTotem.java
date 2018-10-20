@@ -5,6 +5,7 @@ import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.hubris.actions.unique.RaiseDeadAction;
 import com.evacipated.cardcrawl.mod.hubris.powers.CursedLifePower;
 import com.evacipated.cardcrawl.mod.hubris.vfx.scene.CursedTotemParticleEffect;
+import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.RollMoveAction;
@@ -147,6 +148,11 @@ public class CursedTotem extends AbstractMonster
                 AbstractDungeon.topLevelEffectsQueue.add(new CursedTotemParticleEffect(hb.x + 50.0f * Settings.scale, hb.y + 240.0f * Settings.scale));
                 AbstractDungeon.topLevelEffectsQueue.add(new CursedTotemParticleEffect(hb.x + hb.width - 22.0f * Settings.scale, hb.y + 230.0f * Settings.scale));
             }
+        }
+
+        if (nextMove != SUMMON && !AbstractDungeon.actionManager.turnHasEnded && numAliveMinions() == 0) {
+            setMove("Raise Dead", SUMMON, Intent.UNKNOWN);
+            createIntent();
         }
     }
 
