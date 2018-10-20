@@ -11,8 +11,13 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ModHelper;
 import com.megacrit.cardcrawl.helpers.MonsterHelper;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.monsters.city.Centurion;
+import com.megacrit.cardcrawl.monsters.city.Mugger;
+import com.megacrit.cardcrawl.monsters.exordium.AcidSlime_L;
+import com.megacrit.cardcrawl.monsters.exordium.SlaverBlue;
+import com.megacrit.cardcrawl.monsters.exordium.SlaverRed;
+import com.megacrit.cardcrawl.monsters.exordium.SpikeSlime_L;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import com.megacrit.cardcrawl.powers.PoisonPower;
 import com.megacrit.cardcrawl.powers.SlowPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import com.megacrit.cardcrawl.relics.PhilosopherStone;
@@ -28,6 +33,24 @@ public class RaiseDeadAction extends AbstractGameAction
 
     private AbstractMonster m;
     private int slotToFill = 0;
+
+    private interface GetMonster {
+        AbstractMonster get(float x, float y);
+    }
+
+    private static List<GetMonster> possibleMinions;
+
+    static
+    {
+        possibleMinions = new ArrayList<>();
+        // Large slimes don't work because of splitting
+        //possibleMinions.add(AcidSlime_L::new);
+        //possibleMinions.add(SpikeSlime_L::new);
+        //possibleMinions.add(SlaverBlue::new);
+        //possibleMinions.add(SlaverRed::new);
+        possibleMinions.add(Mugger::new);
+        possibleMinions.add(Centurion::new);
+    }
 
     public RaiseDeadAction(AbstractMonster[] minions)
     {
@@ -61,19 +84,9 @@ public class RaiseDeadAction extends AbstractGameAction
 
     private static AbstractMonster getRandomMinion(int slot)
     {
-        List<String> pool = new ArrayList<>();
-        pool.add("GremlinWarrior");
-        pool.add("GremlinWarrior");
-        pool.add("GremlinThief");
-        pool.add("GremlinThief");
-        pool.add("GremlinFat");
-        pool.add("GremlinFat");
-        pool.add("GremlinTsundere");
-        pool.add("GremlinWizard");
         float x;
         float y;
-        switch (slot)
-        {
+        switch (slot) {
             case 0:
                 x = -366.0f;
                 y = -4.0f;
@@ -90,7 +103,8 @@ public class RaiseDeadAction extends AbstractGameAction
                 x = -366.0f;
                 y = -4.0f;
         }
-        return MonsterHelper.getGremlin(pool.get(AbstractDungeon.aiRng.random(0, pool.size() - 1)), x, y);
+        GetMonster rand = possibleMinions.get(AbstractDungeon.aiRng.random(0, possibleMinions.size() - 1));
+        return rand.get(x, y);
     }
 
     public void update()
