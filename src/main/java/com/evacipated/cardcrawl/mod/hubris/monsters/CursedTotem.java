@@ -140,11 +140,13 @@ public class CursedTotem extends AbstractMonster
         super.update();
 
         // TODO black particles
-        particleTimer -= Gdx.graphics.getDeltaTime();
-        if (particleTimer < 0) {
-            particleTimer = PARTICAL_EMIT_INTERVAL;
-            AbstractDungeon.topLevelEffectsQueue.add(new CursedTotemParticleEffect(hb.x + 50.0f * Settings.scale, hb.y + 240.0f * Settings.scale));
-            AbstractDungeon.topLevelEffectsQueue.add(new CursedTotemParticleEffect(hb.x + hb.width - 22.0f * Settings.scale, hb.y + 230.0f * Settings.scale));
+        if (!isDeadOrEscaped()) {
+            particleTimer -= Gdx.graphics.getDeltaTime();
+            if (particleTimer < 0) {
+                particleTimer = PARTICAL_EMIT_INTERVAL;
+                AbstractDungeon.topLevelEffectsQueue.add(new CursedTotemParticleEffect(hb.x + 50.0f * Settings.scale, hb.y + 240.0f * Settings.scale));
+                AbstractDungeon.topLevelEffectsQueue.add(new CursedTotemParticleEffect(hb.x + hb.width - 22.0f * Settings.scale, hb.y + 230.0f * Settings.scale));
+            }
         }
     }
 
