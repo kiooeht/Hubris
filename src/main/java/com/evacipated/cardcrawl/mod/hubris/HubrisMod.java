@@ -33,6 +33,9 @@ import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.ModHelper;
 import com.megacrit.cardcrawl.localization.*;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.monsters.MonsterGroup;
+import com.megacrit.cardcrawl.monsters.city.Centurion;
 import com.megacrit.cardcrawl.screens.custom.CustomMod;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import infinitespire.InfiniteSpire;
@@ -267,7 +270,11 @@ public class HubrisMod implements
 
         BaseMod.addMonster(GrandSnecko.ID, GrandSnecko::new);
         BaseMod.addMonster(MusketHawk.ID, MusketHawk::new);
-        BaseMod.addMonster(CursedTotem.ID, CursedTotem::new);
+        BaseMod.addMonster(CursedTotem.ID, () -> new MonsterGroup(new AbstractMonster[]{
+                new Centurion(-366.0f, -4.0f),
+                new Centurion(-170.0f, 6.0f),
+                new CursedTotem()
+        }));
 
         BaseMod.addBoss(TheBeyond.ID, GrandSnecko.ID, assetPath("images/ui/map/boss/grandSnecko.png"), assetPath("images/ui/map/bossOutline/grandSnecko.png"));
         BaseMod.addBoss(TheCity.ID, MusketHawk.ID, assetPath("images/ui/map/boss/musketHawk.png"), assetPath("images/ui/map/bossOutline/musketHawk.png"));

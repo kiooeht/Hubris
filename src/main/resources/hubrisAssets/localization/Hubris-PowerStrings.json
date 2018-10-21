@@ -142,7 +142,9 @@
     "NAME": "Undead",
     "DESCRIPTIONS": [
       "Applies #b",
-      " Poison when attacked."
+      " #yPoison when attacked. NL If ",
+      " is still alive, revives in #b1 turn at full HP and gain #b",
+      " #yStrength."
     ]
   }
 }

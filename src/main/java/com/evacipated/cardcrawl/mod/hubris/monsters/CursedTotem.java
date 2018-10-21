@@ -2,10 +2,10 @@ package com.evacipated.cardcrawl.mod.hubris.monsters;
 
 import com.badlogic.gdx.Gdx;
 import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
-import com.evacipated.cardcrawl.mod.hubris.actions.unique.RaiseDeadAction;
+import com.evacipated.cardcrawl.mod.hubris.actions.unique.SacrificeMinionAction;
 import com.evacipated.cardcrawl.mod.hubris.powers.CursedLifePower;
+import com.evacipated.cardcrawl.mod.hubris.powers.FakeDeathPower;
 import com.evacipated.cardcrawl.mod.hubris.vfx.scene.CursedTotemParticleEffect;
-import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.RollMoveAction;
@@ -66,6 +66,10 @@ public class CursedTotem extends AbstractMonster
         AbstractDungeon.scene.fadeOutAmbiance();
         AbstractDungeon.getCurrRoom().playBgmInstantly("BOSS_CITY");
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new CursedLifePower(this, CURSE_AMT), CURSE_AMT));
+
+        for (AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
+            m.powers.add(new FakeDeathPower(m));
+        }
     }
 
     @Override
@@ -73,8 +77,14 @@ public class CursedTotem extends AbstractMonster
     {
         switch (nextMove) {
             case SUMMON:
-                AbstractDungeon.actionManager.addToBottom(new RaiseDeadAction(minions));
-                AbstractDungeon.actionManager.addToBottom(new RaiseDeadAction(minions));
+                for (AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
+                    if (m != this) {
+                        if (!m.isDeadOrEscaped()) {
+                            AbstractDungeon.actionManager.addToBottom(new VFXAction(new CollectorCurseEffect(m.hb.cX, m.hb.cY), 2.0F));
+                        }
+                        AbstractDungeon.actionManager.addToBottom(new SacrificeMinionAction(this, m));
+                    }
+                }
                 break;
             case BUFF1:
                 for (AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
@@ -104,7 +114,7 @@ public class CursedTotem extends AbstractMonster
     @Override
     protected void getMove(int num)
     {
-        if (numAliveMinions() == 0) {
+        if (numTurns == 0) {
             setMove("Raise Dead", SUMMON, Intent.UNKNOWN);
         } else if (num < 50) {
             setMove(BUFF1, Intent.BUFF);
@@ -148,11 +158,6 @@ public class CursedTotem extends AbstractMonster
                 AbstractDungeon.topLevelEffectsQueue.add(new CursedTotemParticleEffect(hb.x + 50.0f * Settings.scale, hb.y + 240.0f * Settings.scale));
                 AbstractDungeon.topLevelEffectsQueue.add(new CursedTotemParticleEffect(hb.x + hb.width - 22.0f * Settings.scale, hb.y + 230.0f * Settings.scale));
             }
-        }
-
-        if (nextMove != SUMMON && !AbstractDungeon.actionManager.turnHasEnded && numAliveMinions() == 0) {
-            setMove("Raise Dead", SUMMON, Intent.UNKNOWN);
-            createIntent();
         }
     }
 
