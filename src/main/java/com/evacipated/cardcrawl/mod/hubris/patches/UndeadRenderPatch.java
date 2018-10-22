@@ -3,6 +3,7 @@ package com.evacipated.cardcrawl.mod.hubris.patches;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.PolygonSpriteBatch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.esotericsoftware.spine.SkeletonMeshRenderer;
 import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
@@ -26,31 +27,35 @@ public class UndeadRenderPatch
     );
 
     @SpireInsertPatch(
-            locator= LocatorImageStart.class
+            locator=LocatorImageStart.class,
+            localvars={"atlas"}
     )
-    public static void InsertImageStart(AbstractMonster __instance, SpriteBatch sb)
+    public static void InsertImageStart(AbstractMonster __instance, SpriteBatch sb, TextureAtlas atlas)
     {
-        UndeadPower undead = (UndeadPower) __instance.getPower(UndeadPower.POWER_ID);
-        if (undead != null) {
-            shader.begin();
-            shader.setUniformf("shadeTimer", undead.shaderTimer);
-            sb.setShader(shader);
+        if (atlas == null) {
+            UndeadPower undead = (UndeadPower) __instance.getPower(UndeadPower.POWER_ID);
+            if (undead != null) {
+                shader.begin();
+                shader.setUniformf("shadeTimer", undead.shaderTimer);
+                sb.setShader(shader);
+            }
         }
     }
 
     @SpireInsertPatch(
-            locator= LocatorImageEnd.class
+            locator=LocatorImageEnd.class,
+            localvars={"atlas"}
     )
-    public static void InsertImageEnd(AbstractMonster __instance, SpriteBatch sb)
+    public static void InsertImageEnd(AbstractMonster __instance, SpriteBatch sb, TextureAtlas atlas)
     {
-        if (__instance.hasPower(UndeadPower.POWER_ID)) {
+        if (atlas == null && __instance.hasPower(UndeadPower.POWER_ID)) {
             sb.setShader(null);
             shader.end();
         }
     }
 
     @SpireInsertPatch(
-            locator= LocatorSkeletonStart.class
+            locator=LocatorSkeletonStart.class
     )
     public static void InsertSkeletonStart(AbstractMonster __instance, SpriteBatch sb)
     {
@@ -63,7 +68,7 @@ public class UndeadRenderPatch
     }
 
     @SpireInsertPatch(
-            locator= LocatorSkeletonEnd.class
+            locator=LocatorSkeletonEnd.class
     )
     public static void InsertSkeletonEnd(AbstractMonster __instance, SpriteBatch sb)
     {
