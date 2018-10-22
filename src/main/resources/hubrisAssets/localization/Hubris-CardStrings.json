@@ -134,5 +134,9 @@
   "hubris:InfiniteBlow": {
     "NAME": "Infinite Blow",
     "DESCRIPTION": "Deal !D! damage. NL Can be upgraded any number of times. NL Maintains [#efc851]upgrades[] between runs."
+  },
+  "hubris:Despair": {
+    "NAME": "Despair",
+    "DESCRIPTION": "Unplayable. NL Each time you shuffle your draw pile, this card is placed on top. NL Grave."
   }
 }
