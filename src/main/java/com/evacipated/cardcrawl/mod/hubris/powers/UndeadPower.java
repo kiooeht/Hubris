@@ -1,8 +1,9 @@
 package com.evacipated.cardcrawl.mod.hubris.powers;
 
+import basemod.ReflectionHacks;
 import com.badlogic.gdx.Gdx;
 import com.evacipated.cardcrawl.mod.hubris.actions.common.AlwaysApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.evacipated.cardcrawl.mod.hubris.actions.common.AlwaysRemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.actions.common.SetMoveAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -13,7 +14,7 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.PoisonPower;
-import com.megacrit.cardcrawl.powers.StrengthPower;
+import com.megacrit.cardcrawl.vfx.TintEffect;
 
 public class UndeadPower extends AbstractPower
 {
@@ -55,7 +56,7 @@ public class UndeadPower extends AbstractPower
     @Override
     public void onInitialApplication()
     {
-        int poison = owner.maxHealth / 3;
+        int poison = (int)(owner.maxHealth * (1.0f / 5.0f));
         owner.addPower(new PoisonPower(owner, owner, poison));
     }
 
@@ -75,7 +76,19 @@ public class UndeadPower extends AbstractPower
         if (!parent.isDeadOrEscaped()) {
             owner.isDying = false;
             owner.halfDead = true;
-            owner.powers.removeIf(p -> !p.ID.equals(ID));
+            // Stop the fade out on death
+            owner.tint = new TintEffect() {
+                @Override
+                public void fadeOut() {}
+            };
+            // Stop death animation shake
+            ReflectionHacks.setPrivate(owner, AbstractCreature.class, "animationTimer", 0.0f);
+            // Remove all debuffs
+            for (AbstractPower p : owner.powers) {
+                if (p.type == PowerType.DEBUFF) {
+                    AbstractDungeon.actionManager.addToTop(new AlwaysRemoveSpecificPowerAction(owner, owner, p));
+                }
+            }
 
             ((AbstractMonster) owner).setMove((byte) -72, AbstractMonster.Intent.BUFF);
             ((AbstractMonster) owner).createIntent();
@@ -87,7 +100,7 @@ public class UndeadPower extends AbstractPower
     public void onSpecificTrigger()
     {
         onInitialApplication();
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(owner, owner, new StrengthPower(owner, amount), amount));
+        //AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(owner, owner, new StrengthPower(owner, amount), amount));
     }
 
     @Override

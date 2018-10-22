@@ -22,6 +22,8 @@ public class SacrificeMinionAction extends AbstractGameAction
     public void update()
     {
         if (duration == 0) {
+            boolean startedDead = m.isDeadOrEscaped();
+
             m.currentHealth = 0;
             m.halfDead = true;
             m.die(false);
@@ -30,7 +32,7 @@ public class SacrificeMinionAction extends AbstractGameAction
             m.deathTimer = 0;
             m.healthBarUpdatedEvent();
 
-            AbstractDungeon.actionManager.addToBottom(new RaiseDeadAction(parent, m));
+            AbstractDungeon.actionManager.addToBottom(new RaiseDeadAction(parent, m, startedDead));
         }
         tickDuration();
     }

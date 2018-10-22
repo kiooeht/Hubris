@@ -3,12 +3,11 @@ package com.evacipated.cardcrawl.mod.hubris.patches;
 import com.evacipated.cardcrawl.mod.hubris.powers.UndeadPower;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.actions.GameActionManager;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.HealAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import com.megacrit.cardcrawl.powers.StrengthPower;
+import com.megacrit.cardcrawl.vfx.TintEffect;
 import javassist.CannotCompileException;
 import javassist.expr.ExprEditor;
 import javassist.expr.MethodCall;
@@ -43,6 +42,8 @@ public class UndeadRevivePatch
         AbstractPower undead = m.getPower(UndeadPower.POWER_ID);
         m.halfDead = false;
         m.isDying = false;
+        m.tint = new TintEffect();
+        m.state.setTimeScale(0.6f);
 
         if (undead != null) {
             undead.onSpecificTrigger();

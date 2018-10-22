@@ -1,5 +1,6 @@
 package com.evacipated.cardcrawl.mod.hubris.actions.unique;
 
+import com.badlogic.gdx.math.Interpolation;
 import com.evacipated.cardcrawl.mod.hubris.powers.UndeadPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -18,13 +19,17 @@ import com.megacrit.cardcrawl.vfx.TintEffect;
 
 public class RaiseDeadAction extends AbstractGameAction
 {
+    private static final int UNDEAD_AMT = 2;
+
     private AbstractCreature parent;
     private AbstractMonster m;
+    private boolean startedDead;
 
-    public RaiseDeadAction(AbstractCreature parent, AbstractMonster minion)
+    public RaiseDeadAction(AbstractCreature parent, AbstractMonster minion, boolean startedDead)
     {
         m = minion;
         this.parent = parent;
+        this.startedDead = startedDead;
         actionType = ActionType.SPECIAL;
         if (Settings.FAST_MODE) {
             startDuration = Settings.ACTION_DUR_FAST;
@@ -50,12 +55,14 @@ public class RaiseDeadAction extends AbstractGameAction
             m.halfDead = false;
             m.hideHealthBar();
 
-            //m.animY = (-400.0f * Settings.scale);
+            if (startedDead) {
+                m.animY = (-400.0f * Settings.scale);
+            }
             m.init();
             m.applyPowers();
-            AbstractPower undead = new UndeadPower(m, parent, 1);
-            m.powers.clear();
-            m.addPower(undead);
+            AbstractPower undead = new UndeadPower(m, parent, UNDEAD_AMT);
+            m.powers.removeIf(p -> p.type == AbstractPower.PowerType.DEBUFF);
+            m.powers.add(0, undead);
             undead.onInitialApplication();
             if (AbstractDungeon.player.hasRelic(PhilosopherStone.ID)) {
                 m.addPower(new StrengthPower(m, 2));
@@ -72,8 +79,8 @@ public class RaiseDeadAction extends AbstractGameAction
             m.animY = 0.0f;
             m.showHealthBar();
             m.usePreBattleAction();
-        } else {
-            //m.animY = Interpolation.fade.apply(0.0f, -400.0f * Settings.scale, duration);
+        } else if (startedDead) {
+            m.animY = Interpolation.fade.apply(0.0f, -400.0f * Settings.scale, duration);
         }
     }
 }

@@ -36,6 +36,8 @@ import com.megacrit.cardcrawl.localization.*;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.MonsterGroup;
 import com.megacrit.cardcrawl.monsters.city.Centurion;
+import com.megacrit.cardcrawl.monsters.city.SnakePlant;
+import com.megacrit.cardcrawl.monsters.exordium.Cultist;
 import com.megacrit.cardcrawl.screens.custom.CustomMod;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import infinitespire.InfiniteSpire;
@@ -271,8 +273,8 @@ public class HubrisMod implements
         BaseMod.addMonster(GrandSnecko.ID, GrandSnecko::new);
         BaseMod.addMonster(MusketHawk.ID, MusketHawk::new);
         BaseMod.addMonster(CursedTotem.ID, () -> new MonsterGroup(new AbstractMonster[]{
-                new Centurion(-366.0f, -4.0f),
-                new Centurion(-170.0f, 6.0f),
+                new Centurion(-436.0f, -4.0f),
+                new Cultist(-170.0f, 6.0f),
                 new CursedTotem()
         }));
 

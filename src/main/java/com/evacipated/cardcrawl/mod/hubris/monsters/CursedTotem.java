@@ -22,7 +22,7 @@ public class CursedTotem extends AbstractMonster
     public static final String ID = "hubris:CursedTotem";
     public static final String NAME = "Cursed Totem";
     public static final String[] MOVES = {};
-    public static final int HP = 40;
+    public static final int HP = 50;
     private static final int CURSE_AMT = 7;
     private static final int STRENGTH_AMT = 3;
     private static final int MEGA_DEBUFF_AMT = 3;
@@ -35,8 +35,6 @@ public class CursedTotem extends AbstractMonster
     private static final float PARTICAL_EMIT_INTERVAL = 0.15f;
 
     private float particleTimer = 0.0f;
-
-    private AbstractMonster[] minions = new AbstractMonster[3];
 
     private int numTurns = 0;
 
@@ -103,7 +101,7 @@ public class CursedTotem extends AbstractMonster
             case DEBUFF1:
                 AbstractDungeon.actionManager.addToBottom(new VFXAction(new CollectorCurseEffect(hb.cX, hb.cY), 2.0F));
                 AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, this, new WeakPower(AbstractDungeon.player, MEGA_DEBUFF_AMT, true), MEGA_DEBUFF_AMT));
-                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, this, new VulnerablePower(AbstractDungeon.player, MEGA_DEBUFF_AMT, true), MEGA_DEBUFF_AMT));
+                //AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, this, new VulnerablePower(AbstractDungeon.player, MEGA_DEBUFF_AMT, true), MEGA_DEBUFF_AMT));
                 AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, this, new FrailPower(AbstractDungeon.player, MEGA_DEBUFF_AMT, true), MEGA_DEBUFF_AMT));
                 break;
         }
@@ -116,33 +114,13 @@ public class CursedTotem extends AbstractMonster
     {
         if (numTurns == 0) {
             setMove("Raise Dead", SUMMON, Intent.UNKNOWN);
-        } else if (num < 50) {
+        } else if (num < 65) {
             setMove(BUFF1, Intent.BUFF);
         } else {
             setMove(DEBUFF1, Intent.STRONG_DEBUFF);
         }
 
         ++numTurns;
-    }
-
-    private int numAliveMinions()
-    {
-        int count = 0;
-        for (AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
-            if (m != null && m != this && !m.isDeadOrEscaped() && !willBeDeadFromPoison(m)) {
-                ++count;
-            }
-        }
-        return count;
-    }
-
-    private boolean willBeDeadFromPoison(AbstractMonster m)
-    {
-        AbstractPower poison = m.getPower(PoisonPower.POWER_ID);
-        if (poison != null && poison.amount >= m.currentHealth) {
-            return true;
-        }
-        return false;
     }
 
     @Override
