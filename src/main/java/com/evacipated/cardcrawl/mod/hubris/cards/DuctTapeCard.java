@@ -765,7 +765,9 @@ public class DuctTapeCard extends CustomCard
             }
         }
         cards.get(0).calculateCardDamage(m);
-        cards.get(0).use(p, m);
+        if (cards.get(0).canUse(p, m)) {
+            cards.get(0).use(p, m);
+        }
         AbstractDungeon.actionManager.addToBottom(new DuctTapeUseNextAction(cards, 1, p, m));
     }
 
