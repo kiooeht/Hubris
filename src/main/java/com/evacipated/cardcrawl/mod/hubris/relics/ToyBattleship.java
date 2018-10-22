@@ -14,7 +14,7 @@ public class ToyBattleship extends HubrisRelic
 
     public ToyBattleship()
     {
-        super(ID, "battleship.png", RelicTier.UNCOMMON, LandingSound.CLINK);
+        super(ID, "battleship.png", RelicTier.COMMON, LandingSound.CLINK);
     }
 
     @Override
@@ -24,7 +24,7 @@ public class ToyBattleship extends HubrisRelic
     }
 
     @Override
-    public void atTurnStartPostDraw()
+    public void atBattleStartPreDraw()
     {
         beginLongPulse();
     }
