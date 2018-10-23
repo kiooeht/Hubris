@@ -4,6 +4,7 @@ import basemod.ReflectionHacks;
 import com.badlogic.gdx.Gdx;
 import com.evacipated.cardcrawl.mod.hubris.actions.common.AlwaysApplyPowerAction;
 import com.evacipated.cardcrawl.mod.hubris.actions.common.AlwaysRemoveSpecificPowerAction;
+import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
 import com.megacrit.cardcrawl.actions.common.SetMoveAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -64,7 +65,15 @@ public class UndeadPower extends AbstractPower
     public int onAttacked(DamageInfo info, int damageAmount)
     {
         if (info.owner != null) {
-            AbstractDungeon.actionManager.addToBottom(new AlwaysApplyPowerAction(info.owner, owner, new PoisonPower(info.owner, owner, amount), amount, true));
+            int poisonAmount = amount;
+            AbstractPower poison = owner.getPower(PoisonPower.POWER_ID);
+            if (poison == null) {
+                poisonAmount = 0;
+            } else {
+                poisonAmount = Math.min(poisonAmount, poison.amount);
+            }
+            AbstractDungeon.actionManager.addToBottom(new ReducePowerAction(owner, owner, PoisonPower.POWER_ID, poisonAmount));
+            AbstractDungeon.actionManager.addToBottom(new AlwaysApplyPowerAction(info.owner, owner, new PoisonPower(info.owner, owner, poisonAmount), poisonAmount, true));
         }
 
         return super.onAttacked(info, damageAmount);

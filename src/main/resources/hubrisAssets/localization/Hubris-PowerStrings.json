@@ -141,8 +141,8 @@
   "hubris:Undead": {
     "NAME": "Undead",
     "DESCRIPTIONS": [
-      "Applies #b",
-      " #yPoison when attacked. NL If ",
+      "When attacked, transfers #b",
+      " #yPoison to you. NL If ",
       " is still alive, revives in #b1 turn at full HP."
     ]
   }
