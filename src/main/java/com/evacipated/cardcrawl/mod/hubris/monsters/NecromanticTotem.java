@@ -19,10 +19,10 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.*;
 import com.megacrit.cardcrawl.vfx.CollectorCurseEffect;
 
-public class CursedTotem extends AbstractMonster
+public class NecromanticTotem extends AbstractMonster
 {
-    public static final String ID = "hubris:CursedTotem";
-    public static final String NAME = "Cursed Totem";
+    public static final String ID = "hubris:NecromanticTotem";
+    public static final String NAME = "Necromantic Totem";
     public static final String[] MOVES = {};
     public static final int HP = 50;
     private static final int CURSE_AMT = 7;
@@ -42,9 +42,9 @@ public class CursedTotem extends AbstractMonster
 
     private int numTurns = 0;
 
-    public CursedTotem()
+    public NecromanticTotem()
     {
-        super(NAME, ID, HP, -8.0f, 10.0f, 230, 300, HubrisMod.assetPath("images/monsters/theCity/cursedTotem.png"), 100.0f, -30.0f);
+        super(NAME, ID, HP, -8.0f, 10.0f, 230, 300, HubrisMod.assetPath("images/monsters/theCity/necromanticTotem.png"), 100.0f, -30.0f);
         /*
         loadAnimation("images/monsters/theBottom/cultist/skeleton.atlas", "images/monsters/theBottom/cultist/skeleton.json", 0.75F);
 
