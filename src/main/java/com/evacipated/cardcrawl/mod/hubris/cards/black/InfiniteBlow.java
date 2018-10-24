@@ -20,7 +20,7 @@ import java.io.IOException;
 public class InfiniteBlow extends BlackCard
 {
     public static final String ID = "hubris:InfiniteBlow";
-    public static final String IMG = HubrisMod.BETA_ATTACK;
+    public static final String IMG = HubrisMod.assetPath("images/cards/infiniteBlow.png");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
