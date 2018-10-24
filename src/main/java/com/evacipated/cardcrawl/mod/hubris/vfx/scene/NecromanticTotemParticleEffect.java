@@ -7,14 +7,14 @@ import com.megacrit.cardcrawl.vfx.scene.TorchParticleMEffect;
 
 import java.lang.reflect.Field;
 
-public class CursedTotemParticleEffect extends TorchParticleMEffect
+public class NecromanticTotemParticleEffect extends TorchParticleMEffect
 {
-    public CursedTotemParticleEffect(float x, float y)
+    public NecromanticTotemParticleEffect(float x, float y)
     {
         super(x, y);
-        color = new Color(MathUtils.random(0.35f, 0.45f), MathUtils.random(0.05f, 0.1f), MathUtils.random(0.35f, 0.45f), 0.01f);
+        color = new Color(MathUtils.random(0.1f, 0.2f), MathUtils.random(0.45f, 0.65f), MathUtils.random(0.15f, 0.3f), 0.01f);
         renderBehind = false;
-        scale = MathUtils.random(1.5f, 3.0f);
+        scale = MathUtils.random(0.5f, 0.7f);
 
         try {
             Field f = TorchParticleMEffect.class.getDeclaredField("vY");

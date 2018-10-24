@@ -1,11 +1,18 @@
 package com.evacipated.cardcrawl.mod.hubris.monsters;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShaderProgram;
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.hubris.actions.unique.SacrificeMinionAction;
 import com.evacipated.cardcrawl.mod.hubris.powers.CursedLifePower;
 import com.evacipated.cardcrawl.mod.hubris.powers.FakeDeathPower;
-import com.evacipated.cardcrawl.mod.hubris.vfx.scene.CursedTotemParticleEffect;
+import com.evacipated.cardcrawl.mod.hubris.vfx.scene.NecromanticTotemParticleEffect;
+import com.evacipated.cardcrawl.modthespire.lib.SpireOverride;
+import com.evacipated.cardcrawl.modthespire.lib.SpireSuper;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
@@ -37,6 +44,11 @@ public class NecromanticTotem extends AbstractMonster
     private static final byte DEBUFF2 = 4;
 
     private static final float PARTICAL_EMIT_INTERVAL = 0.15f;
+
+    private static ShaderProgram shader = new ShaderProgram(
+            Gdx.files.internal(HubrisMod.assetPath("shaders/totem/vertexShader.vs")),
+            Gdx.files.internal(HubrisMod.assetPath("shaders/totem/fragShader.fs"))
+    );
 
     private float particleTimer = 0.0f;
 
@@ -142,8 +154,8 @@ public class NecromanticTotem extends AbstractMonster
             particleTimer -= Gdx.graphics.getDeltaTime();
             if (particleTimer < 0) {
                 particleTimer = PARTICAL_EMIT_INTERVAL;
-                AbstractDungeon.topLevelEffectsQueue.add(new CursedTotemParticleEffect(hb.x + 50.0f * Settings.scale, hb.y + 240.0f * Settings.scale));
-                AbstractDungeon.topLevelEffectsQueue.add(new CursedTotemParticleEffect(hb.x + hb.width - 22.0f * Settings.scale, hb.y + 230.0f * Settings.scale));
+                AbstractDungeon.topLevelEffectsQueue.add(new NecromanticTotemParticleEffect(hb.x + 88.0f * Settings.scale, hb.y + 207.0f * Settings.scale));
+                AbstractDungeon.topLevelEffectsQueue.add(new NecromanticTotemParticleEffect(hb.x + 130.0f * Settings.scale, hb.y + 205.0f * Settings.scale));
             }
         }
     }
@@ -156,5 +168,65 @@ public class NecromanticTotem extends AbstractMonster
         deathTimer += 1.5F;
         super.die();
         onBossVictoryLogic();
+    }
+
+    private float renderTimer = 0;
+    @Override
+    public void render(SpriteBatch sb)
+    {
+        animX = 0;
+        animY = 0;
+        renderImpl(sb, false);
+        if (MathUtils.random(100) < 10) {
+            animX = MathUtils.random(-10.0f, 5.0f);
+            if (animX <= -9.9f) {
+                animX = -15.0f;
+            } else if (animX < -5.0f) {
+                animX = -5.0f;
+            }
+            animX *= Settings.scale;
+            animY = MathUtils.random(-3.0f, 3.0f) * Settings.scale;
+        }
+        renderImpl(sb, true);
+    }
+
+    private void renderImpl(SpriteBatch sb, boolean ghost)
+    {
+        renderTimer += Gdx.graphics.getDeltaTime() * MathUtils.random(0.5f, 2.0f);
+        if (ghost) {
+            sb.end();
+            shader.begin();
+            shader.setUniformf("timer", renderTimer);
+            sb.setShader(shader);
+            sb.begin();
+        }
+
+        super.render(sb);
+    }
+
+    @SpireOverride
+    protected void renderIntentVfxBehind(SpriteBatch sb)
+    {
+        animX = 0;
+        animY = 0;
+        sb.end();
+        shader.end();
+        sb.setShader(null);
+        sb.begin();
+
+        SpireSuper.call(sb);
+    }
+
+    @Override
+    public void renderHealth(SpriteBatch sb)
+    {
+        animX = 0;
+        animY = 0;
+        sb.end();
+        shader.end();
+        sb.setShader(null);
+        sb.begin();
+
+        super.renderHealth(sb);
     }
 }
