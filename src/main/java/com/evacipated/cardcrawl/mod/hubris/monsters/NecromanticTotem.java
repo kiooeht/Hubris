@@ -1,18 +1,15 @@
 package com.evacipated.cardcrawl.mod.hubris.monsters;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.hubris.actions.unique.SacrificeMinionAction;
 import com.evacipated.cardcrawl.mod.hubris.powers.CursedLifePower;
 import com.evacipated.cardcrawl.mod.hubris.powers.FakeDeathPower;
 import com.evacipated.cardcrawl.mod.hubris.vfx.scene.NecromanticTotemParticleEffect;
-import com.evacipated.cardcrawl.modthespire.lib.SpireOverride;
-import com.evacipated.cardcrawl.modthespire.lib.SpireSuper;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
@@ -22,8 +19,12 @@ import com.megacrit.cardcrawl.cards.status.Void;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.*;
+import com.megacrit.cardcrawl.powers.FrailPower;
+import com.megacrit.cardcrawl.powers.IntangiblePower;
+import com.megacrit.cardcrawl.powers.StrengthPower;
+import com.megacrit.cardcrawl.powers.WeakPower;
 import com.megacrit.cardcrawl.vfx.CollectorCurseEffect;
 
 public class NecromanticTotem extends AbstractMonster
@@ -50,6 +51,7 @@ public class NecromanticTotem extends AbstractMonster
             Gdx.files.internal(HubrisMod.assetPath("shaders/totem/fragShader.fs"))
     );
 
+    private Texture faceImg;
     private float particleTimer = 0.0f;
 
     private int numTurns = 0;
@@ -57,12 +59,8 @@ public class NecromanticTotem extends AbstractMonster
     public NecromanticTotem()
     {
         super(NAME, ID, HP, -8.0f, 10.0f, 230, 300, HubrisMod.assetPath("images/monsters/theCity/necromanticTotem.png"), 100.0f, -30.0f);
-        /*
-        loadAnimation("images/monsters/theBottom/cultist/skeleton.atlas", "images/monsters/theBottom/cultist/skeleton.json", 0.75F);
 
-        AnimationState.TrackEntry e = this.state.setAnimation(0, "waving", true);
-        e.setTime(e.getEndTime() * MathUtils.random());
-        */
+        faceImg = ImageMaster.loadImage(HubrisMod.assetPath("images/monsters/theCity/necromanticTotemFace.png"));
 
         this.type = AbstractMonster.EnemyType.BOSS;
         this.dialogX = (-400.0F * Settings.scale);
@@ -174,9 +172,8 @@ public class NecromanticTotem extends AbstractMonster
     @Override
     public void render(SpriteBatch sb)
     {
-        animX = 0;
-        animY = 0;
-        renderImpl(sb, false);
+        super.render(sb);
+
         if (MathUtils.random(100) < 10) {
             animX = MathUtils.random(-10.0f, 5.0f);
             if (animX <= -9.9f) {
@@ -187,46 +184,35 @@ public class NecromanticTotem extends AbstractMonster
             animX *= Settings.scale;
             animY = MathUtils.random(-3.0f, 3.0f) * Settings.scale;
         }
-        renderImpl(sb, true);
+        renderFace(sb);
+        animX = 0;
+        animY = 0;
     }
 
-    private void renderImpl(SpriteBatch sb, boolean ghost)
+    private void renderFace(SpriteBatch sb)
     {
         renderTimer += Gdx.graphics.getDeltaTime() * MathUtils.random(0.5f, 2.0f);
-        if (ghost) {
-            sb.end();
-            shader.begin();
-            shader.setUniformf("timer", renderTimer);
-            sb.setShader(shader);
-            sb.begin();
-        }
 
-        super.render(sb);
-    }
+        sb.end();
+        shader.begin();
+        shader.setUniformf("timer", renderTimer);
+        shader.setUniformf("white", animX < -4.0f * Settings.scale ? 0.25f : 0.0f);
+        sb.setShader(shader);
+        sb.begin();
 
-    @SpireOverride
-    protected void renderIntentVfxBehind(SpriteBatch sb)
-    {
-        animX = 0;
-        animY = 0;
+        sb.setColor(tint.color);
+        sb.draw(
+                faceImg,
+                drawX - faceImg.getWidth() * Settings.scale / 2.0f + animX, drawY + animY + AbstractDungeon.sceneOffsetY,
+                faceImg.getWidth() * Settings.scale, faceImg.getHeight() * Settings.scale,
+                0, 0,
+                faceImg.getWidth(), faceImg.getHeight(),
+                flipHorizontal, flipVertical
+        );
+
         sb.end();
         shader.end();
         sb.setShader(null);
         sb.begin();
-
-        SpireSuper.call(sb);
-    }
-
-    @Override
-    public void renderHealth(SpriteBatch sb)
-    {
-        animX = 0;
-        animY = 0;
-        sb.end();
-        shader.end();
-        sb.setShader(null);
-        sb.begin();
-
-        super.renderHealth(sb);
     }
 }
