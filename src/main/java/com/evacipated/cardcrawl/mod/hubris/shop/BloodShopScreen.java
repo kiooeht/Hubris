@@ -16,11 +16,15 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.*;
 import com.megacrit.cardcrawl.helpers.controller.CInputActionSet;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
+import com.megacrit.cardcrawl.potions.AbstractPotion;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.shop.ShopScreen;
 import com.megacrit.cardcrawl.shop.StoreRelic;
+import com.megacrit.cardcrawl.ui.DialogWord;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import com.megacrit.cardcrawl.vfx.FloatyEffect;
+import com.megacrit.cardcrawl.vfx.ShopSpeechBubble;
+import com.megacrit.cardcrawl.vfx.SpeechTextEffect;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -40,6 +44,11 @@ public class BloodShopScreen
     private static float HAND_W;
     private static float HAND_H;
 
+    private static final float SPEECH_DURATION = 4.0F;
+    private static final float SPEECH_TEXT_R_X = 164.0F * Settings.scale;
+    private static final float SPEECH_TEXT_L_X = -166.0F * Settings.scale;
+    private static final float SPEECH_TEXT_Y = 126.0F * Settings.scale;
+
     public boolean isActive = true;
     private static Texture rugImg = null;
     private static Texture removeServiceImg = null;
@@ -49,11 +58,12 @@ public class BloodShopScreen
     private static final float RUG_SPEED = 5.0F;
 
     private List<BloodStoreRelic> relics = new ArrayList<>();
+    private List<BloodStorePotion> potions = new ArrayList<>();
 
     public boolean purgeAvailable = false;
-    public static int purgeCost = 10;
-    public static int actualPurgeCost = 10;
-    private static final int PURGE_COST_RAMP = 10;
+    public static int purgeCost = 5;
+    public static int actualPurgeCost = 5;
+    private static final int PURGE_COST_RAMP = 2;
     private boolean purgeHovered = false;
     private float purgeCardX;
     private float purgeCardY;
@@ -68,6 +78,9 @@ public class BloodShopScreen
 
     private boolean somethingHovered = false;
     private float notHoveredTimer = 0.0F;
+
+    private ShopSpeechBubble speechBubble;
+    private SpeechTextEffect dialogTextEffect;
 
     public static class Enum
     {
@@ -127,6 +140,7 @@ public class BloodShopScreen
         HAND_H = handImg.getHeight() * Settings.scale;
 
         initRelics();
+        initPotions();
 
         this.purgeAvailable = true;
         this.purgeCardY = -1000.0F;
@@ -138,15 +152,51 @@ public class BloodShopScreen
     private void initRelics()
     {
         relics.clear();
-        for (int i=0; i<3; ++i) {
-            AbstractRelic tempRelic = AbstractDungeon.returnRandomRelicEnd(AbstractRelic.RelicTier.SHOP);
+        for (int i=0; i<6; ++i) {
+            AbstractRelic.RelicTier relicTier = AbstractRelic.RelicTier.SHOP;
+            if (i < 4) {
+                relicTier = rollRelicTier();
+            }
+            AbstractRelic tempRelic;
+            do {
+                tempRelic = AbstractDungeon.returnRandomRelicEnd(relicTier);
+            } while (BloodStoreRelic.isBannedRelic(tempRelic));
 
             BloodStoreRelic relic = new BloodStoreRelic(tempRelic, i, this);
             if (!Settings.isDailyRun) {
-                relic.price = MathUtils.round(relic.price * AbstractDungeon.merchantRng.random(-.95f, 1.05f));
+                relic.price = MathUtils.round(relic.price * AbstractDungeon.merchantRng.random(0.95f, 1.05f));
             }
             relics.add(relic);
         }
+    }
+
+    private void initPotions()
+    {
+        potions.clear();
+        for (int i=0; i<6; ++i) {
+            AbstractPotion tempPotion;
+            do {
+                tempPotion = AbstractDungeon.returnRandomPotion();
+            } while (BloodStorePotion.isBannedPotion(tempPotion));
+            BloodStorePotion potion = new BloodStorePotion(tempPotion, i, this);
+            if (!Settings.isDailyRun) {
+                potion.price = MathUtils.round(potion.price * AbstractDungeon.merchantRng.random(0.95f, 1.05f));
+            }
+            potions.add(potion);
+        }
+    }
+
+    static AbstractRelic.RelicTier rollRelicTier()
+    {
+        int roll = AbstractDungeon.merchantRng.random(99);
+        logger.info("ROLL " + roll);
+        if (roll < 48) {
+            return AbstractRelic.RelicTier.COMMON;
+        }
+        if (roll < 82) {
+            return AbstractRelic.RelicTier.UNCOMMON;
+        }
+        return AbstractRelic.RelicTier.RARE;
     }
 
     public static void purgeCard()
@@ -179,10 +229,15 @@ public class BloodShopScreen
         for (BloodStoreRelic r : relics) {
             r.hide();
         }
+        for (BloodStorePotion p : potions) {
+            p.hide();
+        }
         rugY = Settings.HEIGHT;
         handTargetX = handX = Settings.WIDTH / 2.0f;
         handTargetY = handY = Settings.HEIGHT;
         handTimer = 1.0f;
+        speechBubble = null;
+        dialogTextEffect = null;
         AbstractDungeon.overlayMenu.showBlackScreen();
 
         for (BloodStoreRelic r : relics) {
@@ -211,7 +266,9 @@ public class BloodShopScreen
         somethingHovered = false;
         updatePurgeCard();
         updateRelics();
+        updatePotions();
         updateRug();
+        updateSpeech();
 
         updateHand();
 
@@ -301,6 +358,48 @@ public class BloodShopScreen
         }
     }
 
+    private void updatePotions()
+    {
+        for (BloodStorePotion p : potions) {
+            p.update(rugY);
+        }
+    }
+
+    void createSpeech(String msg)
+    {
+        boolean isRight = MathUtils.randomBoolean();
+        float x = MathUtils.random(66.0f, 1260.0f) * Settings.scale;
+        float y = Settings.HEIGHT - 380.0f * Settings.scale;
+        speechBubble = new ShopSpeechBubble(x, y, SPEECH_DURATION, msg, isRight);
+        float offset_x = 0.0f;
+        if (isRight) {
+            offset_x = SPEECH_TEXT_R_X;
+        } else {
+            offset_x = SPEECH_TEXT_L_X;
+        }
+        dialogTextEffect = new SpeechTextEffect(x + offset_x, y + SPEECH_TEXT_Y, SPEECH_DURATION, msg, DialogWord.AppearEffect.BUMP_IN);
+    }
+
+    private void updateSpeech()
+    {
+        if (speechBubble != null) {
+            speechBubble.update();
+            if (speechBubble.hb.hovered && speechBubble.duration > 0.3f) {
+                speechBubble.duration = 0.3f;
+                dialogTextEffect.duration = 0.3f;
+            }
+            if (speechBubble.isDone) {
+                speechBubble = null;
+            }
+        }
+        if (dialogTextEffect != null) {
+            dialogTextEffect.update();
+            if (dialogTextEffect.isDone) {
+                dialogTextEffect = null;
+            }
+        }
+    }
+
     void playBuySfx()
     {
         int roll = MathUtils.random(2);
@@ -331,17 +430,32 @@ public class BloodShopScreen
         sb.draw(rugImg, 0.0f, rugY, Settings.WIDTH, Settings.HEIGHT);
 
         renderRelics(sb);
+        renderPotions(sb);
         renderPurge(sb);
 
         sb.setColor(Color.RED);
         sb.draw(handImg, handX + f_effect.x, handY + f_effect.y, HAND_W, HAND_H);
         sb.setColor(Color.WHITE);
+
+        if (speechBubble != null) {
+            speechBubble.render(sb);
+        }
+        if (dialogTextEffect != null) {
+            dialogTextEffect.render(sb);
+        }
     }
 
     private void renderRelics(SpriteBatch sb)
     {
         for (BloodStoreRelic r : relics) {
             r.render(sb);
+        }
+    }
+
+    private void renderPotions(SpriteBatch sb)
+    {
+        for (BloodStorePotion p : potions) {
+            p.render(sb);
         }
     }
 

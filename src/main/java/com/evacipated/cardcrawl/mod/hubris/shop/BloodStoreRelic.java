@@ -10,25 +10,51 @@ import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.MathHelper;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.relics.Waffle;
 import com.megacrit.cardcrawl.shop.ShopScreen;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BloodStoreRelic
 {
-    private static final float RELIC_GOLD_OFFSET_X = -56.0F * Settings.scale;
-    private static final float RELIC_GOLD_OFFSET_Y = -100.0F * Settings.scale;
-    private static final float RELIC_PRICE_OFFSET_X = 14.0F * Settings.scale;
-    private static final float RELIC_PRICE_OFFSET_Y = -62.0F * Settings.scale;
-    private static final float GOLD_IMG_WIDTH = ImageMaster.UI_GOLD.getWidth() * Settings.scale;
+    public static List<Class<? extends AbstractRelic>> bannedRelics;
+
+    static
+    {
+        bannedRelics = new ArrayList<>();
+        bannedRelics.add(Waffle.class);
+    }
+
+    static final int GOLD_HP_RATIO = 15;
+    static final float RELIC_GOLD_OFFSET_X = -56.0F * Settings.scale;
+    static final float RELIC_GOLD_OFFSET_Y = -100.0F * Settings.scale;
+    static final float RELIC_PRICE_OFFSET_X = 14.0F * Settings.scale;
+    static final float RELIC_PRICE_OFFSET_Y = -62.0F * Settings.scale;
+    static final float GOLD_IMG_WIDTH = ImageMaster.UI_GOLD.getWidth() * Settings.scale;
 
     public AbstractRelic relic;
     private BloodShopScreen shopScreen;
     public int price;
     private int slot;
 
+    public static boolean isBannedRelic(AbstractRelic relic)
+    {
+        if (relic == null) {
+            return false;
+        }
+        for (Class<? extends AbstractRelic> cls : bannedRelics) {
+            if (cls.isInstance(relic)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public BloodStoreRelic(AbstractRelic relic, int slot, BloodShopScreen screenRef)
     {
         this.relic = relic;
-        price = relic.getPrice() / 20;
+        price = relic.getPrice() / GOLD_HP_RATIO;
         this.slot = slot;
         shopScreen = screenRef;
     }
@@ -43,7 +69,7 @@ public class BloodStoreRelic
     public void update(float rugY)
     {
         if (relic != null) {
-            relic.currentX = (1000.0f + 150.0f * slot) * Settings.scale;
+            relic.currentX = (550.0f + 150.0f * slot) * Settings.scale;
             relic.currentY = rugY + 400.0f * Settings.scale;
             relic.hb.move(relic.currentX, relic.currentY);
 
@@ -74,14 +100,16 @@ public class BloodStoreRelic
                     relic.flash();
                     // TODO eggs
                     shopScreen.playBuySfx();
-                    //shopScreen.createSpeech(ShopScreen.getBuyMsg());
+                    shopScreen.createSpeech(ShopScreen.getBuyMsg());
 
-                    relic = AbstractDungeon.returnRandomRelicEnd(AbstractRelic.RelicTier.SHOP);
-                    price = relic.getPrice() / 20;
+                    do {
+                        relic = AbstractDungeon.returnRandomRelicEnd(BloodShopScreen.rollRelicTier());
+                    } while (isBannedRelic(relic));
+                    price = relic.getPrice() / GOLD_HP_RATIO;
                     //shopScreen.getNewPrice(this);
                 } else {
                     shopScreen.playCantBuySfx();
-                    //shopScreen.createSpeech(ShopScreen.getCantBuyMsg());
+                    shopScreen.createSpeech(ShopScreen.getCantBuyMsg());
                 }
             }
         }
