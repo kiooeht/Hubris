@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import com.evacipated.cardcrawl.mod.hubris.relics.EvacipatedBox;
 import com.evacipated.cardcrawl.modthespire.lib.SpireEnum;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
@@ -19,7 +20,6 @@ import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import com.megacrit.cardcrawl.potions.AbstractPotion;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.shop.ShopScreen;
-import com.megacrit.cardcrawl.shop.StoreRelic;
 import com.megacrit.cardcrawl.ui.DialogWord;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import com.megacrit.cardcrawl.vfx.FloatyEffect;
@@ -30,6 +30,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class BloodShopScreen
@@ -169,6 +170,8 @@ public class BloodShopScreen
             }
             relics.add(relic);
         }
+
+        relics.add(new BloodStoreRelic(RelicLibrary.getRelic(EvacipatedBox.ID).makeCopy(), 0, this, true));
     }
 
     private void initPotions()
@@ -326,7 +329,7 @@ public class BloodShopScreen
 
     private void updatePurgeCard()
     {
-        purgeCardX = Settings.WIDTH / 2.0f;// 1554.0f * Settings.scale;
+        purgeCardX = 1200.0f * Settings.scale;
         purgeCardY = rugY + BOTTOM_ROW_Y;
         if (purgeAvailable) {
             float CARD_W = 110.0f * Settings.scale;
@@ -369,8 +372,13 @@ public class BloodShopScreen
 
     private void updateRelics()
     {
-        for (BloodStoreRelic r : relics) {
+        for (Iterator<BloodStoreRelic> iter=relics.iterator(); iter.hasNext();) {
+            BloodStoreRelic r = iter.next();
             r.update(rugY);
+            if (r.isPurchased) {
+                iter.remove();
+                break;
+            }
         }
     }
 

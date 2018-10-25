@@ -34,9 +34,11 @@ public class BloodStoreRelic
     static final float GOLD_IMG_WIDTH = ImageMaster.UI_GOLD.getWidth() * Settings.scale;
 
     public AbstractRelic relic;
+    public boolean isPurchased = false;
     private BloodShopScreen shopScreen;
     public int price;
     private int slot;
+    private boolean special;
 
     public static boolean isBannedRelic(AbstractRelic relic)
     {
@@ -53,10 +55,16 @@ public class BloodStoreRelic
 
     public BloodStoreRelic(AbstractRelic relic, int slot, BloodShopScreen screenRef)
     {
+        this(relic, slot, screenRef, false);
+    }
+
+    public BloodStoreRelic(AbstractRelic relic, int slot, BloodShopScreen screenRef, boolean special)
+    {
         this.relic = relic;
         price = relic.getPrice() / GOLD_HP_RATIO;
         this.slot = slot;
         shopScreen = screenRef;
+        this.special = special;
     }
 
     public void hide()
@@ -69,8 +77,17 @@ public class BloodStoreRelic
     public void update(float rugY)
     {
         if (relic != null) {
-            relic.currentX = (Settings.WIDTH / 2.0f + 150.0f * (slot - 2) + 75.0f) * Settings.scale;
-            relic.currentY = rugY + 850.0f * Settings.scale;
+            if (special) {
+                relic.currentX = (670.0f + 150.0f * (slot / 2)) * Settings.scale;
+                if (slot % 2 == 0) {
+                    relic.currentY = rugY + 240.0f * Settings.scale;
+                } else {
+                    relic.currentY = rugY + 390.0f * Settings.scale;
+                }
+            } else {
+                relic.currentX = (Settings.WIDTH / 2.0f + 150.0f * (slot - 2) + 75.0f) * Settings.scale;
+                relic.currentY = rugY + 850.0f * Settings.scale;
+            }
             relic.hb.move(relic.currentX, relic.currentY);
 
             relic.hb.update();
@@ -102,11 +119,15 @@ public class BloodStoreRelic
                     shopScreen.playBuySfx();
                     shopScreen.createSpeech(ShopScreen.getBuyMsg());
 
-                    do {
-                        relic = AbstractDungeon.returnRandomRelicEnd(BloodShopScreen.rollRelicTier());
-                    } while (isBannedRelic(relic));
-                    price = relic.getPrice() / GOLD_HP_RATIO;
-                    //shopScreen.getNewPrice(this);
+                    if (special) {
+                        isPurchased = true;
+                    } else {
+                        do {
+                            relic = AbstractDungeon.returnRandomRelicEnd(BloodShopScreen.rollRelicTier());
+                        } while (isBannedRelic(relic));
+                        price = relic.getPrice() / GOLD_HP_RATIO;
+                        //shopScreen.getNewPrice(this);
+                    }
                 } else {
                     shopScreen.playCantBuySfx();
                     shopScreen.createSpeech(ShopScreen.getCantBuyMsg());
