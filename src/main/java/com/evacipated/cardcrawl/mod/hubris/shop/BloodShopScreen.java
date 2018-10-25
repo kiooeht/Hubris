@@ -16,10 +16,16 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.*;
 import com.megacrit.cardcrawl.helpers.controller.CInputActionSet;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
+import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.shop.ShopScreen;
+import com.megacrit.cardcrawl.shop.StoreRelic;
+import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import com.megacrit.cardcrawl.vfx.FloatyEffect;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BloodShopScreen
 {
@@ -41,6 +47,8 @@ public class BloodShopScreen
     private static Texture handImg = null;
     private float rugY = Settings.HEIGHT;
     private static final float RUG_SPEED = 5.0F;
+
+    private List<BloodStoreRelic> relics = new ArrayList<>();
 
     public boolean purgeAvailable = false;
     public static int purgeCost = 10;
@@ -118,11 +126,27 @@ public class BloodShopScreen
         HAND_W = handImg.getWidth() * Settings.scale;
         HAND_H = handImg.getHeight() * Settings.scale;
 
+        initRelics();
+
         this.purgeAvailable = true;
         this.purgeCardY = -1000.0F;
         this.purgeCardX = (1400.0F * Settings.scale);
         this.purgeCardScale = 0.7F;
         actualPurgeCost = purgeCost;
+    }
+
+    private void initRelics()
+    {
+        relics.clear();
+        for (int i=0; i<3; ++i) {
+            AbstractRelic tempRelic = AbstractDungeon.returnRandomRelicEnd(AbstractRelic.RelicTier.SHOP);
+
+            BloodStoreRelic relic = new BloodStoreRelic(tempRelic, i, this);
+            if (!Settings.isDailyRun) {
+                relic.price = MathUtils.round(relic.price * AbstractDungeon.merchantRng.random(-.95f, 1.05f));
+            }
+            relics.add(relic);
+        }
     }
 
     public static void purgeCard()
@@ -152,11 +176,20 @@ public class BloodShopScreen
         AbstractDungeon.screen = Enum.HUBRIS_BLOOD_SHOP;
         AbstractDungeon.overlayMenu.proceedButton.hide();
         AbstractDungeon.overlayMenu.cancelButton.show(ShopScreen.NAMES[12]);
+        for (BloodStoreRelic r : relics) {
+            r.hide();
+        }
         rugY = Settings.HEIGHT;
         handTargetX = handX = Settings.WIDTH / 2.0f;
         handTargetY = handY = Settings.HEIGHT;
         handTimer = 1.0f;
         AbstractDungeon.overlayMenu.showBlackScreen();
+
+        for (BloodStoreRelic r : relics) {
+            if (r.relic != null) {
+                UnlockTracker.markRelicAsSeen(r.relic.relicId);
+            }
+        }
         if (ModHelper.isModEnabled(Hoarder.ID)) {
             purgeAvailable = false;
         }
@@ -177,6 +210,7 @@ public class BloodShopScreen
 
         somethingHovered = false;
         updatePurgeCard();
+        updateRelics();
         updateRug();
 
         updateHand();
@@ -260,7 +294,26 @@ public class BloodShopScreen
         }
     }
 
-    private void playCantBuySfx()
+    private void updateRelics()
+    {
+        for (BloodStoreRelic r : relics) {
+            r.update(rugY);
+        }
+    }
+
+    void playBuySfx()
+    {
+        int roll = MathUtils.random(2);
+        if (roll == 0) {
+            CardCrawlGame.sound.play("VO_MERCHANT_KA");
+        } else if (roll == 1) {
+            CardCrawlGame.sound.play("VO_MERCHANT_KB");
+        } else {
+            CardCrawlGame.sound.play("VO_MERCHANT_KC");
+        }
+    }
+
+    void playCantBuySfx()
     {
         int roll = MathUtils.random(2);
         if (roll == 0) {
@@ -277,11 +330,19 @@ public class BloodShopScreen
         sb.setColor(Color.WHITE);
         sb.draw(rugImg, 0.0f, rugY, Settings.WIDTH, Settings.HEIGHT);
 
+        renderRelics(sb);
         renderPurge(sb);
 
         sb.setColor(Color.RED);
         sb.draw(handImg, handX + f_effect.x, handY + f_effect.y, HAND_W, HAND_H);
         sb.setColor(Color.WHITE);
+    }
+
+    private void renderRelics(SpriteBatch sb)
+    {
+        for (BloodStoreRelic r : relics) {
+            r.render(sb);
+        }
     }
 
     private void renderPurge(SpriteBatch sb)
