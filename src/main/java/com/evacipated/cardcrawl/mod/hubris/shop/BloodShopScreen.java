@@ -24,7 +24,6 @@ import org.apache.logging.log4j.Logger;
 public class BloodShopScreen
 {
     private static final Logger logger = LogManager.getLogger(BloodShopScreen.class.getName());
-    private static final Color TINT = new Color(0.8f, 0, 0, 1);
     private static final float BOTTOM_ROW_Y = 307.0F * Settings.scale;
     private static final float GOLD_IMG_WIDTH = ImageMaster.UI_GOLD.getWidth() * Settings.scale;
     private static final float GOLD_IMG_OFFSET_X = -50.0F * Settings.scale;
@@ -275,12 +274,14 @@ public class BloodShopScreen
 
     public void render(SpriteBatch sb)
     {
-        sb.setColor(TINT);
+        sb.setColor(Color.WHITE);
         sb.draw(rugImg, 0.0f, rugY, Settings.WIDTH, Settings.HEIGHT);
 
         renderPurge(sb);
 
+        sb.setColor(Color.RED);
         sb.draw(handImg, handX + f_effect.x, handY + f_effect.y, HAND_W, HAND_H);
+        sb.setColor(Color.WHITE);
     }
 
     private void renderPurge(SpriteBatch sb)
@@ -298,7 +299,7 @@ public class BloodShopScreen
                 false, false
         );
 
-        sb.setColor(TINT);
+        sb.setColor(Color.WHITE);
         if (purgeAvailable) {
             sb.draw(
                     removeServiceImg,
