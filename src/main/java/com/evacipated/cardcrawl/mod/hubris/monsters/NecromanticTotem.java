@@ -55,6 +55,7 @@ public class NecromanticTotem extends AbstractMonster
     private float particleTimer = 0.0f;
 
     private int numTurns = 0;
+    private float doneMove = -1;
 
     public NecromanticTotem()
     {
@@ -123,6 +124,7 @@ public class NecromanticTotem extends AbstractMonster
                 break;
         }
 
+        doneMove = 0;
         AbstractDungeon.actionManager.addToBottom(new RollMoveAction(this));
     }
 
@@ -147,13 +149,17 @@ public class NecromanticTotem extends AbstractMonster
     {
         super.update();
 
-        // TODO black particles
-        if (!isDeadOrEscaped()) {
+        if (doneMove >= 1.0f && !isDeadOrEscaped()) {
             particleTimer -= Gdx.graphics.getDeltaTime();
             if (particleTimer < 0) {
                 particleTimer = PARTICAL_EMIT_INTERVAL;
                 AbstractDungeon.topLevelEffectsQueue.add(new NecromanticTotemParticleEffect(hb.x + 88.0f * Settings.scale, hb.y + 207.0f * Settings.scale));
                 AbstractDungeon.topLevelEffectsQueue.add(new NecromanticTotemParticleEffect(hb.x + 130.0f * Settings.scale, hb.y + 205.0f * Settings.scale));
+            }
+        } else if (doneMove >= 0) {
+            doneMove += Gdx.graphics.getDeltaTime();
+            if (doneMove > 1.0f) {
+                doneMove = 1.0f;
             }
         }
     }
@@ -191,11 +197,16 @@ public class NecromanticTotem extends AbstractMonster
 
     private void renderFace(SpriteBatch sb)
     {
+        if (doneMove <= 0.0f) {
+            return;
+        }
+
         renderTimer += Gdx.graphics.getDeltaTime() * MathUtils.random(0.5f, 2.0f);
 
         sb.end();
         shader.begin();
         shader.setUniformf("timer", renderTimer);
+        shader.setUniformf("fadeIn", doneMove);
         shader.setUniformf("white", animX < -4.0f * Settings.scale ? 0.25f : 0.0f);
         sb.setShader(shader);
         sb.begin();
