@@ -70,6 +70,7 @@ public class DoWhilePower extends AbstractPower
                 m = (AbstractMonster) action.target;
             }
             AbstractCard tmp = card.makeSameInstanceOf();
+            tmp.freeToPlayOnce = false;
             AbstractDungeon.player.limbo.addToBottom(tmp);
             tmp.current_x = card.current_x;
             tmp.current_y = card.current_y;
