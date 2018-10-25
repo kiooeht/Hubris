@@ -326,7 +326,7 @@ public class BloodShopScreen
 
     private void updatePurgeCard()
     {
-        purgeCardX = 1554.0f * Settings.scale;
+        purgeCardX = Settings.WIDTH / 2.0f;// 1554.0f * Settings.scale;
         purgeCardY = rugY + BOTTOM_ROW_Y;
         if (purgeAvailable) {
             float CARD_W = 110.0f * Settings.scale;

@@ -69,8 +69,8 @@ public class BloodStoreRelic
     public void update(float rugY)
     {
         if (relic != null) {
-            relic.currentX = (550.0f + 150.0f * slot) * Settings.scale;
-            relic.currentY = rugY + 400.0f * Settings.scale;
+            relic.currentX = (Settings.WIDTH / 2.0f + 150.0f * (slot - 2) + 75.0f) * Settings.scale;
+            relic.currentY = rugY + 850.0f * Settings.scale;
             relic.hb.move(relic.currentX, relic.currentY);
 
             relic.hb.update();

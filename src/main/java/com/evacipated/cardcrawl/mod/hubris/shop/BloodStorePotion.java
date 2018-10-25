@@ -67,8 +67,8 @@ public class BloodStorePotion
     public void update(float rugY)
     {
         if (potion != null) {
-            potion.posX = (550.0f + 150.0f * slot) * Settings.scale;
-            potion.posY = rugY + 200.0f * Settings.scale;
+            potion.posX = (Settings.WIDTH / 2.0f + 150.0f * (slot - 2) + 75.0f) * Settings.scale;
+            potion.posY = rugY + 650.0f * Settings.scale;
             potion.hb.move(potion.posX, potion.posY);
 
             potion.hb.update();
