@@ -43,6 +43,12 @@ public class MedicalManual extends HubrisRelic
     }
 
     @Override
+    public void onVictory()
+    {
+        stopPulse();
+    }
+
+    @Override
     public void onCardDraw(AbstractCard card)
     {
         if (firstStatus && card.type == AbstractCard.CardType.STATUS) {
