@@ -71,8 +71,8 @@ public class BloodShopPatch
             if (AbstractDungeon.getCurrRoom() instanceof BloodShopRoom) {
                 HubrisMod.bloodShopScreen.init();
             } else {
-                HubrisMod.bloodShopScreen.init();
-                //AbstractDungeon.shopScreen.init(coloredCards, colorlessCards);
+                //HubrisMod.bloodShopScreen.init();
+                AbstractDungeon.shopScreen.init(coloredCards, colorlessCards);
             }
         }
     }
@@ -101,8 +101,8 @@ public class BloodShopPatch
             if (AbstractDungeon.getCurrRoom() instanceof BloodShopRoom) {
                 HubrisMod.bloodShopScreen.open();
             } else {
-                HubrisMod.bloodShopScreen.open();
-                //AbstractDungeon.shopScreen.open();
+                //HubrisMod.bloodShopScreen.open();
+                AbstractDungeon.shopScreen.open();
             }
         }
     }
