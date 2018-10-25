@@ -23,11 +23,11 @@ import javassist.CtBehavior;
 import javassist.expr.ExprEditor;
 import javassist.expr.MethodCall;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 public class BloodShopPatch
 {
-    //*
     @SpirePatch(
             clz=Merchant.class,
             method=SpirePatch.CONSTRUCTOR,
@@ -39,6 +39,19 @@ public class BloodShopPatch
     )
     public static class ScreenInit
     {
+        public static void Postfix(Merchant __instance, float x, float y, int newShopScreen)
+        {
+            try {
+                Field f = Merchant.class.getDeclaredField("idleMessages");
+                f.setAccessible(true);
+
+                ArrayList<String> idleMessages = (ArrayList<String>) f.get(__instance);
+                idleMessages.add("Have you met my brother?");
+            } catch (IllegalAccessException | NoSuchFieldException e) {
+                e.printStackTrace();
+            }
+        }
+
         public static ExprEditor Instrument()
         {
             return new ExprEditor() {
@@ -93,7 +106,6 @@ public class BloodShopPatch
             }
         }
     }
-    //*/
 
     @SpirePatch(
             clz=AbstractDungeon.class,
