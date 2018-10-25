@@ -12,6 +12,7 @@ import com.evacipated.cardcrawl.mod.hubris.vfx.combat.ShowRollResult;
 import com.evacipated.cardcrawl.mod.stslib.relics.ClickableRelic;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.*;
+import com.megacrit.cardcrawl.cards.status.VoidCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -189,7 +190,7 @@ public class Icosahedron extends HubrisRelic implements ClickableRelic
                 actions.add(new ApplyPowerAction(p, p, new FixedDrawPower(p, -1), -1));
                 break;
             case 3: // Add 3 Void to your draw pile.
-                actions.add(new MakeTempCardInDrawPileAction(new com.megacrit.cardcrawl.cards.status.Void(), 3, true, true));
+                actions.add(new MakeTempCardInDrawPileAction(new VoidCard(), 3, true, true));
                 break;
             case 2: // Lose 10 HP.
                 actions.add(new LoseHPAction(p, p, 10));
