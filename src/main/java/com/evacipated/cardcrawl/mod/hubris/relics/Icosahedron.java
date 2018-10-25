@@ -48,6 +48,7 @@ public class Icosahedron extends HubrisRelic implements ClickableRelic
     @Override
     public void onVictory()
     {
+        stopPulse();
         if (counter != 1 && counter != 20 && counter != -1) {
             setCounter(-1);
         }

@@ -4,14 +4,15 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;
+import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.hubris.actions.AnimationTimeScaleAction;
 import com.evacipated.cardcrawl.mod.hubris.actions.StealGoldAction;
 import com.evacipated.cardcrawl.mod.hubris.actions.ThrowGoldAction;
 import com.evacipated.cardcrawl.mod.hubris.actions.utility.ForceWaitAction;
 import com.evacipated.cardcrawl.mod.hubris.powers.GoldShieldPower;
+import com.evacipated.cardcrawl.mod.hubris.powers.BodyguardPower;
 import com.evacipated.cardcrawl.mod.hubris.relics.NiceRug;
 import com.evacipated.cardcrawl.mod.hubris.vfx.combat.BlueSmokeBombEffect;
-import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.megacrit.cardcrawl.actions.animations.TalkAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.*;
@@ -50,7 +51,8 @@ public class MerchantMonster extends AbstractMonster
             "Hey! NL No stealing!",
             "@No@ @Refunds.@",
             new String(new byte[]{0x52, 0x65, 0x69, 0x6e, 0x61, 0x2c, 0x20, 0x70, 0x6c, 0x65, 0x61, 0x73, 0x65, 0x20,
-                    0x73, 0x74, 0x6f, 0x70, 0x20, 0x68, 0x75, 0x72, 0x74, 0x69, 0x6e, 0x67, 0x20, 0x6d, 0x65, 0x2e})
+                    0x73, 0x74, 0x6f, 0x70, 0x20, 0x68, 0x75, 0x72, 0x74, 0x69, 0x6e, 0x67, 0x20, 0x6d, 0x65, 0x2e}),
+            "Give me back my rug!"
     };
     private static final float DRAW_X = Settings.WIDTH * 0.5F + 34.0F * Settings.scale;
     private static final float DRAW_Y = AbstractDungeon.floorY - 109.0F * Settings.scale;
@@ -74,11 +76,25 @@ public class MerchantMonster extends AbstractMonster
     private int turn = -1;
     private boolean thresholdReached = false;
     private int abuse = 0;
+    private boolean boss = false;
 
     static
     {
         throwAmounts.put(ATTACK, 20);
         throwAmounts.put(ATTACK_STRENGTH_UP, 15);
+    }
+
+    public MerchantMonster(boolean boss)
+    {
+        this((Merchant) null);
+        this.boss = boss;
+        if (boss) {
+            doEscape = false;
+            turn = 1;
+            maxHealth = REAL_HP;
+            maxHealth *= (abuse >= 3 ? 1.5f : 1.0f);
+            currentHealth = maxHealth;
+        }
     }
 
     public MerchantMonster(MerchantMonster merchantMonster)
@@ -91,12 +107,8 @@ public class MerchantMonster extends AbstractMonster
         super(NAME, ID, START_HP, -10.0F, -30.0F, 180.0F, 150.0F, null, 0.0F, 0.0F);
 
         if (CardCrawlGame.playerName.equals(DIALOG[2].substring(0, 5))) {
-            try {
-                SpireConfig config = new SpireConfig("Hubris", "OtherSaveData");
-                if (config.has("abuse")) {
-                    abuse = config.getInt("abuse");
-                }
-            } catch (IOException ignored) {
+            if (HubrisMod.otherSaveData != null && HubrisMod.otherSaveData.has("abuse")) {
+                abuse = HubrisMod.otherSaveData.getInt("abuse");
             }
         }
 
@@ -124,9 +136,11 @@ public class MerchantMonster extends AbstractMonster
     @Override
     public void render(SpriteBatch sb)
     {
-        if (!isDeadOrEscaped() || AbstractDungeon.getCurrRoom().cannotLose) {
-            sb.setColor(Color.WHITE);
-            sb.draw(ImageMaster.MERCHANT_RUG_IMG, DRAW_X, DRAW_Y, 512.0F * Settings.scale, 512.0F * Settings.scale);
+        if (!boss) {
+            if (!isDeadOrEscaped() || AbstractDungeon.getCurrRoom().cannotLose) {
+                sb.setColor(Color.WHITE);
+                sb.draw(ImageMaster.MERCHANT_RUG_IMG, DRAW_X, DRAW_Y, 512.0F * Settings.scale, 512.0F * Settings.scale);
+            }
         }
 
         super.render(sb);
@@ -136,7 +150,20 @@ public class MerchantMonster extends AbstractMonster
     public void usePreBattleAction()
     {
         //UnlockTracker.markBossAsSeen("MERCHANT");
-        AbstractDungeon.actionManager.addToTop(new TalkAction(this, (abuse >= 3 ? DIALOG[2] : DIALOG[0]), 0.5F, 3.0F));
+        if (boss) {
+            AbstractDungeon.actionManager.addToTop(new CanLoseAction());
+            int artifact_amt = (abuse >= 3 ? (int)(ARTIFACT_AMT * 1.6) : ARTIFACT_AMT);
+            AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(this, this, new ArtifactPower(this, artifact_amt), artifact_amt));
+            int metal_amt = (abuse >= 3 ? 50 : METALLICIZE_AMT);
+            AbstractDungeon.actionManager.addToTop(new GainBlockAction(this, this, metal_amt, true));
+            AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(this, this, new GoldShieldPower(this, metal_amt), metal_amt));
+
+            AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(this, this, new BodyguardPower(this)));
+            AbstractDungeon.actionManager.addToTop(new AnimationTimeScaleAction(this, TIME_SCALE));
+            AbstractDungeon.actionManager.addToTop(new TalkAction(this, DIALOG[3], 0.5F, 3.0F));
+        } else {
+            AbstractDungeon.actionManager.addToTop(new TalkAction(this, (abuse >= 3 ? DIALOG[2] : DIALOG[0]), 0.5F, 3.0F));
+        }
     }
 
     @Override
@@ -260,14 +287,15 @@ public class MerchantMonster extends AbstractMonster
     {
         if (!AbstractDungeon.getCurrRoom().cannotLose) {
             super.die();
-            AbstractDungeon.getCurrRoom().spawnRelicAndObtain(npc.hb.cX, npc.hb.cY, RelicLibrary.getRelic(NiceRug.ID).makeCopy());
+            if (!boss) {
+                AbstractDungeon.getCurrRoom().spawnRelicAndObtain(npc.hb.cX, npc.hb.cY, RelicLibrary.getRelic(NiceRug.ID).makeCopy());
+            }
 
             if (CardCrawlGame.playerName.equals(new String(new byte[]{0x52, 0x65, 0x69, 0x6E, 0x61}))) {
                 ++abuse;
                 try {
-                    SpireConfig config = new SpireConfig("Hubris", "OtherSaveData");
-                    config.setInt("abuse", abuse);
-                    config.save();
+                    HubrisMod.otherSaveData.setInt("abuse", abuse);
+                    HubrisMod.otherSaveData.save();
                 } catch (IOException ignored) {
                 }
             }

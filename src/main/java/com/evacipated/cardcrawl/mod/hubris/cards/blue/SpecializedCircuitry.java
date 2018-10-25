@@ -8,6 +8,7 @@ import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.hubris.characters.FakePlayer;
 import com.evacipated.cardcrawl.mod.hubris.powers.SpecializedCircuitryPower;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -86,6 +87,7 @@ public class SpecializedCircuitry extends CustomCard implements ModalChoice.Call
     @Override
     public void optionSelected(AbstractPlayer p, AbstractMonster m, int i)
     {
+        AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(p, p, SpecializedCircuitryPower.POWER_ID));
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new SpecializedCircuitryPower(p, allowedOrbs.get(i).makeCopy())));
     }
 

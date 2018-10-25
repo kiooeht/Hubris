@@ -15,6 +15,7 @@ import com.evacipated.cardcrawl.mod.hubris.events.shrines.TheFatedDie;
 import com.evacipated.cardcrawl.mod.hubris.events.shrines.UpdateBodyText;
 import com.evacipated.cardcrawl.mod.hubris.events.thebeyond.TheBottler;
 import com.evacipated.cardcrawl.mod.hubris.events.thecity.Experiment;
+import com.evacipated.cardcrawl.mod.hubris.monsters.NecromanticTotem;
 import com.evacipated.cardcrawl.mod.hubris.monsters.GrandSnecko;
 import com.evacipated.cardcrawl.mod.hubris.monsters.MusketHawk;
 import com.evacipated.cardcrawl.mod.hubris.relics.*;
@@ -33,6 +34,10 @@ import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.ModHelper;
 import com.megacrit.cardcrawl.localization.*;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.monsters.MonsterGroup;
+import com.megacrit.cardcrawl.monsters.city.Centurion;
+import com.megacrit.cardcrawl.monsters.exordium.Cultist;
 import com.megacrit.cardcrawl.screens.custom.CustomMod;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import infinitespire.InfiniteSpire;
@@ -69,6 +74,7 @@ public class HubrisMod implements
     public static final Logger logger = LogManager.getLogger(HubrisMod.class.getSimpleName());
 
     private static SpireConfig modConfig = null;
+    public static SpireConfig otherSaveData = null;
 
     // Beta card asset paths
     public static final String BETA_ATTACK = HubrisMod.assetPath("images/cards/betaAttack.png");
@@ -158,6 +164,8 @@ public class HubrisMod implements
             Zylophone.load(config);
             EmptyBottle.load(config);
             DuctTape.load(config);
+
+            otherSaveData = new SpireConfig("Hubris", "OtherSaveData");
             if (hasInfiniteSpire) {
                 InfiniteBlow.load();
             }
@@ -178,6 +186,10 @@ public class HubrisMod implements
             Zylophone.save(config);
             EmptyBottle.save(config);
             // Duct Tape saving is handled separately
+
+            if (otherSaveData == null) {
+                otherSaveData = new SpireConfig("Hubris", "OtherSaveData");
+            }
             if (hasInfiniteSpire) {
                 InfiniteBlow.save();
             }
@@ -214,6 +226,12 @@ public class HubrisMod implements
     @Override
     public void receivePostInitialize()
     {
+        try {
+            otherSaveData = new SpireConfig("Hubris", "OtherSaveData");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         ModPanel settingsPanel = new ModPanel();
         ModLabeledToggleButton hubrisBtn = new ModLabeledToggleButton("Add Hubris curse to starting deck",
                 350, 600, Settings.CREAM_COLOR, FontHelper.charDescFont,
@@ -256,9 +274,15 @@ public class HubrisMod implements
 
         BaseMod.addMonster(GrandSnecko.ID, GrandSnecko::new);
         BaseMod.addMonster(MusketHawk.ID, MusketHawk::new);
+        BaseMod.addMonster(NecromanticTotem.ID, () -> new MonsterGroup(new AbstractMonster[]{
+                new Centurion(-436.0f, -4.0f),
+                new Cultist(-170.0f, 6.0f),
+                new NecromanticTotem()
+        }));
 
         BaseMod.addBoss(TheBeyond.ID, GrandSnecko.ID, assetPath("images/ui/map/boss/grandSnecko.png"), assetPath("images/ui/map/bossOutline/grandSnecko.png"));
         BaseMod.addBoss(TheCity.ID, MusketHawk.ID, assetPath("images/ui/map/boss/musketHawk.png"), assetPath("images/ui/map/bossOutline/musketHawk.png"));
+        BaseMod.addBoss(TheCity.ID, NecromanticTotem.ID, assetPath("images/ui/map/boss/necromanticTotem.png"), assetPath("images/ui/map/bossOutline/necromanticTotem.png"));
 
         powerAtlas = new TextureAtlas(Gdx.files.internal(assetPath("images/powers/powers.atlas")));
 
@@ -348,6 +372,7 @@ public class HubrisMod implements
         BaseMod.addRelic(new Reverence(), RelicType.SHARED);
         BaseMod.addRelic(new RunicObelisk(), RelicType.SHARED);
         BaseMod.addRelic(new SlimyHat(), RelicType.SHARED);
+        BaseMod.addRelic(new ToyBattleship(), RelicType.SHARED);
 
         // Ironclad only
         BaseMod.addRelic(new IronBody(), RelicType.RED);

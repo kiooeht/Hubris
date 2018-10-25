@@ -121,5 +121,29 @@
     "DESCRIPTIONS": [
       "Negates all debuffs from enemies."
     ]
+  },
+  "hubris:Bodyguard": {
+    "NAME": "Bodyguard",
+    "DESCRIPTIONS": [
+      "Immune to damage until all other monsters are dead."
+    ]
+  },
+  "hubris:CursedLife": {
+    "NAME": "Cursed Life",
+    "DESCRIPTIONS": [
+      "If ",
+      " dies, permanently add #r",
+      " #rCurses",
+      " #rCurse",
+      " to your deck. NL Decreases by #b1 each turn."
+    ]
+  },
+  "hubris:Undead": {
+    "NAME": "Undead",
+    "DESCRIPTIONS": [
+      "When attacked, transfers #b",
+      " #yPoison to you. NL If ",
+      " is still alive, revives in #b1 turn at full HP."
+    ]
   }
 }

@@ -8,7 +8,7 @@ import com.megacrit.cardcrawl.relics.AbstractRelic;
 public class RunicObelisk extends HubrisRelic
 {
     public static final String ID = "hubris:RunicObelisk";
-    private static final int AMT = 4;
+    private static final int AMT = 3;
 
     public RunicObelisk()
     {

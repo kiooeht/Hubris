@@ -16,6 +16,7 @@ import com.megacrit.cardcrawl.vfx.UpgradeShineEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardBrieflyEffect;
 
+import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -127,6 +128,11 @@ public class UpdateBodyText extends AbstractImageEvent
                 curScreen = CurrentScreen.DONE;
                 break;
             case DONE:
+                try {
+                    HubrisMod.otherSaveData.setBool("UPDATEBODYTEXT", true);
+                    HubrisMod.otherSaveData.save();
+                } catch (IOException ignore) {
+                }
                 openMap();
                 break;
         }

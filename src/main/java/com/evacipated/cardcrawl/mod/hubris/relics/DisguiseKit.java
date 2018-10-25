@@ -137,7 +137,7 @@ public class DisguiseKit extends HubrisRelic
                 CardLibrary.addBlueCards(tmpPool);
                 break;
             default:
-                AbstractCard.CardColor color = BaseMod.getColor(chosenClass);
+                AbstractCard.CardColor color = BaseMod.findCharacter(chosenClass).getCardColor();
                 AbstractCard card;
                 for (Map.Entry<String, AbstractCard> c : CardLibrary.cards.entrySet()) {
                     card = c.getValue();

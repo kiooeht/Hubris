@@ -11,6 +11,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
 public class CrystalStatue extends HubrisRelic implements BetterOnLoseHpRelic
 {
@@ -84,10 +85,12 @@ public class CrystalStatue extends HubrisRelic implements BetterOnLoseHpRelic
     @Override
     public int betterOnLoseHp(DamageInfo info, int damageAmount)
     {
-        if (info.owner != null && info.type != DamageInfo.DamageType.HP_LOSS && info.type != DamageInfo.DamageType.THORNS && damageAmount > 0) {
-            if (counter > 0) {
-                flash();
-                setCounter(counter - damageAmount);
+        if (AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT) {
+            if (info.owner != null && info.type != DamageInfo.DamageType.HP_LOSS && info.type != DamageInfo.DamageType.THORNS && damageAmount > 0) {
+                if (counter > 0) {
+                    flash();
+                    setCounter(counter - damageAmount);
+                }
             }
         }
 

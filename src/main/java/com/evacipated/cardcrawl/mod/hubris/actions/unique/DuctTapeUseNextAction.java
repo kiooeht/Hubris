@@ -27,7 +27,9 @@ public class DuctTapeUseNextAction extends AbstractGameAction
     public void update()
     {
         cards.get(cardIndex).calculateCardDamage(monster);
-        cards.get(cardIndex).use(player, monster);
+        if (cards.get(cardIndex).canUse(player, monster)) {
+            cards.get(cardIndex).use(player, monster);
+        }
 
         ++cardIndex;
         if (cardIndex < cards.size()) {

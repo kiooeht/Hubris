@@ -2,7 +2,6 @@ package com.evacipated.cardcrawl.mod.hubris.cards.black;
 
 import com.evacipated.cardcrawl.mod.hubris.CardIgnore;
 import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
-import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -21,7 +20,7 @@ import java.io.IOException;
 public class InfiniteBlow extends BlackCard
 {
     public static final String ID = "hubris:InfiniteBlow";
-    public static final String IMG = HubrisMod.BETA_ATTACK;
+    public static final String IMG = HubrisMod.assetPath("images/cards/infiniteBlow.png");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
@@ -79,12 +78,11 @@ public class InfiniteBlow extends BlackCard
 
     public static void save()
     {
-        if (AbstractDungeon.player != null) {
+        if (AbstractDungeon.player != null && HubrisMod.otherSaveData != null) {
             try {
-                SpireConfig config = new SpireConfig("Hubris", "OtherSaveData");
                 int maxUpgrades = -1;
-                if (config.has(CONFIG_KEY)) {
-                    maxUpgrades = config.getInt(CONFIG_KEY);
+                if (HubrisMod.otherSaveData.has(CONFIG_KEY)) {
+                    maxUpgrades = HubrisMod.otherSaveData.getInt(CONFIG_KEY);
                 }
                 for (AbstractCard c : AbstractDungeon.player.masterDeck.group) {
                     if (c.cardID.equals(ID)) {
@@ -94,8 +92,8 @@ public class InfiniteBlow extends BlackCard
                     }
                 }
                 if (maxUpgrades >= 0) {
-                    config.setInt(CONFIG_KEY, maxUpgrades);
-                    config.save();
+                    HubrisMod.otherSaveData.setInt(CONFIG_KEY, maxUpgrades);
+                    HubrisMod.otherSaveData.save();
                 }
             } catch (IOException ignored) {
             }
@@ -104,13 +102,9 @@ public class InfiniteBlow extends BlackCard
 
     public static void load()
     {
-        try {
-            SpireConfig config = new SpireConfig("Hubris", "OtherSaveData");
-            if (config.has(CONFIG_KEY)) {
-                savedUpgrades = config.getInt(CONFIG_KEY);
-                System.out.println("GOLD:" + Settings.GOLD_COLOR.toString());
-            }
-        } catch (IOException ignored) {
+        if (HubrisMod.otherSaveData != null && HubrisMod.otherSaveData.has(CONFIG_KEY)) {
+            savedUpgrades = HubrisMod.otherSaveData.getInt(CONFIG_KEY);
+            System.out.println("GOLD:" + Settings.GOLD_COLOR.toString());
         }
     }
 
