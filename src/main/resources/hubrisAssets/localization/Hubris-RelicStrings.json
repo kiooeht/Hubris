@@ -426,5 +426,12 @@
       "The first card played each combat also draws #b",
       " card."
     ]
+  },
+  "hubris:EvacipatedBox": {
+    "NAME": "Evacipated Box",
+    "FLAVOR": "evacipate: v. To undo the consequences of your actions by changing the original circumstances. To erase your own history. ",
+    "DESCRIPTIONS": [
+      "Future boss chests have #b1 additional relic to choose from."
+    ]
   }
 }
