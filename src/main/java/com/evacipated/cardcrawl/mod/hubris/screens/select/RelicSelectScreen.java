@@ -206,7 +206,7 @@ public class RelicSelectScreen implements ScrollBarListener
             if (size % 10 != 0) {
                 ++scrollTmp;
             }
-            scrollUpperBound = scrollLowerBound + Settings.DEFAULT_SCROLL_LIMIT + scrollTmp * 32.0f;
+            scrollUpperBound = scrollLowerBound + Settings.DEFAULT_SCROLL_LIMIT + scrollTmp * 40.0f;
         } else {
             scrollUpperBound = scrollLowerBound + Settings.DEFAULT_SCROLL_LIMIT;
         }
