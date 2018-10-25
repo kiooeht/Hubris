@@ -25,6 +25,7 @@ import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import com.megacrit.cardcrawl.vfx.FloatyEffect;
 import com.megacrit.cardcrawl.vfx.ShopSpeechBubble;
 import com.megacrit.cardcrawl.vfx.SpeechTextEffect;
+import com.megacrit.cardcrawl.vfx.cardManip.PurgeCardEffect;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -218,6 +219,20 @@ public class BloodShopScreen
         */
     }
 
+    public void updatePurge()
+    {
+        if (!AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
+            purgeCard();
+            for (AbstractCard card : AbstractDungeon.gridSelectScreen.selectedCards) {
+                CardCrawlGame.metricData.addPurgedItem(card.getMetricID());
+                AbstractDungeon.topLevelEffects.add(new PurgeCardEffect(card, Settings.WIDTH / 2.0f, Settings.HEIGHT / 2.0f));
+
+                AbstractDungeon.player.masterDeck.removeCard(card);
+            }
+            AbstractDungeon.gridSelectScreen.selectedCards.clear();
+        }
+    }
+
     public void open()
     {
         CardCrawlGame.sound.play("SHOP_OPEN");
@@ -265,6 +280,7 @@ public class BloodShopScreen
 
         somethingHovered = false;
         updatePurgeCard();
+        updatePurge();
         updateRelics();
         updatePotions();
         updateRug();
@@ -330,7 +346,7 @@ public class BloodShopScreen
                     CInputActionSet.select.unpress();
                     this.purgeHovered = false;
                     if (AbstractDungeon.player.gold >= actualPurgeCost) {
-                        AbstractDungeon.previousScreen = AbstractDungeon.CurrentScreen.SHOP;
+                        AbstractDungeon.previousScreen = Enum.HUBRIS_BLOOD_SHOP;
 
                         AbstractDungeon.gridSelectScreen.open(
                                 CardGroup.getGroupWithoutBottledCards(AbstractDungeon.player.masterDeck
