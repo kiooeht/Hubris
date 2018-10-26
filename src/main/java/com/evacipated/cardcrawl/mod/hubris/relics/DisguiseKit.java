@@ -81,7 +81,7 @@ public class DisguiseKit extends HubrisRelic
     private String chosenClassName()
     {
         AbstractPlayer character = BaseMod.findCharacter(chosenClass);
-        return BaseMod.colorString(character.getLocalizedCharacterName(), "#" + character.getCardColor().toString());
+        return BaseMod.colorString(character.getLocalizedCharacterName(), "#" + character.getCardRenderColor().toString());
     }
 
     @Override
