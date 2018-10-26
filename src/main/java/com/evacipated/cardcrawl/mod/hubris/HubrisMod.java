@@ -155,7 +155,6 @@ public class HubrisMod implements
         try {
             SpireConfig config = new SpireConfig("Hubris", "SaveData");
 
-            DisguiseKit.load(config);
             MysteriousPyramids.load(config);
             Zylophone.load(config);
             EmptyBottle.load(config);
@@ -176,7 +175,6 @@ public class HubrisMod implements
         try {
             SpireConfig config = new SpireConfig("Hubris", "SaveData");
 
-            DisguiseKit.save(config);
             MysteriousPyramids.save(config);
             Zylophone.save(config);
             EmptyBottle.save(config);
@@ -202,7 +200,6 @@ public class HubrisMod implements
             config.clear();
             config.save();
 
-            DisguiseKit.clear();
             MysteriousPyramids.clear();
             Zylophone.clear();
             EmptyBottle.clear();
