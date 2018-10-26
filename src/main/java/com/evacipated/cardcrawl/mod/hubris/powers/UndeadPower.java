@@ -82,8 +82,6 @@ public class UndeadPower extends AbstractPower
     @Override
     public void onDeath()
     {
-        System.out.println(parent);
-        System.out.println(parent.isDeadOrEscaped());
         if (!parent.isDeadOrEscaped()) {
             owner.isDying = false;
             owner.halfDead = true;
@@ -104,8 +102,6 @@ public class UndeadPower extends AbstractPower
             ((AbstractMonster) owner).setMove((byte) -72, AbstractMonster.Intent.BUFF);
             ((AbstractMonster) owner).createIntent();
             AbstractDungeon.actionManager.addToBottom(new SetMoveAction((AbstractMonster) owner, (byte)-72, AbstractMonster.Intent.BUFF));
-        } else {
-            System.out.println(owner.halfDead);
         }
     }
 

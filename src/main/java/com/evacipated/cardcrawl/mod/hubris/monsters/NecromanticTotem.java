@@ -81,7 +81,9 @@ public class NecromanticTotem extends AbstractMonster
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new CursedLifePower(this, CURSE_AMT), CURSE_AMT));
 
         for (AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
-            m.powers.add(new FakeDeathPower(m));
+            if (m != this) {
+                m.powers.add(new FakeDeathPower(m));
+            }
         }
     }
 
