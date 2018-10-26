@@ -153,10 +153,6 @@ public class HubrisMod implements
     {
         logger.info("Loading Save Data");
         try {
-            SpireConfig config = new SpireConfig("Hubris", "SaveData");
-
-            DuctTape.load(config);
-
             otherSaveData = new SpireConfig("Hubris", "OtherSaveData");
             if (hasInfiniteSpire) {
                 InfiniteBlow.load();
@@ -170,17 +166,12 @@ public class HubrisMod implements
     {
         logger.info("Saving Data");
         try {
-            SpireConfig config = new SpireConfig("Hubris", "SaveData");
-
-            // Duct Tape saving is handled separately
-
             if (otherSaveData == null) {
                 otherSaveData = new SpireConfig("Hubris", "OtherSaveData");
             }
             if (hasInfiniteSpire) {
                 InfiniteBlow.save();
             }
-            config.save();
         } catch (IOException e) {
             e.printStackTrace();
         }

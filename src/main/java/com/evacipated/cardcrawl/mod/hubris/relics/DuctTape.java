@@ -1,12 +1,14 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
+import basemod.abstracts.CustomSavable;
 import com.evacipated.cardcrawl.mod.hubris.cards.DuctTapeCard;
 import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
-import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
+import com.megacrit.cardcrawl.cards.CardSave;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
@@ -14,13 +16,11 @@ import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DuctTape extends HubrisRelic
+public class DuctTape extends HubrisRelic implements CustomSavable<List<CardSave>>
 {
     public static final String ID = "hubris:DuctTape";
     private static final int COUNT = 2;
     private boolean cardSelected = true;
-
-    private static final String CONFIG_KEY = "ductTape_";
 
     public DuctTape()
     {
@@ -33,41 +33,30 @@ public class DuctTape extends HubrisRelic
         return DESCRIPTIONS[0];
     }
 
-    public static void save(SpireConfig config, int startIndex, int endIndex)
+    @Override
+    public List<CardSave> onSave()
     {
-        if (AbstractDungeon.player != null && AbstractDungeon.player.hasRelic(ID)) {
-            for (int i=startIndex; i<endIndex; ++i) {
-                config.setInt(CONFIG_KEY + (i - startIndex), i);
+        for (int i=0; i<AbstractDungeon.player.masterDeck.size(); ++i) {
+            AbstractCard c = AbstractDungeon.player.masterDeck.group.get(i);
+            if (c instanceof DuctTapeCard) {
+                return ((DuctTapeCard) c).makeCardSaves();
             }
-        } else {
-            config.remove(CONFIG_KEY);
         }
+        return null;
     }
 
-    public static void load(SpireConfig config)
+    @Override
+    public void onLoad(List<CardSave> cardSaves)
     {
-        if (AbstractDungeon.player.hasRelic(ID)) {
-            int insertIndex = -1;
-            List<AbstractCard> cards = new ArrayList<>(COUNT);
-            for (int i=0; i<COUNT; ++i) {
-                if (config.has(CONFIG_KEY + i)) {
-                    int cardIndex = config.getInt(CONFIG_KEY + i);
-
-                    if (cardIndex >= 0 && cardIndex < AbstractDungeon.player.masterDeck.group.size()) {
-                        if (insertIndex == -1) {
-                            insertIndex = cardIndex;
-                        }
-                        AbstractCard c = AbstractDungeon.player.masterDeck.group.get(cardIndex);
-                        if (c == null) {
-                            return;
-                        }
-                        cards.add(c);
-                    }
-                }
-            }
-            AbstractDungeon.player.masterDeck.group.removeAll(cards);
-            AbstractDungeon.player.masterDeck.group.add(insertIndex, new DuctTapeCard(cards));
+        if (cardSaves == null) {
+            return;
         }
+
+        List<AbstractCard> cards = new ArrayList<>();
+        for (CardSave save : cardSaves) {
+            cards.add(CardLibrary.getCopy(save.id, save.upgrades, save.misc));
+        }
+        AbstractDungeon.player.masterDeck.addToTop(new DuctTapeCard(cards));
     }
 
     @Override
