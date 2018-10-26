@@ -156,7 +156,6 @@ public class HubrisMod implements
             SpireConfig config = new SpireConfig("Hubris", "SaveData");
 
             MysteriousPyramids.load(config);
-            Zylophone.load(config);
             EmptyBottle.load(config);
             DuctTape.load(config);
 
@@ -176,7 +175,6 @@ public class HubrisMod implements
             SpireConfig config = new SpireConfig("Hubris", "SaveData");
 
             MysteriousPyramids.save(config);
-            Zylophone.save(config);
             EmptyBottle.save(config);
             // Duct Tape saving is handled separately
 
@@ -201,7 +199,6 @@ public class HubrisMod implements
             config.save();
 
             MysteriousPyramids.clear();
-            Zylophone.clear();
             EmptyBottle.clear();
         } catch (IOException e) {
             e.printStackTrace();

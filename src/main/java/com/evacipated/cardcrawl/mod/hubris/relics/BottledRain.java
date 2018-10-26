@@ -45,7 +45,7 @@ public class BottledRain extends HubrisRelic implements CustomBottleRelic, Custo
     @Override
     public Integer onSave()
     {
-        return AbstractDungeon.player.masterDeck.group.indexOf(this.card);
+        return AbstractDungeon.player.masterDeck.group.indexOf(card);
     }
 
     @Override

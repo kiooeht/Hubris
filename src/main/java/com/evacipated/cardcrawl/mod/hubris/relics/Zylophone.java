@@ -1,9 +1,9 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
+import basemod.abstracts.CustomSavable;
 import com.evacipated.cardcrawl.mod.hubris.cards.DuctTapeCard;
 import com.evacipated.cardcrawl.mod.hubris.patches.cards.AbstractCard.ZylophoneField;
 import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
-import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -12,13 +12,11 @@ import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
-public class Zylophone extends HubrisRelic
+public class Zylophone extends HubrisRelic implements CustomSavable<Integer>
 {
     public static final String ID = "hubris:Zylophone";
     private boolean cardSelected = true;
     private AbstractCard card = null;
-
-    private static final String CONFIG_KEY = "zylophone_";
 
     public Zylophone()
     {
@@ -31,48 +29,25 @@ public class Zylophone extends HubrisRelic
         return DESCRIPTIONS[0];
     }
 
-    public static void save(SpireConfig config)
+    @Override
+    public Integer onSave()
     {
-        if (AbstractDungeon.player != null && AbstractDungeon.player.hasRelic(Zylophone.ID)) {
-            int count = 0;
-            for (int i=0; i<AbstractDungeon.player.masterDeck.size(); ++i) {
-                AbstractCard c = AbstractDungeon.player.masterDeck.group.get(i);
-                if (ZylophoneField.costsX.get(c)) {
-                    config.setInt(CONFIG_KEY + count, i);
-                    ++count;
-                }
-            }
-        } else {
-            config.remove(CONFIG_KEY);
-        }
+        return AbstractDungeon.player.masterDeck.group.indexOf(card);
     }
 
-    public static void load(SpireConfig config)
+    @Override
+    public void onLoad(Integer cardIndex)
     {
-        if (AbstractDungeon.player.hasRelic(ID)) {
-            Zylophone relic = (Zylophone) AbstractDungeon.player.getRelic(ID);
-            int count = 0;
-            while (config.has(CONFIG_KEY + count)) {
-                int cardIndex = config.getInt(CONFIG_KEY + count);
-
-                if (cardIndex >= 0 && cardIndex < AbstractDungeon.player.masterDeck.group.size()) {
-                    AbstractCard card = AbstractDungeon.player.masterDeck.group.get(cardIndex);
-                    if (card != null) {
-                        if (relic.card == null) {
-                            relic.card = card;
-                        }
-                        ZylophoneField.costsX.set(card, true);
-                    }
-                }
-
-                ++count;
-            }
-            relic.setDescriptionAfterLoading();
+        if (cardIndex == null) {
+            return;
         }
-    }
-
-    public static void clear()
-    {
+        if (cardIndex >= 0 && cardIndex < AbstractDungeon.player.masterDeck.group.size()) {
+            card = AbstractDungeon.player.masterDeck.group.get(cardIndex);
+            if (card != null) {
+                ZylophoneField.costsX.set(card, true);
+                setDescriptionAfterLoading();
+            }
+        }
     }
 
     @Override
