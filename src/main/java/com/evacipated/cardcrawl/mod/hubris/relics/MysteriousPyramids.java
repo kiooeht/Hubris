@@ -2,11 +2,11 @@ package com.evacipated.cardcrawl.mod.hubris.relics;
 
 import basemod.BaseMod;
 import basemod.abstracts.CustomBottleRelic;
+import basemod.abstracts.CustomSavable;
 import com.evacipated.cardcrawl.mod.hubris.patches.cards.AbstractCard.PyramidsField;
 import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.evacipated.cardcrawl.mod.stslib.actions.common.AutoplayCardAction;
 import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.AutoplayField;
-import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -20,14 +20,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class MysteriousPyramids extends HubrisRelic implements CustomBottleRelic
+public class MysteriousPyramids extends HubrisRelic implements CustomBottleRelic, CustomSavable<List<Integer>>
 {
     public static final String ID = "hubris:MysteriousPyramids";
     private static final int COUNT = 2;
     private boolean cardSelected = true;
     private List<AbstractCard> cards = new ArrayList<>(COUNT);
-
-    private static final String CONFIG_KEY = "pyramid_";
 
     public MysteriousPyramids()
     {
@@ -55,44 +53,37 @@ public class MysteriousPyramids extends HubrisRelic implements CustomBottleRelic
         initializeTips();
     }
 
-    public static void save(SpireConfig config)
+    @Override
+    public List<Integer> onSave()
     {
-        if (AbstractDungeon.player != null && AbstractDungeon.player.hasRelic(MysteriousPyramids.ID)) {
-            MysteriousPyramids relic = (MysteriousPyramids) AbstractDungeon.player.getRelic(ID);
-            for (int i=0; i<COUNT; ++i) {
-                config.setInt(CONFIG_KEY + i, AbstractDungeon.player.masterDeck.group.indexOf(relic.cards.get(i)));
-            }
-        } else {
-            for (int i=0; i<COUNT; ++i) {
-                config.remove(CONFIG_KEY + i);
-            }
+        List<Integer> cardIndices = new ArrayList<>();
+        for (int i=0; i<COUNT; ++i) {
+            cardIndices.add(AbstractDungeon.player.masterDeck.group.indexOf(cards.get(i)));
         }
+        return cardIndices;
     }
 
-    public static void load(SpireConfig config)
+    @Override
+    public void onLoad(List<Integer> cardIndices)
     {
-        if (AbstractDungeon.player.hasRelic(ID)) {
-            MysteriousPyramids relic = (MysteriousPyramids) AbstractDungeon.player.getRelic(ID);
-
-            if (relic.cards.isEmpty()) {
-                for (int i=0; i<COUNT; ++i) {
-                    if (config.has(CONFIG_KEY + i)) {
-                        int idx = config.getInt(CONFIG_KEY + i);
-                        AbstractCard c = AbstractDungeon.player.masterDeck.group.get(idx);
-                        if (c == null) {
-                            relic.cards.clear();
-                            return;
-                        }
-                        PyramidsField.inPyramids.set(c, true);
-                        relic.cards.add(c);
-                    } else {
-                        relic.cards.clear();
-                        return;
-                    }
+        if (cardIndices == null) {
+            return;
+        }
+        for (int i=0; i<COUNT; ++i) {
+            if (cardIndices.size() > i && AbstractDungeon.player.masterDeck.size() > cardIndices.get(i)) {
+                AbstractCard c = AbstractDungeon.player.masterDeck.group.get(cardIndices.get(i));
+                if (c == null) {
+                    cards.clear();
+                    return;
                 }
-                relic.setDescriptionAfterLoading();
+                PyramidsField.inPyramids.set(c, true);
+                cards.add(c);
+            } else {
+                cards.clear();
+                return;
             }
         }
+        setDescriptionAfterLoading();
     }
 
     public static void clear()
