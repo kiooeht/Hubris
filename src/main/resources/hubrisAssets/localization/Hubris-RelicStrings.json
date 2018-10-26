@@ -423,7 +423,7 @@
     "NAME": "Toy Battleship",
     "FLAVOR": "E6.",
     "DESCRIPTIONS": [
-      "The first card played each combat also draws #b",
+      "Whenever you enter a Rest Site, during the next combat the first card played each turn also draws #b",
       " card."
     ]
   },

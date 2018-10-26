@@ -1,9 +1,9 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
 import basemod.abstracts.CustomBottleRelic;
+import basemod.abstracts.CustomSavable;
 import com.evacipated.cardcrawl.mod.hubris.patches.cards.AbstractCard.BottleRainField;
 import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
-import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -14,13 +14,11 @@ import com.megacrit.cardcrawl.rooms.AbstractRoom;
 
 import java.util.function.Predicate;
 
-public class BottledRain extends HubrisRelic implements CustomBottleRelic
+public class BottledRain extends HubrisRelic implements CustomBottleRelic, CustomSavable<Integer>
 {
     public static final String ID = "hubris:BottledRain";
     private boolean cardSelected = true;
     private AbstractCard card = null;
-
-    private static final String CONFIG_KEY = "bottledRain";
 
     public BottledRain()
     {
@@ -44,34 +42,25 @@ public class BottledRain extends HubrisRelic implements CustomBottleRelic
         return card.makeCopy();
     }
 
-    public static void save(SpireConfig config)
+    @Override
+    public Integer onSave()
     {
-        if (AbstractDungeon.player != null && AbstractDungeon.player.hasRelic(BottledRain.ID)) {
-            BottledRain relic = (BottledRain) AbstractDungeon.player.getRelic(ID);
-            config.setInt(CONFIG_KEY, AbstractDungeon.player.masterDeck.group.indexOf(relic.card));
-        } else {
-            config.remove(CONFIG_KEY);
-        }
+        return AbstractDungeon.player.masterDeck.group.indexOf(card);
     }
 
-    public static void load(SpireConfig config)
+    @Override
+    public void onLoad(Integer cardIndex)
     {
-        if (AbstractDungeon.player.hasRelic(ID) && config.has(CONFIG_KEY)) {
-            BottledRain relic = (BottledRain) AbstractDungeon.player.getRelic(ID);
-            int cardIndex = config.getInt(CONFIG_KEY);
-
-            if (cardIndex >= 0 && cardIndex < AbstractDungeon.player.masterDeck.group.size()) {
-                relic.card = AbstractDungeon.player.masterDeck.group.get(cardIndex);
-                if (relic.card != null) {
-                    BottleRainField.inBottleRain.set(relic.card, true);
-                    relic.setDescriptionAfterLoading();
-                }
+        if (cardIndex == null) {
+            return;
+        }
+        if (cardIndex >= 0 && cardIndex < AbstractDungeon.player.masterDeck.group.size()) {
+            card = AbstractDungeon.player.masterDeck.group.get(cardIndex);
+            if (card != null) {
+                BottleRainField.inBottleRain.set(card, true);
+                setDescriptionAfterLoading();
             }
         }
-    }
-
-    public static void clear()
-    {
     }
 
     @Override

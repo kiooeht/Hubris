@@ -1,9 +1,9 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
 import basemod.BaseMod;
+import basemod.abstracts.CustomSavable;
 import com.evacipated.cardcrawl.mod.hubris.cards.DisguiseKitOption;
 import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
-import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -11,25 +11,20 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
-import com.megacrit.cardcrawl.helpers.FontHelper;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DisguiseKit extends HubrisRelic
+public class DisguiseKit extends HubrisRelic implements CustomSavable<String>
 {
     public static final String ID = "hubris:DisguiseKit";
     public AbstractPlayer.PlayerClass chosenClass = null;
     private boolean pickCard = false;
     private Map<AbstractCard.CardRarity, CardGroup> chosenPools = null;
-
-    private static final String CONFIG_KEY = "disguiseKit";
 
     public DisguiseKit()
     {
@@ -46,42 +41,24 @@ public class DisguiseKit extends HubrisRelic
         }
     }
 
-    public static void save(SpireConfig config)
+    @Override
+    public String onSave()
     {
-        if (AbstractDungeon.player != null && AbstractDungeon.player.hasRelic(DisguiseKit.ID)) {
-            DisguiseKit relic = (DisguiseKit) AbstractDungeon.player.getRelic(ID);
-            if (relic.chosenClass != null) {
-                config.setString(CONFIG_KEY, relic.chosenClass.name());
-            } else {
-                config.remove(CONFIG_KEY);
-            }
-        } else {
-            config.remove(CONFIG_KEY);
-        }
+        return chosenClass.name();
     }
 
-    public static void load(SpireConfig config)
+    @Override
+    public void onLoad(String playerClass)
     {
-        if (AbstractDungeon.player.hasRelic(ID) && config.has(CONFIG_KEY)) {
-            DisguiseKit relic = (DisguiseKit) AbstractDungeon.player.getRelic(ID);
-            try {
-                if (!relic.chooseClass(AbstractPlayer.PlayerClass.valueOf(config.getString(CONFIG_KEY)))) {
-                    System.out.println("OH GOD WTF!!");
-                }
-            } catch (IllegalArgumentException ignored) {
-                relic.chosenClass = null;
-            }
+        if (!chooseClass(AbstractPlayer.PlayerClass.valueOf(playerClass))) {
+            System.out.println("OH GOD WTF!!");
         }
-    }
-
-    public static void clear()
-    {
     }
 
     private String chosenClassName()
     {
         AbstractPlayer character = BaseMod.findCharacter(chosenClass);
-        return BaseMod.colorString(character.getLocalizedCharacterName(), "#" + character.getCardColor().toString());
+        return BaseMod.colorString(character.getLocalizedCharacterName(), "#" + character.getCardRenderColor().toString());
     }
 
     @Override

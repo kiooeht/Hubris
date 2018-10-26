@@ -156,15 +156,6 @@ public class HubrisMod implements
     {
         logger.info("Loading Save Data");
         try {
-            SpireConfig config = new SpireConfig("Hubris", "SaveData");
-
-            BottledRain.load(config);
-            DisguiseKit.load(config);
-            MysteriousPyramids.load(config);
-            Zylophone.load(config);
-            EmptyBottle.load(config);
-            DuctTape.load(config);
-
             otherSaveData = new SpireConfig("Hubris", "OtherSaveData");
             if (hasInfiniteSpire) {
                 InfiniteBlow.load();
@@ -178,22 +169,12 @@ public class HubrisMod implements
     {
         logger.info("Saving Data");
         try {
-            SpireConfig config = new SpireConfig("Hubris", "SaveData");
-
-            BottledRain.save(config);
-            DisguiseKit.save(config);
-            MysteriousPyramids.save(config);
-            Zylophone.save(config);
-            EmptyBottle.save(config);
-            // Duct Tape saving is handled separately
-
             if (otherSaveData == null) {
                 otherSaveData = new SpireConfig("Hubris", "OtherSaveData");
             }
             if (hasInfiniteSpire) {
                 InfiniteBlow.save();
             }
-            config.save();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -207,11 +188,7 @@ public class HubrisMod implements
             config.clear();
             config.save();
 
-            BottledRain.clear();
-            DisguiseKit.clear();
             MysteriousPyramids.clear();
-            Zylophone.clear();
-            EmptyBottle.clear();
         } catch (IOException e) {
             e.printStackTrace();
         }

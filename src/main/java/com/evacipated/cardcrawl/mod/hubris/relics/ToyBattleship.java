@@ -24,15 +24,26 @@ public class ToyBattleship extends HubrisRelic
     }
 
     @Override
-    public void atBattleStartPreDraw()
+    public void atTurnStart()
     {
-        beginLongPulse();
+        if (counter == -2) {
+            beginLongPulse();
+        }
     }
 
     @Override
     public void onVictory()
     {
         stopPulse();
+        counter = -1;
+    }
+
+    @Override
+    public void onEnterRestRoom()
+    {
+        flash();
+        counter = -2;
+        pulse = true;
     }
 
     @Override

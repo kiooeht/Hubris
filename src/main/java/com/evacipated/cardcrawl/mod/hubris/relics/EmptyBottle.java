@@ -1,20 +1,21 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
+import basemod.abstracts.CustomSavable;
 import com.evacipated.cardcrawl.mod.hubris.actions.utility.SetPotionSlotAction;
 import com.evacipated.cardcrawl.mod.hubris.patches.potions.AbstractPotion.PotionUseCountField;
 import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.evacipated.cardcrawl.mod.stslib.relics.BetterOnUsePotionRelic;
-import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.potions.AbstractPotion;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 
-public class EmptyBottle extends HubrisRelic implements BetterOnUsePotionRelic
+import java.util.ArrayList;
+import java.util.List;
+
+public class EmptyBottle extends HubrisRelic implements BetterOnUsePotionRelic, CustomSavable<List<Integer>>
 {
     public static final String ID = "hubris:EmptyBottle";
     public static final int POTION_USES = 2;
-
-    private static final String CONFIG_KEY = "potionUse_";
 
     public EmptyBottle()
     {
@@ -27,32 +28,29 @@ public class EmptyBottle extends HubrisRelic implements BetterOnUsePotionRelic
         return DESCRIPTIONS[0];
     }
 
-    public static void save(SpireConfig config)
+    @Override
+    public List<Integer> onSave()
     {
-        if (AbstractDungeon.player != null && AbstractDungeon.player.hasRelic(ID)) {
-            for (int i=0; i<AbstractDungeon.player.potions.size(); ++i) {
-                config.setInt(CONFIG_KEY + i, PotionUseCountField.useCount.get(AbstractDungeon.player.potions.get(i)));
-            }
-        } else {
-            config.remove(CONFIG_KEY);
+        List<Integer> potionCounts = new ArrayList<>();
+        for (AbstractPotion p : AbstractDungeon.player.potions) {
+            potionCounts.add(PotionUseCountField.useCount.get(p));
         }
+        return potionCounts;
     }
 
-    public static void load(SpireConfig config)
+    @Override
+    public void onLoad(List<Integer> potionCounts)
     {
-        if (AbstractDungeon.player.hasRelic(ID)) {
-            for (int i = 0; i < AbstractDungeon.player.potions.size(); ++i) {
-                int uses = POTION_USES;
-                if (config.has(CONFIG_KEY + i)) {
-                    uses = config.getInt(CONFIG_KEY + i);
-                }
-                PotionUseCountField.useCount.set(AbstractDungeon.player.potions.get(i), uses);
-            }
+        if (potionCounts == null) {
+            return;
         }
-    }
-
-    public static void clear()
-    {
+        for (int i = 0; i < AbstractDungeon.player.potions.size(); ++i) {
+            int uses = POTION_USES;
+            if (potionCounts.size() > i) {
+                uses = potionCounts.get(i);
+            }
+            PotionUseCountField.useCount.set(AbstractDungeon.player.potions.get(i), uses);
+        }
     }
 
     @Override

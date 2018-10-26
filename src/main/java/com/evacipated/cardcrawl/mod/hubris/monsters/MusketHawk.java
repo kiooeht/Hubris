@@ -26,7 +26,7 @@ public class MusketHawk extends AbstractMonster
     public static final String ID = "hubris:MusketHawk";
     public static final String NAME = "Musket Hawk";
     public static final String[] MOVES = {};
-    public static final int HP = 250;
+    public static final int HP = 350;
 
     private static final byte LOAD_CANNON = 0;
     private static final byte FIRE_CANNON = 1;
