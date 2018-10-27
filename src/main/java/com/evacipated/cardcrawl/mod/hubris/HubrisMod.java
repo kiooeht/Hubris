@@ -256,7 +256,7 @@ public class HubrisMod implements
 
         BaseMod.addBoss(TheBeyond.ID, GrandSnecko.ID, assetPath("images/ui/map/boss/grandSnecko.png"), assetPath("images/ui/map/bossOutline/grandSnecko.png"));
         BaseMod.addBoss(TheCity.ID, MusketHawk.ID, assetPath("images/ui/map/boss/musketHawk.png"), assetPath("images/ui/map/bossOutline/musketHawk.png"));
-        //BaseMod.addBoss(TheCity.ID, NecromanticTotem.ID, assetPath("images/ui/map/boss/necromanticTotem.png"), assetPath("images/ui/map/bossOutline/necromanticTotem.png"));
+        BaseMod.addBoss(TheCity.ID, NecromanticTotem.ID, assetPath("images/ui/map/boss/necromanticTotem.png"), assetPath("images/ui/map/bossOutline/necromanticTotem.png"));
 
         powerAtlas = new TextureAtlas(Gdx.files.internal(assetPath("images/powers/powers.atlas")));
     }
