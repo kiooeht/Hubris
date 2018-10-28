@@ -2,6 +2,7 @@ package com.evacipated.cardcrawl.mod.hubris.relics;
 
 import basemod.BaseMod;
 import basemod.abstracts.CustomSavable;
+import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.hubris.cards.DisguiseKitOption;
 import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -44,12 +45,19 @@ public class DisguiseKit extends HubrisRelic implements CustomSavable<String>
     @Override
     public String onSave()
     {
+        if (chosenClass == null) {
+            HubrisMod.logger.warn("Cunning Disguise chosenClass is null");
+            return null;
+        }
         return chosenClass.name();
     }
 
     @Override
     public void onLoad(String playerClass)
     {
+        if (playerClass == null) {
+            return;
+        }
         if (!chooseClass(AbstractPlayer.PlayerClass.valueOf(playerClass))) {
             System.out.println("OH GOD WTF!!");
         }
@@ -82,7 +90,7 @@ public class DisguiseKit extends HubrisRelic implements CustomSavable<String>
     {
         super.update();
 
-        if (pickCard && !AbstractDungeon.isScreenUp && !AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
+        if (pickCard && !AbstractDungeon.gridSelectScreen.selectedCards.isEmpty()) {
             pickCard = false;
             DisguiseKitOption selected = (DisguiseKitOption) AbstractDungeon.gridSelectScreen.selectedCards.get(0);
             AbstractDungeon.gridSelectScreen.selectedCards.clear();
