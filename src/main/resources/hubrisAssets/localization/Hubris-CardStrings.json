@@ -21,7 +21,7 @@
   },
   "hubris:SlightOfHand": {
     "NAME": "Sleight of Hand",
-    "DESCRIPTION": "Draw or Discard 1 card."
+    "DESCRIPTION": "Discard 1 card. NL It costs 0 until played."
   },
   "hubris:Wrath": {
     "NAME": "Wrath",

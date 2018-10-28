@@ -1,12 +1,8 @@
 package com.evacipated.cardcrawl.mod.hubris.cards.green;
 
 import basemod.abstracts.CustomCard;
-import basemod.helpers.ModalChoice;
-import basemod.helpers.ModalChoiceBuilder;
 import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
-import com.evacipated.cardcrawl.mod.hubris.cards.curses.Hubris;
-import com.megacrit.cardcrawl.actions.common.DiscardAction;
-import com.megacrit.cardcrawl.actions.common.DrawCardAction;
+import com.evacipated.cardcrawl.mod.hubris.actions.unique.SlightofHandAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -14,7 +10,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
-public class SlightOfHand extends CustomCard implements ModalChoice.Callback
+public class SlightOfHand extends CustomCard
 {
     public static final String ID = "hubris:SlightOfHand";
     public static final String IMG = HubrisMod.BETA_SKILL;
@@ -24,37 +20,17 @@ public class SlightOfHand extends CustomCard implements ModalChoice.Callback
     private static final int COST = 1;
     private static final int UPGRADE_COST = 0;
 
-    private ModalChoice modal;
-
     public SlightOfHand()
     {
         super(ID, NAME, IMG, COST, DESCRIPTION, CardType.SKILL, CardColor.GREEN, CardRarity.COMMON, CardTarget.SELF);
 
-        modal = new ModalChoiceBuilder()
-                .setCallback(this)
-                .setColor(CardColor.GREEN)
-                .addOption("Draw", "Draw 1 card.", CardTarget.SELF)
-                .addOption("Discard", "Discard 1 card.", CardTarget.SELF)
-                .create();
+
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m)
     {
-        modal.open();
-    }
-
-    @Override
-    public void optionSelected(AbstractPlayer p, AbstractMonster m, int i)
-    {
-        switch (i) {
-            case 0:
-                AbstractDungeon.actionManager.addToBottom(new DrawCardAction(p, 1));
-                break;
-            case 1:
-                AbstractDungeon.actionManager.addToBottom(new DiscardAction(p, p, 1, false));
-                break;
-        }
+        AbstractDungeon.actionManager.addToBottom(new SlightofHandAction());
     }
 
     @Override
