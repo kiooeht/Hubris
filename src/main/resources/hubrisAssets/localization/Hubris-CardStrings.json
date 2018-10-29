@@ -75,8 +75,8 @@
   },
   "hubris:ReadiedAction": {
     "NAME": "Readied Action",
-    "DESCRIPTION": "At the end of this turn, Retain up to !M! card.",
-    "UPGRADE_DESCRIPTION": "At the end of this turn, Retain up to !M! cards."
+    "DESCRIPTION": "At the end of this turn, Retain up to !M! card. NL It costs 1 less Energy next turn.",
+    "UPGRADE_DESCRIPTION": "At the end of this turn, Retain up to !M! cards. NL They cost 1 less Energy next turn."
   },
   "hubris:CleavingFinish": {
     "NAME": "Cleaving Finish",
