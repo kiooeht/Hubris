@@ -136,7 +136,7 @@ public class NecromanticTotem extends AbstractMonster
     @Override
     protected void getMove(int num)
     {
-        if (numTurns == 0) {
+        if (doneMove < 0) {
             setMove("Raise Dead", SUMMON, Intent.UNKNOWN);
         } else if (num < 50) {
             setMove(BUFF1, Intent.BUFF);
@@ -145,8 +145,6 @@ public class NecromanticTotem extends AbstractMonster
         } else {
             setMove(DEBUFF1, Intent.STRONG_DEBUFF);
         }
-
-        ++numTurns;
     }
 
     @Override
