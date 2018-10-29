@@ -147,5 +147,10 @@
     "NAME": "Sharpening Stone",
     "DESCRIPTION": "Choose an Attack in hand, it gains Piercing for the rest of combat. NL Exhaust.",
     "UPGRADE_DESCRIPTION": "Choose !M! Attacks in hand, they gain Piercing for the rest of combat. NL Exhaust."
+  },
+  "hubris:Rewind": {
+    "NAME": "Rewind",
+    "DESCRIPTION": "Innate. NL Replay every card you've played this combat. NL Purge.",
+    "UPGRADE_DESCRIPTION": "Grave. NL Replay every card you've played this combat. NL Purge."
   }
 }
