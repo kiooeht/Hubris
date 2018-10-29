@@ -142,5 +142,10 @@
   "hubris:Disease": {
     "NAME": "Disease",
     "DESCRIPTION": "Unplayable. Retain NL At the end of your turn, put a copy of this card into your discard pile."
+  },
+  "hubris:SharpeningStone": {
+    "NAME": "Sharpening Stone",
+    "DESCRIPTION": "Choose an Attack in hand, it gains Piercing for the rest of combat. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Choose !M! Attacks in hand, they gain Piercing for the rest of combat. NL Exhaust."
   }
 }
