@@ -35,7 +35,7 @@ public class Fate extends BlackCard
     }
 
     @Override
-    public void use(AbstractPlayer p, AbstractMonster m)
+    public void useWithEffect(AbstractPlayer p, AbstractMonster m)
     {
         AbstractDungeon.actionManager.addToBottom(new FateAction(cardID, CardColorEnumPatch.CardColorPatch.INFINITE_BLACK, true, magicNumber));
     }
