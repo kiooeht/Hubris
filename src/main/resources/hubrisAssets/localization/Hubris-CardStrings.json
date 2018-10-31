@@ -29,7 +29,7 @@
   },
   "hubris:EnhanceAbility": {
     "NAME": "Enhance Ability",
-    "DESCRIPTION": "Gain either !M! Strength, !M! Dexterity, !M! Focus, or !M!0  Temporary HP."
+    "DESCRIPTION": "Gain either !M! Strength, !M! Dexterity, !M! Focus, or !M!0  Temporary_HP."
   },
   "hubris:BullsStrength": {
     "NAME": "Bull's Strength",
@@ -45,7 +45,7 @@
   },
   "hubris:BearsEndurance": {
     "NAME": "Bear's Endurance",
-    "DESCRIPTION": "Gain !M! Temporary HP."
+    "DESCRIPTION": "Gain !M! Temporary_HP."
   },
   "hubris:Sloth": {
     "NAME": "Sloth",
