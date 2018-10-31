@@ -145,8 +145,8 @@
   },
   "hubris:SharpeningStone": {
     "NAME": "Sharpening Stone",
-    "DESCRIPTION": "Choose an Attack in hand, it gains Piercing for the rest of combat. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "Choose !M! Attacks in hand, they gain Piercing for the rest of combat. NL Exhaust."
+    "DESCRIPTION": "Choose !M! Attacks in hand, they gain Piercing for the rest of combat. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": " NL Startup: A random Attack in your deck gains Piercing for the rest of combat."
   },
   "hubris:Rewind": {
     "NAME": "Rewind",
