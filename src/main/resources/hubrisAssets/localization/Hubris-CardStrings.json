@@ -152,5 +152,9 @@
     "NAME": "Rewind",
     "DESCRIPTION": "Innate. NL Replay every card you've played this combat. NL Purge.",
     "UPGRADE_DESCRIPTION": "Grave. NL Replay every card you've played this combat. NL Purge."
+  },
+  "hubris:PowerSurge": {
+    "NAME": "Power Surge",
+    "DESCRIPTION": "Grave. NL Autoplay. NL Lose !M! Focus. NL NL Startup: Gain !M! Focus."
   }
 }
