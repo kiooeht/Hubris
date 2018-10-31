@@ -176,6 +176,7 @@ public class NecromanticTotem extends AbstractMonster
         super.die();
         onBossVictoryLogic();
         for (AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
+            m.powers.removeIf(p -> p.ID.equals(FakeDeathPower.POWER_ID));
             if (m.halfDead) {
                 AbstractDungeon.actionManager.addToTop(new HideHealthBarAction(m));
                 AbstractDungeon.actionManager.addToTop(new SuicideAction(m));
