@@ -156,5 +156,12 @@
   "hubris:PowerSurge": {
     "NAME": "Power Surge",
     "DESCRIPTION": "Grave. NL Autoplay. NL Lose !M! Focus. NL NL Startup: Gain !M! Focus."
+  },
+  "hubris:Sniper": {
+    "NAME": "Sniper",
+    "DESCRIPTION": "Unplayable. NL If this card is discarded from your hand, Shivs deal !M! additional damage.",
+    "EXTENDED_DESCRIPTION": [
+      "I can't play this card."
+    ]
   }
 }
