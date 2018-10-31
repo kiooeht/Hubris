@@ -35,10 +35,11 @@ public class PowerSurge extends CustomCard implements StartupCard
     }
 
     @Override
-    public void atBattleStartPreDraw()
+    public boolean atBattleStartPreDraw()
     {
         AbstractPlayer p = AbstractDungeon.player;
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new FocusPower(p, magicNumber), magicNumber));
+        return true;
     }
 
     @Override
