@@ -257,7 +257,7 @@ public class FakePlayer extends AbstractPlayer
     }
 
     @Override
-    protected void initializeStarterDeck()
+    public void initializeStarterDeck()
     {
 
     }

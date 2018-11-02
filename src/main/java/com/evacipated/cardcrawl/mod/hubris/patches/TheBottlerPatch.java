@@ -2,12 +2,14 @@ package com.evacipated.cardcrawl.mod.hubris.patches;
 
 import com.evacipated.cardcrawl.mod.hubris.events.thebeyond.TheBottler;
 import com.evacipated.cardcrawl.modthespire.lib.*;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.random.Random;
 import javassist.CtBehavior;
 
 import java.util.ArrayList;
 
 @SpirePatch(
-        cls="com.megacrit.cardcrawl.dungeons.AbstractDungeon",
+        clz=AbstractDungeon.class,
         method="getEvent"
 )
 public class TheBottlerPatch
@@ -16,7 +18,7 @@ public class TheBottlerPatch
             locator=Locator.class,
             localvars={"tmp"}
     )
-    public static void Insert(ArrayList<String> tmp)
+    public static void Insert(Random rng, ArrayList<String> tmp)
     {
         if (!TheBottler.canAppear()) {
             tmp.remove(TheBottler.ID);
@@ -28,7 +30,7 @@ public class TheBottlerPatch
         @Override
         public int[] Locate(CtBehavior ctMethodToPatch) throws Exception
         {
-            Matcher finalMatcher = new Matcher.MethodCallMatcher("java.util.ArrayList", "isEmpty");
+            Matcher finalMatcher = new Matcher.MethodCallMatcher(ArrayList.class, "isEmpty");
             return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
         }
     }
