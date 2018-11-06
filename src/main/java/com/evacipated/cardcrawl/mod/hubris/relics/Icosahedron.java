@@ -166,6 +166,7 @@ public class Icosahedron extends HubrisRelic implements ClickableRelic
                 actions.add(new ObtainPotionAction(AbstractDungeon.returnRandomPotion(AbstractPotion.PotionRarity.COMMON, true)));
                 break;
             case 11: // Gain 100 Gold.
+                AbstractDungeon.player.gainGold(100);
                 EffectHelper.gainGold(p, this.currentX, this.currentY, 100);
                 break;
             case 10: // Add a Mulligan to your hand.
