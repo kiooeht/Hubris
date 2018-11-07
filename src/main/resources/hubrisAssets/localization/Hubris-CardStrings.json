@@ -163,5 +163,9 @@
     "EXTENDED_DESCRIPTION": [
       "I can't play this card."
     ]
+  },
+  "hubris:Insight": {
+    "NAME": "Insight",
+    "DESCRIPTION": "Look at the top !M! cards of your draw pile. Add one of them to your hand."
   }
 }
