@@ -167,5 +167,17 @@
   "hubris:Insight": {
     "NAME": "Insight",
     "DESCRIPTION": "Look at the top !M! cards of your draw pile. Add one of them to your hand."
+  },
+  "hubris:Strike_Merchant": {
+    "NAME": "Strike",
+    "DESCRIPTION": "Deal !D! damage."
+  },
+  "hubris:Defend_Merchant": {
+    "NAME": "Defend",
+    "DESCRIPTION": "Gain !B! Block."
+  },
+  "hubris:MerchantsHand": {
+    "NAME": "Merchant's Hand",
+    "DESCRIPTION": "Deal !D! damage. NL If this kills a non-minion enemy, gain !M! Gold."
   }
 }
