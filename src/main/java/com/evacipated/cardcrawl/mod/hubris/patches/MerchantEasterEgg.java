@@ -7,6 +7,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.characters.AnimatedNpc;
 import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.SmilingMask;
 import javassist.CannotCompileException;
 import javassist.expr.ExprEditor;
@@ -30,15 +31,22 @@ public class MerchantEasterEgg
         {
             if (__instance.hasRelic(NiceRug.ID) && __instance.hasRelic(SmilingMask.ID)) {
                 if (merchant == null) {
-                    merchant = new AnimatedNpc(__instance.drawX, __instance.drawY, "images/npcs/merchant/skeleton.atlas", "images/npcs/merchant/skeleton.json", "idle");
+                    merchant = new AnimatedNpc(__instance.drawX + __instance.animX, __instance.drawY + __instance.animY + AbstractDungeon.sceneOffsetY,
+                            "images/npcs/merchant/skeleton.atlas", "images/npcs/merchant/skeleton.json", "idle");
                     __instance.hb_w = __instance.hb.width = 180.0f * Settings.scale;
                     __instance.hb_h = __instance.hb.height = 170.0f * Settings.scale;
                     __instance.hb_y -= 40.0f * Settings.scale;
                     __instance.healthBarUpdatedEvent();
                 }
+                merchant.skeleton.setPosition(__instance.drawX + __instance.animX, __instance.drawY + __instance.animY + AbstractDungeon.sceneOffsetY);
                 merchant.skeleton.setFlip(true, false);
                 merchant.render(sb);
                 return SpireReturn.Return(null);
+            } else {
+                if (merchant != null) {
+                    merchant.dispose();
+                }
+                merchant = null;
             }
             return SpireReturn.Continue();
         }
