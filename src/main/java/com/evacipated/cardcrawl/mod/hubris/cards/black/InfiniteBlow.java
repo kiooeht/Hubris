@@ -3,6 +3,7 @@ package com.evacipated.cardcrawl.mod.hubris.cards.black;
 import com.evacipated.cardcrawl.mod.hubris.CardIgnore;
 import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.DamageAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.DamageInfo;
@@ -12,6 +13,7 @@ import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.vfx.combat.SearingBlowEffect;
 import infinitespire.abstracts.BlackCard;
 
 import java.io.IOException;
@@ -49,9 +51,12 @@ public class InfiniteBlow extends BlackCard
     }
 
     @Override
-    public void use(AbstractPlayer p, AbstractMonster m)
+    public void useWithEffect(AbstractPlayer p, AbstractMonster m)
     {
-        AbstractDungeon.actionManager.addToBottom(new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn), AbstractGameAction.AttackEffect.FIRE));
+        if (m != null) {
+            AbstractDungeon.actionManager.addToBottom(new VFXAction(new SearingBlowEffect(m.hb.cX, m.hb.cY, timesUpgraded), 0.2F));
+        }
+        AbstractDungeon.actionManager.addToBottom(new DamageAction(m, new DamageInfo(p, damage, damageTypeForTurn), AbstractGameAction.AttackEffect.BLUNT_HEAVY));
     }
 
     @Override

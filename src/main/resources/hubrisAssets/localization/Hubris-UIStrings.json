@@ -3,5 +3,11 @@
     "TEXT": [
       "Fire"
     ]
+  },
+  "SharpeningStoneAction": {
+    "TEXT": [
+      "Sharpen",
+      "Piercing. NL "
+    ]
   }
 }

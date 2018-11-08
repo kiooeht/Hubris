@@ -1,6 +1,7 @@
 package com.evacipated.cardcrawl.mod.hubris.actions.unique;
 
 import com.badlogic.gdx.math.Interpolation;
+import com.evacipated.cardcrawl.mod.hubris.powers.FakeDeathPower;
 import com.evacipated.cardcrawl.mod.hubris.powers.UndeadPower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
@@ -61,6 +62,7 @@ public class RaiseDeadAction extends AbstractGameAction
             m.init();
             m.applyPowers();
             AbstractPower undead = new UndeadPower(m, parent, UNDEAD_AMT);
+            m.powers.removeIf(p -> p.ID.equals(FakeDeathPower.POWER_ID));
             m.powers.removeIf(p -> p.type == AbstractPower.PowerType.DEBUFF);
             m.powers.add(0, undead);
             undead.onInitialApplication();

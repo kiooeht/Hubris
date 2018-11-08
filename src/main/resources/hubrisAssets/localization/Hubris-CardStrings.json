@@ -21,7 +21,7 @@
   },
   "hubris:SlightOfHand": {
     "NAME": "Sleight of Hand",
-    "DESCRIPTION": "Draw or Discard 1 card."
+    "DESCRIPTION": "Discard 1 card. NL It costs 0 until played."
   },
   "hubris:Wrath": {
     "NAME": "Wrath",
@@ -29,7 +29,7 @@
   },
   "hubris:EnhanceAbility": {
     "NAME": "Enhance Ability",
-    "DESCRIPTION": "Gain either !M! Strength, !M! Dexterity, !M! Focus, or !M!0  Temporary HP."
+    "DESCRIPTION": "Gain either !M! Strength, !M! Dexterity, !M! Focus, or !M!0  Temporary_HP."
   },
   "hubris:BullsStrength": {
     "NAME": "Bull's Strength",
@@ -45,7 +45,7 @@
   },
   "hubris:BearsEndurance": {
     "NAME": "Bear's Endurance",
-    "DESCRIPTION": "Gain !M! Temporary HP."
+    "DESCRIPTION": "Gain !M! Temporary_HP."
   },
   "hubris:Sloth": {
     "NAME": "Sloth",
@@ -75,8 +75,8 @@
   },
   "hubris:ReadiedAction": {
     "NAME": "Readied Action",
-    "DESCRIPTION": "At the end of this turn, Retain up to !M! card.",
-    "UPGRADE_DESCRIPTION": "At the end of this turn, Retain up to !M! cards."
+    "DESCRIPTION": "At the end of this turn, Retain up to !M! card. NL It costs 1 less Energy next turn.",
+    "UPGRADE_DESCRIPTION": "At the end of this turn, Retain up to !M! cards. NL They cost 1 less Energy next turn."
   },
   "hubris:CleavingFinish": {
     "NAME": "Cleaving Finish",
@@ -142,5 +142,42 @@
   "hubris:Disease": {
     "NAME": "Disease",
     "DESCRIPTION": "Unplayable. Retain NL At the end of your turn, put a copy of this card into your discard pile."
+  },
+  "hubris:SharpeningStone": {
+    "NAME": "Sharpening Stone",
+    "DESCRIPTION": "Choose !M! Attacks in hand, they gain Piercing for the rest of combat. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": " NL Startup: A random Attack in your deck gains Piercing for the rest of combat."
+  },
+  "hubris:Rewind": {
+    "NAME": "Rewind",
+    "DESCRIPTION": "Innate. NL Replay every card you've played this combat. NL Purge.",
+    "UPGRADE_DESCRIPTION": "Grave. NL Replay every card you've played this combat. NL Purge."
+  },
+  "hubris:PowerSurge": {
+    "NAME": "Power Surge",
+    "DESCRIPTION": "Grave. NL Autoplay. NL Lose !M! Focus. NL NL Startup: Gain !M! Focus."
+  },
+  "hubris:Sniper": {
+    "NAME": "Sniper",
+    "DESCRIPTION": "Unplayable. NL If this card is discarded from your hand, Shivs deal !M! additional damage.",
+    "EXTENDED_DESCRIPTION": [
+      "I can't play this card."
+    ]
+  },
+  "hubris:Insight": {
+    "NAME": "Insight",
+    "DESCRIPTION": "Look at the top !M! cards of your draw pile. Add one of them to your hand."
+  },
+  "hubris:Strike_Merchant": {
+    "NAME": "Strike",
+    "DESCRIPTION": "Deal !D! damage."
+  },
+  "hubris:Defend_Merchant": {
+    "NAME": "Defend",
+    "DESCRIPTION": "Gain !B! Block."
+  },
+  "hubris:MerchantsHand": {
+    "NAME": "Merchant's Hand",
+    "DESCRIPTION": "Deal !D! damage. NL If this kills a non-minion enemy, gain !M! Gold."
   }
 }

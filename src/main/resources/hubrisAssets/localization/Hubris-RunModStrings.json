@@ -2,5 +2,9 @@
   "hubris:Hubris": {
     "NAME": "Hubris Curse",
     "DESCRIPTION": "Add the Hubris curse to starting deck."
+  },
+  "hubris:Mercantile": {
+    "NAME": "Mercantile",
+    "DESCRIPTION": "Be the Merchant."
   }
 }

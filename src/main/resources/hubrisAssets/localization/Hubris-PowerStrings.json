@@ -59,8 +59,8 @@
     "NAME": "Readied Action",
     "DESCRIPTIONS": [
       "At the end of your turn, you may retain #b",
-      " card.",
-      " cards."
+      " card. NL It costs #b1 less Energy next turn.",
+      " cards. NL They cost #b1 less Energy next turn."
     ]
   },
   "hubris:TimeStop": {

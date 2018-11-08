@@ -14,7 +14,7 @@ public class HerbalPaste extends HubrisRelic
 
     public HerbalPaste()
     {
-        super(ID, "herbalPaste.png", RelicTier.RARE, LandingSound.CLINK);
+        super(ID, "herbalPaste.png", RelicTier.SHOP, LandingSound.CLINK);
     }
 
     @Override

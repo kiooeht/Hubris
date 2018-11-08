@@ -30,7 +30,7 @@
     "FLAVOR": "Is it pronounced gif or gif?",
     "DESCRIPTIONS": [
       "At the start of each combat, gain #b",
-      " #yTemporary HP."
+      " #yTemporary_HP."
     ]
   },
   "hubris:CuriousFeather": {
@@ -93,7 +93,7 @@
     "NAME": "Bottled Heart",
     "FLAVOR": "Your own heart in a bottle. Still beating.",
     "DESCRIPTIONS": [
-      "Upon pickup, this relic gains charge equal to half your Max HP and your Max HP is reduced to #b1. NL Start each combat with #yTemporary HP equal to this relic's charge. NL Any changes to Max HP affect this instead.",
+      "Upon pickup, this relic gains charge equal to half your Max HP and your Max HP is reduced to #b1. NL Start each combat with #yTemporary_HP equal to this relic's charge. NL Any changes to Max HP affect this instead.",
       " NL #ySynergy: ",
       "If you have the ",
       ", this gains an additional #b",

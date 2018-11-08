@@ -32,14 +32,14 @@ public class StunningStrike extends CustomCard
         tags.add(CardTags.STRIKE);
         exhaust = true;
         baseDamage = DAMAGE;
-        baseMagicNumber = STUN_LENGTH;
+        magicNumber = baseMagicNumber = STUN_LENGTH;
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m)
     {
         AbstractDungeon.actionManager.addToBottom(new DamageAction(m, new DamageInfo(p, damage, DamageInfo.DamageType.NORMAL), AbstractGameAction.AttackEffect.BLUNT_HEAVY));
-        AbstractDungeon.actionManager.addToBottom(new StunMonsterAction(m, p));
+        AbstractDungeon.actionManager.addToBottom(new StunMonsterAction(m, p, magicNumber));
     }
 
     @Override

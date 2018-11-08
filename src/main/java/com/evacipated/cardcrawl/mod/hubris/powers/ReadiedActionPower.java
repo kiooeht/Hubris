@@ -1,13 +1,12 @@
 package com.evacipated.cardcrawl.mod.hubris.powers;
 
+import com.evacipated.cardcrawl.mod.hubris.actions.unique.ReadiedActionAction;
 import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
-import com.megacrit.cardcrawl.actions.unique.RetainCardsAction;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
-import com.megacrit.cardcrawl.relics.RunicPyramid;
 
 public class ReadiedActionPower extends AbstractPower
 {
@@ -39,8 +38,8 @@ public class ReadiedActionPower extends AbstractPower
     @Override
     public void atEndOfTurn(boolean isPlayer)
     {
-        if (isPlayer && !AbstractDungeon.player.hand.isEmpty() && !AbstractDungeon.player.hasRelic(RunicPyramid.ID)) {
-            AbstractDungeon.actionManager.addToBottom(new RetainCardsAction(owner, amount));
+        if (isPlayer && !AbstractDungeon.player.hand.isEmpty()) {
+            AbstractDungeon.actionManager.addToBottom(new ReadiedActionAction(owner, amount));
         }
         AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(owner, owner, ID));
     }

@@ -14,6 +14,8 @@ import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
 import com.megacrit.cardcrawl.actions.common.RollMoveAction;
+import com.megacrit.cardcrawl.actions.common.SuicideAction;
+import com.megacrit.cardcrawl.actions.utility.HideHealthBarAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.cards.status.VoidCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -26,6 +28,7 @@ import com.megacrit.cardcrawl.powers.IntangiblePower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import com.megacrit.cardcrawl.powers.WeakPower;
 import com.megacrit.cardcrawl.vfx.CollectorCurseEffect;
+import com.megacrit.cardcrawl.vfx.combat.InflameEffect;
 
 public class NecromanticTotem extends AbstractMonster
 {
@@ -81,7 +84,9 @@ public class NecromanticTotem extends AbstractMonster
         AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new CursedLifePower(this, CURSE_AMT), CURSE_AMT));
 
         for (AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
-            m.powers.add(new FakeDeathPower(m));
+            if (m != this) {
+                m.powers.add(new FakeDeathPower(m));
+            }
         }
     }
 
@@ -131,7 +136,7 @@ public class NecromanticTotem extends AbstractMonster
     @Override
     protected void getMove(int num)
     {
-        if (numTurns == 0) {
+        if (doneMove < 0) {
             setMove("Raise Dead", SUMMON, Intent.UNKNOWN);
         } else if (num < 50) {
             setMove(BUFF1, Intent.BUFF);
@@ -140,8 +145,6 @@ public class NecromanticTotem extends AbstractMonster
         } else {
             setMove(DEBUFF1, Intent.STRONG_DEBUFF);
         }
-
-        ++numTurns;
     }
 
     @Override
@@ -172,6 +175,14 @@ public class NecromanticTotem extends AbstractMonster
         deathTimer += 1.5F;
         super.die();
         onBossVictoryLogic();
+        for (AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
+            m.powers.removeIf(p -> p.ID.equals(FakeDeathPower.POWER_ID));
+            if (m.halfDead) {
+                AbstractDungeon.actionManager.addToTop(new HideHealthBarAction(m));
+                AbstractDungeon.actionManager.addToTop(new SuicideAction(m));
+                AbstractDungeon.actionManager.addToTop(new VFXAction(m, new InflameEffect(m), 0.2f));
+            }
+        }
     }
 
     private float renderTimer = 0;
