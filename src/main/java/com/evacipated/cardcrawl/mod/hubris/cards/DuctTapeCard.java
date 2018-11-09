@@ -263,7 +263,7 @@ public class DuctTapeCard extends CustomCard
             if (cards.get(0) instanceof CustomCard) {
                 portraitTexture = CustomCard.getPortraitImage((CustomCard) cards.get(0));
             } else {
-                portraitTexture = ImageMaster.loadImage("images/1024Portraits/" + cards.get(0).assetURL + ".png");
+                portraitTexture = ImageMaster.loadImage("images/1024Portraits/" + cards.get(0).assetUrl + ".png");
             }
             TextureRegion portrait0 = new TextureRegion(portraitTexture);
             portrait0.setRegion(
@@ -277,7 +277,7 @@ public class DuctTapeCard extends CustomCard
             if (cards.get(1) instanceof CustomCard) {
                 portraitTexture = CustomCard.getPortraitImage((CustomCard) cards.get(1));
             } else {
-                portraitTexture = ImageMaster.loadImage("images/1024Portraits/" + cards.get(1).assetURL + ".png");
+                portraitTexture = ImageMaster.loadImage("images/1024Portraits/" + cards.get(1).assetUrl + ".png");
             }
             TextureRegion portrait1 = new TextureRegion(portraitTexture);
             portrait1.setRegion(
