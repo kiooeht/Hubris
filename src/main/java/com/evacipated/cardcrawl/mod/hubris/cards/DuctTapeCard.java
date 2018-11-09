@@ -831,29 +831,24 @@ public class DuctTapeCard extends CustomCard
     @Override
     public AbstractCard makeStatEquivalentCopy()
     {
-        DuctTapeCard card = (DuctTapeCard) makeCopy();
+        DuctTapeCard card = (DuctTapeCard) super.makeStatEquivalentCopy();
 
         for (int i=0; i<cards.size(); ++i) {
             card.cards.set(i, cards.get(i).makeStatEquivalentCopy());
         }
 
-        card.name = this.name;
-        card.target = this.target;
-        card.upgraded = this.upgraded;
-        card.timesUpgraded = this.timesUpgraded;
-        card.baseDamage = this.baseDamage;
-        card.baseBlock = this.baseBlock;
-        card.baseMagicNumber = this.baseMagicNumber;
-        card.cost = this.cost;
-        card.costForTurn = this.costForTurn;
-        card.isCostModified = this.isCostModified;
-        card.isCostModifiedForTurn = this.isCostModifiedForTurn;
-        card.inBottleLightning = this.inBottleLightning;
-        card.inBottleFlame = this.inBottleFlame;
-        card.inBottleTornado = this.inBottleTornado;
-        card.isSeen = this.isSeen;
-        card.isLocked = this.isLocked;
-        card.misc = this.misc;
+        return card;
+    }
+
+    @Override
+    public AbstractCard makeSameInstanceOf()
+    {
+        DuctTapeCard card = (DuctTapeCard) super.makeSameInstanceOf();
+
+        for (int i=0; i<cards.size(); ++i) {
+            card.cards.get(i).uuid = cards.get(i).uuid;
+        }
+
         return card;
     }
 
@@ -866,5 +861,14 @@ public class DuctTapeCard extends CustomCard
         }
 
         return ret;
+    }
+
+    public void checkCardUUIDs(HashSet<AbstractCard> foundCards, UUID uuid)
+    {
+        for (AbstractCard card : cards) {
+            if (card.uuid.equals(uuid)) {
+                foundCards.add(card);
+            }
+        }
     }
 }

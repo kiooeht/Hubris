@@ -403,7 +403,6 @@ public class HubrisMod implements
     {
         list.add(new CustomMod(Hubris.ID, "r", true));
         list.add(new CustomMod("hubris:Mercantile", "b", false));
-
     }
 
     private static void autoAddCards() throws URISyntaxException, IllegalAccessException, InstantiationException, NotFoundException, CannotCompileException
