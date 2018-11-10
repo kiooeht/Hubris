@@ -20,7 +20,7 @@ public class TenFootPole extends HubrisRelic implements OnReceivePowerRelic, Bet
 
     public TenFootPole()
     {
-        super(ID, "test5.png", RelicTier.COMMON, LandingSound.FLAT);
+        super(ID, "tenFootPole.png", RelicTier.COMMON, LandingSound.FLAT);
     }
 
     @Override
