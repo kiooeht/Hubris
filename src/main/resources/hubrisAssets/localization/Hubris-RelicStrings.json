@@ -433,5 +433,13 @@
     "DESCRIPTIONS": [
       " [#2aecd7]Usable [#2aecd7]once [#2aecd7]per [#2aecd7]combat. NL #yRetain your hand this turn."
     ]
+  },
+  "hubris:TenFootPole": {
+    "NAME": "10-Foot Pole",
+    "FLAVOR": "Almost as useful as a towel.",
+    "DESCRIPTIONS": [
+      "Take 50% less damage outside of combat.",
+      " NL You cannot be surprised or caught off-guard by mimics."
+    ]
   }
 }

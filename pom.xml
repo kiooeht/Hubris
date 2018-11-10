@@ -78,6 +78,13 @@
             <scope>system</scope>
             <systemPath>${basedir}/../_ModTheSpire/mods/ColoredMap.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>evilboys</groupId>
+            <artifactId>MimicMod</artifactId>
+            <version>0.0.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/../_ModTheSpire/mods/MimicMod.jar</systemPath>
+        </dependency>
     </dependencies>
 
     <build>

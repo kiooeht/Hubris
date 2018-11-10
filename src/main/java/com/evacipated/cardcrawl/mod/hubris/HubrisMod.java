@@ -90,6 +90,7 @@ public class HubrisMod implements
     public static final boolean hasConstructMod;
     public static final boolean hasFruityMod;
     public static final boolean hasInfiniteSpire;
+    public static final boolean hasMimicMod;
 
     static
     {
@@ -108,6 +109,10 @@ public class HubrisMod implements
         hasInfiniteSpire = Loader.isModLoaded("infinitespire");
         if (hasInfiniteSpire) {
             logger.info("Detected Infinite Spire");
+        }
+        hasMimicMod = Loader.isModLoaded("mimicmod");
+        if (hasMimicMod) {
+            logger.info("Detected Mimic Mod");
         }
     }
 
@@ -348,6 +353,7 @@ public class HubrisMod implements
         BaseMod.addRelic(new SlimyHat(), RelicType.SHARED);
         BaseMod.addRelic(new ToyBattleship(), RelicType.SHARED);
         BaseMod.addRelic(new DeckOfHolding(), RelicType.SHARED);
+        BaseMod.addRelic(new TenFootPole(), RelicType.SHARED);
 
         // Ironclad only
         BaseMod.addRelic(new IronBody(), RelicType.RED);
