@@ -426,5 +426,12 @@
       "Whenever you enter a Rest Site, during the next combat the first card played each turn also draws #b",
       " card."
     ]
+  },
+  "hubris:DeckOfHolding": {
+    "NAME": "Deck of Holding",
+    "FLAVOR": "A nice box to hold your cards.",
+    "DESCRIPTIONS": [
+      " [#2aecd7]Usable [#2aecd7]once [#2aecd7]per [#2aecd7]combat. NL #yRetain your hand."
+    ]
   }
 }

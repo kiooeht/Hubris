@@ -347,6 +347,7 @@ public class HubrisMod implements
         BaseMod.addRelic(new RunicObelisk(), RelicType.SHARED);
         BaseMod.addRelic(new SlimyHat(), RelicType.SHARED);
         BaseMod.addRelic(new ToyBattleship(), RelicType.SHARED);
+        BaseMod.addRelic(new DeckOfHolding(), RelicType.SHARED);
 
         // Ironclad only
         BaseMod.addRelic(new IronBody(), RelicType.RED);

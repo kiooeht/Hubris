@@ -145,5 +145,11 @@
       " #yPoison to you. NL If ",
       " is still alive, revives in #b1 turn at full HP."
     ]
+  },
+  "hubris:RetainHand": {
+    "NAME": "Retain Hand",
+    "DESCRIPTIONS": [
+      "Do not discard your hand at the end of this turn."
+    ]
   }
 }
