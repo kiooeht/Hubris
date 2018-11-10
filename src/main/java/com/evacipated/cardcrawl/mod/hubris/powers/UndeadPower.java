@@ -64,7 +64,7 @@ public class UndeadPower extends AbstractPower
     @Override
     public int onAttacked(DamageInfo info, int damageAmount)
     {
-        if (info.owner != null) {
+        if (info.owner != null && info.type != DamageInfo.DamageType.THORNS) {
             int poisonAmount = amount;
             AbstractPower poison = owner.getPower(PoisonPower.POWER_ID);
             if (poison == null) {
