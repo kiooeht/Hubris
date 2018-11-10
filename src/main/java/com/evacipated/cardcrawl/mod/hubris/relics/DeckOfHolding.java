@@ -15,7 +15,7 @@ public class DeckOfHolding extends HubrisRelic implements ClickableRelic
 
     public DeckOfHolding()
     {
-        super(ID, "test5.png", RelicTier.UNCOMMON, LandingSound.FLAT);
+        super(ID, "deckOfHolding.png", RelicTier.UNCOMMON, LandingSound.FLAT);
     }
 
     @Override

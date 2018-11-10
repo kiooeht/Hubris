@@ -431,7 +431,7 @@
     "NAME": "Deck of Holding",
     "FLAVOR": "A nice box to hold your cards.",
     "DESCRIPTIONS": [
-      " [#2aecd7]Usable [#2aecd7]once [#2aecd7]per [#2aecd7]combat. NL #yRetain your hand."
+      " [#2aecd7]Usable [#2aecd7]once [#2aecd7]per [#2aecd7]combat. NL #yRetain your hand this turn."
     ]
   }
 }
