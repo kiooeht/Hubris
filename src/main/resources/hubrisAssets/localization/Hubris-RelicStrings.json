@@ -214,8 +214,8 @@
     "NAME": "Stopwatch",
     "FLAVOR": "Maybe time's just a construct of human perception, an illusion created by—",
     "DESCRIPTIONS": [
-      " NL Lose #b1 charge. At the end of your turn, immediately start another turn. Energy and #yBlock are maintained between these turns. NL Starts with #b",
-      " charges. NL Only usable once per combat."
+      " [#2aecd7]Usable [#2aecd7]once [#2aecd7]per [#2aecd7]combat. NL Lose #b1 charge. At the end of your turn, immediately start another turn. Energy and #yBlock are maintained between these turns. NL Starts with #b",
+      " charges."
     ]
   },
   "hubris:HerbalPaste": {
