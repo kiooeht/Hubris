@@ -20,7 +20,7 @@ import com.megacrit.cardcrawl.vfx.TintEffect;
 
 public class RaiseDeadAction extends AbstractGameAction
 {
-    private static final int UNDEAD_AMT = 2;
+    private static final int UNDEAD_AMT = 1;
 
     private AbstractCreature parent;
     private AbstractMonster m;
