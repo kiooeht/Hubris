@@ -49,8 +49,10 @@ public class TenFootPole extends HubrisRelic implements OnReceivePowerRelic, Bet
     {
         if (HubrisMod.hasMimicMod) {
             if (power instanceof EntanglePower && source instanceof Mimic) {
+                flash();
                 return false;
             } else if (power instanceof MimicSurprisePower) {
+                flash();
                 return false;
             }
         }
