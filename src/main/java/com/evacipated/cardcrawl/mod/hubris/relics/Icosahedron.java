@@ -22,6 +22,7 @@ import com.megacrit.cardcrawl.potions.AbstractPotion;
 import com.megacrit.cardcrawl.powers.*;
 import com.megacrit.cardcrawl.random.Random;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.relics.Omamori;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.vfx.cardManip.ShowCardAndObtainEffect;
 
@@ -197,7 +198,9 @@ public class Icosahedron extends HubrisRelic implements ClickableRelic
                 actions.add(new LoseHPAction(p, p, 10));
                 break;
             case 1: // Natural One.
-                actions.add(new MakeTempCardInHandAction(new NaturalOne()));
+                if (!AbstractDungeon.player.hasRelic(Omamori.ID) || AbstractDungeon.player.getRelic(Omamori.ID).counter == 0) {
+                    actions.add(new MakeTempCardInHandAction(new NaturalOne()));
+                }
                 AbstractDungeon.topLevelEffects.add(new ShowCardAndObtainEffect(new NaturalOne(), Settings.WIDTH / 2.0f, Settings.HEIGHT / 2.0f));
                 break;
         }
