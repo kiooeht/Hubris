@@ -450,5 +450,12 @@
     "DESCRIPTIONS": [
       "Future relic rewards from combats and non-Boss chests give you a choice between two relics."
     ]
+  },
+  "hubris:Potato": {
+    "NAME": "Potato",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "During your turn, you are immune to damage."
+    ]
   }
 }

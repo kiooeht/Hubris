@@ -151,5 +151,11 @@
     "DESCRIPTIONS": [
       "Do not discard your hand at the end of this turn."
     ]
+  },
+  "hubris:Potato": {
+    "NAME": "Potato",
+    "DESCRIPTIONS": [
+      "During your turn, you are immune to damage."
+    ]
   }
 }

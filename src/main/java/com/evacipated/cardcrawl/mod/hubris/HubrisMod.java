@@ -357,6 +357,7 @@ public class HubrisMod implements
         BaseMod.addRelic(new DeckOfHolding(), RelicType.SHARED);
         BaseMod.addRelic(new TenFootPole(), RelicType.SHARED);
         BaseMod.addRelic(new Towel(), RelicType.SHARED);
+        BaseMod.addRelic(new Potato(), RelicType.SHARED);
 
         // Ironclad only
         BaseMod.addRelic(new IronBody(), RelicType.RED);
