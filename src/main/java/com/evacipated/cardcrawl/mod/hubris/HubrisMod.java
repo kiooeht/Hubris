@@ -12,6 +12,7 @@ import com.evacipated.cardcrawl.mod.hubris.cards.black.InfiniteBlow;
 import com.evacipated.cardcrawl.mod.hubris.cards.curses.Hubris;
 import com.evacipated.cardcrawl.mod.hubris.crossover.InfiniteCrossover;
 import com.evacipated.cardcrawl.mod.hubris.events.shrines.TheFatedDie;
+import com.evacipated.cardcrawl.mod.hubris.events.shrines.YourTowel;
 import com.evacipated.cardcrawl.mod.hubris.events.shrines.UpdateBodyText;
 import com.evacipated.cardcrawl.mod.hubris.events.thebeyond.TheBottler;
 import com.evacipated.cardcrawl.mod.hubris.events.thecity.Experiment;
@@ -252,6 +253,7 @@ public class HubrisMod implements
         // Only appears if player has Bottle relic. See TheBottlerPatch
         BaseMod.addEvent(TheBottler.ID, TheBottler.class, TheBeyond.ID);
         BaseMod.addEvent(UpdateBodyText.ID, UpdateBodyText.class);
+        BaseMod.addEvent(YourTowel.ID, YourTowel.class);
 
         BaseMod.addMonster(GrandSnecko.ID, GrandSnecko::new);
         BaseMod.addMonster(MusketHawk.ID, MusketHawk::new);
