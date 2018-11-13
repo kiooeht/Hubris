@@ -453,7 +453,7 @@
   },
   "hubris:Potato": {
     "NAME": "Potato",
-    "FLAVOR": "TODO",
+    "FLAVOR": "A staple of pre-Spireblight life.",
     "DESCRIPTIONS": [
       "During your turn, you are immune to damage."
     ]
