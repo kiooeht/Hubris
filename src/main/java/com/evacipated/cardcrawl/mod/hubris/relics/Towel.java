@@ -16,7 +16,7 @@ public class Towel extends HubrisRelic
 
     public Towel()
     {
-        super(ID, "test5.png", RelicTier.SPECIAL, LandingSound.FLAT);
+        super(ID, "towel.png", RelicTier.SPECIAL, LandingSound.FLAT);
     }
 
     @Override
