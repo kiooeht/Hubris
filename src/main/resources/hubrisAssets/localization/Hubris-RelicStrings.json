@@ -457,5 +457,13 @@
     "DESCRIPTIONS": [
       "During your turn, you are immune to damage."
     ]
+  },
+  "hubris:FruitBowl": {
+    "NAME": "Fruit Bowl",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "Changes to Max HP are increased by #b",
+      "%."
+    ]
   }
 }
