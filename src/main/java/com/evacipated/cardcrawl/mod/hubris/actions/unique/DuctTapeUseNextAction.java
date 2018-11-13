@@ -27,8 +27,10 @@ public class DuctTapeUseNextAction extends AbstractGameAction
     public void update()
     {
         cards.get(cardIndex).calculateCardDamage(monster);
-        // Fix not having energy stopping the second card from being played
-        cards.get(cardIndex).freeToPlayOnce = true;
+        if (cards.get(cardIndex).costForTurn != -1) {
+            // Fix not having energy stopping the second card from being played
+            cards.get(cardIndex).freeToPlayOnce = true;
+        }
         if (cards.get(cardIndex).canUse(player, monster)) {
             cards.get(cardIndex).use(player, monster);
         }
