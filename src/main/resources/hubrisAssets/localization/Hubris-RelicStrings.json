@@ -443,5 +443,12 @@
       "Take 50% less damage outside of combat.",
       " NL You cannot be surprised or caught off-guard by mimics."
     ]
+  },
+  "hubris:Towel": {
+    "NAME": "Towel",
+    "FLAVOR": "Now you're a real frood.",
+    "DESCRIPTIONS": [
+      "Future relic rewards from combats and non-Boss chests give you a choice between two relics."
+    ]
   }
 }
