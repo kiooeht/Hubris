@@ -13,7 +13,7 @@ public class Potato extends HubrisRelic
 
     public Potato()
     {
-        super(ID, "test5.png", RelicTier.RARE, LandingSound.FLAT);
+        super(ID, "potato.png", RelicTier.RARE, LandingSound.FLAT);
     }
 
     @Override
