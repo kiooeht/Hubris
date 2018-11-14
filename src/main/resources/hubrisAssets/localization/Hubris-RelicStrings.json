@@ -460,7 +460,7 @@
   },
   "hubris:FruitBowl": {
     "NAME": "Fruit Bowl",
-    "FLAVOR": "TODO",
+    "FLAVOR": "Store your fruit in an aesthetically pleasing manner.",
     "DESCRIPTIONS": [
       "Changes to Max HP are increased by #b",
       "%."
