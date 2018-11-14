@@ -2,18 +2,21 @@ package com.evacipated.cardcrawl.mod.hubris.patches;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.mod.hubris.cards.DuctTapeCard;
-import com.evacipated.cardcrawl.modthespire.lib.ByRef;
-import com.evacipated.cardcrawl.modthespire.lib.SpireInsertPatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import com.evacipated.cardcrawl.modthespire.lib.*;
+import com.megacrit.cardcrawl.actions.defect.IncreaseMiscAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
+import com.megacrit.cardcrawl.helpers.GetAllInBattleInstances;
 import com.megacrit.cardcrawl.screens.SingleCardViewPopup;
-import javassist.*;
+import javassist.CannotCompileException;
+import javassist.CtBehavior;
 import javassist.expr.ExprEditor;
 import javassist.expr.FieldAccess;
 import javassist.expr.MethodCall;
 
 import java.lang.reflect.Field;
+import java.util.HashSet;
+import java.util.UUID;
 
 public class DuctTapePatch
 {
@@ -122,6 +125,69 @@ public class DuctTapePatch
                 card[0] = ductTapeCard;
                 ductTapeCard = null;
                 ductTapeCardOrig = null;
+            }
+        }
+    }
+
+    @SpirePatch(
+            clz=GetAllInBattleInstances.class,
+            method="get"
+    )
+    public static class GetSubCardBattleInstances
+    {
+        public static ExprEditor Instrument()
+        {
+            return new ExprEditor() {
+                @Override
+                public void edit(FieldAccess f) throws CannotCompileException
+                {
+                    if (f.getClassName().equals(AbstractCard.class.getName()) && f.getFieldName().equals("uuid")) {
+                        f.replace("$_ = " + GetSubCardBattleInstances.class.getName() + ".DuctTapeCardCheck($0, cards, uuid);");
+                    }
+                }
+            };
+        }
+
+        public static UUID DuctTapeCardCheck(AbstractCard card, HashSet<AbstractCard> cards, UUID uuid)
+        {
+            if (card instanceof DuctTapeCard) {
+                ((DuctTapeCard) card).checkCardUUIDs(cards, uuid);
+            }
+            return card.uuid;
+        }
+    }
+
+    @SpirePatch(
+            clz=IncreaseMiscAction.class,
+            method="update"
+    )
+    public static class IncreaseMisc
+    {
+        @SpireInsertPatch(
+                locator=Locator.class,
+                localvars={"uuid", "c", "miscIncrease"}
+        )
+        public static void Insert(IncreaseMiscAction __instance, UUID uuid, AbstractCard c, int miscIncrease)
+        {
+            if (c instanceof DuctTapeCard) {
+                HashSet<AbstractCard> foundCards = new HashSet<>();
+                ((DuctTapeCard) c).checkCardUUIDs(foundCards, uuid);
+                for (AbstractCard found : foundCards) {
+                    found.misc += miscIncrease;
+                    c.applyPowers();
+                    c.baseBlock = c.misc;
+                    c.isBlockModified = false;
+                }
+            }
+        }
+
+        private static class Locator extends SpireInsertLocator
+        {
+            @Override
+            public int[] Locate(CtBehavior ctMethodToPatch) throws Exception
+            {
+                Matcher finalMatcher = new Matcher.FieldAccessMatcher(AbstractCard.class, "uuid");
+                return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
             }
         }
     }

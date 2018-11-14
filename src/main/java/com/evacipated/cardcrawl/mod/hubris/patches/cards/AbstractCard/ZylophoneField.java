@@ -27,6 +27,10 @@ public class ZylophoneField
             if (value && __intance instanceof AbstractCard) {
                 ((AbstractCard)__intance).cost = -1;
                 ((AbstractCard)__intance).costForTurn = -1;
+            } else if (!value && __intance instanceof AbstractCard) {
+                AbstractCard copy = ((AbstractCard) __intance).makeCopy();
+                ((AbstractCard) __intance).cost = copy.cost;
+                ((AbstractCard) __intance).costForTurn = copy.costForTurn;
             }
         }
     }

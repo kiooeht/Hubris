@@ -32,6 +32,8 @@ public class PowerSurge extends CustomCard implements StartupCard
         GraveField.grave.set(this, true);
         AutoplayField.autoplay.set(this, true);
         magicNumber = baseMagicNumber = FOCUS_AMT;
+        // Stop this card generating mid-combat
+        tags.add(CardTags.HEALING);
     }
 
     @Override

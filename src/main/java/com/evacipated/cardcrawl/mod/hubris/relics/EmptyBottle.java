@@ -17,6 +17,8 @@ public class EmptyBottle extends HubrisRelic implements BetterOnUsePotionRelic, 
     public static final String ID = "hubris:EmptyBottle";
     public static final int POTION_USES = 2;
 
+    private AbstractPotion potion;
+
     public EmptyBottle()
     {
         super(ID, "emptyBottle.png", RelicTier.SHOP, LandingSound.CLINK);
@@ -61,8 +63,19 @@ public class EmptyBottle extends HubrisRelic implements BetterOnUsePotionRelic, 
         PotionUseCountField.useCount.set(potion, useCount);
 
         if (useCount > 0) {
+            this.potion = potion;
+        }
+    }
+
+    @Override
+    public void update()
+    {
+        super.update();
+
+        if (potion != null) {
             flash();
-            AbstractDungeon.actionManager.addToTop(new SetPotionSlotAction(potion.slot, potion, true));
+            AbstractDungeon.player.obtainPotion(potion.slot, potion);
+            potion = null;
         }
     }
 

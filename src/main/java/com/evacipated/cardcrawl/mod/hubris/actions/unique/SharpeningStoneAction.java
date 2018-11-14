@@ -1,5 +1,6 @@
 package com.evacipated.cardcrawl.mod.hubris.actions.unique;
 
+import com.evacipated.cardcrawl.mod.hubris.patches.PiercingPatch;
 import com.evacipated.cardcrawl.mod.hubris.patches.cards.AbstractCard.PiercingTag;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.utility.WaitAction;
@@ -76,7 +77,7 @@ public class SharpeningStoneAction extends AbstractGameAction
     {
         // Make piercing
         c.tags.add(PiercingTag.HUBRIS_PIERCING);
-        c.damageTypeForTurn = DamageInfo.DamageType.HP_LOSS;
+        c.damageTypeForTurn = PiercingPatch.PIERCING;
         // Prepend piercing to description
         c.rawDescription = TEXT[1] + c.rawDescription;
         c.initializeDescription();

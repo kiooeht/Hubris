@@ -7,10 +7,10 @@
     <name>Hubris</name>
     <groupId>com.evacipated.cardcrawl.mod</groupId>
     <artifactId>hubris</artifactId>
-    <version>0.12.0</version>
+    <version>0.14.0</version>
 
     <properties>
-        <SlayTheSpire.version>11-01-2018</SlayTheSpire.version>
+        <SlayTheSpire.version>11-08-2018</SlayTheSpire.version>
         <ModTheSpire.version>3.6.0</ModTheSpire.version>
     </properties>
 
@@ -77,6 +77,13 @@
             <version>1.2.1</version>
             <scope>system</scope>
             <systemPath>${basedir}/../_ModTheSpire/mods/ColoredMap.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>evilboys</groupId>
+            <artifactId>MimicMod</artifactId>
+            <version>0.0.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/../_ModTheSpire/mods/MimicMod.jar</systemPath>
         </dependency>
     </dependencies>
 

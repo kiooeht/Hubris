@@ -179,5 +179,9 @@
   "hubris:MerchantsHand": {
     "NAME": "Merchant's Hand",
     "DESCRIPTION": "Deal !D! damage. NL If this kills a non-minion enemy, gain !M! Gold."
+  },
+  "hubris:Acid": {
+    "NAME": "Acid",
+    "DESCRIPTION": "Unplayable. NL At the end of your turn, take !M! damage. NL Ethereal."
   }
 }

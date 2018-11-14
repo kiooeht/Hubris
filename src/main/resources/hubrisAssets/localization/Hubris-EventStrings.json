@@ -97,5 +97,18 @@
       "Choose 2 Cards to Remove.",
       "You already have "
     ]
+  },
+  "hubris:YourTowel": {
+    "NAME": "Your Towel",
+    "DESCRIPTIONS": [
+      "You find your towel lying on the ground. NL NL Some would say you lost it, but you always knew it was here.",
+      "Picking up your trusty towel, you wrap it around your arm and continue your climb.",
+      "You leave your towel where it is, after all, you already know where it is."
+    ],
+    "OPTIONS": [
+      "[Pick Up] #gObtain ",
+      ".",
+      "[Leave]"
+    ]
   }
 }

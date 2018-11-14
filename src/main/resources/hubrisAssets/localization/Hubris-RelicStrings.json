@@ -214,8 +214,8 @@
     "NAME": "Stopwatch",
     "FLAVOR": "Maybe time's just a construct of human perception, an illusion created by—",
     "DESCRIPTIONS": [
-      " NL Lose #b1 charge. At the end of your turn, immediately start another turn. Energy and #yBlock are maintained between these turns. NL Starts with #b",
-      " charges. NL Only usable once per combat."
+      " [#2aecd7]Usable [#2aecd7]once [#2aecd7]per [#2aecd7]combat. NL Lose #b1 charge. At the end of your turn, immediately start another turn. Energy and #yBlock are maintained between these turns. NL Starts with #b",
+      " charges."
     ]
   },
   "hubris:HerbalPaste": {
@@ -425,6 +425,45 @@
     "DESCRIPTIONS": [
       "Whenever you enter a Rest Site, during the next combat the first card played each turn also draws #b",
       " card."
+    ]
+  },
+  "hubris:DeckOfHolding": {
+    "NAME": "Deck of Holding",
+    "FLAVOR": "A nice box to hold your cards.",
+    "DESCRIPTIONS": [
+      " [#2aecd7]Usable [#2aecd7]once [#2aecd7]per [#2aecd7]combat. NL #yRetain your hand this turn. NL #ySynergy: ",
+      "If you have the ",
+      ", discard your hand instead."
+    ]
+  },
+  "hubris:TenFootPole": {
+    "NAME": "10-Foot Pole",
+    "FLAVOR": "Almost as useful as a towel.",
+    "DESCRIPTIONS": [
+      "Take 50% less damage outside of combat.",
+      " NL You cannot be surprised or caught off-guard by mimics."
+    ]
+  },
+  "hubris:Towel": {
+    "NAME": "Towel",
+    "FLAVOR": "Now you're a real frood.",
+    "DESCRIPTIONS": [
+      "Future relic rewards from combats and non-Boss chests give you a choice between two relics."
+    ]
+  },
+  "hubris:Potato": {
+    "NAME": "Potato",
+    "FLAVOR": "A staple of pre-Spireblight life.",
+    "DESCRIPTIONS": [
+      "During your turn, you are immune to damage."
+    ]
+  },
+  "hubris:FruitBowl": {
+    "NAME": "Fruit Bowl",
+    "FLAVOR": "Store your fruit in an aesthetically pleasing manner.",
+    "DESCRIPTIONS": [
+      "Changes to Max HP are increased by #b",
+      "%."
     ]
   },
   "hubris:EvacipatedBox": {

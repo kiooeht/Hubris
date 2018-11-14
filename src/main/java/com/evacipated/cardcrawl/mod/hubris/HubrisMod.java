@@ -12,6 +12,7 @@ import com.evacipated.cardcrawl.mod.hubris.cards.black.InfiniteBlow;
 import com.evacipated.cardcrawl.mod.hubris.cards.curses.Hubris;
 import com.evacipated.cardcrawl.mod.hubris.crossover.InfiniteCrossover;
 import com.evacipated.cardcrawl.mod.hubris.events.shrines.TheFatedDie;
+import com.evacipated.cardcrawl.mod.hubris.events.shrines.YourTowel;
 import com.evacipated.cardcrawl.mod.hubris.events.shrines.UpdateBodyText;
 import com.evacipated.cardcrawl.mod.hubris.events.thebeyond.TheBottler;
 import com.evacipated.cardcrawl.mod.hubris.events.thecity.Experiment;
@@ -93,6 +94,7 @@ public class HubrisMod implements
     public static final boolean hasConstructMod;
     public static final boolean hasFruityMod;
     public static final boolean hasInfiniteSpire;
+    public static final boolean hasMimicMod;
 
     static
     {
@@ -111,6 +113,10 @@ public class HubrisMod implements
         hasInfiniteSpire = Loader.isModLoaded("infinitespire");
         if (hasInfiniteSpire) {
             logger.info("Detected Infinite Spire");
+        }
+        hasMimicMod = Loader.isModLoaded("mimicmod");
+        if (hasMimicMod) {
+            logger.info("Detected Mimic Mod");
         }
     }
 
@@ -250,6 +256,7 @@ public class HubrisMod implements
         // Only appears if player has Bottle relic. See TheBottlerPatch
         BaseMod.addEvent(TheBottler.ID, TheBottler.class, TheBeyond.ID);
         BaseMod.addEvent(UpdateBodyText.ID, UpdateBodyText.class);
+        BaseMod.addEvent(YourTowel.ID, YourTowel.class);
 
         BaseMod.addMonster(GrandSnecko.ID, GrandSnecko::new);
         BaseMod.addMonster(MusketHawk.ID, MusketHawk::new);
@@ -352,6 +359,11 @@ public class HubrisMod implements
         BaseMod.addRelic(new RunicObelisk(), RelicType.SHARED);
         BaseMod.addRelic(new SlimyHat(), RelicType.SHARED);
         BaseMod.addRelic(new ToyBattleship(), RelicType.SHARED);
+        BaseMod.addRelic(new DeckOfHolding(), RelicType.SHARED);
+        BaseMod.addRelic(new TenFootPole(), RelicType.SHARED);
+        BaseMod.addRelic(new Towel(), RelicType.SHARED);
+        BaseMod.addRelic(new Potato(), RelicType.SHARED);
+        BaseMod.addRelic(new FruitBowl(), RelicType.SHARED);
         BaseMod.addRelic(new EvacipatedBox(), RelicType.SHARED);
 
         // Ironclad only
@@ -409,7 +421,6 @@ public class HubrisMod implements
     {
         list.add(new CustomMod(Hubris.ID, "r", true));
         list.add(new CustomMod("hubris:Mercantile", "b", false));
-
     }
 
     private static void autoAddCards() throws URISyntaxException, IllegalAccessException, InstantiationException, NotFoundException, CannotCompileException
@@ -462,9 +473,13 @@ public class HubrisMod implements
     @Override
     public int receiveMapHPChange(int amount)
     {
+        if (AbstractDungeon.player != null && AbstractDungeon.player.hasRelic(FruitBowl.ID)) {
+            FruitBowl relic = (FruitBowl) AbstractDungeon.player.getRelic(FruitBowl.ID);
+            amount = relic.onMaxHPChange(amount);
+        }
         if (AbstractDungeon.player != null && AbstractDungeon.player.hasRelic(BottledHeart.ID)) {
             BottledHeart relic = (BottledHeart) AbstractDungeon.player.getRelic(BottledHeart.ID);
-            return relic.onMaxHPChange(amount);
+            amount = relic.onMaxHPChange(amount);
         }
         return amount;
     }

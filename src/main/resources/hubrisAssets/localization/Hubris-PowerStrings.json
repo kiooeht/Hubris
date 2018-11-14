@@ -141,9 +141,21 @@
   "hubris:Undead": {
     "NAME": "Undead",
     "DESCRIPTIONS": [
-      "When attacked, transfers #b",
-      " #yPoison to you. NL If ",
+      "When attacked, shuffles #b",
+      " #yAcid into your draw pile. NL If ",
       " is still alive, revives in #b1 turn at full HP."
+    ]
+  },
+  "hubris:RetainHand": {
+    "NAME": "Retain Hand",
+    "DESCRIPTIONS": [
+      "Do not discard your hand at the end of this turn."
+    ]
+  },
+  "hubris:Potato": {
+    "NAME": "Potato",
+    "DESCRIPTIONS": [
+      "During your turn, you are immune to damage."
     ]
   }
 }

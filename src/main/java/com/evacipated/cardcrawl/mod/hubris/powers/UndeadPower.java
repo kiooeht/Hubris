@@ -2,9 +2,9 @@ package com.evacipated.cardcrawl.mod.hubris.powers;
 
 import basemod.ReflectionHacks;
 import com.badlogic.gdx.Gdx;
-import com.evacipated.cardcrawl.mod.hubris.actions.common.AlwaysApplyPowerAction;
 import com.evacipated.cardcrawl.mod.hubris.actions.common.AlwaysRemoveSpecificPowerAction;
-import com.megacrit.cardcrawl.actions.common.ReducePowerAction;
+import com.evacipated.cardcrawl.mod.hubris.cards.status.Acid;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
 import com.megacrit.cardcrawl.actions.common.SetMoveAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -64,16 +64,8 @@ public class UndeadPower extends AbstractPower
     @Override
     public int onAttacked(DamageInfo info, int damageAmount)
     {
-        if (info.owner != null) {
-            int poisonAmount = amount;
-            AbstractPower poison = owner.getPower(PoisonPower.POWER_ID);
-            if (poison == null) {
-                poisonAmount = 0;
-            } else {
-                poisonAmount = Math.min(poisonAmount, poison.amount);
-            }
-            AbstractDungeon.actionManager.addToBottom(new ReducePowerAction(owner, owner, PoisonPower.POWER_ID, poisonAmount));
-            AbstractDungeon.actionManager.addToBottom(new AlwaysApplyPowerAction(info.owner, owner, new PoisonPower(info.owner, owner, poisonAmount), poisonAmount, true));
+        if (info.owner != null && info.owner != owner && info.type != DamageInfo.DamageType.THORNS) {
+            AbstractDungeon.actionManager.addToBottom(new MakeTempCardInDrawPileAction(new Acid(), amount, true, true));
         }
 
         return super.onAttacked(info, damageAmount);
