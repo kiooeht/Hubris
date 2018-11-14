@@ -472,5 +472,12 @@
     "DESCRIPTIONS": [
       "Future boss chests have #b1 additional relic to choose from."
     ]
+  },
+  "hubris:Tomato": {
+    "NAME": "Tomato",
+    "FLAVOR": "TODO",
+    "DESCRIPTIONS": [
+      "Upon pickup, raise your Max HP by #b"
+    ]
   }
 }
