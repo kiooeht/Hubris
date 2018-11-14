@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.mod.hubris.relics.EvacipatedBox;
+import com.evacipated.cardcrawl.mod.hubris.relics.FruitBowl;
+import com.evacipated.cardcrawl.mod.hubris.relics.Tomato;
 import com.evacipated.cardcrawl.modthespire.lib.SpireEnum;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
@@ -172,6 +174,8 @@ public class BloodShopScreen
         }
 
         relics.add(new BloodStoreRelic(RelicLibrary.getRelic(EvacipatedBox.ID).makeCopy(), 0, this, true));
+        relics.add(new BloodStoreRelic(RelicLibrary.getRelic(FruitBowl.ID).makeCopy(), 0, this, true));
+        relics.add(new BloodStoreRelic(RelicLibrary.getRelic(Tomato.ID).makeCopy(), 0, this, true));
     }
 
     private void initPotions()

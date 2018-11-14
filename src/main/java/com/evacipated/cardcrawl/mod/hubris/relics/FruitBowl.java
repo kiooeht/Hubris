@@ -10,7 +10,7 @@ public class FruitBowl extends HubrisRelic
 
     public FruitBowl()
     {
-        super(ID, "fruitBowl.png", RelicTier.RARE, LandingSound.SOLID);
+        super(ID, "fruitBowl.png", RelicTier.SPECIAL, LandingSound.SOLID);
     }
 
     @Override
