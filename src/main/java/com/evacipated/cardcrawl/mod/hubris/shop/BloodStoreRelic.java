@@ -78,12 +78,8 @@ public class BloodStoreRelic
     {
         if (relic != null) {
             if (special) {
-                relic.currentX = (670.0f + 150.0f * (slot / 2)) * Settings.scale;
-                if (slot % 2 == 0) {
-                    relic.currentY = rugY + 240.0f * Settings.scale;
-                } else {
-                    relic.currentY = rugY + 390.0f * Settings.scale;
-                }
+                relic.currentX = (670.0f + 150.0f * (slot % 3)) * Settings.scale;
+                relic.currentY = rugY + 350.0f - (150.0f * (slot / 3)) * Settings.scale;
             } else {
                 relic.currentX = (Settings.WIDTH / 2.0f + 150.0f * (slot - 2) + 75.0f) * Settings.scale;
                 relic.currentY = rugY + 850.0f * Settings.scale;

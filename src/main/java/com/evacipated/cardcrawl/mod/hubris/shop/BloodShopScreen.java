@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
+import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.hubris.relics.EvacipatedBox;
 import com.evacipated.cardcrawl.mod.hubris.relics.FruitBowl;
 import com.evacipated.cardcrawl.mod.hubris.relics.Tomato;
@@ -31,12 +32,21 @@ import com.megacrit.cardcrawl.vfx.cardManip.PurgeCardEffect;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class BloodShopScreen
 {
+    public static List<String> specialRelicIDs = new ArrayList<>();
+
+    static
+    {
+        specialRelicIDs.add(EvacipatedBox.ID);
+        specialRelicIDs.add(FruitBowl.ID);
+        if (HubrisMod.hasInfiniteSpire) {
+
+        }
+    }
+
     private static final Logger logger = LogManager.getLogger(BloodShopScreen.class.getName());
     private static final float BOTTOM_ROW_Y = 307.0F * Settings.scale;
     private static final float GOLD_IMG_WIDTH = ImageMaster.UI_GOLD.getWidth() * Settings.scale;
@@ -173,9 +183,11 @@ public class BloodShopScreen
             relics.add(relic);
         }
 
-        relics.add(new BloodStoreRelic(RelicLibrary.getRelic(EvacipatedBox.ID).makeCopy(), 0, this, true));
-        relics.add(new BloodStoreRelic(RelicLibrary.getRelic(FruitBowl.ID).makeCopy(), 0, this, true));
-        relics.add(new BloodStoreRelic(RelicLibrary.getRelic(Tomato.ID).makeCopy(), 0, this, true));
+        for (int i=0; i<Math.min(specialRelicIDs.size(), 6); ++i) {
+            if (!AbstractDungeon.player.hasRelic(specialRelicIDs.get(i))) {
+                relics.add(new BloodStoreRelic(RelicLibrary.getRelic(specialRelicIDs.get(i)).makeCopy(), i, this, true));
+            }
+        }
     }
 
     private void initPotions()
