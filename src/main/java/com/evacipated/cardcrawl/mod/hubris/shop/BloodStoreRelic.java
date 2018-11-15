@@ -62,6 +62,9 @@ public class BloodStoreRelic
     {
         this.relic = relic;
         price = relic.getPrice() / GOLD_HP_RATIO;
+        if (special) {
+            price *= 0.75f;
+        }
         this.slot = slot;
         shopScreen = screenRef;
         this.special = special;
