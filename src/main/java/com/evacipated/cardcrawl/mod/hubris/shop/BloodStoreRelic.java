@@ -26,7 +26,7 @@ public class BloodStoreRelic
         bannedRelics.add(Waffle.class);
     }
 
-    static final int GOLD_HP_RATIO = 15;
+    static final int GOLD_HP_RATIO = 10;
     static final float RELIC_GOLD_OFFSET_X = -56.0F * Settings.scale;
     static final float RELIC_GOLD_OFFSET_Y = -100.0F * Settings.scale;
     static final float RELIC_PRICE_OFFSET_X = 14.0F * Settings.scale;

@@ -77,8 +77,8 @@ public class BloodShopScreen
     private List<BloodStorePotion> potions = new ArrayList<>();
 
     public boolean purgeAvailable = false;
-    public static int purgeCost = 5;
-    public static int actualPurgeCost = 5;
+    public static int purgeCost = 7;
+    public static int actualPurgeCost = 7;
     private static final int PURGE_COST_RAMP = 2;
     private boolean purgeHovered = false;
     private float purgeCardX;
