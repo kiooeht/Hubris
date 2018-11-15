@@ -366,6 +366,7 @@ public class HubrisMod implements
         BaseMod.addRelic(new FruitBowl(), RelicType.SHARED);
         BaseMod.addRelic(new EvacipatedBox(), RelicType.SHARED);
         //BaseMod.addRelic(new Tomato(), RelicType.SHARED);
+        BaseMod.addRelic(new Macrotransations(), RelicType.SHARED);
 
         // Ironclad only
         BaseMod.addRelic(new IronBody(), RelicType.RED);

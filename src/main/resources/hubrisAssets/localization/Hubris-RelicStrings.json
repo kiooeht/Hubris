@@ -486,5 +486,13 @@
     "DESCRIPTIONS": [
       "Upon pickup, choose #b1 of #b3 random [infinitespire:Purple]Black cards to add to your deck."
     ]
+  },
+  "hubris:Macrotransations": {
+    "NAME": "Macrotransations",
+    "FLAVOR": "All payments wired directly to Merchant.",
+    "DESCRIPTIONS": [
+      " NL Lose #b",
+      " #yGold. NL Immediately kill all non-Elite, non-Boss enemies."
+    ]
   }
 }

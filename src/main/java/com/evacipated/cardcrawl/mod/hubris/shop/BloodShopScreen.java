@@ -9,6 +9,7 @@ import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.hubris.relics.KleinBottle;
 import com.evacipated.cardcrawl.mod.hubris.relics.EvacipatedBox;
 import com.evacipated.cardcrawl.mod.hubris.relics.FruitBowl;
+import com.evacipated.cardcrawl.mod.hubris.relics.Macrotransations;
 import com.evacipated.cardcrawl.modthespire.lib.SpireEnum;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
@@ -42,6 +43,7 @@ public class BloodShopScreen
     {
         specialRelicIDs.add(EvacipatedBox.ID);
         specialRelicIDs.add(FruitBowl.ID);
+        specialRelicIDs.add(Macrotransations.ID);
         if (HubrisMod.hasInfiniteSpire) {
             specialRelicIDs.add(KleinBottle.ID);
         }
