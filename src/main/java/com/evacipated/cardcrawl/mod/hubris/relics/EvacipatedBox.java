@@ -9,7 +9,7 @@ public class EvacipatedBox extends HubrisRelic
 
     public EvacipatedBox()
     {
-        super(ID, "test5.png", RelicTier.SPECIAL, LandingSound.HEAVY);
+        super(ID, "evacipatedBox.png", RelicTier.SPECIAL, LandingSound.HEAVY);
     }
     @Override
     public String getUpdatedDescription()
