@@ -387,6 +387,7 @@ public class HubrisMod implements
         }
         if (hasInfiniteSpire) {
             BaseMod.addRelic(new MobiusCoin(), RelicType.SHARED);
+            BaseMod.addRelic(new KleinBottle(), RelicType.SHARED);
         }
     }
 
