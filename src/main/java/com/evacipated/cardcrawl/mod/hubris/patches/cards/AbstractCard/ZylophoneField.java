@@ -43,8 +43,8 @@ public class ZylophoneField
     {
         public static AbstractCard Postfix(AbstractCard __result, AbstractCard __instance)
         {
-            costsX.set(__result, costsX.get(__instance));
-            if (costsX.get(__result)) {
+            if (costsX.get(__instance)) {
+                costsX.set(__result, true);
                 __result.cost = -1;
                 __result.costForTurn = -1;
             }
