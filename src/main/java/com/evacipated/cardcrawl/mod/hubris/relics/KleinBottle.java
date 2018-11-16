@@ -34,7 +34,13 @@ public class KleinBottle extends HubrisRelic
     {
         ArrayList<AbstractCard> cards = new ArrayList<>();
         for (int i=0; i<OPTIONS; ++i) {
-            cards.add(CardHelper.getRandomBlackCard().makeCopy());
+            do {
+                AbstractCard tmp = CardHelper.getRandomBlackCard();
+                if (cards.stream().noneMatch(c -> c.cardID.equals(tmp.cardID))) {
+                    cards.add(tmp.makeCopy());
+                    break;
+                }
+            } while (true);
         }
         AbstractDungeon.CurrentScreen screen = AbstractDungeon.screen;
         AbstractDungeon.cardRewardScreen.open(cards, null, RewardItem.TEXT[4]);
