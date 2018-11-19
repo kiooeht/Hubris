@@ -26,6 +26,7 @@ public class CursedLifePower extends AbstractPower
         type = PowerType.BUFF;
         updateDescription();
         priority = -99;
+        isTurnBased = true;
         loadRegion("brutality");
     }
 
@@ -60,5 +61,16 @@ public class CursedLifePower extends AbstractPower
     {
         AbstractDungeon.actionManager.addToBottom(new ReducePowerAction(owner, owner, ID, 1));
         updateDescription();
+    }
+
+    @Override
+    public void onRemove()
+    {
+        if (amount > 1) {
+            // Add a copy, only one will be removed
+            owner.powers.add(0, this);
+            // Cancel the removal text effect
+            AbstractDungeon.effectList.remove(AbstractDungeon.effectList.size() - 1);
+        }
     }
 }
