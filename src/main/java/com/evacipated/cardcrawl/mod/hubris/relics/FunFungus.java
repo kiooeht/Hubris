@@ -1,19 +1,18 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
 import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.actions.common.HealAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
-import com.megacrit.cardcrawl.actions.utility.UseCardAction;
-import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.actions.common.RemoveSpecificPowerAction;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.ui.panels.EnergyPanel;
 
 public class FunFungus extends HubrisRelic
 {
     public static final String ID = "hubris:FunFungus";
-    private static final int AMT = 5;
-    private boolean firstTurn = false;
-    private boolean healNext = false;
 
     public FunFungus()
     {
@@ -23,50 +22,42 @@ public class FunFungus extends HubrisRelic
     }
 
     @Override
-    public void atPreBattle()
-    {
-        flash();
-        firstTurn = true;
-        healNext = true;
-        if (!pulse) {
-            beginPulse();
-            pulse = true;
-        }
-    }
-
-    @Override
-    public void atTurnStart()
-    {
-        beginPulse();
-        pulse = true;
-        if (healNext && !firstTurn) {
-            flash();
-            AbstractDungeon.actionManager.addToBottom(new RelicAboveCreatureAction(AbstractDungeon.player, this));
-            AbstractDungeon.actionManager.addToBottom(new HealAction(AbstractDungeon.player, AbstractDungeon.player, AMT));
-        }
-        firstTurn = false;
-        healNext = true;
-    }
-
-    @Override
-    public void onUseCard(AbstractCard card, UseCardAction action)
-    {
-        if (card.type == AbstractCard.CardType.ATTACK) {
-            healNext = false;
-            pulse = false;
-        }
-    }
-
-    @Override
-    public void onVictory()
-    {
-        pulse = false;
-    }
-
-    @Override
     public String getUpdatedDescription()
     {
-        return DESCRIPTIONS[0] + AMT + DESCRIPTIONS[1];
+        return DESCRIPTIONS[0];
+    }
+
+    @Override
+    public void onPlayerEndTurn()
+    {
+        if (EnergyPanel.totalCount > 0) {
+            flash();
+            AbstractPower healNextTurn = new AbstractPower()
+            {
+                @Override
+                public void updateDescription()
+                {
+                    description = "Heal #b" + amount + " HP at the start of your next turn.";
+                    loadRegion("regen");
+                }
+
+                @Override
+                public void atStartOfTurn()
+                {
+                    flash();
+                    AbstractDungeon.actionManager.addToBottom(new HealAction(AbstractDungeon.player, AbstractDungeon.player, amount));
+                    AbstractDungeon.actionManager.addToBottom(new RemoveSpecificPowerAction(owner, owner, this));
+                }
+            };
+            healNextTurn.ID = "hubris:HealNextTurn";
+            healNextTurn.name = "Heal";
+            healNextTurn.owner = AbstractDungeon.player;
+            healNextTurn.amount = EnergyPanel.totalCount;
+            healNextTurn.updateDescription();
+            healNextTurn.priority = 20;
+            AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, healNextTurn));
+            AbstractDungeon.actionManager.addToTop(new RelicAboveCreatureAction(AbstractDungeon.player, this));
+        }
     }
 
     @Override

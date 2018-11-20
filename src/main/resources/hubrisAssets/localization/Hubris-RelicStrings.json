@@ -60,10 +60,9 @@
   },
   "hubris:FunFungus": {
     "NAME": "Fun Fungus",
-    "FLAVOR": "If you remain still, this fungus will grow into your wounds and healing them.",
+    "FLAVOR": "If you remain still, this fungus will grow into your wounds and heal them.",
     "DESCRIPTIONS": [
-      "If you do not play any #yAttacks during your turn, heal #b",
-      " HP at the start of your next turn."
+      "If you have leftover energy at the end of your turn, heal that much HP at the start of your next turn."
     ]
   },
   "hubris:CrackedHourglass": {
