@@ -116,4 +116,13 @@ public class UndeadPower extends AbstractPower
             }
         }
     }
+
+    @Override
+    public void onRemove()
+    {
+        // Add a copy, only one will be removed
+        owner.powers.add(0, this);
+        // Cancel the removal text effect
+        AbstractDungeon.effectList.remove(AbstractDungeon.effectList.size() - 1);
+    }
 }
