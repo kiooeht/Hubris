@@ -26,6 +26,7 @@ public class MysteriousPyramids extends HubrisRelic implements CustomBottleRelic
     private static final int COUNT = 2;
     private boolean cardSelected = true;
     private List<AbstractCard> cards = new ArrayList<>(COUNT);
+    private boolean recursive = false;
 
     public MysteriousPyramids()
     {
@@ -93,6 +94,10 @@ public class MysteriousPyramids extends HubrisRelic implements CustomBottleRelic
     @Override
     public void onCardDraw(AbstractCard c)
     {
+        if (recursive) {
+            return;
+        }
+
         if (PyramidsField.inPyramids.get(c)) {
             boolean fullHandDialog = false;
             for (Iterator<AbstractCard> it = AbstractDungeon.player.drawPile.group.iterator(); it.hasNext();) {
@@ -101,9 +106,14 @@ public class MysteriousPyramids extends HubrisRelic implements CustomBottleRelic
                     flash();
                     it.remove();
                     if (AbstractDungeon.player.hand.size() < BaseMod.MAX_HAND_SIZE) {
-                        AbstractDungeon.player.drawPile.moveToHand(card, AbstractDungeon.player.drawPile);
                         if (AutoplayField.autoplay.get(card)) {
                             AbstractDungeon.actionManager.addToBottom(new AutoplayCardAction(card, AbstractDungeon.player.hand));
+                        }
+                        card.triggerWhenDrawn();
+                        AbstractDungeon.player.drawPile.moveToHand(card, AbstractDungeon.player.drawPile);
+                        recursive = true;
+                        for (AbstractRelic r : AbstractDungeon.player.relics) {
+                            r.onCardDraw(card);
                         }
                     } else {
                         if (!fullHandDialog) {
