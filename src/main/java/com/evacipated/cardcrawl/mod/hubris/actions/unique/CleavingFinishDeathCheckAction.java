@@ -22,7 +22,7 @@ public class CleavingFinishDeathCheckAction extends AbstractGameAction
     public void update()
     {
         if (duration == DURATION && target != null) {
-            if ((target.isDying || target.currentHealth <= 0) && !target.halfDead) {
+            if (target.isDying || target.currentHealth <= 0) {
                 NoDiscardField.noDiscard.set(card, true);
                 card.setCostForTurn(0);
             }
