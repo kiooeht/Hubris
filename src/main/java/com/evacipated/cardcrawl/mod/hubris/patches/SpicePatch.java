@@ -7,6 +7,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import javassist.CannotCompileException;
 import javassist.CtBehavior;
 
@@ -15,14 +16,14 @@ import java.util.ArrayList;
 public class SpicePatch
 {
     @SpirePatch(
-            cls="com.megacrit.cardcrawl.dungeons.AbstractDungeon",
+            clz=AbstractDungeon.class,
             method="returnEndRandomRelicKey"
     )
     public static class ReturnEndRandomRelicKey
     {
         public static String Postfix(String __result, AbstractRelic.RelicTier tier)
         {
-            if (!__result.equals(Spice.ID) && Spice.replaceWithSpice()) {
+            if (!Spice.ID.equals(__result) && Spice.replaceWithSpice()) {
                 return Spice.ID;
             } else {
                 return __result;
@@ -31,14 +32,14 @@ public class SpicePatch
     }
 
     @SpirePatch(
-            cls="com.megacrit.cardcrawl.dungeons.AbstractDungeon",
+            clz=AbstractDungeon.class,
             method="returnRandomRelicKey"
     )
     public static class ReturnRandomRelicKey
     {
         public static String Postfix(String __result, AbstractRelic.RelicTier tier)
         {
-            if (!__result.equals(Spice.ID) && Spice.replaceWithSpice()) {
+            if (!Spice.ID.equals(__result) && Spice.replaceWithSpice()) {
                 return Spice.ID;
             } else {
                 return __result;
@@ -49,7 +50,7 @@ public class SpicePatch
     public static class SpawnRelicAndObtain
     {
         @SpirePatch(
-                cls="com.megacrit.cardcrawl.rooms.AbstractRoom",
+                clz=AbstractRoom.class,
                 method="spawnRelicAndObtain"
         )
         public static class Nested
@@ -63,7 +64,7 @@ public class SpicePatch
 
         public static boolean Stop(AbstractRelic relic)
         {
-            if (relic.relicId.equals(Spice.ID) && AbstractDungeon.player.hasRelic(Spice.ID)) {
+            if (Spice.ID.equals(relic.relicId) && AbstractDungeon.player.hasRelic(Spice.ID)) {
                 Spice spice = (Spice) AbstractDungeon.player.getRelic(Spice.ID);
                 spice.increment();
                 spice.flash();
@@ -74,7 +75,7 @@ public class SpicePatch
     }
 
     @SpirePatch(
-            cls="com.megacrit.cardcrawl.dungeons.AbstractDungeon",
+            clz=AbstractDungeon.class,
             method="getRewardCards"
     )
     public static class AddCardReward

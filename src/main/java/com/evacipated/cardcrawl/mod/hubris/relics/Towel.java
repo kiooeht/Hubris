@@ -36,9 +36,6 @@ public class Towel extends HubrisRelic
     @Override
     public void onTrigger()
     {
-        flash();
-        AbstractDungeon.actionManager.addToTop(new RelicAboveCreatureAction(AbstractDungeon.player,  this));
-
         List<RewardItem> relicRewards = new ArrayList<>();
         for (RewardItem reward : AbstractDungeon.getCurrRoom().rewards) {
             if (reward.type == RewardItem.RewardType.RELIC && reward.relicLink == null) {
@@ -46,15 +43,28 @@ public class Towel extends HubrisRelic
             }
         }
 
+        boolean doFlash = false;
         for (RewardItem reward : relicRewards) {
             RelicTier tier = reward.relic.tier;
-            RewardItem replaceReward = new LinkedRewardItem(reward);
-            RewardItem newReward = new LinkedRewardItem(replaceReward, AbstractDungeon.returnRandomRelic(tier));
-            int indexOf = AbstractDungeon.getCurrRoom().rewards.indexOf(reward);
-            // Insert after existing reward
-            AbstractDungeon.getCurrRoom().rewards.add(indexOf + 1, newReward);
-            // Replace original
-            AbstractDungeon.getCurrRoom().rewards.set(indexOf, replaceReward);
+            if (tier != RelicTier.SPECIAL && tier != RelicTier.DEPRECATED && tier != RelicTier.STARTER) {
+                AbstractRelic newRelic = AbstractDungeon.returnRandomRelic(tier);
+                if (newRelic != null) {
+                    doFlash = true;
+                    RewardItem replaceReward = new LinkedRewardItem(reward);
+                    RewardItem newReward = new LinkedRewardItem(replaceReward, newRelic);
+                    int indexOf = AbstractDungeon.getCurrRoom().rewards.indexOf(reward);
+                    // Insert after existing reward
+                    AbstractDungeon.getCurrRoom().rewards.add(indexOf + 1, newReward);
+                    // Replace original
+                    AbstractDungeon.getCurrRoom().rewards.set(indexOf, replaceReward);
+                }
+            }
+        }
+
+        if (doFlash) {
+            flash();
+            AbstractDungeon.actionManager.addToTop(new RelicAboveCreatureAction(AbstractDungeon.player,  this));
+
         }
     }
 
