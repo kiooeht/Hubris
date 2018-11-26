@@ -11,6 +11,7 @@ import com.megacrit.cardcrawl.actions.common.EnableEndTurnButtonAction;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAndEnableControlsAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.blights.Muzzle;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.MonsterHelper;
@@ -114,6 +115,9 @@ public class HollowSoul extends HubrisRelic
         AbstractRoom room = AbstractDungeon.getCurrRoom();
 
         // Clear
+        CardCrawlGame.music.silenceTempBgmInstantly();
+        CardCrawlGame.music.silenceBGMInstantly();
+
         AbstractDungeon.fadeIn();
         AbstractDungeon.player.resetControllerValues();
         AbstractDungeon.effectList.clear();
