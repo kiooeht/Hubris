@@ -70,6 +70,7 @@ public class RelicSelectScreen implements ScrollBarListener
     {
         AbstractDungeon.isScreenUp = true;
         AbstractDungeon.overlayMenu.showBlackScreen(0.5f);
+        AbstractDungeon.overlayMenu.proceedButton.hide();
         show = true;
 
         controllerRelicHb = null;
