@@ -1,5 +1,6 @@
 package com.evacipated.cardcrawl.mod.hubris.powers;
 
+import com.evacipated.cardcrawl.mod.stslib.powers.interfaces.OnLoseTempHpPower;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -7,7 +8,7 @@ import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 
-public class PotatoPower extends AbstractPower
+public class PotatoPower extends AbstractPower implements OnLoseTempHpPower
 {
     public static final String POWER_ID = "hubris:Potato";
     private static final PowerStrings powerStrings = CardCrawlGame.languagePack.getPowerStrings(POWER_ID);
@@ -47,14 +48,26 @@ public class PotatoPower extends AbstractPower
     @Override
     public void atEndOfTurn(boolean isPlayer)
     {
-        duringTurn = false;
+        if (isPlayer) {
+            duringTurn = false;
+        }
     }
 
     @Override
     public int onAttacked(DamageInfo info, int damageAmount)
     {
         if (duringTurn) {
-            flash();
+            flashWithoutSound();
+            return 0;
+        }
+        return damageAmount;
+    }
+
+    @Override
+    public int onLoseTempHp(DamageInfo info, int damageAmount)
+    {
+        if (duringTurn) {
+            flashWithoutSound();
             return 0;
         }
         return damageAmount;
