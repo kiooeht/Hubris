@@ -24,7 +24,8 @@ import com.megacrit.cardcrawl.vfx.combat.BattleStartEffect;
 public class HollowSoul extends HubrisRelic
 {
     public static final String ID = "hubris:HollowSoul";
-    private static final int HP_PERCENT = 10;
+    private static final int HP_PERCENT = 20;
+    private static final int VICTORY_HEAL_PERCENT = 50;
 
     private int originalMaxHP = -1;
 
@@ -36,7 +37,7 @@ public class HollowSoul extends HubrisRelic
     @Override
     public String getUpdatedDescription()
     {
-        return DESCRIPTIONS[0] + HP_PERCENT + DESCRIPTIONS[1];
+        return DESCRIPTIONS[0] + HP_PERCENT + DESCRIPTIONS[1] + VICTORY_HEAL_PERCENT + DESCRIPTIONS[2];
     }
 
     @Override
@@ -84,20 +85,13 @@ public class HollowSoul extends HubrisRelic
             flash();
             originalMaxHP = AbstractDungeon.player.maxHealth;
 
-            AbstractDungeon.player.maxHealth = Math.round(AbstractDungeon.player.maxHealth * 0.1f);
+            AbstractDungeon.player.maxHealth = (int) (AbstractDungeon.player.maxHealth * ((float) HP_PERCENT / 100.0f));
             if (AbstractDungeon.player.maxHealth < 1) {
                 AbstractDungeon.player.maxHealth = 1;
             }
             //AbstractDungeon.player.healthBarUpdatedEvent();
 
             int healAmt = AbstractDungeon.player.maxHealth;
-            if (AbstractDungeon.player.hasBlight(Muzzle.ID)) {
-                healAmt /= 2;
-            }
-            if (healAmt < 1) {
-                healAmt = 1;
-            }
-
             AbstractDungeon.player.heal(healAmt, true);
             use();
 
@@ -196,6 +190,9 @@ public class HollowSoul extends HubrisRelic
         if (counter == -2 && originalMaxHP > 0) {
             flash();
             restore();
+            int healAmt = (int) (AbstractDungeon.player.maxHealth * ((float) VICTORY_HEAL_PERCENT / 100.0f));
+            AbstractDungeon.player.currentHealth = 0;
+            AbstractDungeon.player.heal(healAmt, true);
         }
     }
 

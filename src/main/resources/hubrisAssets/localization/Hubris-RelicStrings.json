@@ -247,7 +247,8 @@
     "FLAVOR": "An echo of a past life. Perhaps with this you may become whole.",
     "DESCRIPTIONS": [
       "When you would die in combat, immediately restart the fight with #b",
-      "% Max HP. NL Regain your original Max HP and recharge this relic if you win the fight."
+      "% Max HP. NL Regain your original Max HP, heal to #b",
+      "% of your Max HP, and recharge this relic if you win the fight."
     ]
   },
   "hubris:CrystalStatue": {
