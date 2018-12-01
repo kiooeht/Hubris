@@ -58,6 +58,8 @@ public class DisguiseKit extends HubrisRelic implements CustomSavable<String>
         if (playerClass == null) {
             return;
         }
+        System.out.println(playerClass);
+        System.out.println(AbstractPlayer.PlayerClass.valueOf(playerClass));
         if (!chooseClass(AbstractPlayer.PlayerClass.valueOf(playerClass))) {
             System.out.println("OH GOD WTF!!");
         }
@@ -102,7 +104,10 @@ public class DisguiseKit extends HubrisRelic implements CustomSavable<String>
     private boolean chooseClass(AbstractPlayer.PlayerClass chosenClass)
     {
         this.chosenClass = chosenClass;
-        if (chosenClass == null || CardCrawlGame.dungeon == null) {
+        if (chosenClass == null) {
+            if (CardCrawlGame.dungeon == null) {
+                System.out.println("dungeon null");
+            }
             return false;
         }
         description = getUpdatedDescription();
