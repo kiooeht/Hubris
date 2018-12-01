@@ -115,6 +115,7 @@ public class MysteriousPyramids extends HubrisRelic implements CustomBottleRelic
                         for (AbstractRelic r : AbstractDungeon.player.relics) {
                             r.onCardDraw(card);
                         }
+                        recursive = false;
                     } else {
                         if (!fullHandDialog) {
                             AbstractDungeon.player.createHandIsFullDialog();
