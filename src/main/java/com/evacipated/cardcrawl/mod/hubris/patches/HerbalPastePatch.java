@@ -2,6 +2,8 @@ package com.evacipated.cardcrawl.mod.hubris.patches;
 
 import com.evacipated.cardcrawl.mod.hubris.relics.HerbalPaste;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import com.megacrit.cardcrawl.actions.common.LoseHPAction;
+import com.megacrit.cardcrawl.actions.unique.RegenAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
@@ -12,10 +14,12 @@ import javassist.expr.ExprEditor;
 import javassist.expr.MethodCall;
 import javassist.expr.NewExpr;
 
+import java.util.ArrayList;
+
 public class HerbalPastePatch
 {
     @SpirePatch(
-            cls="com.megacrit.cardcrawl.powers.RegenPower",
+            clz=RegenPower.class,
             method=SpirePatch.CONSTRUCTOR
     )
     public static class CanGoNegative
@@ -29,7 +33,7 @@ public class HerbalPastePatch
     }
 
     @SpirePatch(
-            cls="com.megacrit.cardcrawl.powers.RegenPower",
+            clz=RegenPower.class,
             method="atEndOfTurn"
     )
     public static class AtEndOfTurn
@@ -40,11 +44,11 @@ public class HerbalPastePatch
                 @Override
                 public void edit(NewExpr e) throws CannotCompileException
                 {
-                    if (e.getClassName().equals("com.megacrit.cardcrawl.actions.unique.RegenAction")) {
+                    if (e.getClassName().equals(RegenAction.class.getName())) {
                         e.replace("if ($2 < 0) {" +
-                                "--amount;" +
+                                //"--amount;" +
                                 "updateDescription();" +
-                                "$_ = new com.megacrit.cardcrawl.actions.common.LoseHPAction($1, $1, -$2);" +
+                                "$_ = new " + LoseHPAction.class.getName() + "($1, $1, -$2);" +
                                 "} else {" +
                                 "$_ = $proceed($$);" +
                                 "}");
@@ -55,7 +59,7 @@ public class HerbalPastePatch
     }
 
     @SpirePatch(
-            cls="com.megacrit.cardcrawl.actions.unique.RegenAction",
+            clz=RegenAction.class,
             method="update"
     )
     public static class RegenActionPatch
@@ -66,8 +70,8 @@ public class HerbalPastePatch
                 @Override
                 public void edit(MethodCall m) throws CannotCompileException
                 {
-                    if (m.getClassName().equals("java.util.ArrayList") && m.getMethodName().equals("remove")) {
-                        m.replace("$_ = com.evacipated.cardcrawl.mod.hubris.patches.HerbalPastePatch.RegenActionPatch.Nested.Do(target, p);");
+                    if (m.getClassName().equals(ArrayList.class.getName()) && m.getMethodName().equals("remove")) {
+                        m.replace("$_ = " + Nested.class.getName() + ".Do(target, p);");
                     }
                 }
             };

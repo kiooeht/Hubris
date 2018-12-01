@@ -222,7 +222,7 @@
     "FLAVOR": "A foul smelling substance. Perhaps slathering it on your skin will heal your wounds.",
     "DESCRIPTIONS": [
       "Start each combat with #b",
-      " #yRegen. NL #yRegen can go negative."
+      " #yRegen. NL #yRegen can go to #r-1."
     ]
   },
   "hubris:MedicalManual": {
