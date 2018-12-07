@@ -191,6 +191,9 @@ public class HollowSoul extends HubrisRelic
             flash();
             restore();
             int healAmt = (int) (AbstractDungeon.player.maxHealth * ((float) VICTORY_HEAL_PERCENT / 100.0f));
+            if (healAmt < 1) {
+                healAmt = 1;
+            }
             AbstractDungeon.player.currentHealth = 0;
             AbstractDungeon.player.heal(healAmt, true);
         }
