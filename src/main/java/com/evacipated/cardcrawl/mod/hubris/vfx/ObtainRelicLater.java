@@ -27,4 +27,10 @@ public class ObtainRelicLater extends AbstractGameEffect
     {
 
     }
+
+    @Override
+    public void dispose()
+    {
+
+    }
 }

@@ -117,4 +117,10 @@ public class BetterShowCardAndObtainEffect extends AbstractGameEffect
             card.render(sb);
         }
     }
+
+    @Override
+    public void dispose()
+    {
+
+    }
 }

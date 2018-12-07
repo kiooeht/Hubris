@@ -100,4 +100,10 @@ public class RelicSpeechBubble extends AbstractGameEffect
                 scale_x * 0.5f, scale_y * 0.5f, rotation,
                 0, 0, 512, 512, false, false);
     }
+
+    @Override
+    public void dispose()
+    {
+
+    }
 }

@@ -129,4 +129,10 @@ public class ThrowPennyEffect extends AbstractGameEffect
         sb.setColor(this.color);
         sb.draw(this.img, this.x, this.y, this.img.packedWidth / 2.0F, this.img.packedHeight / 2.0F, this.img.packedWidth, this.img.packedHeight, this.scale, this.scale, this.rotation);
     }
+
+    @Override
+    public void dispose()
+    {
+
+    }
 }

@@ -70,6 +70,12 @@ public class ShowRollResult extends AbstractGameEffect
         }
     }
 
+    @Override
+    public void dispose()
+    {
+
+    }
+
     public static class Roll extends CustomCard
     {
         private int roll;
