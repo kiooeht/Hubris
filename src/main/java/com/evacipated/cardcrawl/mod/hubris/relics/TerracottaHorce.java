@@ -14,14 +14,6 @@ public class TerracottaHorce extends HubrisRelic
         super(ID, "terracottaHorce.png", RelicTier.BOSS, LandingSound.SOLID);
     }
 
-    public static boolean allowedInPool()
-    {
-        if (AbstractDungeon.isAscensionMode && AbstractDungeon.ascensionLevel > (20 - ASCENSION_BOOST)) {
-            return false;
-        }
-        return true;
-    }
-
     @Override
     public String getUpdatedDescription()
     {
@@ -52,6 +44,15 @@ public class TerracottaHorce extends HubrisRelic
             AbstractDungeon.isAscensionMode = false;
         }
         AbstractDungeon.topPanel.setPlayerName();
+    }
+
+    @Override
+    public boolean canSpawn()
+    {
+        if (AbstractDungeon.isAscensionMode && AbstractDungeon.ascensionLevel > (20 - ASCENSION_BOOST)) {
+            return false;
+        }
+        return true;
     }
 
     @Override

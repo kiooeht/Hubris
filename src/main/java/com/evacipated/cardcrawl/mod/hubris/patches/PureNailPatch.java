@@ -18,23 +18,6 @@ import java.util.function.Predicate;
 
 public class PureNailPatch
 {
-    // Makes Old Nail only available in the Exordium
-    @SpirePatch(
-            clz=TheCity.class,
-            method=SpirePatch.CONSTRUCTOR,
-            paramtypez={
-                    AbstractPlayer.class,
-                    ArrayList.class
-            }
-    )
-    public static class RemoveFromRelicPool
-    {
-        public static void Postfix(TheCity __intance, AbstractPlayer p, ArrayList<String> theList)
-        {
-            AbstractDungeon.commonRelicPool.removeIf(Predicate.isEqual(OldNail.ID));
-        }
-    }
-
     private static float doubleDamage(AbstractCard card, float damage)
     {
         AbstractRelic nail = AbstractDungeon.player.getRelic(OldNail.ID);

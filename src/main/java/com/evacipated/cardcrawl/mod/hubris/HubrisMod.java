@@ -501,11 +501,5 @@ public class HubrisMod implements
                 logger.info(CrackedHourglass.ID + " removed.");
             }
         }
-
-        if (!TerracottaHorce.allowedInPool()) {
-            if (AbstractDungeon.bossRelicPool.removeIf(r -> r.equals(TerracottaHorce.ID))) {
-                logger.info(TerracottaHorce.ID + " removed.");
-            }
-        }
     }
 }

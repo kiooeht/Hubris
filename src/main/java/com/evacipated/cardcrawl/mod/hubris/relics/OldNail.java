@@ -2,6 +2,8 @@ package com.evacipated.cardcrawl.mod.hubris.relics;
 
 import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.dungeons.Exordium;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.helpers.PowerTip;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
@@ -51,6 +53,12 @@ public class OldNail extends HubrisRelic
             tips.add(new PowerTip(name, description));
             initializeTips();
         }
+    }
+
+    @Override
+    public boolean canSpawn()
+    {
+        return AbstractDungeon.id.equals(Exordium.ID);
     }
 
     @Override
