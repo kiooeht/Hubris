@@ -9,6 +9,7 @@ import com.evacipated.cardcrawl.mod.hubris.actions.AnimationTimeScaleAction;
 import com.evacipated.cardcrawl.mod.hubris.actions.StealGoldAction;
 import com.evacipated.cardcrawl.mod.hubris.actions.ThrowGoldAction;
 import com.evacipated.cardcrawl.mod.hubris.actions.utility.ForceWaitAction;
+import com.evacipated.cardcrawl.mod.hubris.blights.Reinasbane;
 import com.evacipated.cardcrawl.mod.hubris.powers.GoldShieldPower;
 import com.evacipated.cardcrawl.mod.hubris.powers.BodyguardPower;
 import com.evacipated.cardcrawl.mod.hubris.relics.NiceRug;
@@ -292,7 +293,12 @@ public class MerchantMonster extends AbstractMonster
             }
 
             if (CardCrawlGame.playerName.equals(new String(new byte[]{0x52, 0x65, 0x69, 0x6E, 0x61}))) {
+                if (abuse >= 3 && MathUtils.randomBoolean(0.5f)) {
+                    AbstractDungeon.getCurrRoom().spawnBlightAndObtain(npc.hb.cX, npc.hb.cY, new Reinasbane());
+                }
+
                 ++abuse;
+
                 try {
                     HubrisMod.otherSaveData.setInt("abuse", abuse);
                     HubrisMod.otherSaveData.save();
