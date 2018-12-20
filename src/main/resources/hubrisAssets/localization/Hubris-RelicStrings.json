@@ -501,5 +501,12 @@
     "DESCRIPTIONS": [
       "#yCantrips are always considered [#5299DC]Spells[]."
     ]
+  },
+  "hubris:MadmansSpellBook": {
+    "NAME": "Madman's Spell Book",
+    "FLAVOR": "The scrawlings of a madman who spent too much time in the Spire.",
+    "DESCRIPTIONS": [
+      "Reverse [#5299DC]Spells[] and [#FF5252]Artes[]. NL All [#5299DC]Spells[] are now [#FF5252]Artes[], all [#FF5252]Artes[] are now [#5299DC]Spells[]."
+    ]
   }
 }

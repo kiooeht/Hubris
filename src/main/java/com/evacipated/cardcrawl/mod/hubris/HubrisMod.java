@@ -46,7 +46,6 @@ import infinitespire.InfiniteSpire;
 import javassist.CannotCompileException;
 import javassist.CtClass;
 import javassist.NotFoundException;
-import mysticmod.patches.AbstractCardEnum;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.clapper.util.classutil.*;
@@ -398,6 +397,7 @@ public class HubrisMod implements
         }
         if (hasMysticMod) {
             BaseMod.addRelicToCustomPool(new FoxTail(), mysticmod.patches.AbstractCardEnum.MYSTIC_PURPLE);
+            BaseMod.addRelicToCustomPool(new MadmansSpellBook(), mysticmod.patches.AbstractCardEnum.MYSTIC_PURPLE);
         }
     }
 
