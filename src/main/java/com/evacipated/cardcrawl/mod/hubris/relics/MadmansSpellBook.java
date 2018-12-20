@@ -62,6 +62,12 @@ public class MadmansSpellBook extends HubrisRelic implements SpellArteLogicAffec
     }
 
     @Override
+    public int getSpellArteLogicPriority()
+    {
+        return 999;
+    }
+
+    @Override
     public void onEquip()
     {
         // Force a refresh when this relic is obtained
