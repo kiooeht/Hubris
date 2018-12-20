@@ -85,6 +85,13 @@
             <scope>system</scope>
             <systemPath>${basedir}/../_ModTheSpire/mods/MimicMod.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>mysticmod</groupId>
+            <artifactId>MysticMod</artifactId>
+            <version>0.14.4</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/../_ModTheSpire/mods/TheMystic.jar</systemPath>
+        </dependency>
     </dependencies>
 
     <build>

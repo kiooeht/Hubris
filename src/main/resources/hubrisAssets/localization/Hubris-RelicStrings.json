@@ -494,5 +494,12 @@
       " NL Lose #b",
       " #yGold. NL Immediately kill all non-Elite, non-Boss enemies."
     ]
+  },
+  "hubris:FoxTail": {
+    "NAME": "Fox Tail",
+    "FLAVOR": "No foxes were harmed in the making of this relic.",
+    "DESCRIPTIONS": [
+      "#yCantrips are always considered [#5299DC]Spells[]."
+    ]
   }
 }

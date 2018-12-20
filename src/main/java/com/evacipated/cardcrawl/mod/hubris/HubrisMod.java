@@ -46,6 +46,7 @@ import infinitespire.InfiniteSpire;
 import javassist.CannotCompileException;
 import javassist.CtClass;
 import javassist.NotFoundException;
+import mysticmod.patches.AbstractCardEnum;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.clapper.util.classutil.*;
@@ -95,6 +96,7 @@ public class HubrisMod implements
     public static final boolean hasFruityMod;
     public static final boolean hasInfiniteSpire;
     public static final boolean hasMimicMod;
+    public static final boolean hasMysticMod;
 
     static
     {
@@ -117,6 +119,10 @@ public class HubrisMod implements
         hasMimicMod = Loader.isModLoaded("mimicmod");
         if (hasMimicMod) {
             logger.info("Detected Mimic Mod");
+        }
+        hasMysticMod = Loader.isModLoaded("MysticMod");
+        if (hasMysticMod) {
+            logger.info("Detected Mystic Mod");
         }
     }
 
@@ -389,6 +395,9 @@ public class HubrisMod implements
         if (hasInfiniteSpire) {
             BaseMod.addRelic(new MobiusCoin(), RelicType.SHARED);
             BaseMod.addRelic(new KleinBottle(), RelicType.SHARED);
+        }
+        if (hasMysticMod) {
+            BaseMod.addRelicToCustomPool(new FoxTail(), mysticmod.patches.AbstractCardEnum.MYSTIC_PURPLE);
         }
     }
 
