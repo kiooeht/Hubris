@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.evacipated.cardcrawl.mod.hubris.cards.black.InfiniteBlow;
 import com.evacipated.cardcrawl.mod.hubris.cards.curses.Hubris;
 import com.evacipated.cardcrawl.mod.hubris.crossover.InfiniteCrossover;
+import com.evacipated.cardcrawl.mod.hubris.crossover.MysticCrossover;
 import com.evacipated.cardcrawl.mod.hubris.events.shrines.TheFatedDie;
 import com.evacipated.cardcrawl.mod.hubris.events.shrines.YourTowel;
 import com.evacipated.cardcrawl.mod.hubris.events.shrines.UpdateBodyText;
@@ -396,8 +397,7 @@ public class HubrisMod implements
             BaseMod.addRelic(new KleinBottle(), RelicType.SHARED);
         }
         if (hasMysticMod) {
-            BaseMod.addRelicToCustomPool(new FoxTail(), mysticmod.patches.AbstractCardEnum.MYSTIC_PURPLE);
-            BaseMod.addRelicToCustomPool(new MadmansSpellBook(), mysticmod.patches.AbstractCardEnum.MYSTIC_PURPLE);
+            MysticCrossover.Relics();
         }
     }
 
