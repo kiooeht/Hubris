@@ -47,6 +47,7 @@ public class PrefetchAction extends AbstractGameAction
                 AbstractDungeon.gridSelectScreen.selectedCards.get(i).unhover();
                 InnateOncePatch.Field.isInnateOnce.set(AbstractDungeon.gridSelectScreen.selectedCards.get(i), true);
             }
+            AbstractDungeon.gridSelectScreen.selectedCards.clear();
         }
         tickDuration();
     }
