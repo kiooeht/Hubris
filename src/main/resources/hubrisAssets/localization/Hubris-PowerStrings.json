@@ -131,18 +131,19 @@
   "hubris:CursedLife": {
     "NAME": "Cursed Life",
     "DESCRIPTIONS": [
-      "If ",
+      "At the start of its turn, loses #b",
+      " HP. NL If ",
       " dies, permanently add #r",
       " #rCurses",
       " #rCurse",
-      " to your deck. NL Decreases by #b1 each turn."
+      " to your deck. Number of #rCurses decreases by #b1 each turn."
     ]
   },
   "hubris:Undead": {
     "NAME": "Undead",
     "DESCRIPTIONS": [
-      "When attacked, shuffles #b",
-      " #yAcid into your draw pile. NL If ",
+      "When it dies, add a card that heals ",
+      " into your hand. NL If ",
       " is still alive, revives in #b1 turn at full HP."
     ]
   },

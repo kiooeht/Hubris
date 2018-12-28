@@ -12,21 +12,16 @@ import com.evacipated.cardcrawl.mod.hubris.powers.FakeDeathPower;
 import com.evacipated.cardcrawl.mod.hubris.vfx.scene.NecromanticTotemParticleEffect;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
-import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
 import com.megacrit.cardcrawl.actions.common.RollMoveAction;
 import com.megacrit.cardcrawl.actions.common.SuicideAction;
 import com.megacrit.cardcrawl.actions.utility.HideHealthBarAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
-import com.megacrit.cardcrawl.cards.status.VoidCard;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.FrailPower;
-import com.megacrit.cardcrawl.powers.IntangiblePower;
-import com.megacrit.cardcrawl.powers.StrengthPower;
-import com.megacrit.cardcrawl.powers.WeakPower;
+import com.megacrit.cardcrawl.powers.*;
 import com.megacrit.cardcrawl.vfx.CollectorCurseEffect;
 import com.megacrit.cardcrawl.vfx.combat.InflameEffect;
 
@@ -37,13 +32,11 @@ public class NecromanticTotem extends AbstractMonster
     public static final String[] MOVES = {};
     public static final int HP = 50;
     private static final int CURSE_AMT = 7;
-    private static final int STRENGTH_AMT = 3;
-    private static final int INTANGIBLE_AMT = 1;
-    private static final int MEGA_DEBUFF_AMT = 3;
+    private static final int SELF_DAMAGE_AMT = 10;
+    private static final int MEGA_DEBUFF_AMT = 1;
 
     private static final byte SUMMON = 0;
-    private static final byte BUFF1 = 1;
-    private static final byte BUFF2 = 2;
+    private static final byte STRONG_DEBUFF = 2;
     private static final byte DEBUFF1 = 3;
     private static final byte DEBUFF2 = 4;
 
@@ -81,7 +74,8 @@ public class NecromanticTotem extends AbstractMonster
         CardCrawlGame.music.unsilenceBGM();
         AbstractDungeon.scene.fadeOutAmbiance();
         AbstractDungeon.getCurrRoom().playBgmInstantly("BOSS_CITY");
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new CursedLifePower(this, CURSE_AMT), CURSE_AMT));
+        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new CursedLifePower(this, CURSE_AMT, SELF_DAMAGE_AMT), CURSE_AMT));
+        //AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(this, this, new DeathWishPower(this, SELF_DAMAGE_AMT), SELF_DAMAGE_AMT));
 
         for (AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
             if (m != this) {
@@ -104,28 +98,17 @@ public class NecromanticTotem extends AbstractMonster
                     }
                 }
                 break;
-            case BUFF1:
-                for (AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
-                    if (m != this && !m.isDeadOrEscaped()) {
-                        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(m, this, new StrengthPower(m, STRENGTH_AMT), STRENGTH_AMT));
-                    }
-                }
-                break;
-            case BUFF2:
-                for (AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
-                    if (m != this && !m.isDeadOrEscaped()) {
-                        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(m, this, new IntangiblePower(m, INTANGIBLE_AMT), INTANGIBLE_AMT));
-                    }
-                }
+            case STRONG_DEBUFF:
+                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, this, new DrawReductionPower(AbstractDungeon.player, 1)));
                 break;
             case DEBUFF1:
-                AbstractDungeon.actionManager.addToBottom(new VFXAction(new CollectorCurseEffect(hb.cX, hb.cY), 2.0F));
+                AbstractDungeon.actionManager.addToBottom(new VFXAction(new CollectorCurseEffect(AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY), 2.0F));
                 AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, this, new WeakPower(AbstractDungeon.player, MEGA_DEBUFF_AMT, true), MEGA_DEBUFF_AMT));
                 //AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, this, new VulnerablePower(AbstractDungeon.player, MEGA_DEBUFF_AMT, true), MEGA_DEBUFF_AMT));
-                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, this, new FrailPower(AbstractDungeon.player, MEGA_DEBUFF_AMT, true), MEGA_DEBUFF_AMT));
                 break;
             case DEBUFF2:
-                AbstractDungeon.actionManager.addToBottom(new MakeTempCardInDrawPileAction(new VoidCard(), 1, true, true));
+                AbstractDungeon.actionManager.addToBottom(new VFXAction(new CollectorCurseEffect(AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY), 2.0F));
+                AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, this, new FrailPower(AbstractDungeon.player, MEGA_DEBUFF_AMT, true), MEGA_DEBUFF_AMT));
                 break;
         }
 
@@ -138,12 +121,16 @@ public class NecromanticTotem extends AbstractMonster
     {
         if (doneMove < 0) {
             setMove("Raise Dead", SUMMON, Intent.UNKNOWN);
-        } else if (num < 50) {
-            setMove(BUFF1, Intent.BUFF);
-        } else if (num < 70) {
-            setMove(DEBUFF2, Intent.DEBUFF);
+        } else if (num < 20) {
+            if (!lastMove(STRONG_DEBUFF) && !lastTwoMoves(STRONG_DEBUFF)) {
+                setMove(STRONG_DEBUFF, Intent.STRONG_DEBUFF);
+            } else {
+                getMove(AbstractDungeon.aiRng.random(20, 99));
+            }
+        } else if (num < 60) {
+            setMove(DEBUFF1, Intent.DEBUFF);
         } else {
-            setMove(DEBUFF1, Intent.STRONG_DEBUFF);
+            setMove(DEBUFF2, Intent.DEBUFF);
         }
     }
 

@@ -4,7 +4,9 @@ import basemod.ReflectionHacks;
 import com.badlogic.gdx.Gdx;
 import com.evacipated.cardcrawl.mod.hubris.actions.common.AlwaysRemoveSpecificPowerAction;
 import com.evacipated.cardcrawl.mod.hubris.cards.status.Acid;
+import com.evacipated.cardcrawl.mod.hubris.cards.status.NegativeEnergy;
 import com.megacrit.cardcrawl.actions.common.MakeTempCardInDrawPileAction;
+import com.megacrit.cardcrawl.actions.common.MakeTempCardInHandAction;
 import com.megacrit.cardcrawl.actions.common.SetMoveAction;
 import com.megacrit.cardcrawl.cards.DamageInfo;
 import com.megacrit.cardcrawl.core.AbstractCreature;
@@ -51,7 +53,7 @@ public class UndeadPower extends AbstractPower
     @Override
     public void updateDescription()
     {
-        description = DESCRIPTIONS[0] + amount + DESCRIPTIONS[1] + FontHelper.colorString(parent.name, "y") + DESCRIPTIONS[2];
+        description = DESCRIPTIONS[0] + FontHelper.colorString(parent.name, "y") + DESCRIPTIONS[1] + FontHelper.colorString(parent.name, "y") + DESCRIPTIONS[2];
     }
 
     @Override
@@ -62,19 +64,11 @@ public class UndeadPower extends AbstractPower
     }
 
     @Override
-    public int onAttacked(DamageInfo info, int damageAmount)
-    {
-        if (info.owner != null && info.owner != owner && info.type != DamageInfo.DamageType.THORNS) {
-            AbstractDungeon.actionManager.addToBottom(new MakeTempCardInDrawPileAction(new Acid(), amount, true, true));
-        }
-
-        return super.onAttacked(info, damageAmount);
-    }
-
-    @Override
     public void onDeath()
     {
         if (!parent.isDeadOrEscaped()) {
+            AbstractDungeon.actionManager.addToTop(new MakeTempCardInHandAction(new NegativeEnergy(), amount));
+
             owner.isDying = false;
             owner.halfDead = true;
             // Stop the fade out on death

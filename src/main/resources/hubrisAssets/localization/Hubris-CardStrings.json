@@ -183,5 +183,9 @@
   "hubris:Acid": {
     "NAME": "Acid",
     "DESCRIPTION": "Unplayable. NL At the end of your turn, take !M! damage. NL Ethereal."
+  },
+  "hubris:NegativeEnergy": {
+    "NAME": "Negative Energy",
+    "DESCRIPTION": "Retain. NL Heal Necromantic Totem !M! HP. NL Exhaust."
   }
 }
