@@ -70,7 +70,6 @@ public class HubrisMod implements
         EditKeywordsSubscriber,
         EditStringsSubscriber,
         PostDeathSubscriber,
-        StartGameSubscriber,
         MaxHPChangeSubscriber,
         AddCustomModeModsSubscriber,
         PostDungeonInitializeSubscriber
@@ -166,9 +165,9 @@ public class HubrisMod implements
         return modConfig.getBool("crackedHourglass");
     }
 
-    public static void loadData()
+    public static void loadOtherData()
     {
-        logger.info("Loading Save Data");
+        logger.info("Loading Other Save Data");
         try {
             otherSaveData = new SpireConfig("Hubris", "OtherSaveData");
             if (hasInfiniteSpire) {
@@ -209,19 +208,9 @@ public class HubrisMod implements
     }
 
     @Override
-    public void receiveStartGame()
-    {
-        loadData();
-    }
-
-    @Override
     public void receivePostInitialize()
     {
-        try {
-            otherSaveData = new SpireConfig("Hubris", "OtherSaveData");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        loadOtherData();
 
         ModPanel settingsPanel = new ModPanel();
         ModLabeledToggleButton hubrisBtn = new ModLabeledToggleButton("Add Hubris curse to starting deck",

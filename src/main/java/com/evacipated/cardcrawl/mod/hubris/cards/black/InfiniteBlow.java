@@ -109,7 +109,6 @@ public class InfiniteBlow extends BlackCard
     {
         if (HubrisMod.otherSaveData != null && HubrisMod.otherSaveData.has(CONFIG_KEY)) {
             savedUpgrades = HubrisMod.otherSaveData.getInt(CONFIG_KEY);
-            System.out.println("GOLD:" + Settings.GOLD_COLOR.toString());
         }
     }
 
