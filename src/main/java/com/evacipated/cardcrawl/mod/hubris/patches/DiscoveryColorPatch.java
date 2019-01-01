@@ -47,7 +47,7 @@ public class DiscoveryColorPatch
                     }
                 }
                 if (!dupe) {
-                    AbstractCard c = tmp.makeCopy();
+                    AbstractCard c = tmp.makeStatEquivalentCopy();
                     if (lookingForUpgraded) {
                         c.upgrade();
                     }
