@@ -149,12 +149,7 @@ public class HollowSoul extends HubrisRelic
         AbstractDungeon.actionManager.clear();
 
         // Remake monsters
-        if (AbstractDungeon.lastCombatMetricKey.equals(MerchantMonster.ID)) {
-            MerchantMonster merchantMonster = (MerchantMonster) room.monsters.monsters.get(0);
-            room.monsters = new MonsterGroup(new MerchantMonster(merchantMonster));
-        } else {
-            room.monsters = MonsterHelper.getEncounter(AbstractDungeon.lastCombatMetricKey);
-        }
+        room.monsters = MonsterHelper.getEncounter(AbstractDungeon.lastCombatMetricKey);
         room.monsters.init();
 
         // Prepare monsters

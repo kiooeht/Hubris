@@ -72,7 +72,6 @@ public class MerchantMonster extends AbstractMonster
     private static final int ARTIFACT_AMT = 5;
     private static final Map<Byte, Integer> throwAmounts = new HashMap<>();
 
-    private Merchant npc;
     private boolean doEscape = true;
     private int turn = -1;
     private boolean thresholdReached = false;
@@ -87,7 +86,7 @@ public class MerchantMonster extends AbstractMonster
 
     public MerchantMonster(boolean boss)
     {
-        this((Merchant) null);
+        this();
         this.boss = boss;
         if (boss) {
             doEscape = false;
@@ -98,12 +97,7 @@ public class MerchantMonster extends AbstractMonster
         }
     }
 
-    public MerchantMonster(MerchantMonster merchantMonster)
-    {
-        this(merchantMonster.npc);
-    }
-
-    public MerchantMonster(Merchant npc)
+    public MerchantMonster()
     {
         super(NAME, ID, START_HP, -10.0F, -30.0F, 180.0F, 150.0F, null, 0.0F, 0.0F);
 
@@ -112,8 +106,6 @@ public class MerchantMonster extends AbstractMonster
                 abuse = HubrisMod.otherSaveData.getInt("abuse");
             }
         }
-
-        this.npc = npc;
 
         drawX = 1260.0F * Settings.scale;
         drawY = 370.0F * Settings.scale;
@@ -129,7 +121,6 @@ public class MerchantMonster extends AbstractMonster
 
         gold = 300;
         halfDead = false;
-        AbstractDungeon.getCurrRoom().cannotLose = true;
 
         damage.add(new DamageInfo(this, 1));
     }
@@ -150,6 +141,8 @@ public class MerchantMonster extends AbstractMonster
     @Override
     public void usePreBattleAction()
     {
+        AbstractDungeon.getCurrRoom().cannotLose = true;
+
         //UnlockTracker.markBossAsSeen("MERCHANT");
         if (boss) {
             AbstractDungeon.actionManager.addToTop(new CanLoseAction());
@@ -289,12 +282,12 @@ public class MerchantMonster extends AbstractMonster
         if (!AbstractDungeon.getCurrRoom().cannotLose) {
             super.die();
             if (!boss) {
-                AbstractDungeon.getCurrRoom().spawnRelicAndObtain(npc.hb.cX, npc.hb.cY, RelicLibrary.getRelic(NiceRug.ID).makeCopy());
+                AbstractDungeon.getCurrRoom().spawnRelicAndObtain(hb.cX, hb.cY, RelicLibrary.getRelic(NiceRug.ID).makeCopy());
             }
 
             if (CardCrawlGame.playerName.equals(new String(new byte[]{0x52, 0x65, 0x69, 0x6E, 0x61}))) {
                 if (abuse >= 3 && MathUtils.randomBoolean(0.5f)) {
-                    AbstractDungeon.getCurrRoom().spawnBlightAndObtain(npc.hb.cX, npc.hb.cY, new Reinasbane());
+                    AbstractDungeon.getCurrRoom().spawnBlightAndObtain(hb.cX, hb.cY, new Reinasbane());
                 }
 
                 ++abuse;

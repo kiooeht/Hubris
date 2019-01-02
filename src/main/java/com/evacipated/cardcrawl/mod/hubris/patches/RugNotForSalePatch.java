@@ -101,7 +101,7 @@ public class RugNotForSalePatch
             AbstractDungeon.closeCurrentScreen();
             AbstractDungeon.getCurrRoom().phase = AbstractRoom.RoomPhase.COMBAT;
             AbstractDungeon.lastCombatMetricKey = MerchantMonster.ID;
-            AbstractDungeon.getCurrRoom().monsters = new MonsterGroup(new MerchantMonster(merchant));
+            AbstractDungeon.getCurrRoom().monsters = new MonsterGroup(new MerchantMonster());
             AbstractDungeon.getCurrRoom().event = new MerchantFight();
 
             AbstractDungeon.getCurrRoom().rewards.clear();
