@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.evacipated.cardcrawl.mod.hubris.cards.black.InfiniteBlow;
 import com.evacipated.cardcrawl.mod.hubris.cards.curses.Hubris;
+import com.evacipated.cardcrawl.mod.hubris.cards.red.ReadiedAction;
 import com.evacipated.cardcrawl.mod.hubris.crossover.InfiniteCrossover;
 import com.evacipated.cardcrawl.mod.hubris.crossover.MysticCrossover;
 import com.evacipated.cardcrawl.mod.hubris.events.shrines.TheFatedDie;
@@ -97,6 +98,7 @@ public class HubrisMod implements
     public static final boolean hasInfiniteSpire;
     public static final boolean hasMimicMod;
     public static final boolean hasMysticMod;
+    public static final boolean hasDisciple;
 
     static
     {
@@ -123,6 +125,10 @@ public class HubrisMod implements
         hasMysticMod = Loader.isModLoaded("MysticMod");
         if (hasMysticMod) {
             logger.info("Detected Mystic Mod");
+        }
+        hasDisciple = Loader.isModLoaded("chronomuncher");
+        if (hasDisciple) {
+            logger.info("Detected Disciple");
         }
     }
 
@@ -338,7 +344,9 @@ public class HubrisMod implements
         BaseMod.addRelic(new Test447(), RelicType.SHARED);
         BaseMod.addRelic(new BundleOfHerbs(), RelicType.SHARED);
         BaseMod.addRelic(new SphereOfDissonance(), RelicType.SHARED);
-        BaseMod.addRelic(new Stopwatch(), RelicType.SHARED);
+        if (!hasDisciple) { // TODO: Currently there's a cross-mod bug with Disciple
+            BaseMod.addRelic(new Stopwatch(), RelicType.SHARED);
+        }
         BaseMod.addRelic(new HerbalPaste(), RelicType.SHARED);
         BaseMod.addRelic(new MedicalManual(), RelicType.SHARED);
         BaseMod.addRelic(new HollowSoul(), RelicType.SHARED);
@@ -462,6 +470,11 @@ public class HubrisMod implements
             if (!isCard) {
                 continue;
             }
+            if (hasDisciple && classInfo.getClassName().equals(ReadiedAction.class.getName())) {
+                // TODO: Currently there's a cross-mod bug with Disciple
+                continue;
+            }
+
             System.out.println(classInfo.getClassName());
             AbstractCard card = (AbstractCard) Loader.getClassPool().toClass(cls).newInstance();
             BaseMod.addCard(card);
