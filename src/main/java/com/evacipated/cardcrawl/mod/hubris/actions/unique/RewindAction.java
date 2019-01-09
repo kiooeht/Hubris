@@ -1,5 +1,6 @@
 package com.evacipated.cardcrawl.mod.hubris.actions.unique;
 
+import com.evacipated.cardcrawl.mod.hubris.cards.DuctTapeCard;
 import com.evacipated.cardcrawl.mod.hubris.cards.black.Rewind;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -22,6 +23,11 @@ public class RewindAction extends AbstractGameAction
             for (AbstractCard c : AbstractDungeon.actionManager.cardsPlayedThisCombat) {
                 if (c.cardID.equals(Rewind.ID)) {
                     continue;
+                }
+                if (c instanceof DuctTapeCard) {
+                    if (((DuctTapeCard) c).containsCard(Rewind.ID)) {
+                        continue;
+                    }
                 }
 
                 AbstractMonster targetMonster = AbstractDungeon.getRandomMonster();

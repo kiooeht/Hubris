@@ -871,4 +871,14 @@ public class DuctTapeCard extends CustomCard
             }
         }
     }
+
+    public boolean containsCard(String cardID)
+    {
+        for (AbstractCard card : cards) {
+            if (card.cardID.equals(cardID)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
