@@ -5,6 +5,7 @@ import com.megacrit.cardcrawl.actions.common.GainBlockAction;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.OrbStrings;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.orbs.AbstractOrb;
 import com.megacrit.cardcrawl.orbs.Frost;
 import com.megacrit.cardcrawl.orbs.Plasma;
@@ -53,7 +54,11 @@ public class MonsterFrost extends Frost
     @Override
     public void onEvoke()
     {
-        AbstractDungeon.actionManager.addToTop(new GainBlockAction(owner, owner, evokeAmount));
+        for (AbstractMonster m : AbstractDungeon.getMonsters().monsters) {
+            if (!m.isDeadOrEscaped()) {
+                AbstractDungeon.actionManager.addToTop(new GainBlockAction(m, owner, evokeAmount));
+            }
+        }
     }
 
     @Override

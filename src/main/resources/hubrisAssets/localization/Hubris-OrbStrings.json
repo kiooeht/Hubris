@@ -9,7 +9,7 @@
   "hubris:MonsterFrost": {
     "NAME": "Frost",
     "DESCRIPTION": [
-      "#yEvoke: Gain #b",
+      "#yEvoke: ALL enemies gain #b",
       " #yBlock."
     ]
   },
