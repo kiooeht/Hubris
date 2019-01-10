@@ -56,11 +56,7 @@ public class MonsterDraining extends AbstractOrb
     @Override
     public void applyFocus()
     {
-        AbstractPower power = owner.getPower(FocusPower.POWER_ID);
-        if (power != null && !ID.equals(Plasma.ORB_ID)) {
-            passiveAmount = Math.max(0, basePassiveAmount + power.amount);
-            evokeAmount = Math.max(0, baseEvokeAmount + power.amount);
-        }
+        // Not affected by Focus
     }
 
     @Override

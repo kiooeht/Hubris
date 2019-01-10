@@ -39,7 +39,7 @@
     "NAME": "Draining",
     "DESCRIPTION": [
       "#yEvoke: Add #b",
-      " #yDazed to your draw pile."
+      " #yDazed to your draw pile. NL Draining is unaffected by #yFocus."
     ]
   },
   "hubris:MonsterWarp": {
