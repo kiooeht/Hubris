@@ -16,6 +16,7 @@ public class MonsterFrost extends Frost
     public static final String ORB_ID = "hubris:MonsterFrost";
     private static final OrbStrings orbString = CardCrawlGame.languagePack.getOrbString(ORB_ID);
     public static final String[] DESC = orbString.DESCRIPTION;
+    private static final int BLOCK = 10;
 
     private OrbUsingMonster owner;
 
@@ -24,6 +25,7 @@ public class MonsterFrost extends Frost
         super();
         ID = ORB_ID;
         this.owner = owner;
+        baseEvokeAmount = 10;
         showEvokeValue();
         updateDescription();
     }
