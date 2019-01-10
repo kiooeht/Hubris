@@ -381,6 +381,7 @@ public class BloodShopScreen
                         InputHelper.mX - 360.0F * Settings.scale, InputHelper.mY - 70.0F * Settings.scale,
                         ShopScreen.LABEL[0],
                         ShopScreen.MSG[0] + PURGE_COST_RAMP + ShopScreen.MSG[1]
+                                + " NL " + FontHelper.colorString("Can be used any number of times.", "g")
                 );
             }
         } else {
