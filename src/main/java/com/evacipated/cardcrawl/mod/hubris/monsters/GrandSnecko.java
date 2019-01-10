@@ -160,6 +160,10 @@ public class GrandSnecko extends OrbUsingMonster
                 && (orbTypesBeingChannelled.contains(MonsterWarp.ORB_ID) || hasOrbType(MonsterWarp.ORB_ID))) {
             return true;
         }
+        if (orb.ID.equals(MonsterDraining.ORB_ID)
+                && (orbTypesBeingChannelled.contains(MonsterDraining.ORB_ID) || hasOrbType(MonsterDraining.ORB_ID))) {
+            return true;
+        }
 
         return false;
     }
