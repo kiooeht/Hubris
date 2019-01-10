@@ -54,8 +54,7 @@ public class GrandSnecko extends OrbUsingMonster
 
     static {
         orbPercents = new ArrayList<>();
-        orbPercents.add(new Pair<>(50, MonsterLightning.class));
-        orbPercents.add(new Pair<>(25, MonsterFrost.class));
+        orbPercents.add(new Pair<>(70, MonsterLightning.class));
         orbPercents.add(new Pair<>(15, MonsterMiasma.class));
         orbPercents.add(new Pair<>(10, MonsterDraining.class));
 
@@ -68,6 +67,7 @@ public class GrandSnecko extends OrbUsingMonster
 
     private int ORB_SLOTS = BASE_ORB_SLOTS;
     private int summonCount = 0;
+    private int turnCount = 0;
 
     public GrandSnecko()
     {
@@ -171,6 +171,10 @@ public class GrandSnecko extends OrbUsingMonster
     @Override
     public void takeTurn()
     {
+        ++turnCount;
+
+        boolean frostTurn = false;
+
         ArrayList<String> orbTypesBeingChannelled = new ArrayList<>();
         for (int i=0; i<numberToChannel; ++i) {
             AbstractOrb orb;
@@ -179,9 +183,18 @@ public class GrandSnecko extends OrbUsingMonster
             } else if (!hasOrbType(MonsterFocusing.ORB_ID) && !orbTypesBeingChannelled.contains(MonsterFocusing.ORB_ID)) {
                 orb = new MonsterFocusing(this);
             } else {
-                do {
-                    orb = getRandomOrb();
-                } while (rerollOrb(orbTypesBeingChannelled, orb));
+                if (turnCount >= 3 && orbTypesBeingChannelled.isEmpty()) {
+                    turnCount = 0;
+                    frostTurn = true;
+                }
+
+                if (frostTurn) {
+                    orb = new MonsterFrost(this);
+                } else {
+                    do {
+                        orb = getRandomOrb();
+                    } while (rerollOrb(orbTypesBeingChannelled, orb));
+                }
             }
             orbTypesBeingChannelled.add(orb.ID);
             if (orb instanceof MonsterWarp) {
