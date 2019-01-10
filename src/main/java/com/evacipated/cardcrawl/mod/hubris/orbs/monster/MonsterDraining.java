@@ -27,7 +27,7 @@ public class MonsterDraining extends AbstractOrb
     private static final OrbStrings orbStrings = CardCrawlGame.languagePack.getOrbString(ORB_ID);
     public static final String[] DESC = orbStrings.DESCRIPTION;
     private float vfxTimer = 0.5f;
-    private static final int AMOUNT = 3;
+    private static final int AMOUNT = 4;
 
     private OrbUsingMonster owner;
 
