@@ -71,7 +71,7 @@ public class MysteriousPyramids extends HubrisRelic implements CustomBottleRelic
             return;
         }
         for (int i=0; i<COUNT; ++i) {
-            if (cardIndices.size() > i && AbstractDungeon.player.masterDeck.size() > cardIndices.get(i)) {
+            if (cardIndices.size() > i && AbstractDungeon.player.masterDeck.size() > cardIndices.get(i) && cardIndices.get(i) >= 0) {
                 AbstractCard c = AbstractDungeon.player.masterDeck.group.get(cardIndices.get(i));
                 if (c == null) {
                     cards.clear();
