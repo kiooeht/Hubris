@@ -4,6 +4,7 @@ import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.hubris.cards.black.Fate;
 import com.evacipated.cardcrawl.mod.hubris.cards.black.InfiniteBlow;
 import com.evacipated.cardcrawl.mod.hubris.cards.black.Rewind;
+import com.megacrit.cardcrawl.cards.AbstractCard;
 import infinitespire.helpers.CardHelper;
 
 public class InfiniteCrossover
@@ -16,5 +17,10 @@ public class InfiniteCrossover
         CardHelper.addCard(new Fate());
         CardHelper.addCard(new InfiniteBlow());
         CardHelper.addCard(new Rewind());
+    }
+
+    public static AbstractCard getRandomBlackCard()
+    {
+        return CardHelper.getRandomBlackCard();
     }
 }

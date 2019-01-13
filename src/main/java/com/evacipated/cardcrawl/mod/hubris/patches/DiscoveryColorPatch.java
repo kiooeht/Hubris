@@ -1,12 +1,14 @@
 package com.evacipated.cardcrawl.mod.hubris.patches;
 
+import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
+import com.evacipated.cardcrawl.mod.hubris.crossover.InfiniteCrossover;
 import com.evacipated.cardcrawl.modthespire.lib.*;
-import com.megacrit.cardcrawl.actions.unique.DiscoveryAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
 import com.megacrit.cardcrawl.random.Random;
 import com.megacrit.cardcrawl.screens.CardRewardScreen;
+import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import javassist.CtBehavior;
 
 import java.util.ArrayList;
@@ -35,7 +37,6 @@ public class DiscoveryColorPatch
             derp.clear();
             while (derp.size() != lookingForCount) {
                 boolean dupe = false;
-                System.out.println(lookingForColor);
                 AbstractCard tmp = getColorSpecificCard(lookingForProhibit, lookingForColor, AbstractDungeon.cardRandomRng);
                 if (tmp.hasTag(AbstractCard.CardTags.HEALING)) {
                     dupe = true;
@@ -48,6 +49,8 @@ public class DiscoveryColorPatch
                 }
                 if (!dupe) {
                     AbstractCard c = tmp.makeStatEquivalentCopy();
+                    UnlockTracker.markCardAsSeen(c.cardID);
+                    c.isSeen = true;
                     if (lookingForUpgraded) {
                         c.upgrade();
                     }
