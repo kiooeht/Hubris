@@ -1,5 +1,6 @@
 package com.evacipated.cardcrawl.mod.hubris.events.shrines;
 
+import basemod.BaseMod;
 import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
@@ -46,6 +47,14 @@ public class UpdateBodyText extends AbstractImageEvent
         super(NAME, DESCRIPTIONS[0], HubrisMod.assetPath("images/events/updatebodytext1.jpg"));
 
         imageEventText.setDialogOption(OPTIONS[0]);
+    }
+
+    @Override
+    public void onEnterRoom()
+    {
+        super.onEnterRoom();
+
+        BaseMod.setRichPresence("UPDATE BODY TEXT");
     }
 
     @Override
