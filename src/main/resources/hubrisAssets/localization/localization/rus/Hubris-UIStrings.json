@@ -1,0 +1,13 @@
+{
+  "FireCardAction": {
+    "TEXT": [
+      "Огонь"
+    ]
+  },
+  "SharpeningStoneAction": {
+    "TEXT": [
+      "Острый",
+      "Пронзающий. NL "
+    ]
+  }
+}

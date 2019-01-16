@@ -1,0 +1,82 @@
+{
+  "hubris:Icosahedron_1": {
+    "DESCRIPTION": "Беспечность.",
+    "NAME": "1"
+  },
+  "hubris:Icosahedron_10": {
+    "DESCRIPTION": "Добавляет Второй шанс в вашу руку.",
+    "NAME": "10"
+  },
+  "hubris:Icosahedron_11": {
+    "DESCRIPTION": "Получить 100 Золота.",
+    "NAME": "11"
+  },
+  "hubris:Icosahedron_12": {
+    "DESCRIPTION": "Получить обычное зелье.",
+    "NAME": "12"
+  },
+  "hubris:Icosahedron_13": {
+    "DESCRIPTION": "Получить 3 Артифакта.",
+    "NAME": "13"
+  },
+  "hubris:Icosahedron_14": {
+    "DESCRIPTION": "Получить 1 Силы, 1 Ловкости, и 1 Фокуса.",
+    "NAME": "14"
+  },
+  "hubris:Icosahedron_15": {
+    "DESCRIPTION": "Вы брете на 1 карту больше каждый ход.",
+    "NAME": "15"
+  },
+  "hubris:Icosahedron_16": {
+    "DESCRIPTION": "Получить редкое зелье.",
+    "NAME": "16"
+  },
+  "hubris:Icosahedron_17": {
+    "DESCRIPTION": "выберите 1 из 3 редких карт и добавить её в вашу руку.",
+    "NAME": "17"
+  },
+  "hubris:Icosahedron_18": {
+    "DESCRIPTION": "В начале каждого хода, дает [E].",
+    "NAME": "18"
+  },
+  "hubris:Icosahedron_19": {
+    "DESCRIPTION": "Полностью восстанавливает здоровье.",
+    "NAME": "19"
+  },
+  "hubris:Icosahedron_2": {
+    "DESCRIPTION": "Потерять 10 HP.",
+    "NAME": "2"
+  },
+  "hubris:Icosahedron_20": {
+    "DESCRIPTION": "20 Беспечность.",
+    "NAME": "20"
+  },
+  "hubris:Icosahedron_3": {
+    "DESCRIPTION": "Добавить 3 Бездны ввашу стопку сброса.",
+    "NAME": "3"
+  },
+  "hubris:Icosahedron_4": {
+    "DESCRIPTION": "Брать на 1 карту меньше каждый ход.",
+    "NAME": "4"
+  },
+  "hubris:Icosahedron_5": {
+    "DESCRIPTION": "Увеличивает стоимость карт в вашей руке на 1 до конца битвы.",
+    "NAME": "5"
+  },
+  "hubris:Icosahedron_6": {
+    "DESCRIPTION": "Получить 5 Уязвимости.",
+    "NAME": "6"
+  },
+  "hubris:Icosahedron_7": {
+    "DESCRIPTION": "Получить 5 Хрупкости.",
+    "NAME": "7"
+  },
+  "hubris:Icosahedron_8": {
+    "DESCRIPTION": "Получить 5 Слабости.",
+    "NAME": "8"
+  },
+  "hubris:Icosahedron_9": {
+    "DESCRIPTION": "Потерять 50 Золота.",
+    "NAME": "9"
+  }
+}

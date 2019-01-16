@@ -1,0 +1,51 @@
+{
+  "hubris:MonsterLightning": {
+    "NAME": "Молния",
+    "DESCRIPTION": [
+      "#yПризыв: наносит #b",
+      " урона."
+    ]
+  },
+  "hubris:MonsterFrost": {
+    "NAME": "Мороз",
+    "DESCRIPTION": [
+      "#yПризыв: Дает #b",
+      " #yБрони."
+    ]
+  },
+  "hubris:MonsterMiasma": {
+    "NAME": "Миазма",
+    "DESCRIPTION": [
+      "#yПризыв: Накладывает #b",
+      " Слабость, #b",
+      " Уязвимость, и #b",
+      " Хрупкость."
+    ]
+  },
+  "hubris:MonsterFocusing": {
+    "NAME": "Сосредоточение",
+    "DESCRIPTION": [
+      "#yПризыв: Дает #b",
+      " Фокуса."
+    ]
+  },
+  "hubris:MonsterHypnotic": {
+    "NAME": "Гипноз",
+    "DESCRIPTION": [
+      "#yПризыв: Применяет Озадаченный. NL NL #yОзадаченный: Первая полученная карта в каждом ходу преобразовывается."
+    ]
+  },
+  "hubris:MonsterDraining": {
+    "NAME": "Высасывание",
+    "DESCRIPTION": [
+      "#yПризыв: Добавляет #b",
+      " #yГоловокружений в вашу стопку сброса."
+    ]
+  },
+  "hubris:MonsterWarp": {
+    "NAME": "Портад",
+    "DESCRIPTION": [
+      "#yПризыв: Вызывает какое-то другое существо шпиля."
+    ]
+  }
+}
