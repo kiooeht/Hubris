@@ -19,7 +19,7 @@ public class SlothPower extends AbstractPower
         name = NAME;
         ID = POWER_ID;
         this.owner = owner;
-        type = PowerType.DEBUFF;
+        type = PowerType.BUFF;
         amount = -1;
         updateDescription();
         loadRegion("slow");
