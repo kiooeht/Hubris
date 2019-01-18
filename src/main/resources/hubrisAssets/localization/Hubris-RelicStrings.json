@@ -508,5 +508,13 @@
     "DESCRIPTIONS": [
       "Reverse [#5299DC]Spells[] and [#FF5252]Artes[]. NL All [#5299DC]Spells[] are now [#FF5252]Artes[], all [#FF5252]Artes[] are now [#5299DC]Spells[]."
     ]
+  },
+  "hubris:GrandSneckoEye": {
+    "NAME": "Grand Snecko Eye",
+    "FLAVOR": "Perplexingly large.",
+    "DESCRIPTIONS": [
+      "Gain [E] and transform #b",
+      " cards at the start of your turn."
+    ]
   }
 }
