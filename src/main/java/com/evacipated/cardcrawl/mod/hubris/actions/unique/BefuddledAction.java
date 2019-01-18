@@ -48,7 +48,8 @@ public class BefuddledAction extends AbstractGameAction
             }
 
             p.hand.group.removeAll(cannotTransform);
-            AbstractDungeon.handCardSelectScreen.open(TEXT[0], amount, false, false, false, false, false);
+            AbstractDungeon.handCardSelectScreen.open(TEXT[0], Math.min(amount, p.hand.size()),
+                    false, false, false, false, false);
             tickDuration();
             return;
         }
