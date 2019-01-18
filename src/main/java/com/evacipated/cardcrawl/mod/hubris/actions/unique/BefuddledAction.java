@@ -38,7 +38,7 @@ public class BefuddledAction extends AbstractGameAction
             }
 
             for (AbstractCard c : p.hand.group) {
-                if (c.type == AbstractCard.CardType.STATUS) {
+                if (c.type == AbstractCard.CardType.STATUS || c.type == AbstractCard.CardType.CURSE) {
                     cannotTransform.add(c);
                 }
             }
