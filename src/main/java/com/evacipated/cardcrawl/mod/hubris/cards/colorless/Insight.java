@@ -2,7 +2,7 @@ package com.evacipated.cardcrawl.mod.hubris.cards.colorless;
 
 import basemod.abstracts.CustomCard;
 import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
-import com.evacipated.cardcrawl.mod.hubris.actions.unique.InsightAction;
+import com.evacipated.cardcrawl.mod.stslib.actions.common.FetchAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
@@ -31,7 +31,17 @@ public class Insight extends CustomCard
     @Override
     public void use(AbstractPlayer p, AbstractMonster m)
     {
-        AbstractDungeon.actionManager.addToBottom(new InsightAction(magicNumber, 1));
+        AbstractDungeon.actionManager.addToBottom(
+                new FetchAction(
+                        AbstractDungeon.player.drawPile,
+                        c -> AbstractDungeon.player.drawPile.group.indexOf(c) > AbstractDungeon.player.drawPile.size() - magicNumber - 1,
+                        fetchedCards -> {
+                            for (AbstractCard card : fetchedCards) {
+                                card.modifyCostForCombat(-1);
+                            }
+                        }
+                )
+        );
     }
 
     @Override
