@@ -2,17 +2,26 @@ package com.evacipated.cardcrawl.mod.hubris.actions.unique;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.localization.UIStrings;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BefuddledAction extends AbstractGameAction
 {
-    private AbstractCard c;
+    private static final UIStrings uiStrings = CardCrawlGame.languagePack.getUIString("BefuddledAction");
+    public static final String[] TEXT = uiStrings.TEXT;
 
-    public BefuddledAction(AbstractCard card)
+    private int amount;
+    private List<AbstractCard> cannotTransform = new ArrayList<>();
+
+    public BefuddledAction(int amount)
     {
-        c = card;
-        AbstractDungeon.player.limbo.addToBottom(c);
+        this.amount = amount;
         duration = Settings.ACTION_DUR_FAST;
         actionType = ActionType.CARD_MANIPULATION;
     }
@@ -20,37 +29,56 @@ public class BefuddledAction extends AbstractGameAction
     @Override
     public void update()
     {
+        AbstractPlayer p = AbstractDungeon.player;
+
         if (duration == Settings.ACTION_DUR_FAST) {
-            AbstractDungeon.actionManager.cleanCardQueue();
             if (AbstractDungeon.player.hand.group.isEmpty()) {
                 isDone = true;
                 return;
             }
-            c.setAngle(0);
-            c.target_x = Settings.WIDTH / 2.0f;
-            c.target_y = Settings.HEIGHT / 2.0f;
-            c.targetTransparency = c.transparency = 1.0f;
-        }
 
-        if (c.current_x == c.target_x && c.current_y == c.target_y) {
-            tickDuration();
-        }
-
-        if (isDone) {
-            int index = AbstractDungeon.player.hand.group.indexOf(c);
-            if (index < 0) {
+            for (AbstractCard c : p.hand.group) {
+                if (c.type == AbstractCard.CardType.STATUS) {
+                    cannotTransform.add(c);
+                }
+            }
+            if (cannotTransform.size() == p.hand.size()) {
+                isDone = true;
                 return;
             }
-            AbstractDungeon.player.hand.removeCard(c);
-            AbstractDungeon.player.limbo.removeCard(c);
-            AbstractDungeon.srcTransformCard(c);
-            AbstractCard transformedCard = AbstractDungeon.getTransformedCard();
-            transformedCard.current_x = transformedCard.target_x = c.current_x;
-            transformedCard.current_y = transformedCard.target_y = c.current_y;
-            AbstractDungeon.player.hand.group.add(index, transformedCard);
-            transformedCard.beginGlowing();
-            transformedCard.targetTransparency = transformedCard.transparency = 1.0f;
-            AbstractDungeon.player.hand.refreshHandLayout();
+
+            p.hand.group.removeAll(cannotTransform);
+            AbstractDungeon.handCardSelectScreen.open(TEXT[0], amount, false, false, false, false, false);
+            tickDuration();
+            return;
         }
+
+        if (!AbstractDungeon.handCardSelectScreen.wereCardsRetrieved) {
+            for (AbstractCard c : AbstractDungeon.handCardSelectScreen.selectedCards.group) {
+                // Transform
+                AbstractDungeon.srcTransformCard(c);
+                AbstractCard transformedCard = AbstractDungeon.getTransformedCard();
+                transformedCard.current_x = transformedCard.target_x = c.current_x;
+                transformedCard.current_y = transformedCard.target_y = c.current_y;
+                transformedCard.superFlash();
+                AbstractDungeon.player.hand.addToTop(transformedCard);
+                AbstractDungeon.player.hand.refreshHandLayout();
+            }
+            returnCards();
+            AbstractDungeon.handCardSelectScreen.wereCardsRetrieved = true;
+            AbstractDungeon.handCardSelectScreen.selectedCards.group.clear();
+            AbstractDungeon.player.hand.glowCheck();
+            isDone = true;
+        }
+
+        tickDuration();
+    }
+
+    private void returnCards()
+    {
+        for (AbstractCard c : cannotTransform) {
+            AbstractDungeon.player.hand.addToTop(c);
+        }
+        AbstractDungeon.player.hand.refreshHandLayout();
     }
 }

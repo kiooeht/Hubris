@@ -23,6 +23,8 @@ public class MonsterHypnotic extends AbstractOrb
     public static final String[] DESC = orbStrings.DESCRIPTION;
     private float vfxTimer = 0.5f;
 
+    private static final int BEFUDDLE_AMT = 2;
+
     private OrbUsingMonster owner;
 
     public MonsterHypnotic(OrbUsingMonster owner)
@@ -55,7 +57,7 @@ public class MonsterHypnotic extends AbstractOrb
     @Override
     public void onEvoke()
     {
-        AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(AbstractDungeon.player, owner, new BefuddledPower(owner)));
+        AbstractDungeon.actionManager.addToTop(new ApplyPowerAction(AbstractDungeon.player, owner, new BefuddledPower(owner, BEFUDDLE_AMT), BEFUDDLE_AMT));
     }
 
     @Override

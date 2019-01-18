@@ -2,7 +2,9 @@
   "hubris:Befuddled": {
     "NAME": "Befuddled",
     "DESCRIPTIONS": [
-      "The first card drawn each turn is transformed."
+      "Transform #b",
+      " card at the start of each turn.",
+      " cards at the start of each turn."
     ]
   },
   "hubris:Dissonance": {

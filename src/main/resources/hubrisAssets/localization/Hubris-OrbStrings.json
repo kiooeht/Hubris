@@ -32,7 +32,7 @@
   "hubris:MonsterHypnotic": {
     "NAME": "Hypnotic",
     "DESCRIPTION": [
-      "#yEvoke: Apply Befuddled. NL NL #yBefuddled: The first card drawn each turn is transformed."
+      "#yEvoke: Apply Befuddled. NL NL #yBefuddled: Transform cards at the start of each turn."
     ]
   },
   "hubris:MonsterDraining": {
