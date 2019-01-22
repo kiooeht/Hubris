@@ -11,7 +11,7 @@ public class GrandSneckoEye extends HubrisRelic
 {
     public static final String ID = "hubris:GrandSneckoEye";
 
-    private static final int AMT = 3;
+    private static final int AMT = 2;
 
     public GrandSneckoEye()
     {

@@ -513,7 +513,7 @@
     "NAME": "Grand Snecko Eye",
     "FLAVOR": "Perplexingly large.",
     "DESCRIPTIONS": [
-      "Gain [E] and transform #b",
+      "Gain [E] and #yTransform #b",
       " cards at the start of your turn."
     ]
   }
