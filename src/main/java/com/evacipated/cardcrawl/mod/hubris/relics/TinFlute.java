@@ -13,6 +13,7 @@ import com.google.gson.JsonSyntaxException;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.cards.CardGroup;
 import com.megacrit.cardcrawl.cards.CardSave;
+import com.megacrit.cardcrawl.cards.colorless.Madness;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.CardLibrary;
@@ -62,7 +63,12 @@ public class TinFlute extends HubrisRelic
                     cards.add(CardLibrary.getCopy(save.tinFlute.get(1).id, save.tinFlute.get(1).upgrades, save.tinFlute.get(1).misc));
                     return new DuctTapeCard(cards);
                 } else {
-                    return CardLibrary.getCopy(save.tinFlute.get(0).id, save.tinFlute.get(0).upgrades, save.tinFlute.get(0).misc);
+                    try {
+                        return CardLibrary.getCopy(save.tinFlute.get(0).id, save.tinFlute.get(0).upgrades, save.tinFlute.get(0).misc);
+                    } catch (Exception e) {
+                        HubrisMod.logger.error("Failed to get saved Tin Flute card \"" + save.tinFlute.get(0).id + "\"");
+                        return CardLibrary.getCopy(Madness.ID);
+                    }
                 }
             }
         } catch (JsonSyntaxException e) {
