@@ -34,12 +34,7 @@ public class Insight extends CustomCard
         AbstractDungeon.actionManager.addToBottom(
                 new FetchAction(
                         AbstractDungeon.player.drawPile,
-                        c -> AbstractDungeon.player.drawPile.group.indexOf(c) > AbstractDungeon.player.drawPile.size() - magicNumber - 1,
-                        fetchedCards -> {
-                            for (AbstractCard card : fetchedCards) {
-                                card.modifyCostForCombat(-1);
-                            }
-                        }
+                        c -> AbstractDungeon.player.drawPile.group.indexOf(c) > AbstractDungeon.player.drawPile.size() - magicNumber - 1
                 )
         );
     }
