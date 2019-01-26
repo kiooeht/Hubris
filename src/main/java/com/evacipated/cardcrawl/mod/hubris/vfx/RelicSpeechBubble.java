@@ -13,6 +13,7 @@ import com.megacrit.cardcrawl.ui.DialogWord;
 import com.megacrit.cardcrawl.vfx.AbstractGameEffect;
 import com.megacrit.cardcrawl.vfx.SpeechTextEffect;
 
+// TODO This is broken currently
 public class RelicSpeechBubble extends AbstractGameEffect
 {
     private static final float WAVY_SPEED = 6.0F * Settings.scale;

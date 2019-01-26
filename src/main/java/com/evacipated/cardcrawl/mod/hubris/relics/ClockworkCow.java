@@ -21,13 +21,6 @@ public class ClockworkCow extends HubrisRelic
     }
 
     @Override
-    public void flash()
-    {
-        super.flash();
-        AbstractDungeon.effectList.add(new RelicSpeechBubble(this, 1.0f, "Moo."));
-    }
-
-    @Override
     public AbstractRelic makeCopy()
     {
         return new ClockworkCow();

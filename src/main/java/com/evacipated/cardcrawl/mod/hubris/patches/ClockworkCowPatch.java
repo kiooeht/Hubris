@@ -32,7 +32,7 @@ public class ClockworkCowPatch
                 ++__instance.timesCycled;
                 recursive = true;
                 if (__result && !__instance.canCycle()) {
-                    relic.flash();
+                    //relic.flash();
                 }
                 recursive = false;
             }
