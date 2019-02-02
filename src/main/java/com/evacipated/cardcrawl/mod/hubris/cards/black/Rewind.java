@@ -16,7 +16,7 @@ import infinitespire.abstracts.BlackCard;
 public class Rewind extends BlackCard
 {
     public static final String ID = "hubris:Rewind";
-    public static final String IMG = HubrisMod.BETA_SKILL;
+    public static final String IMG = HubrisMod.assetPath("images/cards/rewind.png");
     private static final CardStrings cardStrings = CardCrawlGame.languagePack.getCardStrings(ID);
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
