@@ -402,7 +402,7 @@ public class HubrisMod implements
         }
     }
 
-    public String makePath(String filename)
+    private static String makeLocPath(String filename)
     {
         String toReturn = "localization/";
         switch (Settings.language)
@@ -424,7 +424,7 @@ public class HubrisMod implements
     public void receiveEditKeywords()
     {
         Gson gson = new Gson();
-        String json = Gdx.files.internal(assetPath(makePath("Hubris-Keywords"))).readString(String.valueOf(StandardCharsets.UTF_8));
+        String json = Gdx.files.internal(assetPath(makeLocPath("Hubris-Keywords"))).readString(String.valueOf(StandardCharsets.UTF_8));
         Keyword[] keywords = gson.fromJson(json, Keyword[].class);
 
         if (keywords != null) {
@@ -437,14 +437,14 @@ public class HubrisMod implements
     @Override
     public void receiveEditStrings()
     {
-        BaseMod.loadCustomStringsFile(RelicStrings.class, assetPath(makePath("Hubris-RelicStrings")));
-        BaseMod.loadCustomStringsFile(CardStrings.class, assetPath(makePath("Hubris-CardStrings")));
-        BaseMod.loadCustomStringsFile(CardStrings.class, assetPath(makePath("Hubris-IcosahedronStrings")));
-        BaseMod.loadCustomStringsFile(OrbStrings.class, assetPath(makePath("Hubris-OrbStrings")));
-        BaseMod.loadCustomStringsFile(PowerStrings.class, assetPath(makePath("Hubris-PowerStrings")));
-        BaseMod.loadCustomStringsFile(EventStrings.class, assetPath(makePath("Hubris-EventStrings")));
-        BaseMod.loadCustomStringsFile(RunModStrings.class, assetPath(makePath("Hubris-RunModStrings")));
-        BaseMod.loadCustomStringsFile(UIStrings.class, assetPath(makePath("Hubris-UIStrings")));
+        BaseMod.loadCustomStringsFile(RelicStrings.class, assetPath(makeLocPath("Hubris-RelicStrings")));
+        BaseMod.loadCustomStringsFile(CardStrings.class, assetPath(makeLocPath("Hubris-CardStrings")));
+        BaseMod.loadCustomStringsFile(CardStrings.class, assetPath(makeLocPath("Hubris-IcosahedronStrings")));
+        BaseMod.loadCustomStringsFile(OrbStrings.class, assetPath(makeLocPath("Hubris-OrbStrings")));
+        BaseMod.loadCustomStringsFile(PowerStrings.class, assetPath(makeLocPath("Hubris-PowerStrings")));
+        BaseMod.loadCustomStringsFile(EventStrings.class, assetPath(makeLocPath("Hubris-EventStrings")));
+        BaseMod.loadCustomStringsFile(RunModStrings.class, assetPath(makeLocPath("Hubris-RunModStrings")));
+        BaseMod.loadCustomStringsFile(UIStrings.class, assetPath(makeLocPath("Hubris-UIStrings")));
     }
 
     @Override
