@@ -81,9 +81,9 @@ public class CrackedHourglass extends HubrisRelic
         if (counter > 0) {
             if (!isStopped()) {
                 if (waitTimer <= 0) {
-                    timeCounter -= Gdx.graphics.getDeltaTime();
+                    timeCounter -= Gdx.graphics.getRawDeltaTime();
                 } else {
-                    waitTimer -= Gdx.graphics.getDeltaTime();
+                    waitTimer -= Gdx.graphics.getRawDeltaTime();
                 }
                 setCounter((int)timeCounter);
             }
@@ -100,7 +100,7 @@ public class CrackedHourglass extends HubrisRelic
                     waitTimer = 1.0f;
                 }
             } else {
-                waitTimer -= Gdx.graphics.getDeltaTime();
+                waitTimer -= Gdx.graphics.getRawDeltaTime();
             }
         }
     }
