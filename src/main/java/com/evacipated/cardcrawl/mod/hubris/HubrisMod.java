@@ -410,7 +410,7 @@ public class HubrisMod implements
 
         if (keywords != null) {
             for (Keyword keyword : keywords) {
-                BaseMod.addKeyword(keyword.NAMES, keyword.DESCRIPTION);
+                BaseMod.addKeyword("hubris", null, keyword.NAMES, keyword.DESCRIPTION);
             }
         }
     }
