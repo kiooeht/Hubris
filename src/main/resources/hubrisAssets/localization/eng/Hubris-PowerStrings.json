@@ -41,7 +41,8 @@
     "NAME": " Circuitry",
     "DESCRIPTIONS": [
       "All orbs you #yChannel are #y",
-      " orbs."
+      " orbs.",
+      ""
     ]
   },
   "hubris:Unfocused": {

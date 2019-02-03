@@ -29,6 +29,7 @@ public class SpecializedCircuitry extends CustomCard implements ModalChoice.Call
     public static final String NAME = cardStrings.NAME;
     public static final String DESCRIPTION = cardStrings.DESCRIPTION;
     public static final String UPGRADE_DESCRIPTION = cardStrings.UPGRADE_DESCRIPTION;
+    public static final String[] EXTENDED_DESCRIPTION = cardStrings.EXTENDED_DESCRIPTION;
     private static final int COST = 2;
 
     private static List<AbstractOrb> allowedOrbs = new ArrayList<>();
@@ -58,7 +59,7 @@ public class SpecializedCircuitry extends CustomCard implements ModalChoice.Call
                 .setType(CardType.POWER);
 
         for (AbstractOrb orb : allowedOrbs) {
-                builder.addOption(orb.name, "All orbs you Channel are " + orb.name + " orbs.", CardTarget.SELF);
+                builder.addOption(orb.name, EXTENDED_DESCRIPTION[0] + orb.name + EXTENDED_DESCRIPTION[1], CardTarget.SELF);
         }
 
         modal = builder.create();

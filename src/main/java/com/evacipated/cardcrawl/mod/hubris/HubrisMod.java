@@ -27,6 +27,7 @@ import com.evacipated.cardcrawl.mod.hubris.shop.BloodShopScreen;
 import com.evacipated.cardcrawl.modthespire.Loader;
 import com.evacipated.cardcrawl.modthespire.lib.SpireConfig;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
+import com.evacipated.cardcrawl.mod.stslib.Keyword;
 import com.google.gson.Gson;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -401,16 +402,34 @@ public class HubrisMod implements
         }
     }
 
+    private static String makeLocPath(String filename)
+    {
+        String toReturn = "localization/";
+        switch (Settings.language)
+        {
+            case RUS:
+                toReturn += "rus/";
+                break;
+            case ENG:
+                toReturn += "eng/";
+                break;
+            default:
+                toReturn += "eng/";
+                break;
+        }
+        return (toReturn + filename + ".json");
+    }
+
     @Override
     public void receiveEditKeywords()
     {
         Gson gson = new Gson();
-        String json = Gdx.files.internal(assetPath("localization/Hubris-Keywords.json")).readString(String.valueOf(StandardCharsets.UTF_8));
+        String json = Gdx.files.internal(assetPath(makeLocPath("Hubris-Keywords"))).readString(String.valueOf(StandardCharsets.UTF_8));
         Keyword[] keywords = gson.fromJson(json, Keyword[].class);
 
         if (keywords != null) {
             for (Keyword keyword : keywords) {
-                BaseMod.addKeyword("hubris", null, keyword.NAMES, keyword.DESCRIPTION);
+                BaseMod.addKeyword("hubris", keyword.PROPER_NAME, keyword.NAMES, keyword.DESCRIPTION);
             }
         }
     }
@@ -418,14 +437,14 @@ public class HubrisMod implements
     @Override
     public void receiveEditStrings()
     {
-        BaseMod.loadCustomStringsFile(RelicStrings.class, assetPath("localization/Hubris-RelicStrings.json"));
-        BaseMod.loadCustomStringsFile(CardStrings.class, assetPath("localization/Hubris-CardStrings.json"));
-        BaseMod.loadCustomStringsFile(CardStrings.class, assetPath("localization/Hubris-IcosahedronStrings.json"));
-        BaseMod.loadCustomStringsFile(OrbStrings.class, assetPath("localization/Hubris-OrbStrings.json"));
-        BaseMod.loadCustomStringsFile(PowerStrings.class, assetPath("localization/Hubris-PowerStrings.json"));
-        BaseMod.loadCustomStringsFile(EventStrings.class, assetPath("localization/Hubris-EventStrings.json"));
-        BaseMod.loadCustomStringsFile(RunModStrings.class, assetPath("localization/Hubris-RunModStrings.json"));
-        BaseMod.loadCustomStringsFile(UIStrings.class, assetPath("localization/Hubris-UIStrings.json"));
+        BaseMod.loadCustomStringsFile(RelicStrings.class, assetPath(makeLocPath("Hubris-RelicStrings")));
+        BaseMod.loadCustomStringsFile(CardStrings.class, assetPath(makeLocPath("Hubris-CardStrings")));
+        BaseMod.loadCustomStringsFile(CardStrings.class, assetPath(makeLocPath("Hubris-IcosahedronStrings")));
+        BaseMod.loadCustomStringsFile(OrbStrings.class, assetPath(makeLocPath("Hubris-OrbStrings")));
+        BaseMod.loadCustomStringsFile(PowerStrings.class, assetPath(makeLocPath("Hubris-PowerStrings")));
+        BaseMod.loadCustomStringsFile(EventStrings.class, assetPath(makeLocPath("Hubris-EventStrings")));
+        BaseMod.loadCustomStringsFile(RunModStrings.class, assetPath(makeLocPath("Hubris-RunModStrings")));
+        BaseMod.loadCustomStringsFile(UIStrings.class, assetPath(makeLocPath("Hubris-UIStrings")));
     }
 
     @Override

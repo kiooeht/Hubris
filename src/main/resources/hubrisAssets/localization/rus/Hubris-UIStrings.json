@@ -1,0 +1,18 @@
+{
+  "FireCardAction": {
+    "TEXT": [
+      "Fire"
+    ]
+  },
+  "SharpeningStoneAction": {
+    "TEXT": [
+      "Заточить",
+      "Бронебойная. NL "
+    ]
+  },
+  "BefuddledAction": {
+    "TEXT": [
+      "Преобразовать"
+    ]
+  }
+}

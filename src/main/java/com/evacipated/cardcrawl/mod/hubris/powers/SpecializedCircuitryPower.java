@@ -24,7 +24,7 @@ public class SpecializedCircuitryPower extends AbstractPower
 
     public SpecializedCircuitryPower(AbstractCreature owner, AbstractOrb orbType)
     {
-        name = orbType.name + NAME;
+        name = DESCRIPTIONS[2] + orbType.name + NAME;
         ID = POWER_ID;
         this.owner = owner;
         type = PowerType.BUFF;
