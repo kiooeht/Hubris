@@ -56,7 +56,7 @@ public class TinFlute extends HubrisRelic
                 Gson gson = new Gson();
                 String savestr = loadSaveString(getSavePath());
                 Save save = gson.fromJson(savestr, Save.class);
-                if (save.tinFlute.size() == 2) {
+                if (save != null && save.tinFlute != null && save.tinFlute.size() == 2) {
                     // Duct Tape
                     List<AbstractCard> cards = new ArrayList<>();
                     cards.add(CardLibrary.getCopy(save.tinFlute.get(0).id, save.tinFlute.get(0).upgrades, save.tinFlute.get(0).misc));
