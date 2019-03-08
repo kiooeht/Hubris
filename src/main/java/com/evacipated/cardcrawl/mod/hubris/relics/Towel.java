@@ -36,11 +36,21 @@ public class Towel extends HubrisRelic
     @Override
     public void onTrigger()
     {
+        int indexOfSapphire = -1;
+        LinkedRewardItem sapphireKeyReward = null;
         List<RewardItem> relicRewards = new ArrayList<>();
         for (RewardItem reward : AbstractDungeon.getCurrRoom().rewards) {
-            if (reward.type == RewardItem.RewardType.RELIC && reward.relicLink == null) {
+            if (reward.type == RewardItem.RewardType.RELIC) {
                 relicRewards.add(reward);
+            } else if (reward.type == RewardItem.RewardType.SAPPHIRE_KEY) {
+                indexOfSapphire = AbstractDungeon.getCurrRoom().rewards.indexOf(reward);
+                sapphireKeyReward = new LinkedRewardItem(reward);
             }
+        }
+
+        if (sapphireKeyReward != null) {
+            // Replace original
+            AbstractDungeon.getCurrRoom().rewards.set(indexOfSapphire, sapphireKeyReward);
         }
 
         boolean doFlash = false;
@@ -50,8 +60,17 @@ public class Towel extends HubrisRelic
                 AbstractRelic newRelic = AbstractDungeon.returnRandomRelic(tier);
                 if (newRelic != null) {
                     doFlash = true;
-                    RewardItem replaceReward = new LinkedRewardItem(reward);
-                    RewardItem newReward = new LinkedRewardItem(replaceReward, newRelic);
+                    LinkedRewardItem replaceReward = new LinkedRewardItem(reward);
+                    LinkedRewardItem newReward = new LinkedRewardItem(replaceReward, newRelic);
+                    // Link with sapphire key
+                    boolean linkedWithSapphire = false;
+                    if (reward.relicLink != null && reward.relicLink.type == RewardItem.RewardType.SAPPHIRE_KEY) {
+                        linkedWithSapphire = true;
+                    }
+                    if (sapphireKeyReward != null && linkedWithSapphire) {
+                        sapphireKeyReward.addRelicLink(replaceReward);
+                        sapphireKeyReward.addRelicLink(newReward);
+                    }
                     int indexOf = AbstractDungeon.getCurrRoom().rewards.indexOf(reward);
                     // Insert after existing reward
                     AbstractDungeon.getCurrRoom().rewards.add(indexOf + 1, newReward);
@@ -64,7 +83,6 @@ public class Towel extends HubrisRelic
         if (doFlash) {
             flash();
             AbstractDungeon.actionManager.addToTop(new RelicAboveCreatureAction(AbstractDungeon.player,  this));
-
         }
     }
 
