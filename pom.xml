@@ -7,7 +7,7 @@
     <name>Hubris</name>
     <groupId>com.evacipated.cardcrawl.mod</groupId>
     <artifactId>hubris</artifactId>
-    <version>0.21.4</version>
+    <version>0.22.0</version>
 
     <properties>
         <SlayTheSpire.version>01-23-2019</SlayTheSpire.version>
