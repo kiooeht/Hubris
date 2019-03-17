@@ -794,6 +794,14 @@ public class DuctTapeCard extends CustomCard
             c.triggerOnManualDiscard();
         }
     }
+    
+    @Override
+    public void triggerOnOtherCardPlayed(AbstractCard cardPlayed)
+    {
+        for (AbstractCard c : cards) {
+            c.triggerOnOtherCardPlayed(cardPlayed);
+        }
+    }
 
     @Override
     public boolean canUpgrade()
