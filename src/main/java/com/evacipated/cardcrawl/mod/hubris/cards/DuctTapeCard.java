@@ -172,7 +172,7 @@ public class DuctTapeCard extends CustomCard
 
     public DuctTapeCard(List<AbstractCard> pCards)
     {
-        super(ID, "Duct Tape", null, -2, "", CardType.STATUS, CardColor.COLORLESS, CardRarity.SPECIAL, CardTarget.NONE);
+        super(ID, "Duct Tape", (String) null, -2, "", CardType.STATUS, CardColor.COLORLESS, CardRarity.SPECIAL, CardTarget.NONE);
 
         assert pCards != null;
         assert pCards.size() > 0;
