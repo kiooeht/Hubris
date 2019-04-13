@@ -4,6 +4,7 @@ import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.hubris.actions.utility.ForceWaitAction;
 import com.evacipated.cardcrawl.mod.hubris.monsters.MerchantMonster;
 import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
+import com.evacipated.cardcrawl.mod.stslib.relics.OnPlayerDeathRelic;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.GameActionManager;
 import com.megacrit.cardcrawl.actions.common.DrawCardAction;
@@ -11,6 +12,8 @@ import com.megacrit.cardcrawl.actions.common.EnableEndTurnButtonAction;
 import com.megacrit.cardcrawl.actions.common.GainEnergyAndEnableControlsAction;
 import com.megacrit.cardcrawl.actions.common.RelicAboveCreatureAction;
 import com.megacrit.cardcrawl.blights.Muzzle;
+import com.megacrit.cardcrawl.cards.DamageInfo;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
@@ -18,10 +21,11 @@ import com.megacrit.cardcrawl.helpers.MonsterHelper;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.monsters.MonsterGroup;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.relics.MarkOfTheBloom;
 import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.vfx.combat.BattleStartEffect;
 
-public class HollowSoul extends HubrisRelic
+public class HollowSoul extends HubrisRelic implements OnPlayerDeathRelic
 {
     public static final String ID = "hubris:HollowSoul";
     private static final int HP_PERCENT = 20;
@@ -68,13 +72,23 @@ public class HollowSoul extends HubrisRelic
     }
 
     @Override
-    public void onTrigger()
+    public boolean onPlayerDeath(AbstractPlayer p, DamageInfo info)
     {
-        if (counter != -2) {
-            flash();
-            AbstractDungeon.actionManager.addToTop(new HollowSoulReviveAction());
-            AbstractDungeon.actionManager.addToTop(new ForceWaitAction(2.0f));
+        if (AbstractDungeon.getCurrRoom().phase == AbstractRoom.RoomPhase.COMBAT && !p.hasRelic(MarkOfTheBloom.ID)) {
+            if (counter != -2) {
+                p.currentHealth = 0;
+                flash();
+                AbstractDungeon.actionManager.addToTop(new HollowSoulReviveAction());
+                AbstractDungeon.actionManager.addToTop(new ForceWaitAction(2.0f));
+                return false;
+            } else {
+                // Reset Max HP to normal to stop losing out on Stuffed points
+                restore();
+                setCounter(-2);
+            }
         }
+
+        return true;
     }
 
     private class HollowSoulReviveAction extends AbstractGameAction
