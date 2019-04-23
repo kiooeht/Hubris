@@ -374,6 +374,7 @@ public class HubrisMod implements
         //BaseMod.addRelic(new Tomato(), RelicType.SHARED);
         BaseMod.addRelic(new Macrotransations(), RelicType.SHARED);
         BaseMod.addRelic(new GrandSneckoEye(), RelicType.SHARED);
+        //BaseMod.addRelic(new Rogue(), RelicType.SHARED);
 
         // Ironclad only
         BaseMod.addRelic(new IronBody(), RelicType.RED);
@@ -509,9 +510,19 @@ public class HubrisMod implements
     @Override
     public int receiveMapHPChange(int amount)
     {
+        if (AbstractDungeon.player != null && AbstractDungeon.player.hasRelic(Rogue.ID)) {
+            Rogue relic = (Rogue) AbstractDungeon.player.getRelic(Rogue.ID);
+            amount = relic.onMaxHPChange(amount);
+        }
+        if (amount == 0) {
+            return amount;
+        }
         if (AbstractDungeon.player != null && AbstractDungeon.player.hasRelic(FruitBowl.ID)) {
             FruitBowl relic = (FruitBowl) AbstractDungeon.player.getRelic(FruitBowl.ID);
             amount = relic.onMaxHPChange(amount);
+        }
+        if (amount == 0) {
+            return amount;
         }
         if (AbstractDungeon.player != null && AbstractDungeon.player.hasRelic(BottledHeart.ID)) {
             BottledHeart relic = (BottledHeart) AbstractDungeon.player.getRelic(BottledHeart.ID);

@@ -516,5 +516,13 @@
       "Gain [E] and #yTransform #b",
       " cards at the start of your turn."
     ]
+  },
+  "hubris:Rogue": {
+    "NAME": "Rogue",
+    "FLAVOR": "like",
+    "DESCRIPTIONS": [
+      "Reduce your Max HP to #b1. You can no longer gain Max HP. At the start of each combat, gain #b",
+      " Buffer."
+    ]
   }
 }
