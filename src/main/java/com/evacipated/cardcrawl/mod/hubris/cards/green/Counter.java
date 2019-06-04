@@ -1,6 +1,7 @@
 package com.evacipated.cardcrawl.mod.hubris.cards.green;
 
 import basemod.abstracts.CustomCard;
+import com.evacipated.cardcrawl.mod.bard.notes.AttackNote;
 import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.hubris.actions.unique.CounterAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -23,6 +24,10 @@ public class Counter extends CustomCard
     public Counter()
     {
         super(ID, NAME, IMG,  COST, DESCRIPTION, AbstractCard.CardType.ATTACK, CardColor.GREEN, AbstractCard.CardRarity.UNCOMMON, AbstractCard.CardTarget.ENEMY);
+
+        if (HubrisMod.hasBard) {
+            tags.add(AttackNote.TAG);
+        }
     }
 
     @Override
