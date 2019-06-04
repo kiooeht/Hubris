@@ -3,6 +3,7 @@ package com.evacipated.cardcrawl.mod.hubris.cards.EnhanceAbility;
 import basemod.abstracts.CustomCard;
 import basemod.helpers.ModalChoice;
 import basemod.helpers.ModalChoiceBuilder;
+import com.evacipated.cardcrawl.mod.bard.notes.WildCardNote;
 import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
@@ -26,6 +27,10 @@ public class EnhanceAbility extends CustomCard
     public EnhanceAbility()
     {
         super(ID, NAME, IMG, COST, DESCRIPTION, CardType.POWER, CardColor.COLORLESS, CardRarity.RARE, CardTarget.SELF);
+
+        if (HubrisMod.hasBard) {
+            tags.add(WildCardNote.TAG);
+        }
 
         magicNumber = baseMagicNumber = AMT;
         makeModal();
