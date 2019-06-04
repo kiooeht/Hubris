@@ -508,7 +508,7 @@ public class HubrisMod implements
     }
 
     @Override
-    public int receiveMapHPChange(int amount)
+    public int receiveMaxHPChange(int amount)
     {
         if (AbstractDungeon.player != null && AbstractDungeon.player.hasRelic(Rogue.ID)) {
             Rogue relic = (Rogue) AbstractDungeon.player.getRelic(Rogue.ID);
