@@ -1,6 +1,9 @@
 package com.evacipated.cardcrawl.mod.hubris.cards.blue;
 
 import basemod.abstracts.CustomCard;
+import com.evacipated.cardcrawl.mod.bard.notes.AttackNote;
+import com.evacipated.cardcrawl.mod.bard.notes.BuffNote;
+import com.evacipated.cardcrawl.mod.bard.notes.DebuffNote;
 import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.stslib.cards.interfaces.StartupCard;
 import com.evacipated.cardcrawl.mod.stslib.fields.cards.AbstractCard.AutoplayField;
@@ -29,6 +32,10 @@ public class PowerSurge extends CustomCard implements StartupCard
     {
         super(ID, NAME, IMG, COST, DESCRIPTION, CardType.POWER, CardColor.BLUE, CardRarity.UNCOMMON, CardTarget.SELF);
 
+        if (HubrisMod.hasBard) {
+            tags.add(BuffNote.TAG);
+            tags.add(DebuffNote.TAG);
+        }
         GraveField.grave.set(this, true);
         AutoplayField.autoplay.set(this, true);
         magicNumber = baseMagicNumber = FOCUS_AMT;
