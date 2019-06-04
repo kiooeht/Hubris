@@ -92,6 +92,13 @@
             <scope>system</scope>
             <systemPath>${basedir}/../_ModTheSpire/mods/TheMystic.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>com.evacipated.cardcrawl.mod</groupId>
+            <artifactId>bard</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/../_ModTheSpire/mods/Bard.jar</systemPath>
+        </dependency>
     </dependencies>
 
     <build>

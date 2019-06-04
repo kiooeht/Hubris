@@ -100,6 +100,7 @@ public class HubrisMod implements
     public static final boolean hasMimicMod;
     public static final boolean hasMysticMod;
     public static final boolean hasDisciple;
+    public static final boolean hasBard;
 
     static
     {
@@ -130,6 +131,10 @@ public class HubrisMod implements
         hasDisciple = Loader.isModLoaded("chronomuncher");
         if (hasDisciple) {
             logger.info("Detected Disciple");
+        }
+        hasBard = Loader.isModLoaded("bard");
+        if (hasBard) {
+            logger.info("Detected Bard");
         }
     }
 
