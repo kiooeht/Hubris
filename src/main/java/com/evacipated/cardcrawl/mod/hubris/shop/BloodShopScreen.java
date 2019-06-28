@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
 import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.hubris.relics.KleinBottle;
@@ -505,16 +506,17 @@ public class BloodShopScreen
     private void renderPurge(SpriteBatch sb)
     {
         sb.setColor(new Color(0, 0, 0, 0.25f));
+        TextureAtlas.AtlasRegion img = ImageMaster.CARD_SKILL_BG_SILHOUETTE;
         sb.draw(
-                ImageMaster.CARD_SKILL_BG_SILHOUETTE,
-                purgeCardX - 256.0f + 18.0f * Settings.scale, purgeCardY - 256.0f - 14.0f * Settings.scale,
-                256.0f, 256.0f,
-                512.0f, 512.0f,
+                img,
+                purgeCardX + 18.0f * Settings.scale + img.offsetX - img.originalWidth / 2f,
+                purgeCardY - 14.0f * Settings.scale + img.offsetY - img.originalHeight / 2f,
+                img.originalWidth / 2f - img.offsetX,
+                img.originalHeight / 2f - img.offsetY,
+                img.packedWidth,
+                img.packedHeight,
                 purgeCardScale, purgeCardScale,
-                0.0f,
-                0, 0,
-                512, 512,
-                false, false
+                0.0f
         );
 
         sb.setColor(Color.WHITE);
