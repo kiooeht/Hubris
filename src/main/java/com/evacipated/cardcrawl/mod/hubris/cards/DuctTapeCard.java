@@ -45,31 +45,31 @@ public class DuctTapeCard extends CustomCard
     private static final List<String> keywordBlacklist = Arrays.asList(
             "strike"
     );
-    private static final Map<CardColor, Map<CardType, Texture>> cardBgMap;
-    private static final Map<CardColor, Map<CardType, Texture>> cardLargeBgMap;
-    private static final Map<CardRarity, Map<CardType, Texture>> cardFrameMap;
-    private static final Map<CardRarity, Map<CardType, Texture>> cardLargeFrameMap;
+    private static final Map<CardColor, Map<CardType, TextureAtlas.AtlasRegion>> cardBgMap;
+    private static final Map<CardColor, Map<CardType, TextureAtlas.AtlasRegion>> cardLargeBgMap;
+    private static final Map<CardRarity, Map<CardType, TextureAtlas.AtlasRegion>> cardFrameMap;
+    private static final Map<CardRarity, Map<CardType, TextureAtlas.AtlasRegion>> cardLargeFrameMap;
 
     private List<AbstractCard> cards;
-    private List<Texture> cardBgs = new ArrayList<>();
-    private List<Texture> cardLargeBgs = new ArrayList<>();
-    private List<Texture> cardFrames = new ArrayList<>();
-    private List<Texture> cardLargeFrames = new ArrayList<>();
+    private List<TextureAtlas.AtlasRegion> cardBgs = new ArrayList<>();
+    private List<TextureAtlas.AtlasRegion> cardLargeBgs = new ArrayList<>();
+    private List<TextureAtlas.AtlasRegion> cardFrames = new ArrayList<>();
+    private List<TextureAtlas.AtlasRegion> cardLargeFrames = new ArrayList<>();
     private List<String> savedKeywords = new ArrayList<>();
 
     static
     {
         // Base Game card backgrounds
         cardBgMap = new HashMap<>();
-        Map<CardType, Texture> red = new HashMap<>();
+        Map<CardType, TextureAtlas.AtlasRegion> red = new HashMap<>();
         cardBgMap.put(CardColor.RED, red);
-        Map<CardType, Texture> green = new HashMap<>();
+        Map<CardType, TextureAtlas.AtlasRegion> green = new HashMap<>();
         cardBgMap.put(CardColor.GREEN, green);
-        Map<CardType, Texture> blue = new HashMap<>();
+        Map<CardType, TextureAtlas.AtlasRegion> blue = new HashMap<>();
         cardBgMap.put(CardColor.BLUE, blue);
-        Map<CardType, Texture> colorless = new HashMap<>();
+        Map<CardType, TextureAtlas.AtlasRegion> colorless = new HashMap<>();
         cardBgMap.put(CardColor.COLORLESS, colorless);
-        Map<CardType, Texture> curse = new HashMap<>();
+        Map<CardType, TextureAtlas.AtlasRegion> curse = new HashMap<>();
         cardBgMap.put(CardColor.CURSE, curse);
         
         red.put(CardType.ATTACK, ImageMaster.CARD_ATTACK_BG_RED);
@@ -126,13 +126,13 @@ public class DuctTapeCard extends CustomCard
         
         // Base game card frames
         cardFrameMap = new HashMap<>();
-        Map<CardType, Texture> common = new HashMap<>();
+        Map<CardType, TextureAtlas.AtlasRegion> common = new HashMap<>();
         cardFrameMap.put(CardRarity.COMMON, common);
         cardFrameMap.put(CardRarity.BASIC, common);
         cardFrameMap.put(CardRarity.CURSE, common);
-        Map<CardType, Texture> uncommon = new HashMap<>();
+        Map<CardType, TextureAtlas.AtlasRegion> uncommon = new HashMap<>();
         cardFrameMap.put(CardRarity.UNCOMMON, uncommon);
-        Map<CardType, Texture> rare = new HashMap<>();
+        Map<CardType, TextureAtlas.AtlasRegion> rare = new HashMap<>();
         cardFrameMap.put(CardRarity.RARE, rare);
 
         common.put(CardType.ATTACK, ImageMaster.CARD_FRAME_ATTACK_COMMON);
@@ -313,7 +313,7 @@ public class DuctTapeCard extends CustomCard
         cardLargeBgs.clear();
         for (AbstractCard c : cards) {
             if (cardBgMap.containsKey(c.color)) {
-                Map<CardType, Texture> tmp = cardBgMap.get(c.color);
+                Map<CardType, TextureAtlas.AtlasRegion> tmp = cardBgMap.get(c.color);
                 if (tmp.containsKey(c.type)) {
                     cardBgs.add(tmp.get(c.type));
                     cardLargeBgs.add(cardLargeBgMap.get(c.color).get(c.type));
@@ -322,38 +322,45 @@ public class DuctTapeCard extends CustomCard
                     cardLargeBgs.add(ImageMaster.CARD_SKILL_BG_BLACK_L);
                 }
             } else {
-                Texture texture;
-                Texture largeTexture;
+                Texture tex;
+                TextureAtlas.AtlasRegion texture;
+                TextureAtlas.AtlasRegion largeTexture;
                 switch (c.type) {
                     case POWER:
                         if (BaseMod.getPowerBgTexture(c.color) == null) {
                             BaseMod.savePowerBgTexture(c.color, ImageMaster.loadImage(BaseMod.getPowerBg(c.color)));
                         }
-                        texture = BaseMod.getPowerBgTexture(c.color);
+                        tex = BaseMod.getPowerBgTexture(c.color);
+                        texture = new TextureAtlas.AtlasRegion(tex, 0, 0, tex.getWidth(), tex.getHeight());
                         if (BaseMod.getPowerBgPortraitTexture(c.color) == null) {
                             BaseMod.savePowerBgPortraitTexture(c.color, ImageMaster.loadImage(BaseMod.getPowerBgPortrait(c.color)));
                         }
-                        largeTexture = BaseMod.getPowerBgPortraitTexture(c.color);
+                        tex = BaseMod.getPowerBgPortraitTexture(c.color);
+                        largeTexture = new TextureAtlas.AtlasRegion(tex, 0, 0, tex.getWidth(), tex.getHeight());
                         break;
                     case ATTACK:
                         if (BaseMod.getAttackBgTexture(c.color) == null) {
                             BaseMod.saveAttackBgTexture(c.color, ImageMaster.loadImage(BaseMod.getAttackBg(c.color)));
                         }
-                        texture = BaseMod.getAttackBgTexture(c.color);
+                        tex = BaseMod.getAttackBgTexture(c.color);
+                        texture = new TextureAtlas.AtlasRegion(tex, 0, 0, tex.getWidth(), tex.getHeight());
                         if (BaseMod.getAttackBgPortraitTexture(c.color) == null) {
                             BaseMod.saveAttackBgPortraitTexture(c.color, ImageMaster.loadImage(BaseMod.getAttackBgPortrait(c.color)));
                         }
-                        largeTexture = BaseMod.getAttackBgPortraitTexture(c.color);
+                        tex = BaseMod.getAttackBgPortraitTexture(c.color);
+                        largeTexture = new TextureAtlas.AtlasRegion(tex, 0, 0, tex.getWidth(), tex.getHeight());
                         break;
                     case SKILL:
                         if (BaseMod.getSkillBgTexture(c.color) == null) {
                             BaseMod.saveSkillBgTexture(c.color, ImageMaster.loadImage(BaseMod.getSkillBg(c.color)));
                         }
-                        texture = BaseMod.getSkillBgTexture(c.color);
+                        tex = BaseMod.getSkillBgTexture(c.color);
+                        texture = new TextureAtlas.AtlasRegion(tex, 0, 0, tex.getWidth(), tex.getHeight());
                         if (BaseMod.getSkillBgPortraitTexture(c.color) == null) {
                             BaseMod.saveSkillBgPortraitTexture(c.color, ImageMaster.loadImage(BaseMod.getSkillBgPortrait(c.color)));
                         }
-                        largeTexture = BaseMod.getSkillBgPortraitTexture(c.color);
+                        tex = BaseMod.getSkillBgPortraitTexture(c.color);
+                        largeTexture = new TextureAtlas.AtlasRegion(tex, 0, 0, tex.getWidth(), tex.getHeight());
                         break;
                     default:
                         texture = ImageMaster.CARD_SKILL_BG_BLACK;
@@ -372,7 +379,7 @@ public class DuctTapeCard extends CustomCard
         cardLargeFrames.clear();
         for (AbstractCard c : cards) {
             if (cardFrameMap.containsKey(c.rarity)) {
-                Map<CardType, Texture> tmp = cardFrameMap.get(c.rarity);
+                Map<CardType, TextureAtlas.AtlasRegion> tmp = cardFrameMap.get(c.rarity);
                 if (tmp.containsKey(c.type)) {
                     cardFrames.add(tmp.get(c.type));
                     cardLargeFrames.add(cardLargeFrameMap.get(c.rarity).get(c.type));
@@ -518,22 +525,27 @@ public class DuctTapeCard extends CustomCard
         super.initializeDescription();
 
         for (DescriptionLine line : description) {
-            String[] words = line.text.split(" ");
+            String[] words;
+            if (Settings.lineBreakViaCharacter) {
+                words = line.getCachedTokenizedTextCN();
+            } else {
+                words = line.getCachedTokenizedText();
+            }
             for (int i=0; i<words.length; ++i) {
-                if (words[i].startsWith("*")) {
-                    words[i] = words[i].substring(1);
+                if (!words[i].startsWith("*")) {
+                    words[i] = "*" + words[i];//.substring(1);
                 }
             }
-            line.text = String.join(" *" , words);
-            line.text = "*" + line.text;
+            //line.text = String.join(" *" , words);
+            //line.text = "*" + line.text;
         }
     }
 
     @SpireOverride
     protected void renderPortrait(SpriteBatch sb)
     {
-        float drawX = current_x - 125.0f;
-        float drawY = current_y - 95.0f;
+        float drawX;
+        float drawY;
 
         TextureAtlas.AtlasRegion portrait0 = null;
         TextureAtlas.AtlasRegion portrait1 = null;
@@ -569,6 +581,8 @@ public class DuctTapeCard extends CustomCard
                 );
             }
 
+            drawX = current_x - portrait0.packedWidth / 2f;
+            drawY = current_y - portrait0.packedHeight / 2f;
             sb.draw(portrait0,
                     drawX, drawY + 72.0F,
                     portrait0.packedWidth / 2.0F, portrait0.packedHeight / 2.0F - 72.0F,
@@ -576,10 +590,12 @@ public class DuctTapeCard extends CustomCard
                     drawScale * Settings.scale, drawScale * Settings.scale,
                     angle
             );
+            drawX = current_x - portrait1.packedWidth / 2f;
+            drawY = current_y - portrait1.packedHeight / 2f;
             sb.draw(portrait1,
-                    drawX + (portrait0.packedWidth / 2.0f), drawY + 72.0F,
-                    0, portrait0.packedHeight / 2.0F - 72.0F,
-                    portrait0.packedWidth / 2.0f, portrait0.packedHeight,
+                    drawX + (portrait1.packedWidth / 2.0f), drawY + 72.0F,
+                    0, portrait1.packedHeight / 2.0F - 72.0F,
+                    portrait1.packedWidth / 2.0f, portrait1.packedHeight,
                     drawScale * Settings.scale, drawScale * Settings.scale,
                     angle
             );
@@ -590,17 +606,34 @@ public class DuctTapeCard extends CustomCard
     protected void renderCardBg(SpriteBatch sb, float x, float y)
     {
         sb.setColor(Color.WHITE);
-        sb.draw(cardBgs.get(0),
-                x, y,
-                256.0f, 256.0f, 256.0f, 512.0f,
+        TextureAtlas.AtlasRegion img = new TextureAtlas.AtlasRegion(cardBgs.get(0));
+        img.setRegionWidth(img.getRegionWidth() / 2 + 1);
+        sb.draw(img,
+                x + img.offsetX - img.originalWidth / 2f,
+                y + img.offsetY - img.originalHeight / 2f,
+                img.originalWidth / 2f - img.offsetX,
+                img.originalHeight / 2f - img.offsetY,
+                img.packedWidth / 2f + 1,
+                img.packedHeight,
                 drawScale * Settings.scale, drawScale * Settings.scale,
-                angle, 0, 0, 256, 512, false, false
+                angle
         );
-        sb.draw(cardBgs.get(1),
-                x + 256.0f, y,
-                0.0f, 256.0f, 256.0f, 512.0f,
+        img = new TextureAtlas.AtlasRegion(cardBgs.get(1));
+        img.setRegion(
+                img.getRegionX() + img.getRegionWidth() / 2,
+                img.getRegionY(),
+                img.getRegionWidth() / 2,
+                img.getRegionHeight()
+        );
+        sb.draw(img,
+                x,
+                y + img.offsetY - img.originalHeight / 2f,
+                0,
+                img.originalHeight / 2f - img.offsetY,
+                img.packedWidth / 2f,
+                img.packedHeight,
                 drawScale * Settings.scale, drawScale * Settings.scale,
-                angle, 256, 0, 256, 512, false, false
+                angle
         );
     }
 
@@ -608,17 +641,34 @@ public class DuctTapeCard extends CustomCard
     public void renderDuctTapeLargeCardBg(SpriteBatch sb)
     {
         sb.setColor(Color.WHITE);
-        sb.draw(cardLargeBgs.get(0),
-                Settings.WIDTH / 2.0f - 512.0f, Settings.HEIGHT / 2.0f - 512.0f,
-                512, 512, 512, 1024,
+        TextureAtlas.AtlasRegion img = new TextureAtlas.AtlasRegion(cardLargeBgs.get(0));
+        img.setRegionWidth(img.getRegionWidth() / 2 + 1);
+        sb.draw(img,
+                Settings.WIDTH / 2f + img.offsetX - img.originalWidth / 2f,
+                Settings.HEIGHT / 2f + img.offsetY - img.originalHeight / 2f,
+                img.originalWidth / 2f - img.offsetX,
+                img.originalHeight / 2f - img.offsetY,
+                img.packedWidth / 2f + 1,
+                img.packedHeight,
                 Settings.scale, Settings.scale,
-                0, 0, 0, 512, 1024, false, false
+                angle
         );
-        sb.draw(cardLargeBgs.get(1),
-                Settings.WIDTH / 2.0f, Settings.HEIGHT / 2.0f - 512.0f,
-                0, 512, 512, 1024,
+        img = new TextureAtlas.AtlasRegion(cardLargeBgs.get(1));
+        img.setRegion(
+                img.getRegionX() + img.getRegionWidth() / 2,
+                img.getRegionY(),
+                img.getRegionWidth() / 2,
+                img.getRegionHeight()
+        );
+        sb.draw(img,
+                Settings.WIDTH / 2f,
+                Settings.HEIGHT / 2f + img.offsetY - img.originalHeight / 2f,
+                0,
+                img.originalHeight / 2f - img.offsetY,
+                img.packedWidth / 2f,
+                img.packedHeight,
                 Settings.scale, Settings.scale,
-                0, 512, 0, 512, 1024, false, false
+                angle
         );
     }
 
@@ -626,17 +676,34 @@ public class DuctTapeCard extends CustomCard
     protected void renderPortraitFrame(SpriteBatch sb, float x, float y)
     {
         sb.setColor(Color.WHITE);
-        sb.draw(cardFrames.get(0),
-                x, y,
-                256.0f, 256.0f, 256.0f, 512.0f,
+        TextureAtlas.AtlasRegion img = new TextureAtlas.AtlasRegion(cardFrames.get(0));
+        img.setRegionWidth(img.getRegionWidth() / 2);
+        sb.draw(img,
+                x + img.offsetX - img.originalWidth / 2f,
+                y + img.offsetY - img.originalHeight / 2f,
+                img.originalWidth / 2f - img.offsetX,
+                img.originalHeight / 2f - img.offsetY,
+                img.packedWidth / 2f,
+                img.packedHeight,
                 drawScale * Settings.scale, drawScale * Settings.scale,
-                angle, 0, 0, 256, 512, false, false
+                angle
         );
-        sb.draw(cardFrames.get(1),
-                x + 256.0f, y,
-                0.0f, 256.0f, 256.0f, 512.0f,
+        img = new TextureAtlas.AtlasRegion(cardFrames.get(1));
+        img.setRegion(
+                img.getRegionX() + img.getRegionWidth() / 2,
+                img.getRegionY(),
+                img.getRegionWidth() / 2,
+                img.getRegionHeight()
+        );
+        sb.draw(img,
+                x,
+                y + img.offsetY - img.originalHeight / 2f,
+                0,
+                img.originalHeight / 2f - img.offsetY,
+                img.packedWidth / 2f,
+                img.packedHeight,
                 drawScale * Settings.scale, drawScale * Settings.scale,
-                angle, 256, 0, 256, 512, false, false
+                angle
         );
     }
 
@@ -644,17 +711,34 @@ public class DuctTapeCard extends CustomCard
     public void renderDuctTapeLargeFrame(SpriteBatch sb)
     {
         sb.setColor(Color.WHITE);
-        sb.draw(cardLargeFrames.get(0),
-                Settings.WIDTH / 2.0f - 512.0f, Settings.HEIGHT / 2.0f - 512.0f,
-                512, 512, 512, 1024,
+        TextureAtlas.AtlasRegion img = new TextureAtlas.AtlasRegion(cardLargeFrames.get(0));
+        img.setRegionWidth(img.getRegionWidth() / 2);
+        sb.draw(img,
+                Settings.WIDTH / 2f + img.offsetX - img.originalWidth / 2f,
+                Settings.HEIGHT / 2f + img.offsetY - img.originalHeight / 2f,
+                img.originalWidth / 2f - img.offsetX,
+                img.originalHeight / 2f - img.offsetY,
+                img.packedWidth / 2f,
+                img.packedHeight,
                 Settings.scale, Settings.scale,
-                0, 0, 0, 512, 1024, false, false
+                angle
         );
-        sb.draw(cardLargeFrames.get(1),
-                Settings.WIDTH / 2.0f, Settings.HEIGHT / 2.0f - 512.0f,
-                0.0f, 512, 512, 1024,
+        img = new TextureAtlas.AtlasRegion(cardLargeFrames.get(1));
+        img.setRegion(
+                img.getRegionX() + img.getRegionWidth() / 2,
+                img.getRegionY(),
+                img.getRegionWidth() / 2,
+                img.getRegionHeight()
+        );
+        sb.draw(img,
+                Settings.WIDTH / 2f,
+                Settings.HEIGHT / 2f + img.offsetY - img.originalHeight / 2f,
+                0,
+                img.originalHeight / 2f - img.offsetY,
+                img.packedWidth / 2f,
+                img.packedHeight,
                 Settings.scale, Settings.scale,
-                0, 512, 0, 512, 1024, false, false
+                angle
         );
     }
 
@@ -672,7 +756,6 @@ public class DuctTapeCard extends CustomCard
     {
         List<TooltipInfo> tooltips = new ArrayList<>();
         for (AbstractCard card : cards) {
-            Scanner scanner;
             String description = "";
             boolean firstLine = true;
             for (DescriptionLine line : card.description) {
@@ -681,9 +764,13 @@ public class DuctTapeCard extends CustomCard
                 }
                 firstLine = false;
 
-                scanner = new Scanner(line.text);
-                while (scanner.hasNext()) {
-                    String tmp = scanner.next() + ' ';
+                String[] tokens;
+                if (Settings.lineBreakViaCharacter) {
+                    tokens = line.getCachedTokenizedTextCN();
+                } else {
+                    tokens = line.getCachedTokenizedText();
+                }
+                for (String tmp : tokens) {
                     if (tmp.charAt(0) == '*') {
                         tmp = FontHelper.colorString(tmp.substring(1), "y");
                     } else if (tmp.charAt(0) == '!') {
