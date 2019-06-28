@@ -26,6 +26,7 @@ import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
+import com.megacrit.cardcrawl.helpers.PotionHelper;
 import com.megacrit.cardcrawl.helpers.RelicLibrary;
 import com.megacrit.cardcrawl.helpers.ScreenShake;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
@@ -236,7 +237,7 @@ public class MerchantMonster extends AbstractMonster
                 rollMove();
                 return;
             }
-            setMove(StrengthPotion.NAME, STRENGTH_UP, Intent.BUFF);
+            setMove(PotionHelper.getPotion(StrengthPotion.POTION_ID).name, STRENGTH_UP, Intent.BUFF);
         } else if (num < 60) {
             setMove(ATTACK_STRENGTH_UP, Intent.ATTACK_BUFF, 1, throwAmounts.get(ATTACK_STRENGTH_UP), true);
         } else {
