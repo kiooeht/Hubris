@@ -65,7 +65,9 @@ public class PureNailPatch
             public int[] Locate(CtBehavior ctMethodToPatch) throws Exception
             {
                 Matcher finalMatcher = new Matcher.MethodCallMatcher(MathUtils.class, "floor");
-                return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
+                ArrayList<Matcher> matchers = new ArrayList<>();
+                matchers.add(finalMatcher);
+                return LineFinder.findInOrder(ctMethodToPatch, matchers, finalMatcher);
             }
         }
     }
@@ -91,7 +93,10 @@ public class PureNailPatch
             public int[] Locate(CtBehavior ctMethodToPatch) throws Exception
             {
                 Matcher finalMatcher = new Matcher.MethodCallMatcher(MathUtils.class, "floor");
-                return new int[]{LineFinder.findAllInOrder(ctMethodToPatch, finalMatcher)[1]};
+                ArrayList<Matcher> matchers = new ArrayList<>();
+                matchers.add(finalMatcher);
+                matchers.add(finalMatcher);
+                return LineFinder.findInOrder(ctMethodToPatch, matchers, finalMatcher);
             }
         }
     }
@@ -117,7 +122,9 @@ public class PureNailPatch
             public int[] Locate(CtBehavior ctMethodToPatch) throws Exception
             {
                 Matcher finalMatcher = new Matcher.MethodCallMatcher(MathUtils.class, "floor");
-                return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
+                ArrayList<Matcher> matchers = new ArrayList<>();
+                matchers.add(finalMatcher);
+                return LineFinder.findInOrder(ctMethodToPatch, matchers, finalMatcher);
             }
         }
     }
@@ -143,7 +150,11 @@ public class PureNailPatch
             public int[] Locate(CtBehavior ctMethodToPatch) throws Exception
             {
                 Matcher finalMatcher = new Matcher.MethodCallMatcher(MathUtils.class, "floor");
-                return new int[]{LineFinder.findAllInOrder(ctMethodToPatch, finalMatcher)[1]};
+                ArrayList<Matcher> matchers = new ArrayList<>();
+                matchers.add(finalMatcher);
+                matchers.add(finalMatcher);
+                matchers.add(finalMatcher);
+                return LineFinder.findInOrder(ctMethodToPatch, matchers, finalMatcher);
             }
         }
     }
