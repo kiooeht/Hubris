@@ -7,11 +7,11 @@
     <name>Hubris</name>
     <groupId>com.evacipated.cardcrawl.mod</groupId>
     <artifactId>hubris</artifactId>
-    <version>0.22.0</version>
+    <version>0.23.0</version>
 
     <properties>
-        <SlayTheSpire.version>01-23-2019</SlayTheSpire.version>
-        <ModTheSpire.version>3.8.0</ModTheSpire.version>
+        <SlayTheSpire.version>07-01-2019</SlayTheSpire.version>
+        <ModTheSpire.version>3.11.0</ModTheSpire.version>
     </properties>
 
     <dependencies>
