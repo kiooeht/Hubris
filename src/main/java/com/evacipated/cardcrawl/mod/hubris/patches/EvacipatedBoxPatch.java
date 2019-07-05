@@ -2,11 +2,12 @@ package com.evacipated.cardcrawl.mod.hubris.patches;
 
 import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.hubris.relics.EvacipatedBox;
-import com.evacipated.cardcrawl.modthespire.lib.SpireInsertPatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
+import com.evacipated.cardcrawl.modthespire.lib.*;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.screens.CardRewardScreen;
 import com.megacrit.cardcrawl.screens.select.BossRelicSelectScreen;
+import javassist.CtBehavior;
 
 import java.util.ArrayList;
 
@@ -19,7 +20,7 @@ public class EvacipatedBoxPatch
     public static class Open
     {
         @SpireInsertPatch(
-                rloc=26
+                locator=Locator.class
         )
         public static void Insert(BossRelicSelectScreen __instance, ArrayList<AbstractRelic> chosenRelics)
         {
@@ -39,6 +40,18 @@ public class EvacipatedBoxPatch
                 AbstractRelic first = __instance.relics.get(0);
                 first.currentX = SLOT_2_X;
                 first.hb.move(first.currentX, first.currentY);
+            }
+        }
+
+        private static class Locator extends SpireInsertLocator
+        {
+            @Override
+            public int[] Locate(CtBehavior ctMethodToPatch) throws Exception
+            {
+                Matcher finalMatcher = new Matcher.FieldAccessMatcher(BossRelicSelectScreen.class, "relics");
+                // Only the last match
+                int[] found = LineFinder.findAllInOrder(ctMethodToPatch, finalMatcher);
+                return new int[]{found[found.length-1]};
             }
         }
     }
