@@ -33,23 +33,31 @@ public class ZylophonePatch
                 public void edit(MethodCall m) throws CannotCompileException
                 {
                     if (m.getClassName().equals(AbstractCard.class.getName()) && m.getMethodName().equals("use")) {
-                        m.replace(MultiUse.class.getName() + ".use($0, $$, energyOnUse);");
+                        //m.replace(MultiUse.class.getName() + ".use($0, $$, energyOnUse);");
+                        m.replace(
+                                "if (" + MultiUse.class.getName() + ".isZylophone($0)) {" +
+                                        MultiUse.class.getName() + ".use($0, $$, energyOnUse);" +
+                                        "} else {" +
+                                        "$_ = $proceed($$);" +
+                                        "}"
+                        );
                     }
                 }
             };
         }
 
+        public static boolean isZylophone(AbstractCard c)
+        {
+            return ZylophoneField.costsX.get(c);
+        }
+
         public static void use(AbstractCard c, AbstractPlayer player, AbstractMonster monster, int energyOnUse)
         {
-            if (ZylophoneField.costsX.get(c)) {
-                if (player.hasRelic(ChemicalX.ID)) {
-                    player.getRelic(ChemicalX.ID).flash();
-                    energyOnUse += 2;
-                }
-                AbstractDungeon.actionManager.addToBottom(new ZylophoneUseAction(c, player, monster, energyOnUse));
-            } else {
-                c.use(player, monster);
+            if (player.hasRelic(ChemicalX.ID)) {
+                player.getRelic(ChemicalX.ID).flash();
+                energyOnUse += 2;
             }
+            AbstractDungeon.actionManager.addToBottom(new ZylophoneUseAction(c, player, monster, energyOnUse));
         }
     }
 
