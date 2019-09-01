@@ -1,0 +1,82 @@
+{
+  "hubris:Icosahedron_1": {
+    "DESCRIPTION": "天然一。",
+    "NAME": "1"
+  },
+  "hubris:Icosahedron_10": {
+    "DESCRIPTION": "在你的手牌中加入一张 再调度 。",
+    "NAME": "10"
+  },
+  "hubris:Icosahedron_11": {
+    "DESCRIPTION": "获得100金币。",
+    "NAME": "11"
+  },
+  "hubris:Icosahedron_12": {
+    "DESCRIPTION": "获得一瓶随机的普通药水。",
+    "NAME": "12"
+  },
+  "hubris:Icosahedron_13": {
+    "DESCRIPTION": "获得3个遗物。",
+    "NAME": "13"
+  },
+  "hubris:Icosahedron_14": {
+    "DESCRIPTION": "获得1点力量，1点敏捷，和1点集中。",
+    "NAME": "14"
+  },
+  "hubris:Icosahedron_15": {
+    "DESCRIPTION": "每回合额外抽1张牌。",
+    "NAME": "15"
+  },
+  "hubris:Icosahedron_16": {
+    "DESCRIPTION": "获得一瓶随机的稀有药水。",
+    "NAME": "16"
+  },
+  "hubris:Icosahedron_17": {
+    "DESCRIPTION": "从3张稀有卡牌中选择一张加入你的手牌。",
+    "NAME": "17"
+  },
+  "hubris:Icosahedron_18": {
+    "DESCRIPTION": "在每个回合开始时，获得 [E] 。",
+    "NAME": "18"
+  },
+  "hubris:Icosahedron_19": {
+    "DESCRIPTION": "回复所有生命值。",
+    "NAME": "19"
+  },
+  "hubris:Icosahedron_2": {
+    "DESCRIPTION": "失去10生命。",
+    "NAME": "2"
+  },
+  "hubris:Icosahedron_20": {
+    "DESCRIPTION": "天然二十。",
+    "NAME": "20"
+  },
+  "hubris:Icosahedron_3": {
+    "DESCRIPTION": "在你的抽牌堆加入3张 虚空 。",
+    "NAME": "3"
+  },
+  "hubris:Icosahedron_4": {
+    "DESCRIPTION": "每回合少抽1张牌。",
+    "NAME": "4"
+  },
+  "hubris:Icosahedron_5": {
+    "DESCRIPTION": "本场战斗中，你的所有手牌耗能增加1。",
+    "NAME": "5"
+  },
+  "hubris:Icosahedron_6": {
+    "DESCRIPTION": "获得5层易伤。",
+    "NAME": "6"
+  },
+  "hubris:Icosahedron_7": {
+    "DESCRIPTION": "获得5层脆弱。",
+    "NAME": "7"
+  },
+  "hubris:Icosahedron_8": {
+    "DESCRIPTION": "获得5层虚弱。",
+    "NAME": "8"
+  },
+  "hubris:Icosahedron_9": {
+    "DESCRIPTION": "失去50金币。",
+    "NAME": "9"
+  }
+}

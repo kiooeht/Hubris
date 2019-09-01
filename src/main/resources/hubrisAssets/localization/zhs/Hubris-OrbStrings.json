@@ -1,0 +1,51 @@
+{
+  "hubris:MonsterLightning": {
+    "NAME": "闪电",
+    "DESCRIPTION": [
+      "#y激发: 造成 #b",
+      " 点伤害。"
+    ]
+  },
+  "hubris:MonsterFrost": {
+    "NAME": "冰霜",
+    "DESCRIPTION": [
+      "#y激发: 所有敌人获得 #b",
+      " 点 #y格挡 。"
+    ]
+  },
+  "hubris:MonsterMiasma": {
+    "NAME": "污浊",
+    "DESCRIPTION": [
+      "#y激发: 给予 #b",
+      " 层虚弱, #b",
+      " 层易伤, 和 #b",
+      " 层脆弱。"
+    ]
+  },
+  "hubris:MonsterFocusing": {
+    "NAME": "集中",
+    "DESCRIPTION": [
+      "#y激发: 获得 #b",
+      " 点集中。"
+    ]
+  },
+  "hubris:MonsterHypnotic": {
+    "NAME": "催眠",
+    "DESCRIPTION": [
+      "#y激发: 给予 迷惑。 NL NL #y迷惑 ：在每回合开始时变化卡牌。"
+    ]
+  },
+  "hubris:MonsterDraining": {
+    "NAME": "汲取",
+    "DESCRIPTION": [
+      "#y激发: 添加 #b",
+      " 张 #y晕眩 到你的抽牌堆。 NL 汲取不受 #y集中 影响。"
+    ]
+  },
+  "hubris:MonsterWarp": {
+    "NAME": "扭曲",
+    "DESCRIPTION": [
+      "#y激发: 唤起尖塔中的另一怪物。"
+    ]
+  }
+}

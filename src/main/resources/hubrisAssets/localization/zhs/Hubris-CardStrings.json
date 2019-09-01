@@ -1,0 +1,195 @@
+{
+  "hubris:Hubris": {
+    "NAME": "自负",
+    "DESCRIPTION": " 固有 。 自动打出 。 NL 将一张随机 诅咒 加入你的抽牌堆。 NL 抹除 。 灵魂绑定 。"
+  },
+  "hubris:Icosahedron": {
+    "NAME": "二十面体",
+    "DESCRIPTION": " 保留 。 NL 投掷符文二十面体 。 NL 抹除 。"
+  },
+  "hubris:Mulligan": {
+    "NAME": "再调度",
+    "DESCRIPTION": " 保留 。 NL 丢弃所有手牌，然后抽相同数量的牌。 NL 抹除 。"
+  },
+  "hubris:NaturalOne": {
+    "NAME": "天然一",
+    "DESCRIPTION": " 不能被打出 。 NL 当你抽到这张牌时，失去 [E] 。 NL 灵魂绑定 。"
+  },
+  "hubris:Greed": {
+    "NAME": "贪婪",
+    "DESCRIPTION": " 虚无 。 NL 在你的牌组中永久添加一张此牌的复制品。 你的卡组中每有一张贪婪，在战斗结束时额外获得 !M! 金币。"
+  },
+  "hubris:SlightOfHand": {
+    "NAME": "巧手",
+    "DESCRIPTION": "丢弃一张牌。 NL 在其打出之前，其耗能变为0。"
+  },
+  "hubris:Wrath": {
+    "NAME": "暴怒",
+    "DESCRIPTION": " 自动打出 。 NL 对一名随机敌人造成 !D! 点伤害。 NL 在弃牌堆中放入一张此牌的复制品。"
+  },
+  "hubris:EnhanceAbility": {
+    "NAME": "增强属性",
+    "DESCRIPTION": "选择一项获得： !M! 点力量， !M! 点敏捷， !M! 点集中， 或 !M! 0 点 暂时性生命 。"
+  },
+  "hubris:BullsStrength": {
+    "NAME": "牛之力量",
+    "DESCRIPTION": "获得 !M! 点力量。"
+  },
+  "hubris:CatsGrace": {
+    "NAME": "猫之优雅",
+    "DESCRIPTION": "获得 !M! 点敏捷。"
+  },
+  "hubris:FoxsCunning": {
+    "NAME": "狐之狡黠",
+    "DESCRIPTION": "获得 !M! 点集中。"
+  },
+  "hubris:BearsEndurance": {
+    "NAME": "熊之坚韧",
+    "DESCRIPTION": "获得 !M! 点 暂时性生命 。"
+  },
+  "hubris:Sloth": {
+    "NAME": "懒惰",
+    "DESCRIPTION": " 自动打出 。 NL 失去所有最大能量。 在每回合结束时获得1点最大能量。"
+  },
+  "hubris:StunningStrike": {
+    "NAME": "击晕打击",
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 击晕敌人 !M! 回合。 NL 消耗。"
+  },
+  "hubris:Ssssneak": {
+    "NAME": "嘶嘶蛇鸣",
+    "DESCRIPTION": "抽 !M! 张牌。 NL 额外抽等同于此牌费用数量的牌。 NL 异蛇 。",
+    "UPGRADE_DESCRIPTION": "抽 !M! 张牌。 NL 额外抽等同于此牌费用数量两倍的牌。 NL 异蛇 。"
+  },
+  "hubris:SpecializedCircuitry": {
+    "NAME": "特化电路",
+    "DESCRIPTION": "选择一种充能球类型。 NL 每当你 生成 充能球时，将 生成 的充能球变为你所选择的类型。",
+    "UPGRADE_DESCRIPTION": " 固有 。 NL 每当你 生成 充能球时，将 生成 的充能球变为你所选择的类型。",
+    "EXTENDED_DESCRIPTION": [
+      "将你生成的充能球全部变为 ",
+      " 充能球。"
+    ]
+  },
+  "hubris:MarkOfDissonance": {
+    "NAME": "失调印记",
+    "DESCRIPTION": "给予 失调 。 NL 抹除 。"
+  },
+  "hubris:Counter": {
+    "NAME": "反击",
+    "DESCRIPTION": "如果一名敌人的意图是攻击，对其造成等同于其意图造成的伤害。"
+  },
+  "hubris:ReadiedAction": {
+    "NAME": "预备",
+    "DESCRIPTION": "在当前回合结束时， 保留 至多 !M! 张牌。 NL 这张牌在下回合的耗能减少1。",
+    "UPGRADE_DESCRIPTION": "在当前回合结束时， 保留 至多 !M! 张牌。 NL 这些牌在下回合的耗能减少1。"
+  },
+  "hubris:CleavingFinish": {
+    "NAME": "终结顺劈",
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 如果这张牌杀死了敌人，回到到你的手牌，且本回合耗能变为0。"
+  },
+  "hubris:Ukulele": {
+    "NAME": "尤克里里",
+    "DESCRIPTION": "你当前每有一个已 生成 的闪电充能球，造成一次 !D! 点伤害。",
+    "EXTENDED_DESCRIPTION": [
+      " (造成 !M! 次伤害)。",
+      " (造成 !M! 次伤害)。"
+    ]
+  },
+  "hubris:Prefetch": {
+    "NAME": "预取",
+    "DESCRIPTION": "选择手牌中的一张牌。 它在下一场战斗中变为 固有 。 NL 消耗 。"
+  },
+  "hubris:Lust": {
+    "NAME": "色欲",
+    "DESCRIPTION": " 自动打出 。 NL 随机选择一名敌人。 这个回合内，每当你攻击该敌人，失去 !M! 生命。"
+  },
+  "hubris:Gluttony": {
+    "NAME": "暴食",
+    "DESCRIPTION": " 不能被打出 。 NL 在手牌中时，所有牌 消耗 。"
+  },
+  "hubris:Envy": {
+    "NAME": "嫉妒",
+    "DESCRIPTION": " 自动打出 。 NL 这个回合内，手牌中的一张随机牌不能被打出。"
+  },
+  "hubris:SpiceAddiction": {
+    "NAME": "香料",
+    "DESCRIPTION": "不获得这张牌，而是获得一件香料遗物。"
+  },
+  "hubris:Compulsion": {
+    "NAME": "冲动",
+    "DESCRIPTION": " 不能被打出 。 NL 抽到这张牌时，随机选择一张手牌。在打出其他牌之前，你必须先打出这张牌。",
+    "EXTENDED_DESCRIPTION": [
+      "我必须先打出 ",
+      "。"
+    ]
+  },
+  "hubris:DoWhile": {
+    "NAME": "Do-While循环",
+    "DESCRIPTION": "这个回合内，你的下一张牌会以 NL +1 [E] 重复打出，直到你的 [E] 不足。"
+  },
+  "hubris:TrickCloak": {
+    "NAME": "斗篷戏法",
+    "DESCRIPTION": "从弃牌堆获得一张随机牌。 NL 抽 !M! 张牌。",
+    "UPGRADE_DESCRIPTION": "从弃牌堆获得一张牌。 NL 抽 !M! 张牌。"
+  },
+  "hubris:Fate": {
+    "NAME": "命运",
+    "DESCRIPTION": "从 !M! 张 已 [#ff2626]升级[] 的随机 [#ff2626]黑色[] 牌中选择一张加入你的手牌。 NL 消耗 。"
+  },
+  "hubris:InfiniteBlow": {
+    "NAME": "无限攻击",
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 可被多次升级。 NL [#efc851]升级[] 次数在不同局游戏之间保留。"
+  },
+  "hubris:Despair": {
+    "NAME": "绝望",
+    "DESCRIPTION": " 不能被打出 。 NL 你每次将抽牌堆洗牌时，把这张牌放在抽牌堆顶部。 NL 墓地 。"
+  },
+  "hubris:Disease": {
+    "NAME": "疫病",
+    "DESCRIPTION": " 不能被打出 。 保留 。 NL 你的回合结束时，在弃牌堆中放入一张此牌的复制品。"
+  },
+  "hubris:SharpeningStone": {
+    "NAME": "油石",
+    "DESCRIPTION": "选择手牌中的 !M! 张攻击牌，它们在本场战斗中获得 hubris:Piercing 。 NL 消耗 。",
+    "UPGRADE_DESCRIPTION": " NL 起动 ：你牌组中的一张随机攻击牌在本场战斗中获得 hubris:Piercing 。"
+  },
+  "hubris:Rewind": {
+    "NAME": "倒带",
+    "DESCRIPTION": " 固有 。 NL 重新打出你于这场战斗中打出过的每张牌。 NL 抹除 。",
+    "UPGRADE_DESCRIPTION": " 墓地 。 NL 重新打出你于这场战斗中打出过的每张牌。 NL 抹除 。"
+  },
+  "hubris:PowerSurge": {
+    "NAME": "能量涌动",
+    "DESCRIPTION": " 墓地 。 NL 自动打出 。 NL 失去 !M! 点集中。 NL NL 起动 ： 获得 !M! 点集中。"
+  },
+  "hubris:Sniper": {
+    "NAME": "狙击高手",
+    "DESCRIPTION": " 不能被打出 。 NL 如果这张牌从你的手牌中丢弃， 小刀 造成的伤害增加 !M! 点。",
+    "EXTENDED_DESCRIPTION": [
+      "我不能打出这张牌。"
+    ]
+  },
+  "hubris:Insight": {
+    "NAME": "洞察",
+    "DESCRIPTION": "观看抽牌堆顶部的 !M! 张牌。将其中一张加入手牌。"
+  },
+  "hubris:Strike_Merchant": {
+    "NAME": "打击",
+    "DESCRIPTION": "造成 !D! 点伤害。"
+  },
+  "hubris:Defend_Merchant": {
+    "NAME": "防御",
+    "DESCRIPTION": "获得 !B! 点格挡。"
+  },
+  "hubris:MerchantsHand": {
+    "NAME": "商人之手",
+    "DESCRIPTION": "造成 !D! 点伤害。 NL 如果这张牌杀死一名不是“爪牙”的敌人, 获得 !M! 金币。"
+  },
+  "hubris:Acid": {
+    "NAME": "酸液",
+    "DESCRIPTION": " 不能被打出 。 NL 在你的回合结束时，受到 !M! 点伤害。 NL 虚无 。"
+  },
+  "hubris:NegativeEnergy": {
+    "NAME": "负能量",
+    "DESCRIPTION": " 保留 。 NL 给妖术图腾恢复 !M! 生命。 NL 消耗 。"
+  }
+}

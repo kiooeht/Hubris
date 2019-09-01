@@ -416,8 +416,8 @@ public class HubrisMod implements
             case RUS:
                 toReturn += "rus/";
                 break;
-            case ENG:
-                toReturn += "eng/";
+            case ZHS:
+                toReturn += "zhs/";
                 break;
             default:
                 toReturn += "eng/";

@@ -1,0 +1,18 @@
+{
+  "FireCardAction": {
+    "TEXT": [
+      "火焰"
+    ]
+  },
+  "SharpeningStoneAction": {
+    "TEXT": [
+      "磨砺",
+      "穿透。 NL "
+    ]
+  },
+  "BefuddledAction": {
+    "TEXT": [
+      "变化"
+    ]
+  }
+}

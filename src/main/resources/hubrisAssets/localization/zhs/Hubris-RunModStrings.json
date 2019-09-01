@@ -1,0 +1,10 @@
+{
+  "hubris:Hubris": {
+    "NAME": "自负诅咒",
+    "DESCRIPTION": "在初始牌组中添加自负诅咒。"
+  },
+  "hubris:Mercantile": {
+    "NAME": "经商",
+    "DESCRIPTION": "成为商人。"
+  }
+}

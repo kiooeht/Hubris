@@ -1,0 +1,165 @@
+{
+  "hubris:Befuddled": {
+    "NAME": "迷惑",
+    "DESCRIPTIONS": [
+      "在每回合开始时变化 #b",
+      " 张牌。",
+      " 张牌。"
+    ]
+  },
+  "hubris:Dissonance": {
+    "NAME": "失调",
+    "DESCRIPTIONS": [
+      "受到的 #y攻击 伤害增加 #b",
+      "% 。 NL 死亡时， ",
+      " 被加入你的抽牌堆。"
+    ]
+  },
+  "hubris:EnergyGain": {
+    "NAME": "能量获取",
+    "DESCRIPTIONS": [
+      "每回合额外获得 #b",
+      " [E] 。",
+      " [E] 。"
+    ]
+  },
+  "hubris:FlightPlayer": {
+    "NAME": "飞行",
+    "DESCRIPTIONS": [
+      "将所受到的 #y攻击 伤害降低 #b50% 。 如果在一个回合内被 #y攻击 伤害 #b",
+      " 次，就会取消。",
+      " 次，就会取消。"
+    ]
+  },
+  "hubris:Sloth": {
+    "NAME": "懒惰",
+    "DESCRIPTIONS": [
+      "在每回合结束时，获得 #b1 点最大能量。"
+    ]
+  },
+  "hubris:SpecializedCircuitry": {
+    "NAME": " 电路",
+    "DESCRIPTIONS": [
+      "所有你 #y生成 的充能球是 #y",
+      " 充能球。",
+      ""
+    ]
+  },
+  "hubris:Unfocused": {
+    "NAME": "不集中",
+    "DESCRIPTIONS": [
+      "受到攻击伤害时，失去 #b1 点集中。不会低于0点集中。"
+    ]
+  },
+  "hubris:Warp": {
+    "NAME": "扭曲",
+    "DESCRIPTIONS": [
+      "死亡时，",
+      " 将回归。"
+    ]
+  },
+  "hubris:ReadiedAction": {
+    "NAME": "预备",
+    "DESCRIPTIONS": [
+      "在你的回合结束时，你可以保留 #b",
+      " 张牌。 NL 它下回合的耗能减少 #b1 。",
+      " 张牌。 NL 它们下回合的耗能减少 #b1 。"
+    ]
+  },
+  "hubris:TimeStop": {
+    "NAME": "时间停止",
+    "DESCRIPTIONS": [
+      "你的回合结束时，立即开始新的回合。 NL 能量和 格挡 会保留。"
+    ]
+  },
+  "hubris:NoAttack": {
+    "NAME": "攻击禁止",
+    "DESCRIPTIONS": [
+      "你在这个回合不能打出 #y攻击牌 。"
+    ]
+  },
+  "hubris:LustTarget": {
+    "NAME": "色欲",
+    "DESCRIPTIONS": [
+      "这回合受到 #y攻击 伤害时，你 #r失去 #b",
+      " 生命。"
+    ]
+  },
+  "hubris:DoWhilePower": {
+    "NAME": "Do-While循环",
+    "DESCRIPTIONS": [
+      "本回合，以 +1 [E] 打出你打出的下一张牌，直到用尽 [E] 。",
+      "本回合，以 +1 [E] 打出你打出的下 #b",
+      " 张牌，直到用尽 [E] 。"
+    ]
+  },
+  "hubris:ArmorPiercing": {
+    "NAME": "穿甲弹",
+    "DESCRIPTIONS": [
+      "#b50% 的攻击伤害会穿透 #y格挡 。"
+    ]
+  },
+  "hubris:IrradiatedRounds": {
+    "NAME": "放射弹",
+    "DESCRIPTIONS": [
+      "造成未被格挡的、非穿透的伤害时，给予 #b",
+      " 层 #y中毒 。"
+    ]
+  },
+  "hubris:GoldShield": {
+    "NAME": "金盾",
+    "DESCRIPTIONS": [
+      " NL 所有的 #y荆棘 伤害减少到 #b1 。"
+    ]
+  },
+  "hubris:GainFocus": {
+    "NAME": "获得集中",
+    "DESCRIPTIONS": [
+      "在其回合结束时获得 #b",
+      " 点 #y集中 。"
+    ]
+  },
+  "hubris:ChampionShieldPower": {
+    "NAME": "冠军之盾",
+    "DESCRIPTIONS": [
+      "无效化来自敌人的所有debuff。"
+    ]
+  },
+  "hubris:Bodyguard": {
+    "NAME": "护卫",
+    "DESCRIPTIONS": [
+      "免疫伤害，直到所有其他怪物死亡。"
+    ]
+  },
+  "hubris:CursedLife": {
+    "NAME": "被诅咒的生命",
+    "DESCRIPTIONS": [
+      "在其回合开始时，失去 #b",
+      " 生命。 NL 如果 ",
+      " 死亡， 永久增加 #r",
+      " 张 #r诅咒",
+      " 张 #r诅咒",
+      " 到你的牌组。 #r诅咒 的数量每回合减少 #b1 。"
+    ]
+  },
+  "hubris:Undead": {
+    "NAME": "不死",
+    "DESCRIPTIONS": [
+      "死亡时，在你的手牌中添加一张能回复 ",
+      " 生命的牌。 NL 如果 ",
+      " 仍然存活， 在 #b1 回合后以满生命复活。"
+    ]
+  },
+  "hubris:RetainHand": {
+    "NAME": "保留手牌",
+    "DESCRIPTIONS": [
+      "本回合结束时，你不弃置手牌。"
+    ]
+  },
+  "hubris:Potato": {
+    "NAME": "土豆",
+    "DESCRIPTIONS": [
+      "在你的回合内，你免疫伤害。"
+    ]
+  }
+}
