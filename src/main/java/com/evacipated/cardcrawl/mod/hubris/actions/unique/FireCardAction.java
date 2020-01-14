@@ -2,7 +2,7 @@ package com.evacipated.cardcrawl.mod.hubris.actions.unique;
 
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.common.ExhaustSpecificCardAction;
-import com.megacrit.cardcrawl.actions.utility.QueueCardAction;
+import com.megacrit.cardcrawl.actions.utility.NewQueueCardAction;
 import com.megacrit.cardcrawl.actions.utility.UnlimboAction;
 import com.megacrit.cardcrawl.actions.utility.WaitAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -86,7 +86,7 @@ public class FireCardAction extends AbstractGameAction
             AbstractDungeon.actionManager.addToTop(new ExhaustSpecificCardAction(c, AbstractDungeon.player.limbo));
         } else {
             c.applyPowers();
-            AbstractDungeon.actionManager.addToTop(new QueueCardAction(c, target));
+            AbstractDungeon.actionManager.addToTop(new NewQueueCardAction(c, target));
             AbstractDungeon.actionManager.addToTop(new UnlimboAction(c));
             AbstractDungeon.actionManager.addToTop(new WaitAction(Settings.ACTION_DUR_MED));
         }

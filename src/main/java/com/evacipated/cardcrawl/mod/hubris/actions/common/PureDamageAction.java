@@ -21,8 +21,6 @@ public class PureDamageAction extends DamageAction
     {
         if (infoBackup.owner == null && duration == 0.1f) {
             duration = 0.09f;
-            target.damageFlash = true;
-            target.damageFlashFrames = 4;
             AbstractDungeon.effectList.add(new FlashAtkImgEffect(target.hb.cX, target.hb.cY, attackEffect));
         } else {
             super.update();

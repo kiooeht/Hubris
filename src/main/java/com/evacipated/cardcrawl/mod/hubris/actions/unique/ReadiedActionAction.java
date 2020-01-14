@@ -29,7 +29,7 @@ public class ReadiedActionAction extends AbstractGameAction
                 if (!c.isEthereal) {
                     c.retain = true;
                 }
-                c.modifyCostForTurn(-1);
+                c.setCostForTurn(c.costForTurn - 1);
                 AbstractDungeon.player.hand.addToTop(c);
             }
             AbstractDungeon.handCardSelectScreen.wereCardsRetrieved = true;

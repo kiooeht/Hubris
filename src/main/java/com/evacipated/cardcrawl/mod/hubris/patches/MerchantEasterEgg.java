@@ -1,5 +1,6 @@
 package com.evacipated.cardcrawl.mod.hubris.patches;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.mod.hubris.relics.NiceRug;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
@@ -54,7 +55,18 @@ public class MerchantEasterEgg
 
     @SpirePatch(
             clz=AnimatedNpc.class,
-            method="render"
+            method="render",
+            paramtypez={
+                    SpriteBatch.class
+            }
+    )
+    @SpirePatch(
+            clz=AnimatedNpc.class,
+            method="render",
+            paramtypez={
+                    SpriteBatch.class,
+                    Color.class
+            }
     )
     public static class RemoveFlipReset
     {

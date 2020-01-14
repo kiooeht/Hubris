@@ -83,7 +83,7 @@ public class UndeadRenderPatch
         @Override
         public int[] Locate(CtBehavior ctMethodToPatch) throws Exception
         {
-            Matcher finalMatcher = new Matcher.FieldAccessMatcher(AbstractMonster.class, "damageFlash");
+            Matcher finalMatcher = new Matcher.FieldAccessMatcher(AbstractMonster.class, "atlas");
             return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
         }
     }
@@ -93,8 +93,8 @@ public class UndeadRenderPatch
         @Override
         public int[] Locate(CtBehavior ctMethodToPatch) throws Exception
         {
-            Matcher finalMatcher = new Matcher.FieldAccessMatcher(AbstractMonster.class, "damageFlash");
-            return Arrays.copyOfRange(LineFinder.findAllInOrder(ctMethodToPatch, finalMatcher), 1, 2);
+            Matcher finalMatcher = new Matcher.FieldAccessMatcher(AbstractMonster.class, "isDying");
+            return LineFinder.findInOrder(ctMethodToPatch, finalMatcher);
         }
     }
 

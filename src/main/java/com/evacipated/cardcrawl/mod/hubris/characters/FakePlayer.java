@@ -23,6 +23,12 @@ public class FakePlayer extends AbstractPlayer
     }
 
     @Override
+    public String getPortraitImageName()
+    {
+        return null;
+    }
+
+    @Override
     public ArrayList<String> getStartingDeck()
     {
         return null;

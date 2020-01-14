@@ -20,8 +20,6 @@ public class QuietLoseHPAction extends LoseHPAction
     public void update()
     {
         if (duration == DURATION && target.currentHealth > 0) {
-            target.damageFlash = true;
-            target.damageFlashFrames = 4;
             AbstractDungeon.effectList.add(new FlashAtkImgEffect(target.hb.cX, target.hb.cY, attackEffect));
         }
         tickDuration();
