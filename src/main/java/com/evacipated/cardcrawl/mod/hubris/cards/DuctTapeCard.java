@@ -3,7 +3,6 @@ package com.evacipated.cardcrawl.mod.hubris.cards;
 import basemod.BaseMod;
 import basemod.abstracts.CustomCard;
 import basemod.abstracts.DynamicVariable;
-import basemod.helpers.BaseModCardTags;
 import basemod.helpers.TooltipInfo;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -259,8 +258,8 @@ public class DuctTapeCard extends CustomCard
         for (AbstractCard c : cards) {
             tags.addAll(c.tags);
         }
-        tags.remove(BaseModCardTags.BASIC_STRIKE);
-        tags.remove(BaseModCardTags.BASIC_DEFEND);
+        tags.remove(CardTags.STARTER_STRIKE);
+        tags.remove(CardTags.STARTER_DEFEND);
         this.tags.clear();
         this.tags.addAll(tags);
     }
