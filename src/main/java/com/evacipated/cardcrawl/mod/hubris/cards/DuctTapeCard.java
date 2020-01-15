@@ -67,6 +67,8 @@ public class DuctTapeCard extends CustomCard
         cardBgMap.put(CardColor.GREEN, green);
         Map<CardType, TextureAtlas.AtlasRegion> blue = new HashMap<>();
         cardBgMap.put(CardColor.BLUE, blue);
+        Map<CardType, TextureAtlas.AtlasRegion> purple = new HashMap<>();
+        cardBgMap.put(CardColor.PURPLE, purple);
         Map<CardType, TextureAtlas.AtlasRegion> colorless = new HashMap<>();
         cardBgMap.put(CardColor.COLORLESS, colorless);
         Map<CardType, TextureAtlas.AtlasRegion> curse = new HashMap<>();
@@ -84,6 +86,10 @@ public class DuctTapeCard extends CustomCard
         blue.put(CardType.SKILL, ImageMaster.CARD_SKILL_BG_BLUE);
         blue.put(CardType.POWER, ImageMaster.CARD_POWER_BG_BLUE);
 
+        purple.put(CardType.ATTACK, ImageMaster.CARD_ATTACK_BG_PURPLE);
+        purple.put(CardType.SKILL, ImageMaster.CARD_SKILL_BG_PURPLE);
+        purple.put(CardType.POWER, ImageMaster.CARD_POWER_BG_PURPLE);
+
         colorless.put(CardType.ATTACK, ImageMaster.CARD_ATTACK_BG_GRAY);
         colorless.put(CardType.SKILL, ImageMaster.CARD_SKILL_BG_GRAY);
         colorless.put(CardType.POWER, ImageMaster.CARD_POWER_BG_GRAY);
@@ -99,6 +105,8 @@ public class DuctTapeCard extends CustomCard
         cardLargeBgMap.put(CardColor.GREEN, green);
         blue = new HashMap<>();
         cardLargeBgMap.put(CardColor.BLUE, blue);
+        purple = new HashMap<>();
+        cardLargeBgMap.put(CardColor.PURPLE, purple);
         colorless = new HashMap<>();
         cardLargeBgMap.put(CardColor.COLORLESS, colorless);
         curse = new HashMap<>();
@@ -115,6 +123,10 @@ public class DuctTapeCard extends CustomCard
         blue.put(CardType.ATTACK, ImageMaster.CARD_ATTACK_BG_BLUE_L);
         blue.put(CardType.SKILL, ImageMaster.CARD_SKILL_BG_BLUE_L);
         blue.put(CardType.POWER, ImageMaster.CARD_POWER_BG_BLUE_L);
+
+        purple.put(CardType.ATTACK, ImageMaster.CARD_ATTACK_BG_PURPLE_L);
+        purple.put(CardType.SKILL, ImageMaster.CARD_SKILL_BG_PURPLE_L);
+        purple.put(CardType.POWER, ImageMaster.CARD_POWER_BG_PURPLE_L);
 
         colorless.put(CardType.ATTACK, ImageMaster.CARD_ATTACK_BG_GRAY_L);
         colorless.put(CardType.SKILL, ImageMaster.CARD_SKILL_BG_GRAY_L);
