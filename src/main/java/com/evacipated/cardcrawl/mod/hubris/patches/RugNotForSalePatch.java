@@ -87,7 +87,7 @@ public class RugNotForSalePatch
             } catch (IllegalAccessException | NoSuchFieldException e) {
                 e.printStackTrace();
             }
-            RugHitbox.rugHB.get(__instance).move(Settings.WIDTH - 85.0f * Settings.scale, rugY + 705.0f * Settings.scale);
+            RugHitbox.rugHB.get(__instance).move(Settings.WIDTH - 85.0f * Settings.scale, rugY + (Settings.isFourByThree ? 915f : 705.0f) * Settings.scale);
             hitboxListener.instance = __instance;
             RugHitbox.rugHB.get(__instance).encapsulatedUpdate(hitboxListener);
         }
