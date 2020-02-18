@@ -34,7 +34,13 @@ public class CatsGrace extends AbstractCard
     @Override
     public void use(AbstractPlayer p, AbstractMonster m)
     {
-        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(p, p, new DexterityPower(p, magicNumber), magicNumber));
+        onChoseThisOption();
+    }
+
+    @Override
+    public void onChoseThisOption()
+    {
+        addToBot(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new DexterityPower(AbstractDungeon.player, magicNumber), magicNumber));
     }
 
     @Override

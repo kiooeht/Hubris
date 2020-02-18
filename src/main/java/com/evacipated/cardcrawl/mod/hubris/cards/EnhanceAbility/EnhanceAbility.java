@@ -1,15 +1,16 @@
 package com.evacipated.cardcrawl.mod.hubris.cards.EnhanceAbility;
 
 import basemod.abstracts.CustomCard;
-import basemod.helpers.ModalChoice;
-import basemod.helpers.ModalChoiceBuilder;
 import com.evacipated.cardcrawl.mod.bard.notes.WildCardNote;
 import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
+import com.megacrit.cardcrawl.actions.watcher.ChooseOneAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+
+import java.util.ArrayList;
 
 public class EnhanceAbility extends CustomCard
 {
@@ -22,8 +23,6 @@ public class EnhanceAbility extends CustomCard
     private static final int AMT = 1;
     private static final int UPGRADE_AMT = 1;
 
-    private ModalChoice modal;
-
     public EnhanceAbility()
     {
         super(ID, NAME, IMG, COST, DESCRIPTION, CardType.POWER, CardColor.COLORLESS, CardRarity.RARE, CardTarget.SELF);
@@ -33,23 +32,22 @@ public class EnhanceAbility extends CustomCard
         }
 
         magicNumber = baseMagicNumber = AMT;
-        makeModal();
-    }
-
-    private void makeModal()
-    {
-        modal = new ModalChoiceBuilder()
-                .addOption(new BullsStrength(AMT, UPGRADE_AMT))
-                .addOption(new CatsGrace(AMT, UPGRADE_AMT))
-                .addOption(new FoxsCunning(AMT, UPGRADE_AMT))
-                .addOption(new BearsEndurance(AMT * 10, UPGRADE_AMT * 10))
-                .create();
     }
 
     @Override
     public void use(AbstractPlayer p, AbstractMonster m)
     {
-        modal.open();
+        ArrayList<AbstractCard> choices = new ArrayList<>();
+        choices.add(new BullsStrength(AMT, UPGRADE_AMT));
+        choices.add(new CatsGrace(AMT, UPGRADE_AMT));
+        choices.add(new FoxsCunning(AMT, UPGRADE_AMT));
+        choices.add(new BearsEndurance(AMT * 10, UPGRADE_AMT * 10));
+
+        if (upgraded) {
+            choices.forEach(AbstractCard::upgrade);
+        }
+
+        addToBot(new ChooseOneAction(choices));
     }
 
     @Override
@@ -58,9 +56,6 @@ public class EnhanceAbility extends CustomCard
         if (!upgraded) {
             upgradeName();
             upgradeMagicNumber(UPGRADE_AMT);
-            for (int i=0; i<4; ++i) {
-                modal.getCard(i).upgrade();
-            }
         }
     }
 

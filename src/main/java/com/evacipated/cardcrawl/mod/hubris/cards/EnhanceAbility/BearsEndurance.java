@@ -33,7 +33,13 @@ public class BearsEndurance extends AbstractCard
     @Override
     public void use(AbstractPlayer p, AbstractMonster m)
     {
-        AbstractDungeon.actionManager.addToBottom(new AddTemporaryHPAction(p, p, magicNumber));
+        onChoseThisOption();
+    }
+
+    @Override
+    public void onChoseThisOption()
+    {
+        addToBot(new AddTemporaryHPAction(AbstractDungeon.player, AbstractDungeon.player, magicNumber));
     }
 
     @Override
