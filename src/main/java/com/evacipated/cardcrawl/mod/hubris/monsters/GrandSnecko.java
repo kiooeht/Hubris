@@ -1,5 +1,6 @@
 package com.evacipated.cardcrawl.mod.hubris.monsters;
 
+import basemod.Pair;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;
 import com.evacipated.cardcrawl.mod.hubris.actions.monsterOrbs.MonsterChannelAction;
@@ -21,7 +22,6 @@ import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.FrailPower;
 import com.megacrit.cardcrawl.powers.VulnerablePower;
 import com.megacrit.cardcrawl.powers.WeakPower;
-import javafx.util.Pair;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
