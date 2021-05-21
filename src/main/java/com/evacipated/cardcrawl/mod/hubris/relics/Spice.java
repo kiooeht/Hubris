@@ -268,6 +268,11 @@ public class Spice extends HubrisRelic
 
     private static int replaceWithSpiceChance()
     {
+        // Happens because of other mods
+        if (AbstractDungeon.player == null) {
+            return 0;
+        }
+
         AbstractRelic spice = AbstractDungeon.player.getRelic(Spice.ID);
 
         if (spice == null) {
