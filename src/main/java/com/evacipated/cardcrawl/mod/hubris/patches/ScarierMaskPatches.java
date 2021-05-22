@@ -4,7 +4,10 @@ import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpireReturn;
 import com.megacrit.cardcrawl.actions.unique.SpawnDaggerAction;
 import com.megacrit.cardcrawl.actions.unique.SummonGremlinAction;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import com.megacrit.cardcrawl.helpers.MonsterHelper;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.monsters.MonsterGroup;
 import com.megacrit.cardcrawl.monsters.beyond.Reptomancer;
 import javassist.CannotCompileException;
 import javassist.expr.ExprEditor;
@@ -54,6 +57,22 @@ public class ScarierMaskPatches
                     }
                 }
             };
+        }
+    }
+
+    @SpirePatch(
+            clz= MonsterGroup.class,
+            method="shouldFlipVfx"
+    )
+    public static class FixShieldAndSpearCrash
+    {
+        public static SpireReturn<Boolean> Prefix(MonsterGroup __instance)
+        {
+            if (MonsterHelper.SHIELD_SPEAR_ENC.equals(AbstractDungeon.lastCombatMetricKey) &&
+                    __instance.monsters.size() < 2) {
+                return SpireReturn.Return(false);
+            }
+            return SpireReturn.Continue();
         }
     }
 }
