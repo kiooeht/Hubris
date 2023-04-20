@@ -28,7 +28,7 @@ public class Backtick extends HubrisRelic
         super(ID, "backtick.png", RelicTier.BOSS, LandingSound.CLINK);
 
         RelicStrings newRelicStrings = CardCrawlGame.languagePack.getRelicStrings(ID);
-        flavorText = Input.Keys.toString(DevConsole.toggleKey) + newRelicStrings.FLAVOR + Test447.ID;
+        flavorText = DevConsole.newToggleKey.toString() + newRelicStrings.FLAVOR + Test447.ID;
     }
 
     @Override
