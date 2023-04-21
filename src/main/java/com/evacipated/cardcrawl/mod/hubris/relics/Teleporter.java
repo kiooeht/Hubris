@@ -20,7 +20,7 @@ public class Teleporter extends HubrisRelic
 
     public Teleporter(int charges)
     {
-        super(ID, "shortRangeTeleporter.png", RelicTier.RARE, LandingSound.HEAVY);
+        super(ID, "shortRangeTeleporter.png", RelicTier.DEPRECATED, LandingSound.HEAVY);
         setCounter(charges);
     }
 
