@@ -1,6 +1,7 @@
 package com.evacipated.cardcrawl.mod.hubris.cards.blue;
 
 import basemod.abstracts.CustomCard;
+import com.evacipated.cardcrawl.mod.hubris.CardIgnore;
 import com.evacipated.cardcrawl.mod.hubris.HubrisMod;
 import com.evacipated.cardcrawl.mod.hubris.actions.unique.PrefetchAction;
 import com.megacrit.cardcrawl.cards.AbstractCard;
@@ -10,6 +11,7 @@ import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.localization.CardStrings;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
+@Deprecated
 public class Prefetch extends CustomCard
 {
     public static final String ID = "hubris:Prefetch";

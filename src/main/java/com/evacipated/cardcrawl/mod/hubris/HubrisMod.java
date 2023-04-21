@@ -478,7 +478,7 @@ public class HubrisMod implements
 
         for (ClassInfo classInfo : foundClasses) {
             CtClass cls = Loader.getClassPool().get(classInfo.getClassName());
-            if (cls.hasAnnotation(CardIgnore.class)) {
+            if (cls.hasAnnotation(CardIgnore.class) || cls.hasAnnotation(Deprecated.class)) {
                 continue;
             }
             boolean isCard = false;
