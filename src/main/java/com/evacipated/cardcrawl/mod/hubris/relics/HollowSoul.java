@@ -35,7 +35,7 @@ public class HollowSoul extends HubrisRelic implements OnPlayerDeathRelic
 
     public HollowSoul()
     {
-        super(ID, "hollowSoul.png", RelicTier.BOSS, LandingSound.MAGICAL);
+        super(ID, "hollowSoul.png", RelicTier.DEPRECATED, LandingSound.MAGICAL);
     }
 
     @Override
