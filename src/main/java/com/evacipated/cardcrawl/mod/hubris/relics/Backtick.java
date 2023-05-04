@@ -1,7 +1,6 @@
 package com.evacipated.cardcrawl.mod.hubris.relics;
 
 import basemod.DevConsole;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.mod.hubris.relics.abstracts.HubrisRelic;
 import com.evacipated.cardcrawl.mod.hubris.screens.select.RelicSelectScreen;
@@ -79,7 +78,10 @@ public class Backtick extends HubrisRelic
             if (relicSelectScreen.doneSelecting()) {
                 relicSelected = true;
 
-                AbstractRelic relic = relicSelectScreen.getSelectedRelics().get(0).makeCopy();
+                AbstractRelic libraryRelic = relicSelectScreen.getSelectedRelics().get(0);
+                float x = libraryRelic.currentX;
+                float y = libraryRelic.currentY;
+                AbstractRelic relic = libraryRelic.makeCopy();
                 switch (relic.tier) {
                     case COMMON:
                         AbstractDungeon.commonRelicPool.removeIf(id ->  id.equals(relic.relicId));
@@ -97,7 +99,7 @@ public class Backtick extends HubrisRelic
                         AbstractDungeon.bossRelicPool.removeIf(id ->  id.equals(relic.relicId));
                         break;
                 }
-                AbstractDungeon.effectsQueue.add(0, new ObtainRelicLater(relic));
+                AbstractDungeon.effectsQueue.add(0, new ObtainRelicLater(relic, x, y));
 
                 AbstractDungeon.getCurrRoom().phase = AbstractRoom.RoomPhase.COMPLETE;
             } else {
