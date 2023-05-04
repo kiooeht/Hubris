@@ -14,6 +14,7 @@ import com.megacrit.cardcrawl.helpers.controller.CInputActionSet;
 import com.megacrit.cardcrawl.helpers.input.InputHelper;
 import com.megacrit.cardcrawl.localization.UIStrings;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
+import com.megacrit.cardcrawl.screens.mainMenu.MainMenuScreen;
 import com.megacrit.cardcrawl.screens.mainMenu.ScrollBar;
 import com.megacrit.cardcrawl.screens.mainMenu.ScrollBarListener;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
@@ -250,6 +251,9 @@ public class RelicSelectScreen implements ScrollBarListener
 
     private void renderList(SpriteBatch sb, ArrayList<AbstractRelic> list)
     {
+        MainMenuScreen.CurScreen saveScreen = CardCrawlGame.mainMenuScreen.screen;
+        CardCrawlGame.mainMenuScreen.screen = MainMenuScreen.CurScreen.RELIC_VIEW;
+
         row += 1;
         col = 0;
         for (AbstractRelic r : list) {
@@ -284,6 +288,8 @@ public class RelicSelectScreen implements ScrollBarListener
             }
             col += 1;
         }
+
+        CardCrawlGame.mainMenuScreen.screen = saveScreen;
     }
 
     @Override
